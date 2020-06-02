@@ -2,16 +2,22 @@ package plantenApp.java.dao;
 
 import plantenApp.java.model.Plant;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**@author Siebe*/
 public class PlantDAO implements Queries {
 
     private Connection dbConnection;
+
+    //Statements waar geen externe input aan te pas komt
+    private static final String GETALLTYPESDD =
+            "SELECT type_naam FROM type ";
+
+
     private PreparedStatement stmtSelectById;
     private PreparedStatement stmtSelectByPlant;
 
@@ -72,4 +78,19 @@ public class PlantDAO implements Queries {
         }
         return ids;
     }
+    public List<String> getAllTypes() {
+        List<String> typeList = new ArrayList<>();
+        typeList.add(0, "");
+        try {
+            Statement stmt = dbConnection.createStatement();
+            ResultSet rs = stmt.executeQuery(GETALLTYPESDD);
+            while (rs.next()) {
+                typeList.add(rs.getString("type_naam"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PlantDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return typeList;
+    }
+
 }

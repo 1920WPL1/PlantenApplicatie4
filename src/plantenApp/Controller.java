@@ -4,6 +4,7 @@ package plantenApp;
 
 import plantenApp.java.dao.Database;
 import plantenApp.java.dao.InfoTablesDAO;
+import plantenApp.java.dao.PlantDAO;
 import plantenApp.java.model.InfoTables;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,85 +14,28 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 
 public class Controller {
     public ComboBox<String> cboType;
     public ComboBox cboFamilie;
-    public TextField txtNaam;
-    public Spinner nudMinBloeiHoogte;
-    public Spinner nudMinBladHoogte;
-    public Spinner nudMaxBloeiHoogte;
-    public Spinner nudMaxBladHoogte;
-    public ComboBox cboHabitat;
-    public CheckBox chkZand;
-    public CheckBox chkLeem;
-    public CheckBox chkKlei;
     public Slider slrBezonning;
     public Slider slrVochtbehoefte;
-    public Button btnZoek;
     public ComboBox<String> cboBladgrootte;
     public Button btnminimize;
     public Button btnExit;
     public Button btnMaximize;
     public ComboBox<String> cboRatio;
     public ComboBox<String> cboSpruitFenologie;
-    public ImageView imgAar;
-    public ImageView imgBredePluim;
-    public ImageView imgEtage;
-    public ImageView imgKnop;
-    public ImageView imgScherm;
-    public ImageView imgSmallePluim;
-    public ImageView imgMargriet;
-    public ImageView imgPlatScherm;
     public ComboBox<String> cboBladvorm;
-    public RadioButton rdbBloeiwijze1;
-    public RadioButton rdbBloeiwijze2;
-    public RadioButton rdbBloeiwijze3;
-    public RadioButton rdbBloeiwijze4;
-    public RadioButton rdbBloeiwijze5;
-    public RadioButton rdbBloeiwijze6;
-    public RadioButton rdbBloeiwijze7;
-    public RadioButton rdbBloeiwijze8;
-    public CheckBox chkHabitus1;
-    public CheckBox chkHabitus4;
-    public CheckBox chkHabitus7;
-    public CheckBox chkHabitus10;
-    public CheckBox chkHabitus13;
-    public CheckBox chkHabitus2;
-    public CheckBox chkHabitus5;
-    public CheckBox chkHabitus8;
-    public CheckBox chkHabitus11;
-    public CheckBox chkHabitus14;
-    public CheckBox chkHabitus3;
-    public CheckBox chkHabitus6;
-    public CheckBox chkHabitus9;
-    public CheckBox chkHabitus12;
-    public CheckBox chkHabitus15;
-    public Spinner cboFrequentie;
     public ComboBox<String> cboMaand;
-    public ComboBox cboBehandeling;
     public CheckBox chkBezonning;
     public CheckBox chkVochtbehoefte;
-    public ListView lsvUitvoer;
     public ComboBox<String> cboReactie;
     public Slider slrOntwikkelingssnelheid;
-    public CheckBox chkLevensvorm2;
-    public CheckBox chkLevensvorm3;
-    public CheckBox chkLevensvorm4;
-    public CheckBox chkLevensvorm5;
-    public CheckBox chkLevensvorm6;
-    public CheckBox chkLevensvorm7;
-    public CheckBox chkLevensvorm8;
-    public CheckBox chkLevensvorm9;
-    public CheckBox chkSocI;
-    public CheckBox chkSocII;
-    public CheckBox chkSocIII;
-    public CheckBox chkSocIV;
-    public CheckBox chkSocV;
     public CheckBox chkPollenwaarde;
     public CheckBox chkNectarwaarde;
     public Slider slrPollenwaarde;
@@ -99,25 +43,16 @@ public class Controller {
     public CheckBox chkOntwikkelingsnelheid;
     public Slider slrVoedingsbehoefte;
     public CheckBox chkVoedingsbehoefte;
-    public CheckBox chkLevensvorm1;
     private boolean maximized=false;
     private InfoTables infoTables;
     private Connection dbConnection;
+    List<String> types;
 
     public void initialize() throws SQLException {
         dbConnection = Database.getInstance().getConnection();
-
-        /*instellen exit, minimize en resize button*/
-        ScreenControl();
-
-        /*infotabel object aanmaken*/
-        InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
-        infoTables = infotablesDAO.getInfoTables();
-
-        /*comboboxes vullen*/
-        FillComboboxes(infoTables);
-
-
+        PlantDAO plantdao = new PlantDAO(dbConnection);
+        types = plantdao.getAllTypes();
+        cboType.getItems().addAll(types);
     }
     /**
      @param infotables -> lijst van alle lijsten van gegevens uit de naakte tabellen
