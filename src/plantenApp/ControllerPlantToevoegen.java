@@ -191,7 +191,7 @@ public class ControllerPlantToevoegen {
     public void clicked_ToevoegenPlant(MouseEvent mouseEvent) {
     }
 
-
+//functie voor terug te kunnen keren naar het zoek scherm.
     public void clicked_TerugGaan(MouseEvent mouseEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("view/Zoekscherm.fxml"));
         Scene scene = new Scene(root);
