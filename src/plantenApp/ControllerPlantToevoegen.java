@@ -1,7 +1,14 @@
 package plantenApp;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class ControllerPlantToevoegen {
     //Alle velden die ingevuld moeten worden bij Standaard
@@ -169,6 +176,7 @@ public class ControllerPlantToevoegen {
     public RadioButton rdbVorstgevoeligLeeg;
     public RadioButton rdbVorstgevoeligJa;
     public RadioButton rdbVorstgevoeligNeen;
+    public Button btn_Terug;
 
 
     //Functie onder de button doe een nieuwe eigenschap voor habitat toevoegd
@@ -184,6 +192,11 @@ public class ControllerPlantToevoegen {
     }
 
 
-    public void clicked_TerugGaan(MouseEvent mouseEvent) {
+    public void clicked_TerugGaan(MouseEvent mouseEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("view/Zoekscherm.fxml"));
+        Scene scene = new Scene(root);
+        Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        window.show();
+        window.setScene(scene);
     }
 }
