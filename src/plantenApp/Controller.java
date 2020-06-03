@@ -63,7 +63,7 @@ public class Controller {
         //spruitfenologie
         cboSpruitFenologie.getItems().addAll(infotables.getSpruitfenologieen());
         //reactie antagonistische omgeving
-        cboReactie.getItems().addAll(infotables.getAntagonistischeOmgevingsReacties());
+        //    cboReactie.getItems().addAll(infotables.getAntagonistischeOmgevingsReacties());
         //behandeling
 
     }
