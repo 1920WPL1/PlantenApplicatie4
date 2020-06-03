@@ -3,6 +3,7 @@ package plantenApp.java.model;
 import java.sql.Blob;
 import java.util.ArrayList;
 
+
 /**
  * @author Siebe
  */
@@ -41,20 +42,20 @@ public class InfoTables {
     private ArrayList<String> beheerdaden;
 
     //Extra
-    private ArrayList<Integer> nectarwaardes;
-    private ArrayList<Integer> pollenwaardes;
+    private ArrayList<String> nectarwaardes;
+    private ArrayList<String> pollenwaardes;
 
     public InfoTables(
             ArrayList<String> types
             , ArrayList<String> families, ArrayList<String> kleuren, ArrayList<String> bladgroottes, ArrayList<String> bladvormen,
-             ArrayList<String> bloeiBladRatios, ArrayList<String> spruitfenologieen, ArrayList<String> bloeiwijze
+            ArrayList<String> bloeiBladRatios, ArrayList<String> spruitfenologieen, ArrayList<String> bloeiwijze
             //,ArrayList<Blob> bloeiwijzesFotos
-            ,ArrayList<String> habitusMogelijkheden, ArrayList<Blob> habitusFotos
+            , ArrayList<String> habitusMogelijkheden, ArrayList<Blob> habitusFotos
             //, ArrayList<String> levensvormen
             , ArrayList<String> bezonningsMogelijkheden, ArrayList<String> grondsoorten, ArrayList<String> vochtbehoeftes, ArrayList<String>
                voedingsbehoeftes, ArrayList<String> antagonistischeOmgevingsReacties, ArrayList<String> habitats, ArrayList<String>
                 onstwikkelingssnelheden, ArrayList<String> concurentiekrachten, ArrayList<Integer> sociabiliteiten, ArrayList<String>
-                 stratergieen,ArrayList<String> beheerdaden, ArrayList<Integer> nectarwaardes, ArrayList<Integer> pollenwaardes) {
+                 stratergieen, ArrayList<String> beheerdaden, ArrayList<String> nectarwaardes, ArrayList<String> pollenwaardes) {
 
 
         this.types = types;
@@ -172,11 +173,11 @@ public class InfoTables {
         return stratergieen;
     }
 
-    public ArrayList<Integer> getNectarwaardes() {
+    public ArrayList<String> getNectarwaardes() {
         return nectarwaardes;
     }
 
-    public ArrayList<Integer> getPollenwaardes() {
+    public ArrayList<String> getPollenwaardes() {
         return pollenwaardes;
     }
 }

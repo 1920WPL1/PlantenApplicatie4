@@ -87,8 +87,8 @@ public class InfoTablesDAO implements Queries {
                 getInfoTableInt(NTSOCIABILITEIT, "waarde"),
                 getInfoTableString(NTSTRATEGIE, "waarde"),
                 getInfoTableString(NTBEHEERDAAD,"waarde"),
-                getInfoTableInt(NTNECTARWAARDE, "waarde"),
-                getInfoTableInt(NTPOLLENWAARDE, "waarde")
+                getInfoTableString(NTNECTARWAARDE, "waarde"),
+                getInfoTableString(NTPOLLENWAARDE, "waarde")
         );
         return infoTables;
     }
