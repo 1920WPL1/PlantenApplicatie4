@@ -91,7 +91,7 @@ public class ControllerPlantToevoegen {
     public Spinner spnMinBloeihoogteOkt;
     public Spinner spnMinBloeihoogteNov;
     public Spinner spnMinBloeihoogteDec;
-        //Alle spinners per maanD voor Max Bloeihoogte
+        //Alle spinners per maand voor Max Bloeihoogte
     public Spinner spnMaxBloeihoogteJan;
     public Spinner spnMaxBloeihoogteFeb;
     public Spinner spnMaxBloeihoogteMaa;
