@@ -25,7 +25,6 @@ public class Controller {
     public ComboBox cboRatio;
     public ComboBox cboReactie;
     public ComboBox cboSpruitFenologie;
-    private InfoTables infoTables;
     private Connection dbConnection;
 
     public void initialize() throws SQLException {
@@ -33,7 +32,7 @@ public class Controller {
 
         /* infotabel object aanmaken */
         InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
-        infoTables = infotablesDAO.getInfoTables();
+        InfoTables infoTables = infotablesDAO.getInfoTables();
 
         /*opvullen combobox Methode*/
         FillComboboxes(infoTables);
@@ -44,18 +43,18 @@ public class Controller {
      * @author bradley
      * Functie om comboboxes te vullen met alle gegevens uit de database
      */
-    public void FillComboboxes(InfoTables infotables) {
+    private void FillComboboxes(InfoTables infotables) {
         //type
         System.out.println(infotables.getTypes().toString());
         cboType.getItems().addAll(infotables.getTypes());
         //familie
+        System.out.println(infotables.getFamilies().toString());
         cboFamilie.getItems().addAll(infotables.getFamilies());
         //bladgrootte
         cboBladgrootte.getItems().addAll(infotables.getBladgroottes());
         //bladvorm
         cboBladvorm.getItems().addAll(infotables.getBladvormen());
         //Levensvorm
-
         //BehandelingMaand
         cboMaand.getItems().addAll("Januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december");
         //ratio
