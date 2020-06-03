@@ -17,20 +17,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <ScrollPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.Controller">
    <content>
-      <AnchorPane maxHeight="-Infinity" maxWidth="1860.0" minHeight="-Infinity" minWidth="1860.0" prefHeight="1080.0" prefWidth="1860.0">
+      <AnchorPane maxHeight="-Infinity" maxWidth="1888.0" minHeight="-Infinity" minWidth="1859.0" prefHeight="2340.0" prefWidth="1859.0">
          <children>
             <VBox prefHeight="2228.0" prefWidth="1860.0">
                <children>
                   <TitledPane maxWidth="1860.0" minWidth="1829.0" prefWidth="1829.0" text="Zoek">
                     <content>
-                      <AnchorPane maxWidth="1860.0" minWidth="1860.0" prefWidth="1860.0">
+                      <AnchorPane maxWidth="1860.0" minWidth="1858.0" prefHeight="1113.0" prefWidth="1858.0">
                            <children>
                               <VBox layoutX="14.0" layoutY="14.0">
                                  <children>
-                                    <HBox onMouseClicked="#clicked_Toevoegscherm">
+                                    <HBox>
                                        <children>
                                           <VBox>
                                              <children>
@@ -190,7 +189,7 @@
                                                             <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="K" />
                                                          </children>
                                                       </HBox>
-                                                      <ComboBox prefHeight="30.0" prefWidth="120.0" />
+                                                      <ComboBox fx:id="cboBladgrootte" prefHeight="30.0" prefWidth="120.0" />
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -210,11 +209,15 @@
                                                 </VBox>
                                              </children>
                                           </HBox>
-                                          <Label minWidth="20.0" prefHeight="120.0" prefWidth="391.0" />
-                                          <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="109.0" text="Toevoegscherm" />
+                                          <Label minWidth="20.0" prefHeight="120.0" prefWidth="378.0" />
                                           <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Zoek">
                                              <font>
                                                 <Font size="24.0" />
+                                             </font>
+                                          </Button>
+                                          <Button mnemonicParsing="false" onMouseClicked="#plantToevoegenScherm" prefHeight="50.0" prefWidth="113.0" text="Toevoegen">
+                                             <font>
+                                                <Font size="18.0" />
                                              </font>
                                           </Button>
                                        </children>
@@ -384,7 +387,7 @@
                                                                         </Label>
                                                                      </children>
                                                                   </HBox>
-                                                                  <ComboBox prefHeight="30.0" prefWidth="240.0" />
+                                                                  <ComboBox fx:id="cboReactie" prefHeight="30.0" prefWidth="240.0" />
                                                                   <Label prefHeight="30.0">
                                                                      <font>
                                                                         <Font name="System Bold" size="14.0" />
@@ -630,16 +633,16 @@
                                                                         <Font name="System Bold" size="14.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <ComboBox prefHeight="30.0" prefWidth="200.0" />
-                                                                  <ComboBox prefHeight="30.0" prefWidth="200.0" />
-                                                                  <ComboBox prefHeight="30.0" prefWidth="200.0" />
+                                                                  <ComboBox fx:id="cboBladvorm" prefHeight="30.0" prefWidth="200.0" />
+                                                                  <ComboBox fx:id="cboRatio" prefHeight="30.0" prefWidth="200.0" />
+                                                                  <ComboBox fx:id="cboSpruitFenologie" prefHeight="30.0" prefWidth="200.0" />
                                                                   <Label prefHeight="30.0">
                                                                      <font>
                                                                         <Font name="System Bold" size="14.0" />
                                                                      </font>
                                                                   </Label>
                                                                   <ComboBox prefHeight="30.0" prefWidth="200.0" />
-                                                                  <ComboBox prefHeight="30.0" prefWidth="200.0" />
+                                                                  <ComboBox fx:id="cboMaand" prefHeight="30.0" prefWidth="200.0" />
                                                                   <Spinner prefHeight="30.0" prefWidth="80.0" />
                                                                </children>
                                                             </VBox>
