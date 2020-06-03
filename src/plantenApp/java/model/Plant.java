@@ -11,6 +11,18 @@ public class Plant {
     private int minPlantdichtheid;
     private int maxPlantdichtheid;
 
+    private AbiotischeFactoren abiotischeFactoren;
+    private Beheer beheer;
+    private Beheerdaad_Eigenschap beheerdaad_eigenschap;
+    private Commensalisme commensalisme;
+    private Extra extra;
+    private FenoMulti_Eigenschap fenoMulti_eigenschap;
+    private Fenotype fenotype;
+    private Foto foto;
+    private Foto_Eigenschap foto_eigenschap;
+    private InfoTables infoTables;
+
+
     public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid) {
         this.id = id;
         this.type = type;
