@@ -971,7 +971,7 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button layoutX="1700.0" layoutY="980.0" mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" text="Terug">
+            <Button fx:id="btn_Terug" layoutX="1700.0" layoutY="980.0" mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" text="Terug">
                <font>
                   <Font size="24.0" />
                </font>
