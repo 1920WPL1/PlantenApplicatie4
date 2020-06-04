@@ -233,6 +233,6 @@ public interface Queries {
 
     String INSERTABIOTISCHEF =
             "INSERT INTO abiotische_factoren(plant_id, bezonning, grondsoort, vochtbehoefte, voedingsbehoefte, reactie_antagonistische_omg) " +
-                    "VALUES (?,?,?,?,?,?)";
+                    "VALUES (?, ?, ?, ?, ?, ?)";
 }
 

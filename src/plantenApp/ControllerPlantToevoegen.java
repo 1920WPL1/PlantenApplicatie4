@@ -10,9 +10,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import plantenApp.java.dao.AbiotischeFactorenDAO;
 import plantenApp.java.dao.Database;
 import plantenApp.java.dao.InfoTablesDAO;
 import plantenApp.java.dao.PlantDAO;
+import plantenApp.java.model.AbiotischeFactoren;
 import plantenApp.java.model.InfoTables;
 import plantenApp.java.model.Plant;
 import javafx.stage.Stage;
@@ -279,6 +281,11 @@ public class ControllerPlantToevoegen {
         String fgsv = sFam + " " + sGeslacht + " " + sSoort + " '" + sVariant + "'";
         int iMinDichtheid = (int) spnMinPlantDicht.getValue();
         int iMaxDichtheid = (int) spnMaxPlantDicht.getValue();
+        String sBezonning =(String)cboBezonning.getValue();
+        String sGrond =(String)cboGrondsoort.getValue();
+        String sVochtB=(String)cboVochtbehoefte.getValue();
+        String sVoedingsB=(String)cboVoedingsbehoefte.getValue();
+        String sAnta=(String)cboReactieAntag.getValue();
 
         PlantDAO plantDao = new PlantDAO(dbConnection);
         Plant plant = new Plant
@@ -292,6 +299,17 @@ public class ControllerPlantToevoegen {
                         fgsv);
         plantDao.createPlant(plant);
 
+int plant_id =plant.getId();
+AbiotischeFactorenDAO abiotischeFactorenDAO= new AbiotischeFactorenDAO(dbConnection);
+        AbiotischeFactoren abiotischeFactoren=new AbiotischeFactoren
+                (plant_id
+                        ,sBezonning,
+                        sGrond,
+                        sVochtB,
+                        sVoedingsB,
+                        sAnta);
+        abiotischeFactorenDAO.createAbio(abiotischeFactoren,plant);
+        notificationBox("U plant is opgeslagen" );
     }
 
 //functie voor terug te kunnen keren naar het zoek scherm.
@@ -303,6 +321,9 @@ public class ControllerPlantToevoegen {
         window.setScene(scene);
     }
 
+    public void notificationBox(String string){
+        JOptionPane.showMessageDialog(null,string);
+    }
     // Deze functie word opgeroepen om de comboboxen van de kleuren en maand
     // aan te passen van text naar kleur om een mooiere gebruikers ervaring
 
@@ -345,7 +366,7 @@ public class ControllerPlantToevoegen {
                 cbo.setStyle("-fx-background-color:white");
                 break;
             case "zwart":
-                cbo.setStyle("-fx-background-color:white");
+                cbo.setStyle("-fx-background-color:Black");
                 break;
             case "blauw":
                 cbo.setStyle("-fx-background-color:BLUE");
