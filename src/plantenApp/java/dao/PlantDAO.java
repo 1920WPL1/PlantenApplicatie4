@@ -1,5 +1,6 @@
 package plantenApp.java.dao;
 
+import plantenApp.java.model.AbiotischeFactoren;
 import plantenApp.java.model.Plant;
 
 import java.sql.*;
@@ -12,15 +13,12 @@ import java.util.logging.Logger;
 public class PlantDAO implements Queries {
 
     private Connection dbConnection;
-
     //Query voor alle standaard waarde van de plant
     //private static final
-
-
     private PreparedStatement stmtSelectById;
     private PreparedStatement stmtSelectByPlant;
     private PreparedStatement stmtInsertByStandard;
-    private PreparedStatement stmsInsertAbiotischeFactoren;
+
     public PlantDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
         stmtSelectById = dbConnection.prepareStatement(GETPLANTBYID);
@@ -28,7 +26,7 @@ public class PlantDAO implements Queries {
 
         stmtInsertByStandard = dbConnection.prepareStatement(INSERTSTANDAARD,
                 Statement.RETURN_GENERATED_KEYS);
-        stmsInsertAbiotischeFactoren = dbConnection.prepareStatement(INSERTABIOTISCHEF);
+
     }
 
     /**
@@ -70,10 +68,6 @@ public class PlantDAO implements Queries {
         rs.next();
         Integer plant_id = rs.getInt(1);
         plant.setId(plant_id);
-        stmsInsertAbiotischeFactoren.setInt(1, plant_id);
-        stmsInsertAbiotischeFactoren.setString(2,plant.getAbiotischeFactoren().getBezonning());
-        stmsInsertAbiotischeFactoren.setString(3, plant.getAbiotischeFactoren().getGrondsoort());
-        stmsInsertAbiotischeFactoren.setString(4, plant.getAbiotischeFactoren().getVochtbehoefte());
-        stmsInsertAbiotischeFactoren.setString(5, plant.getAbiotischeFactoren().getVoedingsbehoefte());
+
     }
 }
