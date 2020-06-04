@@ -224,5 +224,15 @@ public interface Queries {
     String NTFOTOBlOEIWIJZE =
             "SELECT afbeelding FROM bloeiwijze";
     //endregion
+
+    //Groep 4
+    //Insert query voor toevoegen
+    String INSERTSTANDAARD =
+            "INSERT INTO plant (type, familie, geslacht, soort, variatie, plantdichtheid_min, plantdichtheid_max, fgsv) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+    String INSERTABIOTISCHEF =
+            "INSERT INTO abiotische_factoren(plant_id, bezonning, grondsoort, vochtbehoefte, voedingsbehoefte, reactie_antagonistische_omg) " +
+                    "VALUES (?,?,?,?,?,?)";
 }
 
