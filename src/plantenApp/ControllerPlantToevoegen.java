@@ -6,23 +6,17 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import plantenApp.java.dao.Database;
 import plantenApp.java.dao.InfoTablesDAO;
-import plantenApp.java.dao.PlantDAO;
+import plantenApp.java.dao.*;
 import plantenApp.java.model.InfoTables;
 import plantenApp.java.model.Plant;
-import javafx.stage.Stage;
-
-import javax.swing.*;
-import java.awt.*;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class ControllerPlantToevoegen {
     //Alle velden die ingevuld moeten worden bij Standaard
@@ -356,5 +350,99 @@ public class ControllerPlantToevoegen {
     // Clicked event op de Comboboxes
     public void clickedbladkleurjan(ActionEvent actionEvent) {
         textToColor(cboBladkleurJan, cboBladkleurJan.getValue().toString());
+
+    }
+
+    public void clickedcboBladkleurFeb(ActionEvent actionEvent) {
+        textToColor(cboBladkleurFeb, cboBladkleurFeb.getValue().toString());
+    }
+
+    public void clickedcboBladkleurMaa(ActionEvent actionEvent) {
+        textToColor(cboBladkleurMaa, cboBladkleurMaa.getValue().toString());
+    }
+
+    public void clickedcboBladkleurApr(ActionEvent actionEvent) {
+        textToColor(cboBladkleurApr, cboBladkleurApr.getValue().toString());
+    }
+
+    public void ClickedcboBladkleurMei(ActionEvent actionEvent) {
+        textToColor(cboBladkleurMei, cboBladkleurMei.getValue().toString());
+    }
+
+    public void ClickedcboBladkleurJun(ActionEvent actionEvent) {
+        textToColor(cboBladkleurJun, cboBladkleurJun.getValue().toString());
+    }
+
+    public void ClickedcboBladkleurJul(ActionEvent actionEvent) {
+        textToColor(cboBladkleurJul, cboBladkleurJul.getValue().toString());
+    }
+
+    public void ClickedcboBladkleurAug(ActionEvent actionEvent) {
+        textToColor(cboBladkleurAug, cboBladkleurAug.getValue().toString());
+    }
+
+    public void ClickedcboBladkleurSept(ActionEvent actionEvent) {
+        textToColor(cboBladkleurSept, cboBladkleurSept.getValue().toString());
+    }
+
+    public void ClickedcboBladkleurOkt(ActionEvent actionEvent) {
+        textToColor(cboBladkleurOkt, cboBladkleurOkt.getValue().toString());
+    }
+
+    public void ClickedcboBladkleurNov(ActionEvent actionEvent) {
+        textToColor(cboBladkleurNov, cboBladkleurNov.getValue().toString());
+    }
+
+    public void ClickedcboBladkleurDec(ActionEvent actionEvent) {
+        textToColor(cboBladkleurDec, cboBladkleurDec.getValue().toString());
+    }
+
+    public void actioncboBloeikleurJan(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurJan, cboBloeikleurJan.getValue().toString());
+    }
+
+    public void actioncboBloeikleurFeb(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurFeb, cboBloeikleurFeb.getValue().toString());
+    }
+
+    public void actioncboBloeikleurMaa(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurMaa, cboBloeikleurMaa.getValue().toString());
+    }
+
+    public void actioncboBloeikleurApr(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurApr, cboBloeikleurApr.getValue().toString());
+    }
+
+    public void actioncboBloeikleurMei(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurMei, cboBloeikleurMei.getValue().toString());
+    }
+
+    public void actioncboBloeikleurJun(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurJun, cboBloeikleurJun.getValue().toString());
+    }
+
+    public void actioncboBloeikleurJul(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurJul, cboBloeikleurJul.getValue().toString());
+    }
+
+
+    public void actioncboBloeikleurAug(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurAug, cboBloeikleurAug.getValue().toString());
+    }
+
+    public void actioncboBloeikleurSept(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurSept, cboBloeikleurSept.getValue().toString());
+    }
+
+    public void actioncboBloeikleurOkt(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurOkt, cboBloeikleurOkt.getValue().toString());
+    }
+
+    public void actioncboBloeikleurNov(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurNov, cboBloeikleurNov.getValue().toString());
+    }
+
+    public void actioncboBloeikleurDec(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurDec, cboBloeikleurDec.getValue().toString());
     }
 }
