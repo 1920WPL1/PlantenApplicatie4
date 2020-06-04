@@ -1,7 +1,6 @@
 package plantenApp;
 
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -34,6 +33,7 @@ public class Controller {
         /* infotabel object aanmaken */
         InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
         InfoTables infoTables = infotablesDAO.getInfoTables();
+
 
         /*opvullen combobox Methode*/
         FillComboboxes(infoTables);

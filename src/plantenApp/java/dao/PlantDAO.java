@@ -13,23 +13,27 @@ public class PlantDAO implements Queries {
 
     private Connection dbConnection;
 
-    //Statements waar geen externe input aan te pas komt
-    private static final String GETALLTYPESDD =
-            "SELECT type_naam FROM type ";
-
+    private static final String INSERTSTANDAARD =
+            "INSERT INTO plant (type, familie, geslacht, soort, variatie, plantdichtheid_min, plantdichtheid_max, fgsv) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     private PreparedStatement stmtSelectById;
     private PreparedStatement stmtSelectByPlant;
+
+    private PreparedStatement stmtInsertByStandard;
 
     public PlantDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
         stmtSelectById = dbConnection.prepareStatement(GETPLANTBYID);
         stmtSelectByPlant = dbConnection.prepareStatement(GETIDSBYPLANT);
+
+        stmtInsertByStandard = dbConnection.prepareStatement(INSERTSTANDAARD,
+                Statement.RETURN_GENERATED_KEYS);
     }
 
-    /**@author Siebe
+    /**
      * @param id -> plant_id
      * @return -> alle basis factoren van de specifieke plant
+     * @author Siebe
      */
     public Plant getPlantById(int id) throws SQLException {
         Plant plant = null;
@@ -50,47 +54,19 @@ public class PlantDAO implements Queries {
         }
         return plant;
     }
-
-    /**@author Siebe
-     * @param type -> waarde type van de plant
-     * @param familie -> familie van de plant
-     * @param fgsv -> familie, geslacht, soort, variant
-     * @return -> de gefilterde ids
-     */
-    public ArrayList<Integer> KenmerkenFilter (String type, String familie, String fgsv) throws SQLException {
-        ArrayList<Integer> ids = new ArrayList<>();;
-
-        int iTrue = (type.isBlank())? 1:0;
-        stmtSelectByPlant.setString(1,type);
-        stmtSelectByPlant.setInt(2,iTrue);
-
-        iTrue = (familie.isBlank())? 1:0;
-        stmtSelectByPlant.setString(3,type);
-        stmtSelectByPlant.setInt(4,iTrue);
-
-        iTrue = (fgsv.isBlank())? 1:0;
-        stmtSelectByPlant.setString(5,type);
-        stmtSelectByPlant.setInt(6,iTrue);
-
-        ResultSet rs = stmtSelectByPlant.executeQuery();
-        while (rs.next()){
-            ids.add(rs.getInt("plant_id"));
-        }
-        return ids;
+    public void createPlant(Plant plant) throws SQLException {
+        stmtInsertByStandard.setString(1, plant.getType());
+        stmtInsertByStandard.setString(2, plant.getFamilie());
+        stmtInsertByStandard.setString(3, plant.getGeslacht());
+        stmtInsertByStandard.setString(4, plant.getSoort());
+        stmtInsertByStandard.setString(5, plant.getVariatie());
+        stmtInsertByStandard.setInt(6, plant.getMinPlantdichtheid());
+        stmtInsertByStandard.setInt(7, plant.getMaxPlantdichtheid());
+        stmtInsertByStandard.setString(8, plant.getFgsv());
+        stmtInsertByStandard.executeUpdate();
+        ResultSet rs = stmtInsertByStandard.getGeneratedKeys();
+        rs.next();
+        Integer plant_id = rs.getInt(1);
+        plant.setId(plant_id);
     }
-    public List<String> getAllTypes() {
-        List<String> typeList = new ArrayList<>();
-        typeList.add(0, "");
-        try {
-            Statement stmt = dbConnection.createStatement();
-            ResultSet rs = stmt.executeQuery(GETALLTYPESDD);
-            while (rs.next()) {
-                typeList.add(rs.getString("type_naam"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(PlantDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return typeList;
-    }
-
 }
