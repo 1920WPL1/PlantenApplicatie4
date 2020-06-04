@@ -31,7 +31,8 @@ public class ControllerPlantToevoegen {
     public TextField txtGeslacht;
     public TextField txtSoort;
     public TextField txtVariant;
-
+    public Spinner spnMinPlantDicht;
+    public Spinner spnMaxPlantDicht;
     //Alle velden die ingevuld moeten worden bij AbiotischeFactoren
     public ComboBox cboBezonning;
     public ComboBox cboVoedingsbehoefte;
@@ -124,8 +125,6 @@ public class ControllerPlantToevoegen {
     public Spinner spnMaxBloeihoogteOkt;
     public Spinner spnMaxBloeihoogteNov;
     public Spinner spnMaxBloeihoogteDec;
-    public Spinner spnMinPlantDicht;
-    public Spinner spnMaxPlantDicht;
     //Alle comboboxen per maand voor Bloeikleur
     public ComboBox cboBloeikleurJan;
     public ComboBox cboBloeikleurFeb;
@@ -280,7 +279,6 @@ public class ControllerPlantToevoegen {
         String fgsv = sFam + " " + sGeslacht + " " + sSoort + " '" + sVariant + "'";
         int iMinDichtheid = (int) spnMinPlantDicht.getValue();
         int iMaxDichtheid = (int) spnMaxPlantDicht.getValue();
-
 
         PlantDAO plantDao = new PlantDAO(dbConnection);
         Plant plant = new Plant

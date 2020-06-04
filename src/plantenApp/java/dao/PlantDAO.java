@@ -13,14 +13,14 @@ public class PlantDAO implements Queries {
 
     private Connection dbConnection;
 
-    private static final String INSERTSTANDAARD =
-            "INSERT INTO plant (type, familie, geslacht, soort, variatie, plantdichtheid_min, plantdichtheid_max, fgsv) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    //Query voor alle standaard waarde van de plant
+    //private static final
+
 
     private PreparedStatement stmtSelectById;
     private PreparedStatement stmtSelectByPlant;
-
     private PreparedStatement stmtInsertByStandard;
-
+    private PreparedStatement stmsInsertAbiotischeFactoren;
     public PlantDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
         stmtSelectById = dbConnection.prepareStatement(GETPLANTBYID);
@@ -28,6 +28,7 @@ public class PlantDAO implements Queries {
 
         stmtInsertByStandard = dbConnection.prepareStatement(INSERTSTANDAARD,
                 Statement.RETURN_GENERATED_KEYS);
+        stmsInsertAbiotischeFactoren = dbConnection.prepareStatement(INSERTABIOTISCHEF);
     }
 
     /**
@@ -55,6 +56,7 @@ public class PlantDAO implements Queries {
         return plant;
     }
     public void createPlant(Plant plant) throws SQLException {
+
         stmtInsertByStandard.setString(1, plant.getType());
         stmtInsertByStandard.setString(2, plant.getFamilie());
         stmtInsertByStandard.setString(3, plant.getGeslacht());
@@ -68,5 +70,10 @@ public class PlantDAO implements Queries {
         rs.next();
         Integer plant_id = rs.getInt(1);
         plant.setId(plant_id);
+        stmsInsertAbiotischeFactoren.setInt(1, plant_id);
+        stmsInsertAbiotischeFactoren.setString(2,plant.getAbiotischeFactoren().getBezonning());
+        stmsInsertAbiotischeFactoren.setString(3, plant.getAbiotischeFactoren().getGrondsoort());
+        stmsInsertAbiotischeFactoren.setString(4, plant.getAbiotischeFactoren().getVochtbehoefte());
+        stmsInsertAbiotischeFactoren.setString(5, plant.getAbiotischeFactoren().getVoedingsbehoefte());
     }
 }
