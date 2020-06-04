@@ -84,9 +84,9 @@
                                                 <HBox>
                                                    <children>
                                                       <Label alignment="CENTER" prefHeight="30.0" prefWidth="34.0" text="MIN" />
-                                                      <Spinner fx:id="spnMinPlantDicht" prefHeight="30.0" prefWidth="80.0" initialValue="0" min="0" max="100" />
+                                                      <Spinner fx:id="spnMinPlantDicht" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
                                                       <Label alignment="CENTER" prefHeight="30.0" prefWidth="38.0" text="MAX" />
-                                                      <Spinner fx:id="spnMaxPlantDicht" prefHeight="30.0" prefWidth="80.0" initialValue="0" min="0" max="100" />
+                                                      <Spinner fx:id="spnMaxPlantDicht" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
                                                    </children>
                                                 </HBox>
                                              </children>
@@ -622,17 +622,17 @@
                                                                </font>
                                                             </Label>
                                                             <ComboBox fx:id="cboBladkleurJan" onAction="#clickedbladkleurjan" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBladkleurFeb" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBladkleurMaa" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBladkleurApr" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBladkleurMei" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBladkleurJun" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBladkleurJul" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBladkleurAug" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBladkleurSept" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBladkleurOkt" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBladkleurNov" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBladkleurDec" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBladkleurFeb" onAction="#clickedcboBladkleurFeb" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBladkleurMaa" onAction="#clickedcboBladkleurMaa" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBladkleurApr" onAction="#clickedcboBladkleurApr" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBladkleurMei" onAction="#ClickedcboBladkleurMei" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBladkleurJun" onAction="#ClickedcboBladkleurJun" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBladkleurJul" onAction="#ClickedcboBladkleurJul" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBladkleurAug" onAction="#ClickedcboBladkleurAug" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBladkleurSept" onAction="#ClickedcboBladkleurSept" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBladkleurOkt" onAction="#ClickedcboBladkleurOkt" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBladkleurNov" onAction="#ClickedcboBladkleurNov" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBladkleurDec" onAction="#ClickedcboBladkleurDec" prefHeight="30.0" prefWidth="80.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox>
@@ -684,18 +684,19 @@
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <ComboBox fx:id="cboBloeikleurJan" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBloeikleurFeb" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBloeikleurMaa" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBloeikleurApr" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBloeikleurMei" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBloeikleurJun" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBloeikleurJul" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBloeikleurAug" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBloeikleurSept" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBloeikleurOkt" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBloeikleurNov" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBloeikleurDec" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBloeikleurJan" onAction="#actioncboBloeikleurJan" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBloeikleurFeb" onAction="#actioncboBloeikleurFeb" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBloeikleurMaa" onAction="#actioncboBloeikleurMaa" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBloeikleurApr" onAction="#actioncboBloeikleurApr" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBloeikleurMei" onAction="#actioncboBloeikleurMei" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBloeikleurJun" onAction="#actioncboBloeikleurJun" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBloeikleurJul" onAction="#actioncboBloeikleurJul" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBloeikleurAug" onAction="#actioncboBloeikleurAug" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBloeikleurSept" onAction="#actioncboBloeikleurSept" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBloeikleurOkt" onAction="#actioncboBloeikleurOkt" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBloeikleurNov" onAction="#actioncboBloeikleurNov" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBloeikleurDec" onAction="#actioncboBloeikleurDec" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBloeikleurApr1" layoutX="370.0" layoutY="10.0" onAction="#actioncboBloeikleurApr" prefHeight="30.0" prefWidth="80.0" />
                                                          </children>
                                                       </HBox>
                                                    </children>
