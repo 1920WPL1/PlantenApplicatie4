@@ -83,10 +83,10 @@
                                                 </Label>
                                                 <HBox>
                                                    <children>
-                                                      <Label alignment="CENTER" prefHeight="30.0" prefWidth="20.0" text="X" />
-                                                      <TextField fx:id="txtPlantdichtX" prefHeight="30.0" prefWidth="100.0" text="0" />
-                                                      <Label alignment="CENTER" prefHeight="30.0" prefWidth="20.0" text="Y" />
-                                                      <TextField fx:id="txtPlantdichtY" prefHeight="30.0" prefWidth="100.0" text="0" />
+                                                      <Label alignment="CENTER" prefHeight="30.0" prefWidth="34.0" text="MIN" />
+                                                      <Spinner fx:id="spnMinPlantDicht" prefHeight="30.0" prefWidth="80.0" initialValue="0" min="0" max="100" />
+                                                      <Label alignment="CENTER" prefHeight="30.0" prefWidth="38.0" text="MAX" />
+                                                      <Spinner fx:id="spnMaxPlantDicht" prefHeight="30.0" prefWidth="80.0" initialValue="0" min="0" max="100" />
                                                    </children>
                                                 </HBox>
                                              </children>
@@ -621,7 +621,7 @@
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <ComboBox fx:id="cboBladkleurJan" prefHeight="30.0" prefWidth="80.0" />
+                                                            <ComboBox fx:id="cboBladkleurJan" onAction="#clickedbladkleurjan" prefHeight="30.0" prefWidth="80.0" />
                                                             <ComboBox fx:id="cboBladkleurFeb" prefHeight="30.0" prefWidth="80.0" />
                                                             <ComboBox fx:id="cboBladkleurMaa" prefHeight="30.0" prefWidth="80.0" />
                                                             <ComboBox fx:id="cboBladkleurApr" prefHeight="30.0" prefWidth="80.0" />

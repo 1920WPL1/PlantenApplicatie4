@@ -1,5 +1,6 @@
 package plantenApp;
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -22,8 +23,7 @@ public class ControllerPlantToevoegen {
     public TextField txtGeslacht;
     public TextField txtSoort;
     public TextField txtVariant;
-    public TextField txtPlantdichtX;
-    public TextField txtPlantdichtY;
+
     //Alle velden die ingevuld moeten worden bij AbiotischeFactoren
     public ComboBox cboBezonning;
     public ComboBox cboVoedingsbehoefte;
@@ -116,6 +116,8 @@ public class ControllerPlantToevoegen {
     public Spinner spnMaxBloeihoogteOkt;
     public Spinner spnMaxBloeihoogteNov;
     public Spinner spnMaxBloeihoogteDec;
+    public Spinner spnMinPlantDicht;
+    public Spinner spnMaxPlantDicht;
     //Alle comboboxen per maand voor Bloeikleur
     public ComboBox cboBloeikleurJan;
     public ComboBox cboBloeikleurFeb;
@@ -260,17 +262,26 @@ public class ControllerPlantToevoegen {
     //Functie onder de button die een plant toevoegd
 
     public void clicked_ToevoegenPlant(MouseEvent mouseEvent) throws SQLException {
-        String fgsv = txtFamilie.getText() + " " + txtGeslacht.getText() + " " + txtSoort.getText() + " '" + txtVariant.getText() + "'";
-        PlantDAO plantDao = new PlantDAO(dbConnection);
 
+        String sType = cboType.getValue().toString();
+        String sFam = txtFamilie.getText();
+        String sGeslacht = txtGeslacht.getText();
+        String sSoort = txtSoort.getText();
+        String sVariant = txtVariant.getText();
+        String fgsv = sFam + " " + sGeslacht + " " + sSoort + " '" + sVariant + "'";
+        int iMinDichtheid = (int) spnMinPlantDicht.getValue();
+        int iMaxDichtheid = (int) spnMaxPlantDicht.getValue();
+
+
+        PlantDAO plantDao = new PlantDAO(dbConnection);
         Plant plant = new Plant
-                (cboType.getValue().toString(),
-                        txtFamilie.getText(),
-                        txtGeslacht.getText(),
-                        txtSoort.getText(),
-                        txtVariant.getText(),
-                        Integer.parseInt(txtPlantdichtX.getText()),
-                        Integer.parseInt(txtPlantdichtY.getText()),
+                (sType,
+                        sFam,
+                        sGeslacht,
+                        sSoort,
+                        sVariant,
+                        iMinDichtheid,
+                        iMaxDichtheid,
                         fgsv);
         plantDao.createPlant(plant);
 
@@ -279,15 +290,58 @@ public class ControllerPlantToevoegen {
     public void clicked_TerugGaan(MouseEvent mouseEvent) {
     }
 
-    public void textToColor(String kleur) {
+    // Deze functie word opgeroepen om de comboboxen van de kleuren en maand
+    // aan te passen van text naar kleur om een mooiere gebruikers ervaring
+
+    public void textToColor(ComboBox cbo, String kleur) {
         switch (kleur) {
             case "rood":
-                cboBloeikleurJan.setStyle("-fx-background-color:RED");
+                cbo.setStyle("-fx-background-color:RED");
+                break;
+            case "bruin":
+                cbo.setStyle("-fx-background-color:BROWN");
+                break;
+            case "geel":
+                cbo.setStyle("-fx-background-color:YELLOW");
+                break;
+            case "grijs":
+                cbo.setStyle("-fx-background-color:GREY");
+                break;
+            case "groen":
+                cbo.setStyle("-fx-background-color:GREEN");
+                break;
+            case "lila":
+                cbo.setStyle("-fx-background-color:LAVENDER");
+                break;
+            case "oranje":
+                cbo.setStyle("-fx-background-color:ORANGE");
+                break;
+            case "paars":
+                cbo.setStyle("-fx-background-color:PURPLE");
+                break;
+            case "roze":
+                cbo.setStyle("-fx-background-color:PINK");
+                break;
+            case "violet":
+                cbo.setStyle("-fx-background-color:VIOLET");
+                break;
+            case "":
+                cbo.setStyle("-fx-background-color:white");
+                break;
+            case "wit":
+                cbo.setStyle("-fx-background-color:white");
+                break;
+            case "zwart":
+                cbo.setStyle("-fx-background-color:white");
                 break;
             case "blauw":
-                cboBloeikleurJan.setStyle("-fx-background-color:BLUE");
-                cboBloeikleurJan.setStyle("-fx-background-color:BLUE");
-
+                cbo.setStyle("-fx-background-color:BLUE");
+                break;
         }
+    }
+
+    // Clicked event op de Comboboxes
+    public void clickedbladkleurjan(ActionEvent actionEvent) {
+        textToColor(cboBladkleurJan, cboBladkleurJan.getValue().toString());
     }
 }
