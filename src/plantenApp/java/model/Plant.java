@@ -1,16 +1,27 @@
 package plantenApp.java.model;
 
 
+import java.util.Date;
+
 /**@author Siebe*/
 public class Plant {
-    private int id;
+    private Integer id;
     private String type;
     private String familie;
     private String geslacht;
     private String soort;
     private String variatie;
-    private int minPlantdichtheid;
-    private int maxPlantdichtheid;
+    private Integer minPlantdichtheid;
+    private Integer maxPlantdichtheid;
+    private String fgsv;
+
+    public String getFgsv() {
+        return fgsv;
+    }
+
+    public void setFgsv(String fgsv) {
+        this.fgsv = fgsv;
+    }
 
     private AbiotischeFactoren abiotischeFactoren;
     private Beheer beheer;
@@ -33,6 +44,27 @@ public class Plant {
         this.minPlantdichtheid = minPlantdichtheid;
         this.maxPlantdichtheid = maxPlantdichtheid;
     }
+    //Constructor voor Insert : id wordt gegenereerd door de database.
+    public Plant(String type, String familie,String geslacht, String soort,String variatie,Integer minPlantdichtheid ,Integer maxPlantdichtheid,String fgsv) {
+        this.type = type;
+        this.familie = familie;
+        this.geslacht = geslacht;
+        this.soort = soort;
+        this.variatie = variatie;
+        this.minPlantdichtheid = minPlantdichtheid;
+        this.maxPlantdichtheid = maxPlantdichtheid;
+        this.fgsv =fgsv;
+    }
+
+    //idStudent wordt gegenereerd door de database.
+    //enkel invullen als dit nog niet gebeurd is. Primary key!
+    public void setId(int id) {
+        if (this.id != null) {
+            throw new UnsupportedOperationException("Id change not permitted");
+        }
+        this.id = id;
+    }
+
 
     public int getId() {
         return id;

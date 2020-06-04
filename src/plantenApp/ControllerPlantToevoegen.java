@@ -1,7 +1,19 @@
 package plantenApp;
 
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import plantenApp.java.dao.Database;
+import plantenApp.java.dao.InfoTablesDAO;
+import plantenApp.java.dao.PlantDAO;
+import plantenApp.java.model.InfoTables;
+import plantenApp.java.model.Plant;
+
+import javax.swing.*;
+import java.awt.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class ControllerPlantToevoegen {
     //Alle velden die ingevuld moeten worden bij Standaard
@@ -22,13 +34,13 @@ public class ControllerPlantToevoegen {
     public ListView lvHabitat;
     //Alle velden die ingevuld moeten worden bij Commensalisme
     public ComboBox cboOntwikkelingssnelheid;
-        //Alle checkboxen voor de verschillende  Sociabiliteiten
+    //Alle checkboxen voor de verschillende  Sociabiliteiten
     public CheckBox chbSociabiliteit1;
     public CheckBox chbSociabiliteit2;
     public CheckBox chbSociabiliteit3;
     public CheckBox chbSociabiliteit4;
     public CheckBox chbSociabiliteit5;
-        //Alle radiobuttons voor de verschillende Strategieën
+    //Alle radiobuttons voor de verschillende Strategieën
     public RadioButton rdbStrategieUnknown;
     public RadioButton rdbStrategieC;
     public RadioButton rdbStrategieCS;
@@ -42,7 +54,7 @@ public class ControllerPlantToevoegen {
     public ComboBox cboBladvorm;
     public ComboBox cboRatio;
     public ComboBox cboSpruitfenologie;
-        //Alle radioButtons voor Levensvorm volgens Raunkhiaer
+    //Alle radioButtons voor Levensvorm volgens Raunkhiaer
     public RadioButton rdbHydrofyt1;
     public RadioButton rdbHydrofyt2;
     public RadioButton rdbHelofyt3;
@@ -52,7 +64,7 @@ public class ControllerPlantToevoegen {
     public RadioButton rdbChamaefyt7;
     public RadioButton rdbChamaefyt8;
     public RadioButton rdbFanerophyt9;
-        //Alle spinners per maand voor Max Bladhoogte
+    //Alle spinners per maand voor Max Bladhoogte
     public Spinner spnBladhoogteJan;
     public Spinner spnBladhoogteFeb;
     public Spinner spnBladhoogteMaa;
@@ -65,7 +77,7 @@ public class ControllerPlantToevoegen {
     public Spinner spnBladhoogteOkt;
     public Spinner spnBladhoogteNov;
     public Spinner spnBladhoogteDec;
-        //Alle comboxen per maand voor Bladkleur
+    //Alle comboxen per maand voor Bladkleur
     public ComboBox cboBladkleurJan;
     public ComboBox cboBladkleurFeb;
     public ComboBox cboBladkleurMaa;
@@ -78,7 +90,7 @@ public class ControllerPlantToevoegen {
     public ComboBox cboBladkleurOkt;
     public ComboBox cboBladkleurNov;
     public ComboBox cboBladkleurDec;
-        //Alle spinners per maand voor Min Bloeihoogte
+    //Alle spinners per maand voor Min Bloeihoogte
     public Spinner spnMinBloeihoogteJan;
     public Spinner spnMinBloeihoogteFeb;
     public Spinner spnMinBloeihoogteMaa;
@@ -91,7 +103,7 @@ public class ControllerPlantToevoegen {
     public Spinner spnMinBloeihoogteOkt;
     public Spinner spnMinBloeihoogteNov;
     public Spinner spnMinBloeihoogteDec;
-        //Alle spinners per maand voor Max Bloeihoogte
+    //Alle spinners per maand voor Max Bloeihoogte
     public Spinner spnMaxBloeihoogteJan;
     public Spinner spnMaxBloeihoogteFeb;
     public Spinner spnMaxBloeihoogteMaa;
@@ -104,7 +116,7 @@ public class ControllerPlantToevoegen {
     public Spinner spnMaxBloeihoogteOkt;
     public Spinner spnMaxBloeihoogteNov;
     public Spinner spnMaxBloeihoogteDec;
-        //Alle comboboxen per maand voor Bloeikleur
+    //Alle comboboxen per maand voor Bloeikleur
     public ComboBox cboBloeikleurJan;
     public ComboBox cboBloeikleurFeb;
     public ComboBox cboBloeikleurMaa;
@@ -117,7 +129,7 @@ public class ControllerPlantToevoegen {
     public ComboBox cboBloeikleurOkt;
     public ComboBox cboBloeikleurNov;
     public ComboBox cboBloeikleurDec;
-        //Alle radiobuttons voor Habitus
+    //Alle radiobuttons voor Habitus
     public RadioButton rdbTufted;
     public RadioButton rdbUprightArching;
     public RadioButton rdbArching;
@@ -129,7 +141,7 @@ public class ControllerPlantToevoegen {
     public RadioButton rdbKussenvormend;
     public RadioButton rdbZuilvomrig;
     public RadioButton rdbUitbuigend;
-        //Alle radiobuttons voor Bloeiwijze
+    //Alle radiobuttons voor Bloeiwijze
     public RadioButton rdbAar;
     public RadioButton rdbBredePluim;
     public RadioButton rdbEtage;
@@ -145,33 +157,99 @@ public class ControllerPlantToevoegen {
     public Label lblNectarwaarde;
     public Slider sldPollenwaarde;
     public Label lblPollenwaarde;
-        //Alle radiobuttons voor Bijvriendelijk
+    //Alle radiobuttons voor Bijvriendelijk
     public RadioButton rdbBijvriendelijkLeeg;
     public RadioButton rdbBijvriendelijkJa;
     public RadioButton rdbBijvriendelijkNeen;
-        //Alle radiobuttons voor Vlindervriendelijk
+    //Alle radiobuttons voor Vlindervriendelijk
     public RadioButton rdbVlindervriendelijkLeeg;
     public RadioButton rdbVlindervriendelijkJa;
     public RadioButton rdbVlindervriendelijkNeen;
-        //Alle radiobuttons voor Eetbaar
+    //Alle radiobuttons voor Eetbaar
     public RadioButton rdbEetbaarLeeg;
     public RadioButton rdbEetbaarJa;
     public RadioButton rdbEetbaarNeen;
-        //Alle radiobuttons voor Kruidgebruik
+    //Alle radiobuttons voor Kruidgebruik
     public RadioButton rdbKruidgebruikLeeg;
     public RadioButton rdbKruidgebruikJa;
     public RadioButton rdbKruidgebruikNeen;
-        //Alle radiobuttons voor Geurend
+    //Alle radiobuttons voor Geurend
     public RadioButton rdbGeurendLeeg;
     public RadioButton rdbGeurendJa;
     public RadioButton rdbGeurendNeen;
-        //Alle radiobuttons voor Vorstgevoelig
+    //Alle radiobuttons voor Vorstgevoelig
     public RadioButton rdbVorstgevoeligLeeg;
     public RadioButton rdbVorstgevoeligJa;
     public RadioButton rdbVorstgevoeligNeen;
+    private Connection dbConnection;
 
+
+    public void initialize() throws SQLException {
+        dbConnection = Database.getInstance().getConnection();
+
+        /* infotabel object aanmaken */
+        InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
+        InfoTables infoTables = infotablesDAO.getInfoTables();
+        /*opvullen combobox Methode*/
+        FillComboboxes(infoTables);
+    }
+
+    private void FillComboboxes(InfoTables infotables) {
+        //type
+        cboType.getItems().addAll(infotables.getTypes());
+        //bladgrootte
+        cboBladgrootte.getItems().addAll(infotables.getBladgroottes());
+        //bladvorm
+        cboBladvorm.getItems().addAll(infotables.getBladvormen());
+        //Bezonning
+        cboBezonning.getItems().addAll(infotables.getBezonningsMogelijkheden());
+        //Voedingsbehoefte
+        cboVoedingsbehoefte.getItems().addAll(infotables.getVoedingsbehoeftes());
+        //Vochtbehoefte
+        cboVochtbehoefte.getItems().addAll(infotables.getVochtbehoeftes());
+        //ratio
+        cboRatio.getItems().addAll(infotables.getBloeiBladRatios());
+        //reactie Antagonistische
+        cboReactieAntag.getItems().addAll(infotables.getAntagonistischeOmgevingsReacties());
+        //Grond
+        cboGrondsoort.getItems().addAll(infotables.getGrondsoorten());
+        //Spruitfenologie
+        cboSpruitfenologie.getItems().addAll(infotables.getSpruitfenologieen());
+        //Ontwikkelingssnelheid
+        cboOntwikkelingssnelheid.getItems().addAll(infotables.getOnstwikkelingssnelheden());
+        //concurrentiekracht
+        cboLevensduur.getItems().addAll(infotables.getConcurentiekrachten());
+
+        //Bladkleur per maand
+        cboBladkleurJan.getItems().addAll(infotables.getKleuren());
+        cboBladkleurFeb.getItems().addAll(infotables.getKleuren());
+        cboBladkleurMaa.getItems().addAll(infotables.getKleuren());
+        cboBladkleurApr.getItems().addAll(infotables.getKleuren());
+        cboBladkleurMei.getItems().addAll(infotables.getKleuren());
+        cboBladkleurJun.getItems().addAll(infotables.getKleuren());
+        cboBladkleurJul.getItems().addAll(infotables.getKleuren());
+        cboBladkleurAug.getItems().addAll(infotables.getKleuren());
+        cboBladkleurSept.getItems().addAll(infotables.getKleuren());
+        cboBladkleurOkt.getItems().addAll(infotables.getKleuren());
+        cboBladkleurNov.getItems().addAll(infotables.getKleuren());
+        cboBladkleurDec.getItems().addAll(infotables.getKleuren());
+        //Bloeikleur per maand
+        cboBloeikleurJan.getItems().addAll(infotables.getKleuren());
+        cboBloeikleurFeb.getItems().addAll(infotables.getKleuren());
+        cboBloeikleurMaa.getItems().addAll(infotables.getKleuren());
+        cboBloeikleurApr.getItems().addAll(infotables.getKleuren());
+        cboBloeikleurMei.getItems().addAll(infotables.getKleuren());
+        cboBloeikleurJun.getItems().addAll(infotables.getKleuren());
+        cboBloeikleurJul.getItems().addAll(infotables.getKleuren());
+        cboBloeikleurAug.getItems().addAll(infotables.getKleuren());
+        cboBloeikleurSept.getItems().addAll(infotables.getKleuren());
+        cboBloeikleurOkt.getItems().addAll(infotables.getKleuren());
+        cboBloeikleurNov.getItems().addAll(infotables.getKleuren());
+        cboBloeikleurDec.getItems().addAll(infotables.getKleuren());
+    }
 
     //Functie onder de button doe een nieuwe eigenschap voor habitat toevoegd
+
     public void clicked_ToevoegenHabitat(MouseEvent mouseEvent) {
     }
 
@@ -180,10 +258,36 @@ public class ControllerPlantToevoegen {
     }
 
     //Functie onder de button die een plant toevoegd
-    public void clicked_ToevoegenPlant(MouseEvent mouseEvent) {
+
+    public void clicked_ToevoegenPlant(MouseEvent mouseEvent) throws SQLException {
+        String fgsv = txtFamilie.getText() + " " + txtGeslacht.getText() + " " + txtSoort.getText() + " '" + txtVariant.getText() + "'";
+        PlantDAO plantDao = new PlantDAO(dbConnection);
+
+        Plant plant = new Plant
+                (cboType.getValue().toString(),
+                        txtFamilie.getText(),
+                        txtGeslacht.getText(),
+                        txtSoort.getText(),
+                        txtVariant.getText(),
+                        Integer.parseInt(txtPlantdichtX.getText()),
+                        Integer.parseInt(txtPlantdichtY.getText()),
+                        fgsv);
+        plantDao.createPlant(plant);
+
     }
 
-
     public void clicked_TerugGaan(MouseEvent mouseEvent) {
+    }
+
+    public void textToColor(String kleur) {
+        switch (kleur) {
+            case "rood":
+                cboBloeikleurJan.setStyle("-fx-background-color:RED");
+                break;
+            case "blauw":
+                cboBloeikleurJan.setStyle("-fx-background-color:BLUE");
+                cboBloeikleurJan.setStyle("-fx-background-color:BLUE");
+
+        }
     }
 }
