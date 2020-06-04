@@ -600,18 +600,18 @@
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Spinner fx:id="spnBladhoogteJan" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteFeb" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteMaa" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteApr" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteMei" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteJun" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteJul" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteAug" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteSept" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteOkt" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteNov" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteDec" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteJan" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteFeb" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteMaa" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteApr" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteMei" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteJun" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteJul" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteAug" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteSept" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteOkt" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteNov" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteDec" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox>
@@ -642,18 +642,18 @@
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Spinner fx:id="spnMinBloeihoogteJan" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMinBloeihoogteFeb" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMinBloeihoogteMaa" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMinBloeihoogteApr" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMinBloeihoogteMei" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMinBloeihoogteJun" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMinBloeihoogteJul" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMinBloeihoogteAug" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMinBloeihoogteSept" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMinBloeihoogteOkt" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMinBloeihoogteNov" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMinBloeihoogteDec" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMinBloeihoogteJan" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMinBloeihoogteFeb" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMinBloeihoogteMaa" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMinBloeihoogteApr"  initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMinBloeihoogteMei" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMinBloeihoogteJun" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMinBloeihoogteJul" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMinBloeihoogteAug" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMinBloeihoogteSept" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMinBloeihoogteOkt" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMinBloeihoogteNov" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMinBloeihoogteDec" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox>
@@ -663,18 +663,18 @@
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Spinner fx:id="spnMaxBloeihoogteJan" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMaxBloeihoogteFeb" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMaxBloeihoogteMaa" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMaxBloeihoogteApr" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMaxBloeihoogteMei" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMaxBloeihoogteJun" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMaxBloeihoogteJul" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMaxBloeihoogteAug" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMaxBloeihoogteSept" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMaxBloeihoogteOkt" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMaxBloeihoogteNov" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnMaxBloeihoogteDec" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMaxBloeihoogteJan" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMaxBloeihoogteFeb" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMaxBloeihoogteMaa" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMaxBloeihoogteApr" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMaxBloeihoogteMei" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMaxBloeihoogteJun" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMaxBloeihoogteJul" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMaxBloeihoogteAug" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMaxBloeihoogteSept" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMaxBloeihoogteOkt" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMaxBloeihoogteNov" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnMaxBloeihoogteDec" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox>
@@ -696,7 +696,7 @@
                                                             <ComboBox fx:id="cboBloeikleurOkt" onAction="#actioncboBloeikleurOkt" prefHeight="30.0" prefWidth="80.0" />
                                                             <ComboBox fx:id="cboBloeikleurNov" onAction="#actioncboBloeikleurNov" prefHeight="30.0" prefWidth="80.0" />
                                                             <ComboBox fx:id="cboBloeikleurDec" onAction="#actioncboBloeikleurDec" prefHeight="30.0" prefWidth="80.0" />
-                                                            <ComboBox fx:id="cboBloeikleurApr1" layoutX="370.0" layoutY="10.0" onAction="#actioncboBloeikleurApr" prefHeight="30.0" prefWidth="80.0" />
+
                                                          </children>
                                                       </HBox>
                                                    </children>
