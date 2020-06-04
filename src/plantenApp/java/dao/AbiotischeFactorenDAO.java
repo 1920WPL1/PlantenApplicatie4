@@ -2,6 +2,7 @@ package plantenApp.java.dao;
 
 import plantenApp.java.model.AbioMulti_Eigenschap;
 import plantenApp.java.model.AbiotischeFactoren;
+import plantenApp.java.model.Plant;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -133,5 +134,9 @@ public class AbiotischeFactorenDAO implements Queries {
             ids.add(rs.getInt("plant_id"));
         }
         return ids;
+    }
+    public void createAbiotischeFactoren(AbiotischeFactoren abiotischeFactoren) throws SQLException
+    {
+
     }
 }

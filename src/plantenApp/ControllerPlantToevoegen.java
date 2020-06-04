@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import plantenApp.java.dao.Database;
 import plantenApp.java.dao.InfoTablesDAO;
 import plantenApp.java.dao.PlantDAO;
+import plantenApp.java.model.AbiotischeFactoren;
 import plantenApp.java.model.InfoTables;
 import plantenApp.java.model.Plant;
 import javafx.stage.Stage;
@@ -279,7 +280,11 @@ public class ControllerPlantToevoegen {
         String fgsv = sFam + " " + sGeslacht + " " + sSoort + " '" + sVariant + "'";
         int iMinDichtheid = (int) spnMinPlantDicht.getValue();
         int iMaxDichtheid = (int) spnMaxPlantDicht.getValue();
-
+        String sBezonning = cboBezonning.getValue().toString();
+        String sGrondsoort = cboGrondsoort.getValue().toString();
+        String sVochtbehoefte = cboVochtbehoefte.getValue().toString();
+        String sVoedingsbehoefte = cboVoedingsbehoefte.getValue().toString();
+        String sReactieAnta = cboReactieAntag.getValue().toString();
         PlantDAO plantDao = new PlantDAO(dbConnection);
         Plant plant = new Plant
                 (sType,
@@ -291,6 +296,9 @@ public class ControllerPlantToevoegen {
                         iMaxDichtheid,
                         fgsv);
         plantDao.createPlant(plant);
+
+
+
 
     }
 
