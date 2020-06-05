@@ -252,7 +252,7 @@ public interface Queries {
                     "VALUES(?, ?, ?)";
 
     String INSERTEXTRA =
-            "INSERT INTO extra_id(plant_id, nectarwaarde, pollenwaarde, bijvriendelijk, eetbaar_kruidgebruik, geurend, vorstgevoelig)" +
+            "INSERT INTO extra(plant_id, nectarwaarde, pollenwaarde, bijvriendelijk, eetbaar_kruidgebruik, geurend, vorstgevoelig)" +
                     "VALUES(?, ?, ?, ?, ?, ?, ?)";
 
     String INSERTFENOTYPE =

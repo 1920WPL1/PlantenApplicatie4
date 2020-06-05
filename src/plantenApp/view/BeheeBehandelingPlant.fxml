@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerBeheer">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
@@ -24,7 +24,7 @@
                      <children>
                         <VBox layoutX="14.0" layoutY="14.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Terug">
+                              <Button mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" text="Terug">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -38,62 +38,62 @@
                                  <children>
                                     <VBox>
                                        <children>
-                                          <CheckBox mnemonicParsing="false" prefHeight="30.0" text="Januari">
+                                          <CheckBox fx:id="chbJanuari" mnemonicParsing="false" prefHeight="30.0" text="Januari">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" prefHeight="30.0" text="Februari">
+                                          <CheckBox fx:id="chbFebruari" mnemonicParsing="false" prefHeight="30.0" text="Februari">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" prefHeight="30.0" text="Maart">
+                                          <CheckBox fx:id="chbMaart" mnemonicParsing="false" prefHeight="30.0" text="Maart">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" prefHeight="30.0" text="April">
+                                          <CheckBox fx:id="chbApril" mnemonicParsing="false" prefHeight="30.0" text="April">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" prefHeight="30.0" text="Mei">
+                                          <CheckBox fx:id="chbMei" mnemonicParsing="false" prefHeight="30.0" text="Mei">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" prefHeight="30.0" text="Juni">
+                                          <CheckBox fx:id="chbJuni" mnemonicParsing="false" prefHeight="30.0" text="Juni">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" prefHeight="30.0" text="Juli">
+                                          <CheckBox fx:id="chbJuli" mnemonicParsing="false" prefHeight="30.0" text="Juli">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" prefHeight="30.0" text="Augustus">
+                                          <CheckBox fx:id="chbAugustus" mnemonicParsing="false" prefHeight="30.0" text="Augustus">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" prefHeight="30.0" text="September  ">
+                                          <CheckBox fx:id="chbSeptember" mnemonicParsing="false" prefHeight="30.0" text="September  ">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" prefHeight="30.0" text="Oktober">
+                                          <CheckBox fx:id="chbOktober" mnemonicParsing="false" prefHeight="30.0" text="Oktober">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" prefHeight="30.0" text="November">
+                                          <CheckBox fx:id="chbNovember" mnemonicParsing="false" prefHeight="30.0" text="November">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" prefHeight="30.0" text="December">
+                                          <CheckBox fx:id="chbDecember" mnemonicParsing="false" prefHeight="30.0" text="December">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
@@ -111,7 +111,7 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <ComboBox prefHeight="30.0" prefWidth="300.0" />
+                                                      <ComboBox fx:id="cboBehandeling" prefHeight="30.0" prefWidth="300.0" />
                                                    </children>
                                                 </VBox>
                                                 <VBox>
@@ -121,7 +121,7 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnJaar" prefHeight="30.0" prefWidth="80.0" />
                                                    </children>
                                                 </VBox>
                                                 <VBox>
@@ -131,7 +131,7 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="+" />
+                                                      <Button mnemonicParsing="false" onMouseClicked="#clicked_OpmerkingToevoegen" prefHeight="30.0" prefWidth="30.0" text="+" />
                                                    </children>
                                                 </VBox>
                                                 <VBox>
@@ -141,13 +141,13 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="-" />
+                                                      <Button mnemonicParsing="false" onMouseClicked="#clicked_OpmerkingVerwijderen" prefHeight="30.0" prefWidth="30.0" text="-" />
                                                    </children>
                                                 </VBox>
                                              </children>
                                           </HBox>
-                                          <TextArea prefHeight="60.0" promptText="Opmerking" />
-                                          <ListView prefHeight="240.0" />
+                                          <TextArea fx:id="txtOpmerking" prefHeight="60.0" promptText="Opmerking" />
+                                          <ListView fx:id="lvLijstBehandeling" prefHeight="240.0" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -171,7 +171,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField prefHeight="30.0" prefWidth="300.0" />
+                                    <TextField fx:id="txtBehandeling" prefHeight="30.0" prefWidth="300.0" />
                                  </children>
                               </VBox>
                               <VBox>
@@ -181,7 +181,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="+" />
+                                    <Button mnemonicParsing="false" onMouseClicked="#clicked_BehandelingToevoegen" prefHeight="30.0" prefWidth="30.0" text="+" />
                                  </children>
                               </VBox>
                               <VBox>
