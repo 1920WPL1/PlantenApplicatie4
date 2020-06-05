@@ -37,8 +37,8 @@ public class ExtraDAO implements Queries {
                     rs.getInt("nectarwaarde"),
                     rs.getInt("pollenwaarde"),
                     rs.getString("bijvriendelijk"),
-                    rs.getString("eetbaar_kruidgebruik"),
-                    rs.getString("eetbaar_kruidgebruik"),
+                    rs.getString("eetbaar"),
+                    rs.getString("kruidgebruik"),
                     rs.getString("geurend"),
                     rs.getString("vorstgevoelig")
             );
@@ -113,7 +113,7 @@ public class ExtraDAO implements Queries {
         stmtInsertExtra.executeUpdate();
         ResultSet rs = stmtInsertExtra.getGeneratedKeys();
         rs.next();
-        Integer extra_id = rs.getInt(1);
+        int extra_id = rs.getInt(1);
         extra.setId(extra_id);
     }
 
