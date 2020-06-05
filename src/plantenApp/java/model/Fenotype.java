@@ -16,6 +16,7 @@ public class Fenotype {
 
     private ArrayList<FenoMulti_Eigenschap> multiEigenschappen;
 
+    //Constructor met id
     public Fenotype(int id, int plant_id, String bladvorm, String levensvorm, String habitus, String bloeiwijze, int bladgrootte, String ratio_bloei_blad, String spruitfenologie, ArrayList<FenoMulti_Eigenschap> multiEigenschappen) {
         this.id = id;
         this.plant_id = plant_id;
@@ -28,8 +29,8 @@ public class Fenotype {
         this.spruitfenologie = spruitfenologie;
         this.multiEigenschappen = multiEigenschappen;
     }
+    //Constructor zonder id
     public Fenotype(int plant_id, String bladvorm, String levensvorm, String habitus, String bloeiwijze, int bladgrootte, String ratio_bloei_blad, String spruitfenologie) {
-
         this.plant_id = plant_id;
         this.bladvorm = bladvorm;
         this.levensvorm = levensvorm;

@@ -12,6 +12,7 @@ public class Extra {
     private String geurend;
     private String vorstgevoelig;
 
+    //Constructor met id
     public Extra(int id, int plant_id, int nectarwaarde, int pollenwaarde, String bijvriendelijk, String eetbaar, String kruidgebruik, String geurend, String vorstgevoelig) {
         this.id = id;
         this.plant_id = plant_id;
@@ -23,6 +24,18 @@ public class Extra {
         this.geurend = geurend;
         this.vorstgevoelig = vorstgevoelig;
     }
+    //Constructor zonder id
+    public Extra( int plant_id, int nectarwaarde, int pollenwaarde, String bijvriendelijk, String eetbaar, String kruidgebruik, String geurend, String vorstgevoelig) {
+        this.plant_id = plant_id;
+        this.nectarwaarde = nectarwaarde;
+        this.pollenwaarde = pollenwaarde;
+        this.bijvriendelijk = bijvriendelijk;
+        this.eetbaar = eetbaar;
+        this.kruidgebruik = kruidgebruik;
+        this.geurend = geurend;
+        this.vorstgevoelig = vorstgevoelig;
+    }
+
 
     public int getId() {
         return id;
