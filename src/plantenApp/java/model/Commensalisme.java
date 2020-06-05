@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**@author Siebe*/
 public class Commensalisme {
-    private int id;
+    private Integer id;
     private int plant_id;
     private String strategie;
     private String ontwikkelingssnelheid;
@@ -16,6 +16,12 @@ public class Commensalisme {
         this.strategie = strategie;
         this.ontwikkelingssnelheid = ontwikkelingssnelheid;
         this.multiEigenschappen = multiEigenschappen;
+    }
+
+    public Commensalisme(int plant_id, String strategie, String ontwikkelingssnelheid) {
+        this.plant_id = plant_id;
+        this.strategie = strategie;
+        this.ontwikkelingssnelheid = ontwikkelingssnelheid;
     }
 
     public int getId() {
@@ -37,4 +43,14 @@ public class Commensalisme {
     public ArrayList<CommMulti_Eigenschap> getMultiEigenschappen() {
         return multiEigenschappen;
     }
+
+    public void setId(Integer id)
+    {
+        if (this.id != null)
+        {
+            throw new UnsupportedOperationException("Id change not permitted");
+        }
+        this.id = id;
+    }
+
 }

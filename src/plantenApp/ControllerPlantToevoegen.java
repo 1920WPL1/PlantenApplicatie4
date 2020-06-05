@@ -10,10 +10,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import plantenApp.java.dao.Database;
 import plantenApp.java.dao.InfoTablesDAO;
-import plantenApp.java.model.AbiotischeFactoren;
+import plantenApp.java.model.*;
 import plantenApp.java.dao.*;
-import plantenApp.java.model.InfoTables;
-import plantenApp.java.model.Plant;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -40,12 +38,15 @@ public class ControllerPlantToevoegen {
     //Alle velden die ingevuld moeten worden bij Commensalisme
     public ComboBox cboOntwikkelingssnelheid;
     //Alle checkboxen voor de verschillende  Sociabiliteiten
-    public CheckBox chbSociabiliteit1;
-    public CheckBox chbSociabiliteit2;
-    public CheckBox chbSociabiliteit3;
-    public CheckBox chbSociabiliteit4;
-    public CheckBox chbSociabiliteit5;
+    public ToggleGroup Sociabiliteit;
+    public RadioButton rdbSociabiliteit1;
+    public RadioButton rdbSociabiliteit2;
+    public RadioButton rdbSociabiliteit3;
+    public RadioButton rdbSociabiliteit4;
+    public RadioButton rdbSociabiliteit5;
+    public RadioButton rdbSociabiliteitUnknow;
     //Alle radiobuttons voor de verschillende Strategieën
+    public ToggleGroup Strategie;
     public RadioButton rdbStrategieUnknown;
     public RadioButton rdbStrategieC;
     public RadioButton rdbStrategieCS;
@@ -187,6 +188,8 @@ public class ControllerPlantToevoegen {
     public RadioButton rdbVorstgevoeligJa;
     public RadioButton rdbVorstgevoeligNeen;
     public Button btn_Terug;
+
+
     private Connection dbConnection;
 
 
@@ -281,6 +284,7 @@ public class ControllerPlantToevoegen {
         String sVoedingsB=(String)cboVoedingsbehoefte.getValue();
         String sAnta=(String)cboReactieAntag.getValue();
 
+
         PlantDAO plantDao = new PlantDAO(dbConnection);
         Plant plant = new Plant
                 (sType,
@@ -303,7 +307,56 @@ AbiotischeFactorenDAO abiotischeFactorenDAO= new AbiotischeFactorenDAO(dbConnect
                         sVoedingsB,
                         sAnta);
         abiotischeFactorenDAO.createAbio(abiotischeFactoren,plant);
+
+        String sOntwikkelingssnelheid = (String)cboOntwikkelingssnelheid.getValue();
+        CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
+        Commensalisme commensalisme = new Commensalisme(
+                plant_id,
+                geselecteerdStrategie(),
+                sOntwikkelingssnelheid);
+        commensalismeDAO.createCommensalisme(commensalisme, plant);
+
+        ExtraDAO extraDAO = new ExtraDAO(dbConnection);
+        //Extra extra = new Extra(
+        //plant_id,
+
+        //)
         notificationBox("U plant is opgeslagen" );
+
+    }
+
+    //Functie om de geselecteerd Strategie weer te geven
+    public String geselecteerdStrategie()
+    {
+        String sStrategie = null;
+        if (rdbStrategieC.isSelected()){
+            sStrategie = "C";
+        }
+        else if (rdbStrategieCR.isSelected()){
+            sStrategie = "C-R";
+        }
+        else if (rdbStrategieR.isSelected()) {
+            sStrategie = "R";
+        }
+        else if (rdbStrategieSR.isSelected()){
+            sStrategie = "S-R";
+        }
+        else if (rdbStrategieS.isSelected()){
+            sStrategie = "S";
+        }
+        else if (rdbStrategieCS.isSelected()){
+            sStrategie = "C-S";
+        }
+        else if (rdbStrategieCSR.isSelected()){
+            sStrategie = "C-S-R";
+        }
+        else if (rdbStrategieUnknown.isSelected()){
+            sStrategie ="Unknown";
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "You have not declared anything!");
+        }
+        return sStrategie;
     }
 
 //functie voor terug te kunnen keren naar het zoek scherm.

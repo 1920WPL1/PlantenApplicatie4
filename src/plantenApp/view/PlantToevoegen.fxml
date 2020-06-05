@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -11,6 +10,7 @@
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -188,7 +188,7 @@
                           <content>
                             <AnchorPane>
                                  <children>
-                                    <VBox layoutX="14.0" layoutY="14.0">
+                                    <VBox layoutX="14.0" layoutY="14.0" prefHeight="231.0" prefWidth="257.0">
                                        <children>
                                           <Label prefHeight="30.0" prefWidth="240.0" text="Ontwikkelingssnelheid:">
                                              <font>
@@ -204,11 +204,15 @@
                                           </Label>
                                           <HBox>
                                              <children>
-                                                <CheckBox fx:id="chbSociabiliteit1" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="I" />
-                                                <CheckBox fx:id="chbSociabiliteit2" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="II" />
-                                                <CheckBox fx:id="chbSociabiliteit3" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="III" />
-                                                <CheckBox fx:id="chbSociabiliteit4" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="IV" />
-                                                <CheckBox fx:id="chbSociabiliteit5" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="V" />
+                                                <RadioButton fx:id="rdbSociabiliteit1" mnemonicParsing="false" prefHeight="18.0" prefWidth="32.0" text="I">
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="Sociabiliteit" />
+                                                   </toggleGroup></RadioButton>
+                                                <RadioButton fx:id="rdbSociabiliteit2" mnemonicParsing="false" prefHeight="18.0" prefWidth="32.0" text="II" toggleGroup="$Sociabiliteit" />
+                                                <RadioButton fx:id="rdbSociabiliteit3" mnemonicParsing="false" prefHeight="18.0" prefWidth="38.0" text="III" toggleGroup="$Sociabiliteit" />
+                                                <RadioButton fx:id="rdbSociabiliteit4" mnemonicParsing="false" prefHeight="18.0" prefWidth="39.0" text="IV" toggleGroup="$Sociabiliteit" />
+                                                <RadioButton fx:id="rdbSociabiliteit5" mnemonicParsing="false" prefHeight="18.0" prefWidth="36.0" text="V" toggleGroup="$Sociabiliteit" />
+                                                <RadioButton fx:id="rdbSociabiliteitUnknow" mnemonicParsing="false" text="Unknown" toggleGroup="$Sociabiliteit" />
                                              </children>
                                           </HBox>
                                           <Label prefHeight="30.0" prefWidth="120.0" text="Strategie:">
@@ -220,9 +224,12 @@
                                              <children>
                                                 <HBox>
                                                    <children>
-                                                      <RadioButton fx:id="rdbStrategieUnknown" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" text="Unknown" />
+                                                      <RadioButton fx:id="rdbStrategieUnknown" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" text="Unknown">
+                                                         <toggleGroup>
+                                                            <ToggleGroup fx:id="Strategie" />
+                                                         </toggleGroup></RadioButton>
                                                       <Label prefHeight="30.0" prefWidth="30.0" />
-                                                      <RadioButton fx:id="rdbStrategieC" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="C" />
+                                                      <RadioButton fx:id="rdbStrategieC" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="C" toggleGroup="$Strategie" />
                                                       <Label prefHeight="30.0" prefWidth="30.0" />
                                                       <Label prefHeight="30.0" prefWidth="30.0" />
                                                    </children>
@@ -232,9 +239,9 @@
                                                       <Label prefHeight="30.0" prefWidth="30.0" />
                                                       <Label prefHeight="30.0" prefWidth="30.0" />
                                                       <Label prefHeight="30.0" prefWidth="30.0" />
-                                                      <RadioButton fx:id="rdbStrategieCS" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" />
-                                                      <RadioButton fx:id="rdbStrategieCSR" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" />
-                                                      <RadioButton fx:id="rdbStrategieCR" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" />
+                                                      <RadioButton fx:id="rdbStrategieCS" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$Strategie" />
+                                                      <RadioButton fx:id="rdbStrategieCSR" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$Strategie" />
+                                                      <RadioButton fx:id="rdbStrategieCR" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$Strategie" />
                                                       <Label prefHeight="30.0" prefWidth="30.0" />
                                                    </children>
                                                 </HBox>
@@ -242,18 +249,18 @@
                                                    <children>
                                                       <Label prefHeight="30.0" prefWidth="30.0" />
                                                       <Label prefHeight="30.0" prefWidth="30.0" />
-                                                      <RadioButton fx:id="rdbStrategieS" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="S" />
+                                                      <RadioButton fx:id="rdbStrategieS" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="S" toggleGroup="$Strategie" />
                                                       <Label prefHeight="30.0" prefWidth="30.0" />
-                                                      <RadioButton fx:id="rdbStrategieSR" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" />
+                                                      <RadioButton fx:id="rdbStrategieSR" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$Strategie" />
                                                       <Label prefHeight="30.0" prefWidth="30.0" />
-                                                      <RadioButton fx:id="rdbStrategieR" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="R" />
+                                                      <RadioButton fx:id="rdbStrategieR" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="R" toggleGroup="$Strategie" />
                                                    </children>
                                                 </HBox>
                                              </children>
                                           </VBox>
                                        </children>
                                     </VBox>
-                                    <VBox layoutX="260.0" layoutY="14.0">
+                                    <VBox layoutX="272.0" layoutY="17.0">
                                        <children>
                                           <Label prefHeight="30.0" prefWidth="240.0" text="Levensduur/oncurrentiekracht">
                                              <font>

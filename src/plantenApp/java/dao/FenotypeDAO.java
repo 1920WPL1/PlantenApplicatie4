@@ -2,6 +2,7 @@ package plantenApp.java.dao;
 
 import plantenApp.java.model.FenoMulti_Eigenschap;
 import plantenApp.java.model.Fenotype;
+import plantenApp.java.model.Plant;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +18,7 @@ public class FenotypeDAO implements Queries {
     private PreparedStatement stmtSelectFenoMultiByID;
     private PreparedStatement stmtSelectIdsByFeno;
     private PreparedStatement stmtSelectIdsByFenoMulti;
+    private PreparedStatement stmsInsertFenotype;
 
     public FenotypeDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
@@ -24,6 +26,7 @@ public class FenotypeDAO implements Queries {
         stmtSelectFenoMultiByID = dbConnection.prepareStatement(GETFENOTYPEMULTIBYPLANTID);
         stmtSelectIdsByFeno = dbConnection.prepareStatement(GETIDSBYFENO);
         stmtSelectIdsByFenoMulti = dbConnection.prepareStatement(GETIDSBYFENOMULTI);
+        stmsInsertFenotype = dbConnection.prepareStatement(INSERTFENOTYPE);
     }
 
     /**@author Siebe
@@ -156,6 +159,13 @@ public class FenotypeDAO implements Queries {
             ids.add(rs.getInt("plant_id"));
         }
         return ids;
+    }
+
+    public void createFenotype(Fenotype fenotype, Plant plant) throws SQLException
+    {
+        stmsInsertFenotype.setInt(1, plant.getId());
+        stmsInsertFenotype.setString(2, fenotype.getBladvorm());
+        stmsInsertFenotype.setString(3, fenotype.getLevensvorm());
     }
 }
 
