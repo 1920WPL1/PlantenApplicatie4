@@ -10,8 +10,8 @@ public interface Queries {
     String GETABIOTISCHBYPLANTID = "SELECT * FROM abiotische_factoren WHERE plant_id = ?";
     String GETABIOTISCHBMULTIYPLANTID = "SELECT * FROM abiotisch_multi WHERE plant_id = ?";
 
-    String GETCOMMENSALISMEBYPLANTID = "SELECT * FROM commensialisme WHERE plant_id = ?";
-    String GETCOMMENSALISMEMULTIBYPLANTID = "SELECT * FROM commensialisme_multi WHERE plant_id = ?";
+    String GETCOMMENSALISMEBYPLANTID = "SELECT * FROM commensalisme WHERE plant_id = ?";
+    String GETCOMMENSALISMEMULTIBYPLANTID = "SELECT * FROM commensalisme_multi WHERE plant_id = ?";
 
     String GETBEHEERBYPLANTID = "SELECT * FROM beheer WHERE plant_id = ?";
 
@@ -244,7 +244,7 @@ public interface Queries {
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     String INSERTCOMMESALISME =
-            "INSERT INTO commensialisme(plant_id, strategie, ontwikkelingssnelheid)" +
+            "INSERT INTO commensalisme(plant_id, strategie, ontwikkelingssnelheid)" +
                     "VALUES(?, ?, ?)";
 
     String INSERTCOMMESALISMEMULTI =
