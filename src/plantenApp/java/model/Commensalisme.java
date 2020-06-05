@@ -10,6 +10,7 @@ public class Commensalisme {
     private String ontwikkelingssnelheid;
     private ArrayList<CommMulti_Eigenschap> multiEigenschappen;
 
+    //Constructor met id
     public Commensalisme(int id, int plant_id, String strategie, String ontwikkelingssnelheid, ArrayList<CommMulti_Eigenschap> multiEigenschappen) {
         this.id = id;
         this.plant_id = plant_id;
@@ -17,7 +18,7 @@ public class Commensalisme {
         this.ontwikkelingssnelheid = ontwikkelingssnelheid;
         this.multiEigenschappen = multiEigenschappen;
     }
-
+    //Constructor zonder id
     public Commensalisme(int plant_id, String strategie, String ontwikkelingssnelheid) {
         this.plant_id = plant_id;
         this.strategie = strategie;

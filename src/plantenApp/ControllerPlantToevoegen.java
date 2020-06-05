@@ -162,10 +162,8 @@ public class ControllerPlantToevoegen {
     //Alle velden die ingevuld moeten worden bij Extra
     public ComboBox cboLevensduur;
     public ListView lvLevensduur;
-    public Slider sldNectarwaarde;
-    public Label lblNectarwaarde;
-    public Slider sldPollenwaarde;
-    public Label lblPollenwaarde;
+    public Spinner spnNectarwaarde;
+    public Spinner spnPollenwaarde;
     //Alle radiobuttons voor Bijvriendelijk
     public RadioButton rdbBijvriendelijkLeeg;
     public RadioButton rdbBijvriendelijkJa;
@@ -190,14 +188,20 @@ public class ControllerPlantToevoegen {
     public RadioButton rdbVorstgevoeligLeeg;
     public RadioButton rdbVorstgevoeligJa;
     public RadioButton rdbVorstgevoeligNeen;
+    //Button om terug te keren
     public Button btn_Terug;
-
+    //Alle togglegroups overheen het hele project
     public ToggleGroup levensvormToggle;
     public ToggleGroup habitusToggle;
     public ToggleGroup bloeiwijzeToggle;
+    public ToggleGroup BijvriendelijkToggle;
+    public ToggleGroup VlindervriendelijkToggle;
+    public ToggleGroup EetbaarToggle;
+    public ToggleGroup KruidgebruikToggle;
+    public ToggleGroup GeurendToggle;
+    public ToggleGroup VorstgevoeligToggle;
 
     private Connection dbConnection;
-
 
     public void initialize() throws SQLException {
         dbConnection = Database.getInstance().getConnection();
@@ -302,7 +306,19 @@ public class ControllerPlantToevoegen {
         String sOntwikkelingssnelheid = (String)cboOntwikkelingssnelheid.getValue();
         RadioButton selectStategied = (RadioButton) StrategieToggle.getSelectedToggle();
         String sStrategie = selectStategied.getText();
-
+        //Vars voor toevoegen extra
+        int iNectarwaarde = (int) spnNectarwaarde.getValue();
+        int iPollenwaarde = (int) spnPollenwaarde.getValue();
+        RadioButton selectBijvriendelijk = (RadioButton) BijvriendelijkToggle.getSelectedToggle();
+        String sBijvriendelijk = selectBijvriendelijk.getText();
+        RadioButton selectEetbaar = (RadioButton) EetbaarToggle.getSelectedToggle();
+        String sEetbaar = selectEetbaar.getText();
+        RadioButton selectKruidgebruik = (RadioButton) KruidgebruikToggle.getSelectedToggle();
+        String sKruidgebruik = selectKruidgebruik.getText();
+        RadioButton selectGeurend = (RadioButton) GeurendToggle.getSelectedToggle();
+        String sGeurend = selectGeurend.getText();
+        RadioButton selectVorstgevoelig = (RadioButton) VorstgevoeligToggle.getSelectedToggle();
+        String sVorstgevoelig = selectVorstgevoelig.getText();
 
         int iBladgrootte=Integer.parseInt(cboBladgrootte.getValue().toString());
         String sRatioBloeiBlad = cboRatio.getValue().toString();
@@ -349,6 +365,19 @@ public class ControllerPlantToevoegen {
                 sSpruitfeno);
 
         fenotypeDAO.createFeno(fenotype ,plant);
+
+        ExtraDAO extraDAO = new ExtraDAO(dbConnection);
+        Extra extra = new Extra(
+                plant_id,
+                iNectarwaarde,
+                iPollenwaarde,
+                sBijvriendelijk,
+                sEetbaar,
+                sKruidgebruik,
+                sGeurend,
+                sVorstgevoelig
+        );
+        extraDAO.createExtra(extra, plant);
         notificationBox("U plant is opgeslagen");
     }
 
