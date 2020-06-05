@@ -12,6 +12,7 @@ import plantenApp.java.dao.Database;
 import plantenApp.java.dao.InfoTablesDAO;
 import plantenApp.java.model.AbiotischeFactoren;
 import plantenApp.java.dao.*;
+import plantenApp.java.model.Fenotype;
 import plantenApp.java.model.InfoTables;
 import plantenApp.java.model.Plant;
 
@@ -187,6 +188,9 @@ public class ControllerPlantToevoegen {
     public RadioButton rdbVorstgevoeligJa;
     public RadioButton rdbVorstgevoeligNeen;
     public Button btn_Terug;
+    public ToggleGroup levensvormToggle;
+    public ToggleGroup habitusToggle;
+    public ToggleGroup bloeiwijzeToggle;
     private Connection dbConnection;
 
 
@@ -266,7 +270,7 @@ public class ControllerPlantToevoegen {
     //Functie onder de button die een plant toevoegd
 
     public void clicked_ToevoegenPlant(MouseEvent mouseEvent) throws SQLException {
-
+        //vars voor plant
         String sType = cboType.getValue().toString();
         String sFam = txtFamilie.getText();
         String sGeslacht = txtGeslacht.getText();
@@ -275,12 +279,25 @@ public class ControllerPlantToevoegen {
         String fgsv = sFam + " " + sGeslacht + " " + sSoort + " '" + sVariant + "'";
         int iMinDichtheid = (int) spnMinPlantDicht.getValue();
         int iMaxDichtheid = (int) spnMaxPlantDicht.getValue();
-        String sBezonning =(String)cboBezonning.getValue();
-        String sGrond =(String)cboGrondsoort.getValue();
-        String sVochtB=(String)cboVochtbehoefte.getValue();
-        String sVoedingsB=(String)cboVoedingsbehoefte.getValue();
-        String sAnta=(String)cboReactieAntag.getValue();
+        //vars voor Toevoegen Abio
+        String sBezonning = (String) cboBezonning.getValue();
+        String sGrond = (String) cboGrondsoort.getValue();
+        String sVochtB = (String) cboVochtbehoefte.getValue();
+        String sVoedingsB = (String) cboVoedingsbehoefte.getValue();
+        String sAnta = (String) cboReactieAntag.getValue();
 
+        //vars voor toevoegen Fenotype
+        String sBladvorm = (String)cboBladvorm.getValue();
+        RadioButton selectedRadioButton = (RadioButton) levensvormToggle.getSelectedToggle();
+        String sLevensvorm = selectedRadioButton.getText();
+        RadioButton selectedRadioButton2 = (RadioButton) habitusToggle.getSelectedToggle();
+        String sHabitus = selectedRadioButton2.getText();
+        RadioButton selectedRadioButton3 = (RadioButton) bloeiwijzeToggle.getSelectedToggle();
+        String sBloeiwijze = selectedRadioButton3.getText();
+
+        int iBladgrootte=Integer.parseInt(cboBladgrootte.getValue().toString());
+        String sRatioBloeiBlad = cboRatio.getValue().toString();
+        String sSpruitfeno = (String)cboSpruitfenologie.getValue();
         PlantDAO plantDao = new PlantDAO(dbConnection);
         Plant plant = new Plant
                 (sType,
@@ -292,21 +309,33 @@ public class ControllerPlantToevoegen {
                         iMaxDichtheid,
                         fgsv);
         plantDao.createPlant(plant);
+        int plant_id = plant.getId();
 
-int plant_id =plant.getId();
-AbiotischeFactorenDAO abiotischeFactorenDAO= new AbiotischeFactorenDAO(dbConnection);
-        AbiotischeFactoren abiotischeFactoren=new AbiotischeFactoren
+        AbiotischeFactorenDAO abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
+        AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren
                 (plant_id
-                        ,sBezonning,
+                        , sBezonning,
                         sGrond,
                         sVochtB,
                         sVoedingsB,
                         sAnta);
-        abiotischeFactorenDAO.createAbio(abiotischeFactoren,plant);
-        notificationBox("U plant is opgeslagen" );
+        abiotischeFactorenDAO.createAbio(abiotischeFactoren, plant);
+
+        FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
+        Fenotype fenotype = new Fenotype(plant_id,
+                sBladvorm,
+                sLevensvorm,
+                sHabitus,
+                sBloeiwijze,
+                iBladgrootte,
+                sRatioBloeiBlad,
+                sSpruitfeno);
+
+        fenotypeDAO.createFeno(fenotype ,plant);
+        notificationBox("U plant is opgeslagen");
     }
 
-//functie voor terug te kunnen keren naar het zoek scherm.
+    //functie voor terug te kunnen keren naar het zoek scherm.
     public void clicked_TerugGaan(MouseEvent mouseEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("view/Zoekscherm.fxml"));
         Scene scene = new Scene(root);
@@ -315,8 +344,8 @@ AbiotischeFactorenDAO abiotischeFactorenDAO= new AbiotischeFactorenDAO(dbConnect
         window.setScene(scene);
     }
 
-    public void notificationBox(String string){
-        JOptionPane.showMessageDialog(null,string);
+    public void notificationBox(String string) {
+        JOptionPane.showMessageDialog(null, string);
     }
     // Deze functie word opgeroepen om de comboboxen van de kleuren en maand
     // aan te passen van text naar kleur om een mooiere gebruikers ervaring
@@ -373,71 +402,95 @@ AbiotischeFactorenDAO abiotischeFactorenDAO= new AbiotischeFactorenDAO(dbConnect
         textToColor(cboBladkleurJan, cboBladkleurJan.getValue().toString());
 
     }
+
     public void clickedcboBladkleurFeb(ActionEvent actionEvent) {
         textToColor(cboBladkleurFeb, cboBladkleurFeb.getValue().toString());
     }
+
     public void clickedcboBladkleurMaa(ActionEvent actionEvent) {
         textToColor(cboBladkleurMaa, cboBladkleurMaa.getValue().toString());
     }
+
     public void clickedcboBladkleurApr(ActionEvent actionEvent) {
         textToColor(cboBladkleurApr, cboBladkleurApr.getValue().toString());
     }
+
     public void ClickedcboBladkleurMei(ActionEvent actionEvent) {
         textToColor(cboBladkleurMei, cboBladkleurMei.getValue().toString());
     }
+
     public void ClickedcboBladkleurJun(ActionEvent actionEvent) {
         textToColor(cboBladkleurJun, cboBladkleurJun.getValue().toString());
     }
+
     public void ClickedcboBladkleurJul(ActionEvent actionEvent) {
         textToColor(cboBladkleurJul, cboBladkleurJul.getValue().toString());
     }
+
     public void ClickedcboBladkleurAug(ActionEvent actionEvent) {
         textToColor(cboBladkleurAug, cboBladkleurAug.getValue().toString());
     }
+
     public void ClickedcboBladkleurSept(ActionEvent actionEvent) {
         textToColor(cboBladkleurSept, cboBladkleurSept.getValue().toString());
     }
+
     public void ClickedcboBladkleurOkt(ActionEvent actionEvent) {
         textToColor(cboBladkleurOkt, cboBladkleurOkt.getValue().toString());
     }
+
     public void ClickedcboBladkleurNov(ActionEvent actionEvent) {
         textToColor(cboBladkleurNov, cboBladkleurNov.getValue().toString());
     }
+
     public void ClickedcboBladkleurDec(ActionEvent actionEvent) {
         textToColor(cboBladkleurDec, cboBladkleurDec.getValue().toString());
     }
+
     public void actioncboBloeikleurJan(ActionEvent actionEvent) {
         textToColor(cboBloeikleurJan, cboBloeikleurJan.getValue().toString());
     }
+
     public void actioncboBloeikleurFeb(ActionEvent actionEvent) {
         textToColor(cboBloeikleurFeb, cboBloeikleurFeb.getValue().toString());
     }
+
     public void actioncboBloeikleurMaa(ActionEvent actionEvent) {
         textToColor(cboBloeikleurMaa, cboBloeikleurMaa.getValue().toString());
     }
+
     public void actioncboBloeikleurApr(ActionEvent actionEvent) {
         textToColor(cboBloeikleurApr, cboBloeikleurApr.getValue().toString());
     }
+
     public void actioncboBloeikleurMei(ActionEvent actionEvent) {
         textToColor(cboBloeikleurMei, cboBloeikleurMei.getValue().toString());
     }
+
     public void actioncboBloeikleurJun(ActionEvent actionEvent) {
         textToColor(cboBloeikleurJun, cboBloeikleurJun.getValue().toString());
     }
+
     public void actioncboBloeikleurJul(ActionEvent actionEvent) {
-        textToColor(cboBloeikleurJul, cboBloeikleurJul.getValue().toString()); }
+        textToColor(cboBloeikleurJul, cboBloeikleurJul.getValue().toString());
+    }
+
     public void actioncboBloeikleurAug(ActionEvent actionEvent) {
         textToColor(cboBloeikleurAug, cboBloeikleurAug.getValue().toString());
     }
+
     public void actioncboBloeikleurSept(ActionEvent actionEvent) {
         textToColor(cboBloeikleurSept, cboBloeikleurSept.getValue().toString());
     }
+
     public void actioncboBloeikleurOkt(ActionEvent actionEvent) {
         textToColor(cboBloeikleurOkt, cboBloeikleurOkt.getValue().toString());
     }
+
     public void actioncboBloeikleurNov(ActionEvent actionEvent) {
         textToColor(cboBloeikleurNov, cboBloeikleurNov.getValue().toString());
     }
+
     public void actioncboBloeikleurDec(ActionEvent actionEvent) {
         textToColor(cboBloeikleurDec, cboBloeikleurDec.getValue().toString());
     }
