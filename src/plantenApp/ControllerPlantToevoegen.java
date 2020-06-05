@@ -332,14 +332,13 @@ public class ControllerPlantToevoegen {
                 sOntwikkelingssnelheid);
         commensalismeDAO.createCommensalisme(commensalisme, plant);
 
-        ExtraDAO extraDAO = new ExtraDAO(dbConnection);
+
         //Extra extra = new Extra(
         //plant_id,
 
         //)
-        notificationBox("U plant is opgeslagen" );
 
-        abiotischeFactorenDAO.createAbio(abiotischeFactoren, plant);
+
 
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
         Fenotype fenotype = new Fenotype(plant_id,

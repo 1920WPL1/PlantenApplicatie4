@@ -4,7 +4,6 @@ import plantenApp.java.model.CommMulti_Eigenschap;
 import plantenApp.java.model.Commensalisme;
 import plantenApp.java.model.Plant;
 
-import java.nio.channels.Pipe;
 import java.sql.*;
 import java.util.ArrayList;
 
