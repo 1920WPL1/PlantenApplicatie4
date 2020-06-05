@@ -226,10 +226,10 @@
                                                    <children>
                                                       <RadioButton fx:id="rdbStrategieUnknown" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" text="Unknown">
                                                          <toggleGroup>
-                                                            <ToggleGroup fx:id="Strategie" />
+                                                            <ToggleGroup fx:id="StrategieToggle" />
                                                          </toggleGroup></RadioButton>
-                                                      <Label prefHeight="30.0" prefWidth="30.0" />
-                                                      <RadioButton fx:id="rdbStrategieC" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="C" toggleGroup="$Strategie" />
+                                                      <Label prefHeight="30.0" prefWidth="31.0" />
+                                                      <RadioButton fx:id="rdbStrategieC" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="C" toggleGroup="$StrategieToggle" />
                                                       <Label prefHeight="30.0" prefWidth="30.0" />
                                                       <Label prefHeight="30.0" prefWidth="30.0" />
                                                    </children>
@@ -238,22 +238,22 @@
                                                    <children>
                                                       <Label prefHeight="30.0" prefWidth="30.0" />
                                                       <Label prefHeight="30.0" prefWidth="30.0" />
-                                                      <Label prefHeight="30.0" prefWidth="30.0" />
-                                                      <RadioButton fx:id="rdbStrategieCS" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$Strategie" />
-                                                      <RadioButton fx:id="rdbStrategieCSR" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$Strategie" />
-                                                      <RadioButton fx:id="rdbStrategieCR" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$Strategie" />
+                                                      <Label prefHeight="30.0" prefWidth="14.0" />
+                                                      <RadioButton fx:id="rdbStrategieCS" mnemonicParsing="false" prefHeight="30.0" prefWidth="53.0" text="C-S" toggleGroup="$StrategieToggle" />
+                                                      <RadioButton fx:id="rdbStrategieCSR" mnemonicParsing="false" prefHeight="30.0" prefWidth="62.0" text="C-S-R" toggleGroup="$StrategieToggle" />
+                                                      <RadioButton fx:id="rdbStrategieCR" mnemonicParsing="false" prefHeight="30.0" prefWidth="48.0" text="C-R" toggleGroup="$StrategieToggle" />
                                                       <Label prefHeight="30.0" prefWidth="30.0" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
                                                    <children>
-                                                      <Label prefHeight="30.0" prefWidth="30.0" />
-                                                      <Label prefHeight="30.0" prefWidth="30.0" />
-                                                      <RadioButton fx:id="rdbStrategieS" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="S" toggleGroup="$Strategie" />
-                                                      <Label prefHeight="30.0" prefWidth="30.0" />
-                                                      <RadioButton fx:id="rdbStrategieSR" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$Strategie" />
-                                                      <Label prefHeight="30.0" prefWidth="30.0" />
-                                                      <RadioButton fx:id="rdbStrategieR" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="R" toggleGroup="$Strategie" />
+                                                      <Label prefHeight="30.0" prefWidth="46.0" />
+                                                      <Label prefHeight="30.0" prefWidth="5.0" />
+                                                      <RadioButton fx:id="rdbStrategieS" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="S" toggleGroup="$StrategieToggle" />
+                                                      <Label prefHeight="30.0" prefWidth="37.0" />
+                                                      <RadioButton fx:id="rdbStrategieSR" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="S-R" toggleGroup="$StrategieToggle" />
+                                                      <Label prefHeight="30.0" prefWidth="0.0" />
+                                                      <RadioButton fx:id="rdbStrategieR" mnemonicParsing="false" prefHeight="30.0" prefWidth="39.0" text="R" toggleGroup="$StrategieToggle" />
                                                    </children>
                                                 </HBox>
                                              </children>

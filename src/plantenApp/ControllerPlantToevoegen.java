@@ -49,7 +49,7 @@ public class ControllerPlantToevoegen {
     public RadioButton rdbSociabiliteit5;
     public RadioButton rdbSociabiliteitUnknow;
     //Alle radiobuttons voor de verschillende Strategieën
-    public ToggleGroup Strategie;
+    public ToggleGroup StrategieToggle;
     public RadioButton rdbStrategieUnknown;
     public RadioButton rdbStrategieC;
     public RadioButton rdbStrategieCS;
@@ -191,9 +191,11 @@ public class ControllerPlantToevoegen {
     public RadioButton rdbVorstgevoeligJa;
     public RadioButton rdbVorstgevoeligNeen;
     public Button btn_Terug;
+
     public ToggleGroup levensvormToggle;
     public ToggleGroup habitusToggle;
     public ToggleGroup bloeiwijzeToggle;
+
     private Connection dbConnection;
 
 
@@ -288,7 +290,6 @@ public class ControllerPlantToevoegen {
         String sVochtB = (String) cboVochtbehoefte.getValue();
         String sVoedingsB = (String) cboVoedingsbehoefte.getValue();
         String sAnta = (String) cboReactieAntag.getValue();
-
         //vars voor toevoegen Fenotype
         String sBladvorm = (String)cboBladvorm.getValue();
         RadioButton selectedRadioButton = (RadioButton) levensvormToggle.getSelectedToggle();
@@ -297,10 +298,16 @@ public class ControllerPlantToevoegen {
         String sHabitus = selectedRadioButton2.getText();
         RadioButton selectedRadioButton3 = (RadioButton) bloeiwijzeToggle.getSelectedToggle();
         String sBloeiwijze = selectedRadioButton3.getText();
+        //Vars voor toevoegen Commensalisme
+        String sOntwikkelingssnelheid = (String)cboOntwikkelingssnelheid.getValue();
+        RadioButton selectStategied = (RadioButton) StrategieToggle.getSelectedToggle();
+        String sStrategie = selectStategied.getText();
+
 
         int iBladgrootte=Integer.parseInt(cboBladgrootte.getValue().toString());
         String sRatioBloeiBlad = cboRatio.getValue().toString();
         String sSpruitfeno = (String)cboSpruitfenologie.getValue();
+        //Alles voor het toevoegen van een volledige plant
         PlantDAO plantDao = new PlantDAO(dbConnection);
         Plant plant = new Plant
                 (sType,
@@ -324,21 +331,12 @@ public class ControllerPlantToevoegen {
                         sAnta);
         abiotischeFactorenDAO.createAbio(abiotischeFactoren,plant);
 
-        String sOntwikkelingssnelheid = (String)cboOntwikkelingssnelheid.getValue();
         CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
         Commensalisme commensalisme = new Commensalisme(
                 plant_id,
-                geselecteerdStrategie(),
+                sStrategie,
                 sOntwikkelingssnelheid);
         commensalismeDAO.createCommensalisme(commensalisme, plant);
-
-
-        //Extra extra = new Extra(
-        //plant_id,
-
-        //)
-
-
 
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
         Fenotype fenotype = new Fenotype(plant_id,
@@ -354,40 +352,6 @@ public class ControllerPlantToevoegen {
         notificationBox("U plant is opgeslagen");
     }
 
-    //functie voor terug te kunnen keren naar het zoek scherm.
-    //Functie om de geselecteerd Strategie weer te geven
-    public String geselecteerdStrategie()
-    {
-        String sStrategie = null;
-        if (rdbStrategieC.isSelected()){
-            sStrategie = "C";
-        }
-        else if (rdbStrategieCR.isSelected()){
-            sStrategie = "C-R";
-        }
-        else if (rdbStrategieR.isSelected()) {
-            sStrategie = "R";
-        }
-        else if (rdbStrategieSR.isSelected()){
-            sStrategie = "S-R";
-        }
-        else if (rdbStrategieS.isSelected()){
-            sStrategie = "S";
-        }
-        else if (rdbStrategieCS.isSelected()){
-            sStrategie = "C-S";
-        }
-        else if (rdbStrategieCSR.isSelected()){
-            sStrategie = "C-S-R";
-        }
-        else if (rdbStrategieUnknown.isSelected()){
-            sStrategie ="Unknown";
-        }
-        else {
-            JOptionPane.showMessageDialog(null, "You have not declared anything!");
-        }
-        return sStrategie;
-    }
 
 //functie voor terug te kunnen keren naar het zoek scherm.
     public void clicked_TerugGaan(MouseEvent mouseEvent) throws IOException {
