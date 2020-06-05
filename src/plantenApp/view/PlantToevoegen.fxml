@@ -315,12 +315,12 @@
                                                    <children>
                                                       <HBox>
                                                          <children>
-                                                            <Spinner fx:id="spnNectarwaarde" prefHeight="26.0" prefWidth="105.0" min="0" max="5" initialValue="0"/>
+                                                            <Spinner fx:id="spnNectarwaarde" initialValue="0" max="5" min="0" prefHeight="26.0" prefWidth="105.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox>
                                                          <children>
-                                                            <Spinner fx:id="spnPollenwaarde" prefHeight="26.0" prefWidth="105.0" min="0" max="5" initialValue="0" />
+                                                            <Spinner fx:id="spnPollenwaarde" initialValue="0" max="5" min="0" prefHeight="26.0" prefWidth="105.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox>
@@ -556,7 +556,7 @@
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label prefHeight="30.0" prefWidth="80.0" text="Jan">
+                                                            <Label fx:id="lblJan" prefHeight="30.0" prefWidth="80.0" text="Jan">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
@@ -620,28 +620,28 @@
                                                       </HBox>
                                                       <HBox>
                                                          <children>
-                                                            <Label prefHeight="30.0" prefWidth="120.0" text="Max bladhoogte">
+                                                            <Label fx:id="lblBladhoogte" prefHeight="30.0" prefWidth="120.0" text="Max bladhoogte">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Spinner fx:id="spnBladhoogteJan" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteFeb" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteMaa" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteApr" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteMei" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteJun" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteJul" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteAug" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteSept" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteOkt" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteNov" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteDec" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteJan" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteFeb" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteMaa" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteApr" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteMei" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteJun" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteJul" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteAug" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteSept" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteOkt" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteNov" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
+                                                            <Spinner fx:id="spnBladhoogteDec" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox>
                                                          <children>
-                                                            <Label prefHeight="30.0" prefWidth="120.0" text="Bladkleur">
+                                                            <Label fx:id="lblBladkleur" prefHeight="30.0" prefWidth="120.0" text="Bladkleur">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
@@ -662,7 +662,7 @@
                                                       </HBox>
                                                       <HBox>
                                                          <children>
-                                                            <Label prefHeight="30.0" prefWidth="120.0" text="Min bloeihoogte">
+                                                            <Label fx:id="lblMinBloeihoogte" prefHeight="30.0" prefWidth="120.0" text="Min bloeihoogte">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
@@ -683,7 +683,7 @@
                                                       </HBox>
                                                       <HBox>
                                                          <children>
-                                                            <Label prefHeight="30.0" prefWidth="120.0" text="Max bloeihoogte">
+                                                            <Label fx:id="lblMaxBloeihoogte" prefHeight="30.0" prefWidth="120.0" text="Max bloeihoogte">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
@@ -704,7 +704,7 @@
                                                       </HBox>
                                                       <HBox>
                                                          <children>
-                                                            <Label prefHeight="30.0" prefWidth="120.0" text="Bloeikleur">
+                                                            <Label fx:id="lblBladkleur" prefHeight="30.0" prefWidth="120.0" text="Bloeikleur">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>

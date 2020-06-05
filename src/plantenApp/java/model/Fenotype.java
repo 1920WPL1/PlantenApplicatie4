@@ -47,6 +47,9 @@ public class Fenotype {
         }
         this.id = id;
     }
+
+
+
     public int getId() {
         return id;
     }

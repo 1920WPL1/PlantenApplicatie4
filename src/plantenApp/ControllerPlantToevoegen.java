@@ -295,15 +295,31 @@ public class ControllerPlantToevoegen {
         String sVoedingsB = (String) cboVoedingsbehoefte.getValue();
         String sAnta = (String) cboReactieAntag.getValue();
         //vars voor toevoegen Fenotype
-        String sBladvorm = (String)cboBladvorm.getValue();
+        String sBladvorm = (String) cboBladvorm.getValue();
         RadioButton selectedRadioButton = (RadioButton) levensvormToggle.getSelectedToggle();
         String sLevensvorm = selectedRadioButton.getText();
         RadioButton selectedRadioButton2 = (RadioButton) habitusToggle.getSelectedToggle();
         String sHabitus = selectedRadioButton2.getText();
         RadioButton selectedRadioButton3 = (RadioButton) bloeiwijzeToggle.getSelectedToggle();
         String sBloeiwijze = selectedRadioButton3.getText();
+        //vars voor toevoegen FenoType_Multi
+        String sWaarde =  null
+                ;
+        String sJan;
+        String sFeb;
+        String sMaa;
+        String sApr;
+        String sMei;
+        String sJun;
+        String sJul;
+        String sAug;
+        String sSep;
+        String sOkt;
+        String sNov;
+        String sDec;
+
         //Vars voor toevoegen Commensalisme
-        String sOntwikkelingssnelheid = (String)cboOntwikkelingssnelheid.getValue();
+        String sOntwikkelingssnelheid = (String) cboOntwikkelingssnelheid.getValue();
         RadioButton selectStategied = (RadioButton) StrategieToggle.getSelectedToggle();
         String sStrategie = selectStategied.getText();
         //Vars voor toevoegen extra
@@ -320,9 +336,9 @@ public class ControllerPlantToevoegen {
         RadioButton selectVorstgevoelig = (RadioButton) VorstgevoeligToggle.getSelectedToggle();
         String sVorstgevoelig = selectVorstgevoelig.getText();
 
-        int iBladgrootte=Integer.parseInt(cboBladgrootte.getValue().toString());
+        int iBladgrootte = Integer.parseInt(cboBladgrootte.getValue().toString());
         String sRatioBloeiBlad = cboRatio.getValue().toString();
-        String sSpruitfeno = (String)cboSpruitfenologie.getValue();
+        String sSpruitfeno = (String) cboSpruitfenologie.getValue();
         //Alles voor het toevoegen van een volledige plant
         PlantDAO plantDao = new PlantDAO(dbConnection);
         Plant plant = new Plant
@@ -345,7 +361,7 @@ public class ControllerPlantToevoegen {
                         sVochtB,
                         sVoedingsB,
                         sAnta);
-        abiotischeFactorenDAO.createAbio(abiotischeFactoren,plant);
+        abiotischeFactorenDAO.createAbio(abiotischeFactoren, plant);
 
         CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
         Commensalisme commensalisme = new Commensalisme(
@@ -364,7 +380,22 @@ public class ControllerPlantToevoegen {
                 sRatioBloeiBlad,
                 sSpruitfeno);
 
-        fenotypeDAO.createFeno(fenotype ,plant);
+        fenotypeDAO.createFeno(fenotype, plant);
+        FenoMulti_Eigenschap fenomulti = new FenoMulti_Eigenschap(plant_id,
+                sWaarde,
+                sJan,
+                sFeb,
+                sMaa,
+                sApr,
+                sMei,
+                sJun,
+                sJul,
+                sAug,
+                sSep,
+                sOkt,
+                sNov,
+                sDec);
+
 
         ExtraDAO extraDAO = new ExtraDAO(dbConnection);
         Extra extra = new Extra(
@@ -382,7 +413,7 @@ public class ControllerPlantToevoegen {
     }
 
 
-//functie voor terug te kunnen keren naar het zoek scherm.
+    //functie voor terug te kunnen keren naar het zoek scherm.
     public void clicked_TerugGaan(MouseEvent mouseEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("view/Zoekscherm.fxml"));
         Scene scene = new Scene(root);

@@ -2,7 +2,7 @@ package plantenApp.java.model;
 
 /**@author Siebe*/
 public class FenoMulti_Eigenschap {
-    private int id;
+    private Integer id;
     private String naam;
     private String jan;
     private String feb;
@@ -41,6 +41,14 @@ public class FenoMulti_Eigenschap {
     public String getNaam() {
         return naam;
     }
+
+    public void setId(Integer id) {
+        if (this.id != null) {
+            throw new UnsupportedOperationException("Id change not permitted");
+        }
+        this.id = id;
+    }
+
 
     public String getJan() {
         return jan;
