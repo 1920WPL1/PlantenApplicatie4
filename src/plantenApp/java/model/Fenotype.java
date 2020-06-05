@@ -4,18 +4,19 @@ import java.util.ArrayList;
 
 /**@author Siebe*/
 public class Fenotype {
-    private int id;
-    private int plant_id;
+    private Integer id;
+    private Integer plant_id;
     private String bladvorm;
     private String levensvorm;
     private String habitus;
     private String bloeiwijze;
-    private int bladgrootte;
+    private Integer bladgrootte;
     private String ratio_bloei_blad;
     private String spruitfenologie;
 
     private ArrayList<FenoMulti_Eigenschap> multiEigenschappen;
 
+    //Constructor met id
     public Fenotype(int id, int plant_id, String bladvorm, String levensvorm, String habitus, String bloeiwijze, int bladgrootte, String ratio_bloei_blad, String spruitfenologie, ArrayList<FenoMulti_Eigenschap> multiEigenschappen) {
         this.id = id;
         this.plant_id = plant_id;
@@ -28,7 +29,24 @@ public class Fenotype {
         this.spruitfenologie = spruitfenologie;
         this.multiEigenschappen = multiEigenschappen;
     }
+    //Constructor zonder id
+    public Fenotype(int plant_id, String bladvorm, String levensvorm, String habitus, String bloeiwijze, int bladgrootte, String ratio_bloei_blad, String spruitfenologie) {
+        this.plant_id = plant_id;
+        this.bladvorm = bladvorm;
+        this.levensvorm = levensvorm;
+        this.habitus = habitus;
+        this.bloeiwijze = bloeiwijze;
+        this.bladgrootte = bladgrootte;
+        this.ratio_bloei_blad = ratio_bloei_blad;
+        this.spruitfenologie = spruitfenologie;
+    }
 
+    public void setId(Integer id) {
+        if (this.id != null) {
+            throw new UnsupportedOperationException("Id change not permitted");
+        }
+        this.id = id;
+    }
     public int getId() {
         return id;
     }

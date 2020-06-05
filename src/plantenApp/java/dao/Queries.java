@@ -10,8 +10,8 @@ public interface Queries {
     String GETABIOTISCHBYPLANTID = "SELECT * FROM abiotische_factoren WHERE plant_id = ?";
     String GETABIOTISCHBMULTIYPLANTID = "SELECT * FROM abiotisch_multi WHERE plant_id = ?";
 
-    String GETCOMMENSALISMEBYPLANTID = "SELECT * FROM commensialisme WHERE plant_id = ?";
-    String GETCOMMENSALISMEMULTIBYPLANTID = "SELECT * FROM commensialisme_multi WHERE plant_id = ?";
+    String GETCOMMENSALISMEBYPLANTID = "SELECT * FROM commensalisme WHERE plant_id = ?";
+    String GETCOMMENSALISMEMULTIBYPLANTID = "SELECT * FROM commensalisme_multi WHERE plant_id = ?";
 
     String GETBEHEERBYPLANTID = "SELECT * FROM beheer WHERE plant_id = ?";
 
@@ -224,5 +224,126 @@ public interface Queries {
     String NTFOTOBlOEIWIJZE =
             "SELECT afbeelding FROM bloeiwijze";
     //endregion
+
+    //Groep 4
+    //Insert query voor toevoegen
+    String INSERTABIOTISCHEFMULTI =
+            "INSTER INTO abiotisch_multi(plant_id, eigenschap, waarde)" +
+                    "VALUES(?, ?, ?)";
+
+    String INSERTABIOTISCHEF =
+            "INSERT INTO abiotische_factoren(plant_id, bezonning, grondsoort, vochtbehoefte, voedingsbehoefte, reactie_antagonistische_omg) " +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
+
+    String INSERTBEHEER =
+            "INSERT INTO beheer(plant_id, beheerdaad, opmerking, maand, frequentie_jaar)" +
+                    "VALUES(?, ?, ?, ?, ?)";
+
+    String INSERTSTANDAARD =
+            "INSERT INTO plant (type, familie, geslacht, soort, variatie, plantdichtheid_min, plantdichtheid_max, fgsv) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+    String INSERTCOMMESALISME =
+            "INSERT INTO commensalisme(plant_id, strategie, ontwikkelingssnelheid)" +
+                    "VALUES(?, ?, ?)";
+
+    String INSERTCOMMESALISMEMULTI =
+            "INSERT INTO commensialisme_multi(plant_id, eigenschap, waarde)" +
+                    "VALUES(?, ?, ?)";
+
+    String INSERTEXTRA =
+            "INSERT INTO extra(plant_id, nectarwaarde, pollenwaarde, bijvriendelijk, eetbaar, kruidgebruik, geurend, vorstgevoelig)" +
+                    "VALUES(?, ?, ?, ?, ?, ?, ?,?)";
+
+    String INSERTFENOTYPE =
+            "INSERT INTO fenotype(plant_id, bladvorm, levensvorm, habitus, bloeiwijze, bladgrootte, ratio_bloei_blad, spruitfenelogie)" +
+                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+
+    String INSERTFENOTYPEMULTI =
+            "INSERT INTO fenotype_multi(plant_id,eigenschap, jan, feb, maa, apr, mei, jun, jul, aug, sep, okt, nov, dec)" +
+                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    String INSERTFOTO =
+            "INSERT INTO foto(plant_id, eigenschap, url, figuur)" +
+                    "VALUES(?, ?, ?, ?)";
+
+
+    //Insert query voor naaktetabellen
+    String INSERTBEHEERDAAD =
+            "INSERT INTO beheerdaad(waarde)" +
+                    "VALUES(?)";
+
+    String INSERTBEZONNING =
+            "INSERT INTO bezonning(waarde) VALUES(?)";
+
+    String INSERTBLADVORM =
+            "INSERT INTO bladvorm(waarde) VALUES(?)";
+
+    String INSERTBLOEIWIJZE =
+            "INSERT INTO bloeiwijze(waarde) VALEUS(?)";
+
+    String INSERTFAMILIE =
+            "INSERT INTO familie(familie_naam, type_id) VALUES(?, ?)";
+
+    String INSERTGESLACHT =
+            "INSERT INTO geslacht(geslacht_naam, familie_id) VALUES(?, ?)";
+
+    String INSERTGRONDSOORT =
+            "INSERT INTO grondsoort(waarde) VALUES(?)";
+
+    String INSERTHABITAT =
+            "INSERT INTO habitat(waarde, afkorting) VALUES(?, ?)";
+
+    String INSERTHABITUS =
+            "INSERT INTO habitus(waarde, afbeelding) VALUES(?, ?)";
+
+    String INSERTKLEUR =
+            "INSERT INTO kleuren(kleur) VALUES(?)";
+
+    String INSERTLEVENSDUUR =
+            "INSERT INTO levenduur_concurrentiekracht(waarde) VALUES (?)";
+
+    String INSERTMAXBLADGROOTTE =
+            "INSERT INTO maxbladgrootte(waarde) VALUES(?)";
+
+    String INSERTNECTARWAARDE =
+            "INSERT INTO nectarwaarde(waarde) VALUES(?)";
+
+    String INSERTONTWIKKELINGSSNELHEID =
+            "INSERT INTO ontwikkelingssnelheid(waarde) VALUES(?)";
+
+    String INSERTPOLLENWAARDE =
+            "INSERT INTO pollenwaarde(waarde) VALUES(?)";
+
+    String INSERTRATIO =
+            "INSERT INTO ratio_bloeiblad(waarde) VALUES(?)";
+
+    String INSERTREACTIEOMGEVING =
+            "INSERT INTO reactieomgeving(waarde) VALUES(?)";
+
+    String INSERTSOCIABILITEIT =
+            "INSERT INTO sociabiliteit(waarde) VALUES(?)";
+
+    String INSERTSOORT =
+            "INSERT INTO soort(soort_naam, geslacht_id) VALUES(?, ?)";
+
+    String INSERTSPRUITFENOLOGIE =
+            "INSERT INTO spruitfenologie(waarde) VALUES(?)";
+
+    String INSERTSTRATEGIE =
+            "INSERT INTO strategie(waarde) VALUES(?)";
+
+    String INSERTTYPE =
+            "INSERT INTO type(type_naam) VALUES(?)";
+
+    String INSERTVARIATIE =
+            "INSERT INTO variatie(variatie_naam, soort_id) VALUES(?,?)";
+
+    String INSERTVOCHTBEHOEFTE =
+            "INSERT INTO vochtbehoefte(waarde) VALUES(?)";
+
+    String INSERTVOEDINGSBEHOEFTE =
+            "INSERT INTO voedingsbehoeft(waarde) VALUES(?)";
+    
 }
 

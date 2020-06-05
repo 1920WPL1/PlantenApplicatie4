@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**@author Siebe*/
 public class AbiotischeFactoren {
-    private int id;
+    private Integer id;
     private int plant_id;
     private String bezonning;
     private String grondsoort;
@@ -13,6 +13,7 @@ public class AbiotischeFactoren {
     private String reactieAntagonistischeOmgeving;
     private ArrayList<AbioMulti_Eigenschap> multiEigenschappen;
 
+    //Constructor met id
     public AbiotischeFactoren(int id, int plant_id, String bezonning, String grondsoort, String vochtbehoefte, String voedingsbehoefte, String reactieAntagonistischeOmgeving, ArrayList<AbioMulti_Eigenschap> multiEigenschappen) {
         this.id = id;
         this.plant_id = plant_id;
@@ -22,6 +23,15 @@ public class AbiotischeFactoren {
         this.voedingsbehoefte = voedingsbehoefte;
         this.reactieAntagonistischeOmgeving = reactieAntagonistischeOmgeving;
         this.multiEigenschappen = multiEigenschappen;
+    }
+    //Constructor zonder id
+    public AbiotischeFactoren(int plant_id, String bezonning, String grondsoort, String vochtbehoefte, String voedingsbehoefte, String reactieAntagonistischeOmgeving) {
+        this.plant_id = plant_id;
+        this.bezonning = bezonning;
+        this.grondsoort = grondsoort;
+        this.vochtbehoefte = vochtbehoefte;
+        this.voedingsbehoefte = voedingsbehoefte;
+        this.reactieAntagonistischeOmgeving = reactieAntagonistischeOmgeving;
     }
 
     public int getId() {
@@ -54,5 +64,12 @@ public class AbiotischeFactoren {
 
     public ArrayList<AbioMulti_Eigenschap> getMultiEigenschappen() {
         return multiEigenschappen;
+    }
+
+    public void setId(Integer id) {
+        if (this.id != null) {
+        throw new UnsupportedOperationException("Id change not permitted");
+    }
+        this.id = id;
     }
 }

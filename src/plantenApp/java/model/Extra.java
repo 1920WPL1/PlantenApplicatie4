@@ -2,7 +2,7 @@ package plantenApp.java.model;
 
 /**@author Siebe*/
 public class Extra {
-    private int id;
+    private Integer id;
     private int plant_id;
     private int nectarwaarde;
     private int pollenwaarde;
@@ -12,6 +12,7 @@ public class Extra {
     private String geurend;
     private String vorstgevoelig;
 
+    //Constructor met id
     public Extra(int id, int plant_id, int nectarwaarde, int pollenwaarde, String bijvriendelijk, String eetbaar, String kruidgebruik, String geurend, String vorstgevoelig) {
         this.id = id;
         this.plant_id = plant_id;
@@ -23,6 +24,18 @@ public class Extra {
         this.geurend = geurend;
         this.vorstgevoelig = vorstgevoelig;
     }
+    //Constructor zonder id
+    public Extra( int plant_id, int nectarwaarde, int pollenwaarde, String bijvriendelijk, String eetbaar, String kruidgebruik, String geurend, String vorstgevoelig) {
+        this.plant_id = plant_id;
+        this.nectarwaarde = nectarwaarde;
+        this.pollenwaarde = pollenwaarde;
+        this.bijvriendelijk = bijvriendelijk;
+        this.eetbaar = eetbaar;
+        this.kruidgebruik = kruidgebruik;
+        this.geurend = geurend;
+        this.vorstgevoelig = vorstgevoelig;
+    }
+
 
     public int getId() {
         return id;
@@ -58,5 +71,14 @@ public class Extra {
 
     public String getVorstgevoelig() {
         return vorstgevoelig;
+    }
+
+    public void setId(Integer id)
+    {
+        if (this.id != null)
+        {
+            throw new UnsupportedOperationException("Id change not permitted");
+        }
+        this.id = id;
     }
 }

@@ -2,11 +2,9 @@ package plantenApp.java.dao;
 
 import plantenApp.java.model.CommMulti_Eigenschap;
 import plantenApp.java.model.Commensalisme;
+import plantenApp.java.model.Plant;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**@author Siebe*/
@@ -16,6 +14,7 @@ public class CommensalismeDAO implements Queries {
     private PreparedStatement stmtSelectCommeMultiByID;
     private PreparedStatement stmtSelectIdsByComm;
     private PreparedStatement stmtSelectIdsByCommMulti;
+    private PreparedStatement stmtInsertCommensalisme;
 
     public CommensalismeDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
@@ -23,6 +22,8 @@ public class CommensalismeDAO implements Queries {
         stmtSelectCommeMultiByID = dbConnection.prepareStatement(GETCOMMENSALISMEMULTIBYPLANTID);
         stmtSelectIdsByComm = dbConnection.prepareStatement(GETIDSBYCOMM);
         stmtSelectIdsByCommMulti = dbConnection.prepareStatement(GETIDSBYCOMMMULTI);
+        stmtInsertCommensalisme = dbConnection.prepareStatement(INSERTCOMMESALISME,
+                Statement.RETURN_GENERATED_KEYS);
     }
 
     /**@author Siebe
@@ -113,6 +114,17 @@ public class CommensalismeDAO implements Queries {
             ids.add(rs.getInt("plant_id"));
         }
         return ids;
+    }
+
+    public void createCommensalisme(Commensalisme commensalisme, Plant plant) throws  SQLException {
+        stmtInsertCommensalisme.setInt(1, plant.getId());
+        stmtInsertCommensalisme.setString(2, commensalisme.getStrategie());
+        stmtInsertCommensalisme.setString(3, commensalisme.getOntwikkelingssnelheid());
+        stmtInsertCommensalisme.executeUpdate();
+        ResultSet rs = stmtInsertCommensalisme.getGeneratedKeys();
+        rs.next();
+        Integer commensialisme_id = rs.getInt(1);
+        commensalisme.setId(commensialisme_id);
     }
 }
 
