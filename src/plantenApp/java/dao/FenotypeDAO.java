@@ -4,10 +4,7 @@ import plantenApp.java.model.FenoMulti_Eigenschap;
 import plantenApp.java.model.Fenotype;
 import plantenApp.java.model.Plant;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**@author Siebe*/
@@ -18,7 +15,7 @@ public class FenotypeDAO implements Queries {
     private PreparedStatement stmtSelectFenoMultiByID;
     private PreparedStatement stmtSelectIdsByFeno;
     private PreparedStatement stmtSelectIdsByFenoMulti;
-    private PreparedStatement stmsInsertFenotype;
+    private PreparedStatement stmtInsertByFenotype;
 
     public FenotypeDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
@@ -26,7 +23,10 @@ public class FenotypeDAO implements Queries {
         stmtSelectFenoMultiByID = dbConnection.prepareStatement(GETFENOTYPEMULTIBYPLANTID);
         stmtSelectIdsByFeno = dbConnection.prepareStatement(GETIDSBYFENO);
         stmtSelectIdsByFenoMulti = dbConnection.prepareStatement(GETIDSBYFENOMULTI);
-        stmsInsertFenotype = dbConnection.prepareStatement(INSERTFENOTYPE);
+
+        stmtInsertByFenotype = dbConnection.prepareStatement(INSERTFENOTYPE,
+                Statement.RETURN_GENERATED_KEYS);
+
     }
 
     /**@author Siebe
@@ -86,86 +86,21 @@ public class FenotypeDAO implements Queries {
         }
         return commMulti;
     }
+    public void createFeno(Fenotype fenotype, Plant plant) throws SQLException {
 
-    /**@author Siebe
-     * @param sPlant_ids -> de te filteren ids
-     * @param eigenschap -> de naam van de eigenschap om op te filteren
-     * @param waarde -> de waarde van de eigenschap
-     * @return -> de gefilterde ids
-     */
-    public ArrayList<Integer> KenmerkenMultiFilter(String sPlant_ids,String eigenschap,String waarde) throws SQLException {
-        ArrayList<Integer> ids = new ArrayList<>();;
-        stmtSelectIdsByFenoMulti.setString(1,sPlant_ids);
-        stmtSelectIdsByFenoMulti.setString(2,eigenschap);
-
-        int iTrue = (waarde.isBlank()) ? 1 : 0;
-        stmtSelectIdsByFenoMulti.setString(2, waarde);
-        stmtSelectIdsByFenoMulti.setInt(3, iTrue);
-
-        ResultSet rs = stmtSelectIdsByFenoMulti.executeQuery();
-        while (rs.next()) {
-            ids.add(rs.getInt("plant_id"));
-        }
-        return ids;
-    }
-
-    /**@author Siebe
-     * @param sPlant_ids -> de te filteren ids
-     * @param bladvorm -> waarde van bladvorm om op te filteren
-     * @param levensvorm -> waarde van levensvorm om op te filteren
-     * @param habitus -> waarde van habitus om op te filteren
-     * @param bloeiwijze -> waarde van bloeiwijze om op te filteren
-     * @param bladgrootte -> waarde van bladgrootte om op te filteren
-     * @param ratio_bloei_blad -> waarde van ratio_bloei_blad om op te filteren
-     * @param spruitfenologie -> waarde van spruitfenologie om op te filteren
-     * @return -> de gefilterde ids
-     */
-    public ArrayList<Integer> KenmerkenFilter(String sPlant_ids, String bladvorm, String levensvorm, String habitus, String bloeiwijze, int bladgrootte, String ratio_bloei_blad, String spruitfenologie) throws SQLException {
-        ArrayList<Integer> ids = new ArrayList<>();;
-
-        stmtSelectIdsByFeno.setString(1, sPlant_ids);
-
-        int iTrue = (bladvorm.isBlank()) ? 1 : 0;
-        stmtSelectIdsByFeno.setString(2, bladvorm);
-        stmtSelectIdsByFeno.setInt(3, iTrue);
-
-        //TODO levensvorm moet in databank een string
-        iTrue = (levensvorm.isBlank()) ? 1 : 0;
-        stmtSelectIdsByFeno.setString(4, levensvorm);
-        stmtSelectIdsByFeno.setInt(5, iTrue);
-
-        iTrue = (habitus.isBlank()) ? 1 : 0;
-        stmtSelectIdsByFeno.setString(6, habitus);
-        stmtSelectIdsByFeno.setInt(7, iTrue);
-
-        iTrue = (bloeiwijze.isBlank()) ? 1 : 0;
-        stmtSelectIdsByFeno.setString(8, bloeiwijze);
-        stmtSelectIdsByFeno.setInt(9, iTrue);
-
-        iTrue = (bladgrootte == 0) ? 1 : 0;
-        stmtSelectIdsByFeno.setInt(10, bladgrootte);
-        stmtSelectIdsByFeno.setInt(11, iTrue);
-
-        iTrue = (ratio_bloei_blad.isBlank()) ? 1 : 0;
-        stmtSelectIdsByFeno.setString(12, ratio_bloei_blad);
-        stmtSelectIdsByFeno.setInt(13, iTrue);
-
-        iTrue = (spruitfenologie.isBlank()) ? 1 : 0;
-        stmtSelectIdsByFeno.setString(14, spruitfenologie);
-        stmtSelectIdsByFeno.setInt(15, iTrue);
-
-        ResultSet rs = stmtSelectIdsByFeno.executeQuery();
-        while (rs.next()) {
-            ids.add(rs.getInt("plant_id"));
-        }
-        return ids;
-    }
-
-    public void createFenotype(Fenotype fenotype, Plant plant) throws SQLException
-    {
-        stmsInsertFenotype.setInt(1, plant.getId());
-        stmsInsertFenotype.setString(2, fenotype.getBladvorm());
-        stmsInsertFenotype.setString(3, fenotype.getLevensvorm());
+        stmtInsertByFenotype.setInt(1, plant.getId());
+        stmtInsertByFenotype.setString(2, fenotype.getBladvorm());
+        stmtInsertByFenotype.setString(3, fenotype.getLevensvorm());
+        stmtInsertByFenotype.setString(4, fenotype.getHabitus());
+        stmtInsertByFenotype.setString(5, fenotype.getBloeiwijze());
+        stmtInsertByFenotype.setInt(6,fenotype.getBladgrootte());
+        stmtInsertByFenotype.setString(7, fenotype.getRatio_bloei_blad());
+        stmtInsertByFenotype.setString(8, fenotype.getSpruitfenologie());
+        stmtInsertByFenotype.executeUpdate();
+        ResultSet rs = stmtInsertByFenotype.getGeneratedKeys();
+        rs.next();
+        Integer fenotype_id = rs.getInt(1);
+        fenotype.setId(fenotype_id);
     }
 }
 
