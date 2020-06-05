@@ -2,10 +2,9 @@ package plantenApp.java.dao;
 
 import plantenApp.java.model.Extra;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import plantenApp.java.model.Plant;
+
+import java.sql.*;
 import java.util.ArrayList;
 
 /**@author Siebe*/
@@ -13,11 +12,13 @@ public class ExtraDAO implements Queries {
     private Connection dbConnection;
     private PreparedStatement stmtSelectExtraByID;
     private PreparedStatement stmtSelectByExtra;
+    private PreparedStatement stmtInsertExtra;
 
     public ExtraDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
         stmtSelectExtraByID = dbConnection.prepareStatement(GETEXTRABYPLANTID);
         stmtSelectByExtra = dbConnection.prepareStatement(GETIDSBYEXTRA);
+        stmtInsertExtra = dbConnection.prepareStatement(INSERTEXTRA, Statement.RETURN_GENERATED_KEYS);
     }
 
     /**@author Siebe
@@ -98,4 +99,22 @@ public class ExtraDAO implements Queries {
         }
         return ids;
     }
+
+    public void createExtra(Extra extra, Plant plant) throws SQLException
+    {
+        stmtInsertExtra.setInt(1, plant.getId());
+        stmtInsertExtra.setInt(2, extra.getNectarwaarde());
+        stmtInsertExtra.setInt(3, extra.getPollenwaarde());
+        stmtInsertExtra.setString(4, extra.getBijvriendelijk());
+        stmtInsertExtra.setString(5, extra.getEetbaar());
+        stmtInsertExtra.setString(6, extra.getKruidgebruik());
+        stmtInsertExtra.setString(7, extra.getGeurend());
+        stmtInsertExtra.setString(8, extra.getVorstgevoelig());
+        stmtInsertExtra.executeUpdate();
+        ResultSet rs = stmtInsertExtra.getGeneratedKeys();
+        rs.next();
+        Integer extra_id = rs.getInt(1);
+        extra.setId(extra_id);
+    }
+
 }

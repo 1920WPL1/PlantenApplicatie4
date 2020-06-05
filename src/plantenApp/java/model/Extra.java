@@ -2,7 +2,7 @@ package plantenApp.java.model;
 
 /**@author Siebe*/
 public class Extra {
-    private int id;
+    private Integer id;
     private int plant_id;
     private int nectarwaarde;
     private int pollenwaarde;
@@ -58,5 +58,14 @@ public class Extra {
 
     public String getVorstgevoelig() {
         return vorstgevoelig;
+    }
+
+    public void setId(Integer id)
+    {
+        if (this.id != null)
+        {
+            throw new UnsupportedOperationException("Id change not permitted");
+        }
+        this.id = id;
     }
 }
