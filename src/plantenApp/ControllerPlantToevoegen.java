@@ -379,9 +379,9 @@ public class ControllerPlantToevoegen {
                 iBladgrootte,
                 sRatioBloeiBlad,
                 sSpruitfeno);
+       fenotypeDAO.createFeno(fenotype, plant);
 
-        fenotypeDAO.createFeno(fenotype, plant);
-        FenoMulti_Eigenschap fenomulti = new FenoMulti_Eigenschap(plant_id,
+        /*FenoMulti_Eigenschap fenomulti = new FenoMulti_Eigenschap(plant_id,
                 sWaarde,
                 sJan,
                 sFeb,
@@ -394,7 +394,7 @@ public class ControllerPlantToevoegen {
                 sSep,
                 sOkt,
                 sNov,
-                sDec);
+                sDec);*/
 
 
         ExtraDAO extraDAO = new ExtraDAO(dbConnection);

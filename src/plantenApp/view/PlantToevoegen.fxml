@@ -64,11 +64,11 @@
                                        <children>
                                           <RadioButton fx:id="rdbStrategieUnknown" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" text="Unknown">
                                              <toggleGroup>
-                                                <ToggleGroup fx:id="Strategie" />
+                                                <ToggleGroup fx:id="StrategieToggle" />
                                              </toggleGroup>
                                           </RadioButton>
                                           <Label prefHeight="30.0" prefWidth="30.0" />
-                                          <RadioButton fx:id="rdbStrategieC" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="C" toggleGroup="$Strategie" />
+                                          <RadioButton fx:id="rdbStrategieC" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="C" toggleGroup="$StrategieToggle" />
                                           <Label prefHeight="30.0" prefWidth="30.0" />
                                           <Label prefHeight="30.0" prefWidth="30.0" />
                                        </children>
@@ -78,9 +78,9 @@
                                           <Label prefHeight="30.0" prefWidth="30.0" />
                                           <Label prefHeight="30.0" prefWidth="30.0" />
                                           <Label prefHeight="30.0" prefWidth="30.0" />
-                                          <RadioButton fx:id="rdbStrategieCS" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$Strategie" />
-                                          <RadioButton fx:id="rdbStrategieCSR" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$Strategie" />
-                                          <RadioButton fx:id="rdbStrategieCR" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$Strategie" />
+                                          <RadioButton fx:id="rdbStrategieCS" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$StrategieToggle" />
+                                          <RadioButton fx:id="rdbStrategieCSR" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$StrategieToggle" />
+                                          <RadioButton fx:id="rdbStrategieCR" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$StrategieToggle" />
                                           <Label prefHeight="30.0" prefWidth="30.0" />
                                        </children>
                                     </HBox>
@@ -88,11 +88,11 @@
                                        <children>
                                           <Label prefHeight="30.0" prefWidth="30.0" />
                                           <Label prefHeight="30.0" prefWidth="30.0" />
-                                          <RadioButton fx:id="rdbStrategieS" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="S" toggleGroup="$Strategie" />
+                                          <RadioButton fx:id="rdbStrategieS" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="S" toggleGroup="$StrategieToggle" />
                                           <Label prefHeight="30.0" prefWidth="30.0" />
-                                          <RadioButton fx:id="rdbStrategieSR" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$Strategie" />
+                                          <RadioButton fx:id="rdbStrategieSR" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$StrategieToggle" />
                                           <Label prefHeight="30.0" prefWidth="18.0" />
-                                          <RadioButton fx:id="rdbStrategieR" mnemonicParsing="false" prefHeight="30.0" prefWidth="42.0" text="R" toggleGroup="$Strategie" />
+                                          <RadioButton fx:id="rdbStrategieR" mnemonicParsing="false" prefHeight="30.0" prefWidth="42.0" text="R" toggleGroup="$StrategieToggle" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -294,10 +294,7 @@
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                   </RadioButton>
-                                                                  <RadioButton fx:id="rdbFanerophyt0" mnemonicParsing="false" prefHeight="25.0" selected="true" text="0. Niet gekend">
-                                                                     <toggleGroup>
-                                                                        <ToggleGroup fx:id="levensvormToggle1" />
-                                                                     </toggleGroup>
+                                                                  <RadioButton fx:id="rdbFanerophyt0" mnemonicParsing="false" prefHeight="25.0" selected="true" text="0. Niet gekend" toggleGroup="$levensvormToggle">
                                                                      <font>
                                                                         <Font size="14.0" />
                                                                      </font>
@@ -961,18 +958,6 @@
                                           </HBox>
                                           <HBox>
                                              <children>
-                                                            <Spinner fx:id="spnBladhoogteJan" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteFeb" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteMaa" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteApr" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteJun" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteMei" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteJul" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteSept" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteAug" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteOkt" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteNov" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
-                                                            <Spinner fx:id="spnBladhoogteDec" initialValue="0" max="100" min="0" onMouseClicked="#Clicked_Spn_Bladhoogte" prefHeight="30.0" prefWidth="80.0" />
                                                 <ComboBox fx:id="cboVoedingsbehoefte" prefWidth="150.0" />
                                              </children>
                                           </HBox>
