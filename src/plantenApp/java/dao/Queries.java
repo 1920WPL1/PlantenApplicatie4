@@ -252,8 +252,13 @@ public interface Queries {
                     "VALUES(?, ?, ?)";
 
     String INSERTEXTRA =
+<<<<<<< HEAD
             "INSERT INTO extra(plant_id, nectarwaarde, pollenwaarde, bijvriendelijk, eetbaar_kruidgebruik, geurend, vorstgevoelig)" +
                     "VALUES(?, ?, ?, ?, ?, ?, ?)";
+=======
+            "INSERT INTO extra(plant_id, nectarwaarde, pollenwaarde, bijvriendelijk, eetbaar, kruidgebruik, geurend, vorstgevoelig)" +
+                    "VALUES(?, ?, ?, ?, ?, ?, ?,?)";
+>>>>>>> FemkeBranch2.0
 
     String INSERTFENOTYPE =
             "INSERT INTO fenotype(plant_id, bladvorm, levensvorm, habitus, bloeiwijze, bladgrootte, ratio_bloei_blad, spruitfenelogie)" +
