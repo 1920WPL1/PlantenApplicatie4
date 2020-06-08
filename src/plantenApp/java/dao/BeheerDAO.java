@@ -2,6 +2,7 @@ package plantenApp.java.dao;
 
 import plantenApp.java.model.Beheer;
 import plantenApp.java.model.Beheerdaad_Eigenschap;
+import plantenApp.java.model.Plant;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,11 +15,13 @@ public class BeheerDAO implements Queries {
     private Connection dbConnection;
     private PreparedStatement stmtSelectBeheerByID;
     private PreparedStatement stmtSelectByBeheer;
+    private PreparedStatement stmtInsertBeheer;
 
     public BeheerDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
         stmtSelectBeheerByID = dbConnection.prepareStatement(GETBEHEERBYPLANTID);
         stmtSelectByBeheer = dbConnection.prepareStatement(GETIDSBYBEHEER);
+        stmtInsertBeheer = dbConnection.prepareStatement(INSERTBEHEER);
     }
 
     /**@author Siebe
@@ -88,4 +91,12 @@ public class BeheerDAO implements Queries {
         }
         return ids;
     }
+
+    //Functie om een beheer/behandeling toe te voegen
+    public void createBeheer(Beheer beheer, Plant plant) throws SQLException
+    {
+        stmtInsertBeheer.setInt(1, plant.getId());
+
+    }
+
 }
