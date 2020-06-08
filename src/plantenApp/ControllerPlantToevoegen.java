@@ -767,7 +767,7 @@ public class ControllerPlantToevoegen {
 
     //create commensalisme
     public void createcommensalismemulti(Plant plant) throws SQLException {
-        RadioButton selectcoc = (RadioButton) StrategieToggle.getSelectedToggle();
+        RadioButton selectcoc = (RadioButton) Sociabiliteit.getSelectedToggle();
         String sSoc = selectcoc.getText();
         CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
         CommMulti_Eigenschap commMulti_eigenschap  = new CommMulti_Eigenschap(
