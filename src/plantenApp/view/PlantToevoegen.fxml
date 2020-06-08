@@ -34,7 +34,7 @@
                               </Label>
                               <HBox />
                               <ComboBox fx:id="cboOntwikkelingssnelheid" prefHeight="30.0" prefWidth="240.0" />
-                              <Label prefHeight="30.0" prefWidth="120.0" text="Sociabiliteit:">
+                              <Label fx:id="lblSociabiliteit" prefHeight="30.0" prefWidth="120.0" text="Sociabiliteit">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -990,7 +990,7 @@
                               </HBox>
                               <VBox prefHeight="216.0" prefWidth="480.0">
                                  <children>
-                                    <Label fx:id="lblHabitat" prefHeight="30.0" prefWidth="240.0" text="Habitat:">
+                                    <Label fx:id="lblHabitat" prefHeight="30.0" prefWidth="240.0" text="Habitat">
                                        <font>
                                           <Font size="14.0" />
                                        </font>

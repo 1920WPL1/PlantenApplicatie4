@@ -15,6 +15,7 @@ public class CommensalismeDAO implements Queries {
     private PreparedStatement stmtSelectIdsByComm;
     private PreparedStatement stmtSelectIdsByCommMulti;
     private PreparedStatement stmtInsertCommensalisme;
+    private PreparedStatement stmtinsertCommensalismeMulti;
 
     public CommensalismeDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
@@ -24,6 +25,8 @@ public class CommensalismeDAO implements Queries {
         stmtSelectIdsByCommMulti = dbConnection.prepareStatement(GETIDSBYCOMMMULTI);
         stmtInsertCommensalisme = dbConnection.prepareStatement(INSERTCOMMESALISME,
                 Statement.RETURN_GENERATED_KEYS);
+        stmtinsertCommensalismeMulti = dbConnection.prepareStatement(INSERTCOMMESALISMEMULTI,
+        Statement.RETURN_GENERATED_KEYS);
     }
 
     /**@author Siebe
@@ -125,6 +128,24 @@ public class CommensalismeDAO implements Queries {
         rs.next();
         Integer commensialisme_id = rs.getInt(1);
         commensalisme.setId(commensialisme_id);
+
+
+
+
+
+
     }
+
+    public void createcommulti(CommMulti_Eigenschap commMulti_eigenschap, Plant plant) throws SQLException {
+        stmtinsertCommensalismeMulti.setInt(1,plant.getId());
+        stmtinsertCommensalismeMulti.setString(2,commMulti_eigenschap.getNaam());
+        stmtinsertCommensalismeMulti.setString(3, commMulti_eigenschap.getValue());
+        stmtinsertCommensalismeMulti.executeUpdate();
+        ResultSet rs = stmtinsertCommensalismeMulti.getGeneratedKeys();
+        rs.next();
+        Integer commensalismemulti_id = rs.getInt(1);
+        commMulti_eigenschap.setId(commensalismemulti_id);
+    }
+
 }
 

@@ -248,7 +248,7 @@ public interface Queries {
                     "VALUES(?, ?, ?)";
 
     String INSERTCOMMESALISMEMULTI =
-            "INSERT INTO commensialisme_multi(plant_id, eigenschap, waarde)" +
+            "INSERT INTO commensalisme_multi(plant_id, eigenschap, waarde)" +
                     "VALUES(?, ?, ?)";
 
     String INSERTEXTRA =

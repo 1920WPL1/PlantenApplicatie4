@@ -203,6 +203,7 @@ public class ControllerPlantToevoegen {
     public ToggleGroup VorstgevoeligToggle;
     public Label lblHabitat;
     public Label lblLevensduur;
+    public Label lblSociabiliteit;
 
     private Connection dbConnection;
     //arraylist van fenotype_Multi
@@ -214,6 +215,9 @@ public class ControllerPlantToevoegen {
     String sNaamSpnBloeihoogte;
     String sNaamCmbBladKleur;
     Object sNaamCmbBloeiKleur;
+
+
+
 
 
     public void initialize() throws SQLException {
@@ -399,7 +403,7 @@ public class ControllerPlantToevoegen {
                 sVorstgevoelig
         );
         extraDAO.createExtra(extra, plant);
-        notificationBox("U plant is opgeslagen");
+
 
 //
         setArrayFenotypeMultiFunction();
@@ -410,8 +414,17 @@ public class ControllerPlantToevoegen {
 
 
         //oproepen functie listview
-        listviewreader(lvHabitat, plant, lblHabitat );
-        listviewreader(lvLevensduur, plant, lblLevensduur);
+        listviewreaderhabitat(lvHabitat, plant, lblHabitat );
+        listviewreaderlevensduur(lvLevensduur, plant, lblLevensduur);
+        //oproepen create commensalisme
+        createcommensalismemulti(plant);
+
+
+
+
+
+
+        notificationBox("U plant is opgeslagen");
 
 
     }
@@ -477,6 +490,7 @@ public class ControllerPlantToevoegen {
                 cbo.setStyle("-fx-background-color:BLUE");
                 break;
         }
+
     }
 
     // Clicked event op de Comboboxes voor text naar kleur
@@ -713,7 +727,7 @@ public class ControllerPlantToevoegen {
 
 
     //funcite list view
-    public void listviewreader(ListView ls, Plant plant, Label label ) throws SQLException {
+    public void listviewreaderhabitat(ListView ls, Plant plant, Label label ) throws SQLException {
         ArrayList<String> al = new ArrayList<>();
 
         al.addAll(ls.getItems());
@@ -729,6 +743,40 @@ public class ControllerPlantToevoegen {
                     );
            abiotischedao.createabiomulti(abioMulti_eigenschap, plant);
         }
+    }
+
+    //funcite list view levensduur
+    public void listviewreaderlevensduur(ListView ls, Plant plant, Label label ) throws SQLException {
+        ArrayList<String> al = new ArrayList<>();
+
+        al.addAll(ls.getItems());
+
+        for (int i = 0; i < al.size(); i++){
+
+            CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
+            CommMulti_Eigenschap commMulti_eigenschap  = new CommMulti_Eigenschap
+                    (
+                            plant.getId(),
+                            label.getText()
+                            ,al.get(i)
+                    );
+            commensalismeDAO.createcommulti(commMulti_eigenschap, plant);
+        }
+    }
+
+
+    //create commensalisme
+    public void createcommensalismemulti(Plant plant) throws SQLException {
+        RadioButton selectcoc = (RadioButton) StrategieToggle.getSelectedToggle();
+        String sSoc = selectcoc.getText();
+        CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
+        CommMulti_Eigenschap commMulti_eigenschap  = new CommMulti_Eigenschap(
+                plant.getId(),
+                lblSociabiliteit.getText(),
+                sSoc
+        );
+commensalismeDAO.createcommulti(commMulti_eigenschap, plant);
+
     }
 
 }

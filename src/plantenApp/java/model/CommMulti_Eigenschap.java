@@ -12,6 +12,9 @@ public class CommMulti_Eigenschap {
         this.value = value;
     }
 
+
+
+
     public int getId() {
         return id;
     }
@@ -22,5 +25,17 @@ public class CommMulti_Eigenschap {
 
     public String getValue() {
         return value;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 }
