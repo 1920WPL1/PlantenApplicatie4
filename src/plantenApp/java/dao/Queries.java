@@ -228,7 +228,7 @@ public interface Queries {
     //Groep 4
     //Insert query voor toevoegen
     String INSERTABIOTISCHEFMULTI =
-            "INSTER INTO abiotisch_multi(plant_id, eigenschap, waarde)" +
+            "INSERT INTO abiotisch_multi(plant_id, eigenschap, waarde)" +
                     "VALUES(?, ?, ?)";
 
     String INSERTABIOTISCHEF =

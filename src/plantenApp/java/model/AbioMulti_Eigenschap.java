@@ -2,7 +2,7 @@ package plantenApp.java.model;
 
 /**@author Siebe*/
 public class AbioMulti_Eigenschap {
-    private int id;
+    private Integer id;
     private String naam;
     private String value;
 
@@ -12,6 +12,7 @@ public class AbioMulti_Eigenschap {
         this.value = value;
     }
 
+
     public int getId() {
         return id;
     }
@@ -20,7 +21,21 @@ public class AbioMulti_Eigenschap {
         return naam;
     }
 
+    public void setId(Integer id) { this.id = id;}
+
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
     public String getValue() {
         return value;
+
+
+
+
     }
 }

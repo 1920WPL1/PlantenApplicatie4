@@ -18,6 +18,7 @@ public class FenotypeDAO implements Queries {
     private PreparedStatement stmtInsertByFenotype;
     private PreparedStatement stmtInsertFenotypeMulti;
 
+
     public FenotypeDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
         stmtSelectFenoByID = dbConnection.prepareStatement(GETFENOTYPEBYPLANTID);
@@ -136,6 +137,31 @@ public class FenotypeDAO implements Queries {
         Integer fenotype_id = rs.getInt(1);
         fenotype.setId(fenotype_id);
     }
+
+
+    public void createfenomulti(FenoMulti_Eigenschap fenoMulti_eigenschap, Plant plant) throws SQLException {
+
+        stmtInsertFenotypeMulti.setInt(1, plant.getId());
+        stmtInsertFenotypeMulti.setString(2, fenoMulti_eigenschap.getNaam());
+        stmtInsertFenotypeMulti.setString(3, fenoMulti_eigenschap.getJan());
+        stmtInsertFenotypeMulti.setString(4, fenoMulti_eigenschap.getFeb());
+        stmtInsertFenotypeMulti.setString(5, fenoMulti_eigenschap.getMaa());
+        stmtInsertFenotypeMulti.setString(6, fenoMulti_eigenschap.getApr());
+        stmtInsertFenotypeMulti.setString(7, fenoMulti_eigenschap.getMei());
+        stmtInsertFenotypeMulti.setString(8, fenoMulti_eigenschap.getJun());
+        stmtInsertFenotypeMulti.setString(9, fenoMulti_eigenschap.getJul());
+        stmtInsertFenotypeMulti.setString(10, fenoMulti_eigenschap.getAug());
+        stmtInsertFenotypeMulti.setString(11, fenoMulti_eigenschap.getSep());
+        stmtInsertFenotypeMulti.setString(12, fenoMulti_eigenschap.getOkt());
+        stmtInsertFenotypeMulti.setString(13, fenoMulti_eigenschap.getNov());
+        stmtInsertFenotypeMulti.setString(14, fenoMulti_eigenschap.getDec());
+        stmtInsertFenotypeMulti.executeUpdate();
+        ResultSet rs = stmtInsertFenotypeMulti.getGeneratedKeys();
+        rs.next();
+        Integer fenotype_id = rs.getInt(1);
+        fenoMulti_eigenschap.setId(fenotype_id);
+    }
+
 
 
 

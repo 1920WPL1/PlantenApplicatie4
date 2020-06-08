@@ -43,9 +43,7 @@ public class FenoMulti_Eigenschap {
     }
 
     public void setId(Integer id) {
-        if (this.id != null) {
-            throw new UnsupportedOperationException("Id change not permitted");
-        }
+
         this.id = id;
     }
 

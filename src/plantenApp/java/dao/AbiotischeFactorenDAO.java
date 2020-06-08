@@ -17,6 +17,8 @@ public class AbiotischeFactorenDAO implements Queries {
     private PreparedStatement stmtSelectIdsByAbio;
     private PreparedStatement stmtSelectIdsByAbioMulti;
     private PreparedStatement stmsInsertAbiotischeFactoren;
+    private PreparedStatement stmsInsertAbiotischeFactorenmulti;
+
 
     public AbiotischeFactorenDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
@@ -24,6 +26,7 @@ public class AbiotischeFactorenDAO implements Queries {
         stmtSelectAbioMultiByID = dbConnection.prepareStatement(GETABIOTISCHBMULTIYPLANTID);
         stmtSelectIdsByAbio = dbConnection.prepareStatement(GETIDSBYABIO);
         stmtSelectIdsByAbioMulti = dbConnection.prepareStatement(GETIDSBYABIOMULTI);
+        stmsInsertAbiotischeFactorenmulti = dbConnection.prepareStatement(INSERTABIOTISCHEFMULTI, Statement.RETURN_GENERATED_KEYS);
         stmsInsertAbiotischeFactoren = dbConnection.prepareStatement(INSERTABIOTISCHEF,
                 Statement.RETURN_GENERATED_KEYS);
     }
@@ -90,4 +93,17 @@ public class AbiotischeFactorenDAO implements Queries {
         Integer abiotische_id = rs.getInt(1);
         abiotischeFactoren.setId(abiotische_id);
     }
+
+    public void createabiomulti(AbioMulti_Eigenschap abioMulti_eigenschap, Plant plant) throws SQLException {
+        stmsInsertAbiotischeFactorenmulti.setInt(1, plant.getId());
+        stmsInsertAbiotischeFactorenmulti.setString(2,abioMulti_eigenschap.getNaam());
+        stmsInsertAbiotischeFactorenmulti.setString(3, abioMulti_eigenschap.getValue());
+        stmsInsertAbiotischeFactorenmulti.executeUpdate();
+        ResultSet rs = stmsInsertAbiotischeFactorenmulti.getGeneratedKeys();
+        rs.next();
+        Integer abiotische_id = rs.getInt(1);
+        abioMulti_eigenschap.setId(abiotische_id);
+    }
+
+
 }
