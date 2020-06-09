@@ -648,7 +648,8 @@ public class ControllerPlantToevoegen {
     public void textToColor(ComboBox cbo, String kleur) {
         switch (kleur) {
             case "rood":
-                cbo.setStyle("-fx-background-color:RED");
+                cbo.setStyle("-fx-background-color:RED; -fx-text-base-color: WHITE");
+
                 break;
             case "bruin":
                 cbo.setStyle("-fx-background-color:BROWN");
@@ -669,13 +670,14 @@ public class ControllerPlantToevoegen {
                 cbo.setStyle("-fx-background-color:ORANGE");
                 break;
             case "paars":
-                cbo.setStyle("-fx-background-color:PURPLE");
+                cbo.setStyle("-fx-background-color:PURPLE;  -fx-text-base-color: WHITE ");
+
                 break;
             case "roze":
                 cbo.setStyle("-fx-background-color:PINK");
                 break;
             case "violet":
-                cbo.setStyle("-fx-background-color:VIOLET");
+                cbo.setStyle("-fx-background-color:VIOLET;  ");
                 break;
             case "":
                 cbo.setStyle("-fx-background-color:white");
@@ -684,11 +686,15 @@ public class ControllerPlantToevoegen {
                 cbo.setStyle("-fx-background-color:white");
                 break;
             case "zwart":
-                cbo.setStyle("-fx-background-color:Black");
+                cbo.setStyle("-fx-background-color:Black;  -fx-text-base-color: WHITE");
+
                 break;
             case "blauw":
-                cbo.setStyle("-fx-background-color:BLUE");
+                cbo.setStyle("-fx-background-color:BLUE;  -fx-text-base-color: WHITE ");
+
                 break;
+            case "Unkown":
+                    cbo.setStyle("-fx-background-color:Lightgray ");
         }
 
     }
