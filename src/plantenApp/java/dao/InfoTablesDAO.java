@@ -64,7 +64,7 @@ public class InfoTablesDAO implements Queries {
     // functie om de String Query in te vullen bij 'getInfoTable'
   public InfoTables getInfoTables() throws SQLException{
         InfoTables infoTables = new InfoTables(
-                getInfoTableString(NTTYPE, "type_naam"),
+                getInfoTableString(NTTYPE, "planttype_naam"),
                 getInfoTableString(NTFAMILIE, "familie_naam"),
                 getInfoTableString(NTKLEUREN, "kleur"),
                 getInfoTableString(NTBLADGROOTTE, "waarde"),

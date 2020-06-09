@@ -3,10 +3,12 @@ package plantenApp.java.model;
 
 import java.util.Date;
 
-/**@author Siebe*/
+/**
+ * @author Siebe
+ */
 public class Plant {
     private Integer id;
-    private String type;
+    private String planttype;
     private String familie;
     private String geslacht;
     private String soort;
@@ -14,6 +16,7 @@ public class Plant {
     private Integer minPlantdichtheid;
     private Integer maxPlantdichtheid;
     private String fgsv;
+    private Integer status;
 
     public String getFgsv() {
         return fgsv;
@@ -34,30 +37,34 @@ public class Plant {
     private Foto_Eigenschap foto_eigenschap;
     private InfoTables infoTables;
 
-    public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid) {
+    //Constructor met id
+    public Plant(int id, String planttype, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, int status) {
         this.id = id;
-        this.type = type;
+        this.planttype = planttype;
         this.familie = familie;
         this.geslacht = geslacht;
         this.soort = soort;
         this.variatie = variatie;
         this.minPlantdichtheid = minPlantdichtheid;
         this.maxPlantdichtheid = maxPlantdichtheid;
-    }
-    //Constructor voor Insert : id wordt gegenereerd door de database.
-    public Plant(String type, String familie,String geslacht, String soort,String variatie,Integer minPlantdichtheid ,Integer maxPlantdichtheid,String fgsv) {
-        this.type = type;
-        this.familie = familie;
-        this.geslacht = geslacht;
-        this.soort = soort;
-        this.variatie = variatie;
-        this.minPlantdichtheid = minPlantdichtheid;
-        this.maxPlantdichtheid = maxPlantdichtheid;
-        this.fgsv =fgsv;
+        this.status = status;
     }
 
-    //idStudent wordt gegenereerd door de database.
-    //enkel invullen als dit nog niet gebeurd is. Primary key!
+    //Constructor voor Insert : id wordt gegenereerd door de database.
+    public Plant(String planttype, String familie, String geslacht, String soort, String variatie, Integer minPlantdichtheid, Integer maxPlantdichtheid, String fgsv, int status) {
+        this.planttype = planttype;
+        this.familie = familie;
+        this.geslacht = geslacht;
+        this.soort = soort;
+        this.variatie = variatie;
+        this.minPlantdichtheid = minPlantdichtheid;
+        this.maxPlantdichtheid = maxPlantdichtheid;
+        this.fgsv = fgsv;
+        this.status = status;
+    }
+
+    //Plant_id wordt gegenereerd door de database.
+    //gebeurt enkel als niet gebeurd is. Primary key!
     public void setId(int id) {
         if (this.id != null) {
             throw new UnsupportedOperationException("Id change not permitted");
@@ -71,7 +78,7 @@ public class Plant {
     }
 
     public String getType() {
-        return type;
+        return planttype;
     }
 
     public String getFamilie() {
@@ -176,5 +183,14 @@ public class Plant {
 
     public void setInfoTables(InfoTables infoTables) {
         this.infoTables = infoTables;
+    }
+
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

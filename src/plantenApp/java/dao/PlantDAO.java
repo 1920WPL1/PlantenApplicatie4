@@ -48,7 +48,8 @@ public class PlantDAO implements Queries {
                     rs.getString("soort"),
                     rs.getString("variatie"),
                     rs.getInt("plantdichtheid_min"),
-                    rs.getInt("plantdichtheid_max")
+                    rs.getInt("plantdichtheid_max"),
+                    rs.getInt("status")
             );
         }
         return plant;
@@ -63,11 +64,11 @@ public class PlantDAO implements Queries {
         stmtInsertByStandard.setInt(6, plant.getMinPlantdichtheid());
         stmtInsertByStandard.setInt(7, plant.getMaxPlantdichtheid());
         stmtInsertByStandard.setString(8, plant.getFgsv());
+        stmtInsertByStandard.setInt(9,plant.getStatus());
         stmtInsertByStandard.executeUpdate();
         ResultSet rs = stmtInsertByStandard.getGeneratedKeys();
         rs.next();
         Integer plant_id = rs.getInt(1);
         plant.setId(plant_id);
-
     }
 }

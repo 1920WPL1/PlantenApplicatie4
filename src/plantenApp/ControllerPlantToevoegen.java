@@ -204,6 +204,7 @@ public class ControllerPlantToevoegen {
     public Label lblHabitat;
     public Label lblLevensduur;
     public Label lblSociabiliteit;
+    public Button btnVerstuurVoorGoek;
 
     private Connection dbConnection;
     //arraylist van fenotype_Multi
@@ -294,7 +295,7 @@ public class ControllerPlantToevoegen {
         String fgsv = sFam + " " + sGeslacht + " " + sSoort + " '" + sVariant + "'";
         int iMinDichtheid = (int) spnMinPlantDicht.getValue();
         int iMaxDichtheid = (int) spnMaxPlantDicht.getValue();
-
+        int iStatus=0;
 //Insert van plant
         PlantDAO plantDao = new PlantDAO(dbConnection);
         Plant plant = new Plant
@@ -305,7 +306,8 @@ public class ControllerPlantToevoegen {
                         sVariant,
                         iMinDichtheid,
                         iMaxDichtheid,
-                        fgsv);
+                        fgsv,
+                        iStatus);
         plantDao.createPlant(plant);
 
 //Insert Abiotische factoren
@@ -333,7 +335,8 @@ public class ControllerPlantToevoegen {
         createListViewReaderLevensduur(lvLevensduur, plant);
         createCommMultiSociabiliteit(plant);
 
-        notificationBox("U plant is opgeslagen");
+        notificationBox("U plant is opgeslagen "+"\r\n"+plant.getFgsv());
+        btnVerstuurVoorGoek.setDisable(false);
     }
 
 
@@ -666,7 +669,10 @@ public class ControllerPlantToevoegen {
         window.show();
         window.setScene(scene);
     }
+    public void clicked_versturenVoorGoedkeuring(ActionEvent actionEvent) {
 
+    }
+    public void klaarVoorGoedkeuringStatus1(){}
 
     /* Deze functie word opgeroepen om de comboboxen van de kleuren en maand
        aan te passen van text naar kleur om een mooiere gebruikers ervaring */
@@ -821,5 +827,6 @@ public class ControllerPlantToevoegen {
     public void actioncboBloeikleurDec(ActionEvent actionEvent) {
         textToColor(cboBloeikleurDec, cboBloeikleurDec.getValue().toString());
     }
+
 
 }
