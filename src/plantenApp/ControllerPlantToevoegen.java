@@ -613,7 +613,7 @@ public class ControllerPlantToevoegen {
 
     //Clicked events Deleten of toevoegen tot Listview Habitat en Levensduur
     public void clicked_DeltenHabitat(MouseEvent mouseEvent) {
-        lvHabitat.getItems().remove(lvHabitat.getSelectionModel().getSelectedItem());
+        lvHabitat.getItems().removeAll(lvHabitat.getItems());
         lvHabitat.refresh();
 
     }

@@ -17,9 +17,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1798.0" minHeight="1798.0" prefHeight="1798.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerPlantToevoegen">
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1798.0" minHeight="1798.0" prefHeight="1798.0" prefWidth="1325.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerPlantToevoegen">
    <content>
-      <AnchorPane maxHeight="1796.8" maxWidth="1278.4" minHeight="1796.8" minWidth="1278.4" prefHeight="1796.8" prefWidth="1278.4">
+      <AnchorPane maxHeight="1797.0" maxWidth="1303.0" minHeight="1796.8" minWidth="1278.4" prefHeight="1797.0" prefWidth="1303.0">
          <children>
             <TitledPane layoutX="567.0" layoutY="220.0" prefHeight="382.0" prefWidth="706.0" text="Commensalisme">
               <content>
@@ -50,7 +50,7 @@
                                     <RadioButton fx:id="rdbSociabiliteit3" mnemonicParsing="false" prefHeight="18.0" prefWidth="38.0" text="III" toggleGroup="$Sociabiliteit" />
                                     <RadioButton fx:id="rdbSociabiliteit4" mnemonicParsing="false" prefHeight="18.0" prefWidth="39.0" text="IV" toggleGroup="$Sociabiliteit" />
                                     <RadioButton fx:id="rdbSociabiliteit5" mnemonicParsing="false" prefHeight="18.0" prefWidth="36.0" text="V" toggleGroup="$Sociabiliteit" />
-                                    <RadioButton fx:id="rdbSociabiliteitUnknow" mnemonicParsing="false" text="Unknown" toggleGroup="$Sociabiliteit" />
+                                    <RadioButton fx:id="rdbSociabiliteitUnknow" mnemonicParsing="false" selected="true" text="Unknown" toggleGroup="$Sociabiliteit" />
                                  </children>
                               </HBox>
                               <Label prefHeight="30.0" prefWidth="120.0" text="Strategie:">
@@ -159,7 +159,7 @@
                                     </VBox>
                                     <VBox>
                                        <children>
-                                          <ComboBox fx:id="cboType" prefHeight="30.0" prefWidth="120.0" />
+                                          <ComboBox fx:id="cboType" editable="true" prefHeight="30.0" prefWidth="120.0" />
                                           <TextField fx:id="txtFamilie" prefHeight="30.0" prefWidth="120.0" />
                                           <TextField fx:id="txtGeslacht" prefHeight="30.0" prefWidth="120.0" />
                                           <TextField fx:id="txtSoort" prefHeight="30.0" prefWidth="120.0" />
@@ -193,7 +193,7 @@
             </TitledPane>
             <TitledPane layoutX="8.0" layoutY="601.0" text="Fenotype">
               <content>
-                <AnchorPane>
+                <AnchorPane prefHeight="1178.0" prefWidth="1584.0">
                      <children>
                         <VBox layoutX="14.0" layoutY="14.0">
                            <children>
@@ -227,10 +227,10 @@
                                           </VBox>
                                           <VBox>
                                              <children>
-                                                <ComboBox fx:id="cboBladgrootte" prefHeight="30.0" prefWidth="120.0" />
-                                                <ComboBox fx:id="cboBladvorm" prefHeight="30.0" prefWidth="120.0" />
-                                                <ComboBox fx:id="cboRatio" prefHeight="30.0" prefWidth="120.0" />
-                                                <ComboBox fx:id="cboSpruitfenologie" prefHeight="30.0" prefWidth="120.0" />
+                                                <ComboBox fx:id="cboBladgrootte" prefHeight="30.0" prefWidth="120.0" value="0" />
+                                                <ComboBox fx:id="cboBladvorm" prefHeight="30.0" prefWidth="120.0" value="0"/>
+                                                <ComboBox fx:id="cboRatio" prefHeight="30.0" prefWidth="120.0" value="0"/>
+                                                <ComboBox fx:id="cboSpruitfenologie" prefHeight="30.0" prefWidth="120.0" value="0"/>
                                              </children>
                                           </VBox>
                                           <Label text="       " />
@@ -499,7 +499,7 @@
                                     </AnchorPane>
                                 </content>
                               </TitledPane>
-                              <TitledPane text="Habitus">
+                              <TitledPane prefHeight="171.0" prefWidth="1290.0" text="Habitus">
                                 <content>
                                   <AnchorPane>
                                        <children>
@@ -661,6 +661,7 @@
                                                 </VBox>
                                              </children>
                                           </HBox>
+                                          <RadioButton layoutX="1212.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="74.0" selected="true" text="Unknown" toggleGroup="$habitusToggle" />
                                        </children>
                                     </AnchorPane>
                                 </content>
@@ -757,6 +758,7 @@
                                                 </VBox>
                                              </children>
                                           </HBox>
+                                          <RadioButton fx:id="rdbSmallePluim1" layoutX="814.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" selected="true" text="Unknown" toggleGroup="$bloeiwijzeToggle" />
                                        </children>
                                     </AnchorPane>
                                  </content>
