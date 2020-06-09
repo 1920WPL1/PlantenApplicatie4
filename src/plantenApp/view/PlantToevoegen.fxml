@@ -415,18 +415,18 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <ComboBox fx:id="cboBladkleurJan" onAction="#clickedbladkleurjan" prefHeight="30.0" prefWidth="80.0" value="Unkown"  style="-fx-background-color: Lightgray;"/>
-                                                      <ComboBox fx:id="cboBladkleurFeb" onAction="#clickedcboBladkleurFeb" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
-                                                      <ComboBox fx:id="cboBladkleurMaa" onAction="#clickedcboBladkleurMaa" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
-                                                      <ComboBox fx:id="cboBladkleurApr" onAction="#clickedcboBladkleurApr" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
-                                                      <ComboBox fx:id="cboBladkleurMei" onAction="#ClickedcboBladkleurMei" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
-                                                      <ComboBox fx:id="cboBladkleurJun" onAction="#ClickedcboBladkleurJun" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
-                                                      <ComboBox fx:id="cboBladkleurJul" onAction="#ClickedcboBladkleurJul" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
-                                                      <ComboBox fx:id="cboBladkleurAug" onAction="#ClickedcboBladkleurAug" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
-                                                      <ComboBox fx:id="cboBladkleurSept" onAction="#ClickedcboBladkleurSept" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
-                                                      <ComboBox fx:id="cboBladkleurOkt" onAction="#ClickedcboBladkleurOkt" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
-                                                      <ComboBox fx:id="cboBladkleurNov" onAction="#ClickedcboBladkleurNov" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
-                                                      <ComboBox fx:id="cboBladkleurDec" onAction="#ClickedcboBladkleurDec" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
+                                                      <ComboBox fx:id="cboBladkleurJan" onAction="#clickedbladkleurjan" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurFeb" onAction="#clickedcboBladkleurFeb" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurMaa" onAction="#clickedcboBladkleurMaa" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurApr" onAction="#clickedcboBladkleurApr" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurMei" onAction="#ClickedcboBladkleurMei" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurJun" onAction="#ClickedcboBladkleurJun" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurJul" onAction="#ClickedcboBladkleurJul" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurAug" onAction="#ClickedcboBladkleurAug" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurSept" onAction="#ClickedcboBladkleurSept" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurOkt" onAction="#ClickedcboBladkleurOkt" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurNov" onAction="#ClickedcboBladkleurNov" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurDec" onAction="#ClickedcboBladkleurDec" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
@@ -478,18 +478,18 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <ComboBox fx:id="cboBloeikleurJan" onAction="#actioncboBloeikleurJan" prefHeight="30.0" prefWidth="80.0"  value="Unkown" style="-fx-background-color: Lightgray;"/>
-                                                      <ComboBox fx:id="cboBloeikleurFeb" onAction="#actioncboBloeikleurFeb" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
-                                                      <ComboBox fx:id="cboBloeikleurMaa" onAction="#actioncboBloeikleurMaa" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
-                                                      <ComboBox fx:id="cboBloeikleurApr" onAction="#actioncboBloeikleurApr" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
-                                                      <ComboBox fx:id="cboBloeikleurMei" onAction="#actioncboBloeikleurMei" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
-                                                      <ComboBox fx:id="cboBloeikleurJun" onAction="#actioncboBloeikleurJun" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
-                                                      <ComboBox fx:id="cboBloeikleurJul" onAction="#actioncboBloeikleurJul" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
-                                                      <ComboBox fx:id="cboBloeikleurAug" onAction="#actioncboBloeikleurAug" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
-                                                      <ComboBox fx:id="cboBloeikleurSept" onAction="#actioncboBloeikleurSept" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
-                                                      <ComboBox fx:id="cboBloeikleurOkt" onAction="#actioncboBloeikleurOkt" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
-                                                      <ComboBox fx:id="cboBloeikleurNov" onAction="#actioncboBloeikleurNov" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
-                                                      <ComboBox fx:id="cboBloeikleurDec" onAction="#actioncboBloeikleurDec" prefHeight="30.0" prefWidth="80.0" value="Unkown" style="-fx-background-color: Lightgray;" />
+                                                      <ComboBox fx:id="cboBloeikleurJan" onAction="#actioncboBloeikleurJan" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurFeb" onAction="#actioncboBloeikleurFeb" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurMaa" onAction="#actioncboBloeikleurMaa" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurApr" onAction="#actioncboBloeikleurApr" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurMei" onAction="#actioncboBloeikleurMei" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurJun" onAction="#actioncboBloeikleurJun" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurJul" onAction="#actioncboBloeikleurJul" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurAug" onAction="#actioncboBloeikleurAug" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurSept" onAction="#actioncboBloeikleurSept" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurOkt" onAction="#actioncboBloeikleurOkt" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurNov" onAction="#actioncboBloeikleurNov" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurDec" onAction="#actioncboBloeikleurDec" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
 
                                                    </children>
                                                 </HBox>
@@ -809,7 +809,7 @@
                                                       </HBox>
                                                       <HBox>
                                                          <children>
-                                                            <RadioButton fx:id="rdbBijvriendelijkLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text=" ">
+                                                            <RadioButton fx:id="rdbBijvriendelijkLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" selected="true" text=" ">
                                                                <toggleGroup>
                                                                   <ToggleGroup fx:id="BijvriendelijkToggle" />
                                                                </toggleGroup></RadioButton>
@@ -819,7 +819,7 @@
                                                       </HBox>
                                                       <HBox>
                                                          <children>
-                                                            <RadioButton fx:id="rdbVlindervriendelijkLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text=" ">
+                                                            <RadioButton fx:id="rdbVlindervriendelijkLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" selected="true" text=" ">
                                                                <toggleGroup>
                                                                   <ToggleGroup fx:id="VlindervriendelijkToggle" />
                                                                </toggleGroup></RadioButton>
@@ -861,7 +861,7 @@
                                                    <children>
                                                       <HBox>
                                                          <children>
-                                                            <RadioButton fx:id="rdbEetbaarLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text=" ">
+                                                            <RadioButton fx:id="rdbEetbaarLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" selected="true" text=" ">
                                                                <toggleGroup>
                                                                   <ToggleGroup fx:id="EetbaarToggle" />
                                                                </toggleGroup></RadioButton>
@@ -871,7 +871,7 @@
                                                       </HBox>
                                                       <HBox>
                                                          <children>
-                                                            <RadioButton fx:id="rdbKruidgebruikLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text=" ">
+                                                            <RadioButton fx:id="rdbKruidgebruikLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" selected="true" text=" ">
                                                                <toggleGroup>
                                                                   <ToggleGroup fx:id="KruidgebruikToggle" />
                                                                </toggleGroup></RadioButton>
@@ -881,7 +881,7 @@
                                                       </HBox>
                                                       <HBox>
                                                          <children>
-                                                            <RadioButton fx:id="rdbGeurendLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text=" ">
+                                                            <RadioButton fx:id="rdbGeurendLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" selected="true" text=" ">
                                                                <toggleGroup>
                                                                   <ToggleGroup fx:id="GeurendToggle" />
                                                                </toggleGroup></RadioButton>
@@ -891,7 +891,7 @@
                                                       </HBox>
                                                       <HBox>
                                                          <children>
-                                                            <RadioButton fx:id="rdbVorstgevoeligLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text=" ">
+                                                            <RadioButton fx:id="rdbVorstgevoeligLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" selected="true" text=" ">
                                                                <toggleGroup>
                                                                   <ToggleGroup fx:id="VorstgevoeligToggle" />
                                                                </toggleGroup></RadioButton>
