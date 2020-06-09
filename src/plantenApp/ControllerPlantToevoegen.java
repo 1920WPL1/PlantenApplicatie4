@@ -277,7 +277,6 @@ public class ControllerPlantToevoegen {
         cboBloeikleurOkt.getItems().addAll(infotables.getKleuren());
         cboBloeikleurNov.getItems().addAll(infotables.getKleuren());
         cboBloeikleurDec.getItems().addAll(infotables.getKleuren());
-
         //habitat
         cboHabitat.getItems().addAll(infotables.getHabitats());
     }
