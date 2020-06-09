@@ -33,7 +33,7 @@
                                  </font>
                               </Label>
                               <HBox />
-                              <ComboBox fx:id="cboOntwikkelingssnelheid" prefHeight="30.0" prefWidth="240.0" />
+                              <ComboBox fx:id="cboOntwikkelingssnelheid" prefHeight="30.0" prefWidth="240.0" value="unknown" />
                               <Label fx:id="lblSociabiliteit" prefHeight="30.0" prefWidth="120.0" text="Sociabiliteit">
                                  <font>
                                     <Font size="14.0" />
@@ -108,7 +108,7 @@
                               </Label>
                               <HBox prefHeight="30.0" prefWidth="193.0">
                                  <children>
-                                    <ComboBox fx:id="cboLevensduur" prefHeight="30.0" prefWidth="187.0" />
+                                    <ComboBox fx:id="cboLevensduur" prefHeight="30.0" prefWidth="187.0" promptText="maak u keuze" />
                                     <Button mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenLevensduur" prefHeight="30.0" prefWidth="30.0" text="+" />
                                     <Button mnemonicParsing="false" onMouseClicked="#clicked_DeleteLevensduur" prefHeight="30.0" prefWidth="31.0" text="-" />
                                  </children>
@@ -956,16 +956,16 @@
                                        <children>
                                           <HBox>
                                              <children>
-                                                <ComboBox fx:id="cboBezonning" prefWidth="150.0" />
+                                                <ComboBox fx:id="cboBezonning" prefWidth="150.0" value="unkn" />
                                              </children>
                                           </HBox>
                                           <HBox>
                                              <children>
-                                                <ComboBox fx:id="cboVoedingsbehoefte" prefWidth="150.0" />
+                                                <ComboBox fx:id="cboVoedingsbehoefte" prefWidth="150.0" value="unknown" />
                                              </children>
                                           </HBox>
                                           <HBox />
-                                          <ComboBox fx:id="cboVochtbehoefte" prefWidth="150.0" />
+                                          <ComboBox fx:id="cboVochtbehoefte" prefWidth="150.0" value="unknown" />
                                        </children>
                                     </VBox>
                                     <VBox>
@@ -975,7 +975,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="cboReactieAntag" prefHeight="30.0" prefWidth="226.0" />
+                                          <ComboBox fx:id="cboReactieAntag" prefHeight="30.0" prefWidth="226.0" value="unknown" />
                                           <HBox>
                                              <children>
                                                 <Label prefHeight="30.0" prefWidth="119.0" text=" Grondsoort:">
@@ -983,7 +983,7 @@
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <ComboBox fx:id="cboGrondsoort" prefHeight="30.0" prefWidth="106.0" />
+                                                <ComboBox fx:id="cboGrondsoort" prefHeight="30.0" prefWidth="106.0" value="unk" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -999,7 +999,7 @@
                                     </Label>
                                     <HBox>
                                        <children>
-                                          <ComboBox fx:id="cboHabitat" prefHeight="30.0" prefWidth="450.0" />
+                                          <ComboBox fx:id="cboHabitat" prefHeight="30.0" prefWidth="450.0" promptText="Maak u keuze" />
                                           <Button mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenHabitat" prefHeight="30.0" prefWidth="30.0" text="+" />
                                           <Button mnemonicParsing="false" onMouseClicked="#clicked_DeltenHabitat" prefHeight="30.0" prefWidth="30.0" text="-" />
                                        </children>
@@ -1013,6 +1013,7 @@
                   </AnchorPane>
               </content>
             </TitledPane>
+            <!--suppress XmlDuplicatedId -->
             <Button fx:id="btn_Terug" layoutX="1130.0" layoutY="87.0" mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" text="Terug">
                <font>
                   <Font size="24.0" />

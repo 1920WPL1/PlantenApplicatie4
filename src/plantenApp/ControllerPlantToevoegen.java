@@ -279,10 +279,11 @@ public class ControllerPlantToevoegen {
         cboBloeikleurDec.getItems().addAll(infotables.getKleuren());
         //habitat
         cboHabitat.getItems().addAll(infotables.getHabitats());
+
     }
 
 
-//Toevoegen van een volledige plant
+    //Toevoegen van een volledige plant
     public void clicked_ToevoegenPlant(MouseEvent mouseEvent) throws SQLException {
 //vars voor plant
         String sType = cboType.getValue().toString();
@@ -555,11 +556,14 @@ public class ControllerPlantToevoegen {
     //Abiotische factoren Multi (Habitat) toevoegen DB & Functie list view
     public void listviewreaderhabitat(ListView ls, Plant plant, Label label) throws SQLException {
         ArrayList<String> al = new ArrayList<>();
-
         al.addAll(ls.getItems());
 
-        for (int i = 0; i < al.size(); i++) {
+        if (al.size() == 0) {
+            ls.getItems().add("nog niet ingegeven");
+            al.addAll(ls.getItems());
+        }
 
+        for (int i = 0; i < al.size(); i++) {
             AbiotischeFactorenDAO abiotischedao = new AbiotischeFactorenDAO(dbConnection);
             AbioMulti_Eigenschap abioMulti_eigenschap = new AbioMulti_Eigenschap
                     (
@@ -577,6 +581,11 @@ public class ControllerPlantToevoegen {
         ArrayList<String> al = new ArrayList<>();
 
         al.addAll(ls.getItems());
+
+        if (al.size() == 0) {
+            ls.getItems().add("nog niet ingegeven");
+            al.addAll(ls.getItems());
+        }
 
         for (int i = 0; i < al.size(); i++) {
 
@@ -611,28 +620,44 @@ public class ControllerPlantToevoegen {
 
     /* !!!!Click Events!!!!!*/
 
-    //Clicked events Deleten of toevoegen tot Listview Habitat en Levensduur
+    //Clicked events Delete from Listview (Habitat en Levensduur) met methode deleteFromListMethode
     public void clicked_DeltenHabitat(MouseEvent mouseEvent) {
-        lvHabitat.getItems().removeAll(lvHabitat.getItems());
-        lvHabitat.refresh();
-
+        deleteFromListMethode(lvHabitat);
     }
-
     public void clicked_DeleteLevensduur(MouseEvent mouseEvent) {
-
-        lvLevensduur.getItems().remove(lvLevensduur.getSelectionModel().getSelectedItem());
-        lvLevensduur.refresh();
+        deleteFromListMethode(lvLevensduur);
     }
 
+    //delete from list Methode +fout afhandeling
+    public void deleteFromListMethode(ListView lv) {
+        try {
+            String sStringTester = lv.getSelectionModel().getSelectedItem().toString();
+            System.out.println(sStringTester);
+        } catch (NullPointerException exception) {
+            notificationBox("Gelieve een keuze te maken uit de lijst voor u kan verwijderen");
+        }
+        lv.getItems().remove(lv.getSelectionModel().getSelectedItem());
+        lv.refresh();
+    }
+
+
+    //Clicked events add to Listview (Habitat en Levensduur) met methode toevoegenAanListMethode
     public void clicked_ToevoegenHabitat(MouseEvent mouseEvent) {
-
-        lvHabitat.getItems().add(cboHabitat.getValue().toString());
+        ToevoegenAanListMethode(lvHabitat, cboHabitat);
     }
-
     public void clicked_ToevoegenLevensduur(MouseEvent mouseEvent) {
-        lvLevensduur.getItems().add(cboLevensduur.getValue().toString());
+        ToevoegenAanListMethode(lvLevensduur, cboLevensduur);
     }
 
+    //add to list Methode +fout afhandeling
+    public void ToevoegenAanListMethode(ListView lv, ComboBox cmb) {
+        try {
+            lv.getItems().add(cmb.getValue().toString());
+        } catch (NullPointerException NullExc1) {
+            notificationBox("gelieve iets te selecteren voor toe te voegen"); }
+    }
+
+    
     //functie voor terug te kunnen keren naar het zoek scherm.
     public void clicked_TerugGaan(MouseEvent mouseEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("view/Zoekscherm.fxml"));
@@ -694,7 +719,7 @@ public class ControllerPlantToevoegen {
 
                 break;
             case "Unkown":
-                    cbo.setStyle("-fx-background-color:Lightgray ");
+                cbo.setStyle("-fx-background-color:Lightgray ");
         }
 
     }
