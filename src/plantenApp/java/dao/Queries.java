@@ -23,7 +23,7 @@ public interface Queries {
     //region GETIDBYKENMERKEN
     String GETIDSBYPLANT =
             "SELECT plant_id FROM plant WHERE " +
-                    "type = ? OR  1=? " +
+                    "planttype = ? OR  1=? " +
                     "AND " +
                     "familie = ? OR 1=?" +
                     "AND " +
@@ -150,7 +150,7 @@ public interface Queries {
     //region NAAKTETABELLEN
 
     String NTTYPE =
-            "SELECT type_naam FROM type";
+            "SELECT planttype_naam FROM planttype";
 
     String NTFAMILIE =
             "SELECT familie_naam FROM familie";
@@ -240,8 +240,8 @@ public interface Queries {
                     "VALUES(?, ?, ?, ?, ?)";
 
     String INSERTSTANDAARD =
-            "INSERT INTO plant (type, familie, geslacht, soort, variatie, plantdichtheid_min, plantdichtheid_max, fgsv) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            "INSERT INTO plant (planttype, familie, geslacht, soort, variatie, plantdichtheid_min, plantdichtheid_max, fgsv, status) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     String INSERTCOMMESALISME =
             "INSERT INTO commensalisme(plant_id, strategie, ontwikkelingssnelheid)" +
@@ -259,7 +259,7 @@ public interface Queries {
 
 
     String INSERTFENOTYPE =
-            "INSERT INTO fenotype(plant_id, bladvorm, levensvorm, habitus, bloeiwijze, bladgrootte, ratio_bloei_blad, spruitfenelogie)" +
+            "INSERT INTO fenotype(plant_id, bladvorm, levensvorm, habitus, bloeiwijze, bladgrootte, ratio_bloei_blad, spruitfenologie)" +
                     "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
     String INSERTFENOTYPEMULTI =
@@ -286,7 +286,7 @@ public interface Queries {
             "INSERT INTO bloeiwijze(waarde) VALEUS(?)";
 
     String INSERTFAMILIE =
-            "INSERT INTO familie(familie_naam, type_id) VALUES(?, ?)";
+            "INSERT INTO familie(familie_naam, planttype_id) VALUES(?, ?)";
 
     String INSERTGESLACHT =
             "INSERT INTO geslacht(geslacht_naam, familie_id) VALUES(?, ?)";
@@ -336,8 +336,8 @@ public interface Queries {
     String INSERTSTRATEGIE =
             "INSERT INTO strategie(waarde) VALUES(?)";
 
-    String INSERTTYPE =
-            "INSERT INTO type(type_naam) VALUES(?)";
+    String INSERTPLANTTYPE =
+            "INSERT INTO planttype(planttype_naam) VALUES(?)";
 
     String INSERTVARIATIE =
             "INSERT INTO variatie(variatie_naam, soort_id) VALUES(?,?)";

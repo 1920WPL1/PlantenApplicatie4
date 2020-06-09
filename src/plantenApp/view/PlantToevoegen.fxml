@@ -228,9 +228,9 @@
                                           <VBox>
                                              <children>
                                                 <ComboBox fx:id="cboBladgrootte" prefHeight="30.0" prefWidth="120.0" value="0" />
-                                                <ComboBox fx:id="cboBladvorm" prefHeight="30.0" prefWidth="120.0" value="0"/>
-                                                <ComboBox fx:id="cboRatio" prefHeight="30.0" prefWidth="120.0" value="0"/>
-                                                <ComboBox fx:id="cboSpruitfenologie" prefHeight="30.0" prefWidth="120.0" value="0"/>
+                                                <ComboBox fx:id="cboBladvorm" prefHeight="30.0" prefWidth="120.0" value="0" />
+                                                <ComboBox fx:id="cboRatio" prefHeight="30.0" prefWidth="120.0" value="0" />
+                                                <ComboBox fx:id="cboSpruitfenologie" prefHeight="30.0" prefWidth="120.0" value="0" />
                                              </children>
                                           </VBox>
                                           <Label text="       " />
@@ -911,14 +911,20 @@
                               </AnchorPane>
                           </content>
                         </TitledPane>
-                        <Button layoutX="1025.0" layoutY="1050.0" mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenPlant" text="Voeg plant toe">
+                        <Button layoutX="573.0" layoutY="1039.0" mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenPlant" text="Opslaan">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <!--suppress XmlDuplicatedId -->
+                        <Button fx:id="btn_Terug" layoutX="1150.0" layoutY="1039.0" mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" prefHeight="50.0" prefWidth="118.0" text="Terug">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btn_Terug" layoutX="909.0" layoutY="1050.0" mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" text="Terug">
+                        <Button fx:id="btnVerstuurVoorGoek" disable="true" layoutX="689.0" layoutY="1039.0" mnemonicParsing="false" onMouseClicked="#clicked_versturenVoorGoedkeuring" text="Versturen voor goedkeuring">
                            <font>
-                              <Font size="24.0" />
+                              <Font size="18.0" />
                            </font>
                         </Button>
                      </children>
