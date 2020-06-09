@@ -7,9 +7,6 @@ import plantenApp.java.model.Plant;
 import java.sql.*;
 import java.util.ArrayList;
 
-
-
-/**@author Siebe*/
 public class AbiotischeFactorenDAO implements Queries {
     private Connection dbConnection;
     private PreparedStatement stmtSelectAbioByID;
@@ -31,11 +28,7 @@ public class AbiotischeFactorenDAO implements Queries {
                 Statement.RETURN_GENERATED_KEYS);
     }
 
-    /**
-     * @param id -> plant_id
-     * @return -> alle abiotische factoren van de specifieke plant
-     * @author Siebe
-     */
+
     public AbiotischeFactoren getById(int id) throws SQLException {
         AbiotischeFactoren abio = null;
 
@@ -56,12 +49,6 @@ public class AbiotischeFactorenDAO implements Queries {
         return abio;
     }
 
-    /**
-     * @param id -> plant_id
-     * @return -> alle abiotische_multi factoren van de specifieke plant
-     * @author Siebe
-     * word alleen gebruikt in getById
-     */
     private ArrayList<AbioMulti_Eigenschap> getByIdMulti(int id) throws SQLException {
         ArrayList<AbioMulti_Eigenschap> abioMulti = new ArrayList<>();
         ;
@@ -79,8 +66,10 @@ public class AbiotischeFactorenDAO implements Queries {
         return abioMulti;
     }
 
-    public void createAbio(AbiotischeFactoren abiotischeFactoren, Plant plant) throws SQLException {
 
+
+
+    public void createAbio(AbiotischeFactoren abiotischeFactoren, Plant plant) throws SQLException {
         stmsInsertAbiotischeFactoren.setInt(1, plant.getId());
         stmsInsertAbiotischeFactoren.setString(2,abiotischeFactoren.getBezonning());
         stmsInsertAbiotischeFactoren.setString(3, abiotischeFactoren.getGrondsoort());
