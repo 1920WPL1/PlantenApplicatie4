@@ -29,6 +29,10 @@ public interface Queries {
                     "AND " +
                     "fgsv LIKE ? OR 1=?";
 
+    String GETPLANTSBYSTATUS =
+            "SELECT * FROM plant WHERE "+
+                    "status = ?";
+
     String GETIDSBYEXTRA =
             "SELECT plant_id FROM extra WHERE " +
                     "plant_id IN ? " +

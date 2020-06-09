@@ -62,7 +62,7 @@
                                  <children>
                                     <HBox>
                                        <children>
-                                          <RadioButton fx:id="rdbStrategieUnknown" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" selected="true" text="Unknown">
+                                          <RadioButton fx:id="rdbStrategieUnknown" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" selected="true" text="Unknow">
                                              <toggleGroup>
                                                 <ToggleGroup fx:id="StrategieToggle" />
                                              </toggleGroup>
@@ -911,7 +911,7 @@
                               </AnchorPane>
                           </content>
                         </TitledPane>
-                        <Button layoutX="573.0" layoutY="1039.0" mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenPlant" text="Opslaan">
+                        <Button layoutX="560.0" layoutY="975.0" mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenPlant" text="Opslaan">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -922,7 +922,13 @@
                               <Font size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btnVerstuurVoorGoek" disable="true" layoutX="689.0" layoutY="1039.0" mnemonicParsing="false" onMouseClicked="#clicked_versturenVoorGoedkeuring" text="Versturen voor goedkeuring">
+                        <Button fx:id="btnVerstuurVoorGoek" layoutX="950.0" layoutY="975.0" mnemonicParsing="false" onAction="#clicked_versturenVoorGoedkeuring" text="Versturen voor goedkeuring">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <ListView fx:id="lvLijstOpgeslagenPlanten" layoutX="671.0" layoutY="975.0" prefHeight="180.0" prefWidth="241.0" />
+                        <Button layoutX="560.0" layoutY="1045.0" mnemonicParsing="false" onAction="#Clicked_LijstVanOpgeslagenPlanten" text="Lijst ">
                            <font>
                               <Font size="18.0" />
                            </font>

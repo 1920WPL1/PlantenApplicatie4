@@ -18,14 +18,15 @@ public class PlantDAO implements Queries {
     private PreparedStatement stmtSelectById;
     private PreparedStatement stmtSelectByPlant;
     private PreparedStatement stmtInsertByStandard;
+    private PreparedStatement stmtSelectAllByStatus0;
 
     public PlantDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
         stmtSelectById = dbConnection.prepareStatement(GETPLANTBYID);
         stmtSelectByPlant = dbConnection.prepareStatement(GETIDSBYPLANT);
-
         stmtInsertByStandard = dbConnection.prepareStatement(INSERTSTANDAARD,
                 Statement.RETURN_GENERATED_KEYS);
+        stmtSelectAllByStatus0=dbConnection.prepareStatement(GETPLANTSBYSTATUS);
 
     }
 
@@ -70,5 +71,24 @@ public class PlantDAO implements Queries {
         rs.next();
         Integer plant_id = rs.getInt(1);
         plant.setId(plant_id);
+    }
+    public ArrayList getPlantenByStatus(int status) throws SQLException {
+        ArrayList<Plant> arrListPlanten = new ArrayList<>();
+
+        stmtSelectAllByStatus0.setInt(1, status);
+        ResultSet rs = stmtSelectAllByStatus0.executeQuery();
+        while (rs.next()) {
+            arrListPlanten.add(new Plant(
+                    rs.getInt("plant_id"),
+                    rs.getString("planttype"),
+                    rs.getString("familie"),
+                    rs.getString("geslacht"),
+                    rs.getString("soort"),
+                    rs.getString("variatie"),
+                    rs.getInt("plantdichtheid_min"),
+                    rs.getInt("plantdichtheid_max"),
+                    rs.getInt("status")));
+        }
+        return arrListPlanten;
     }
 }
