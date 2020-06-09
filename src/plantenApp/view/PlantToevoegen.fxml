@@ -811,7 +811,7 @@
                                                       </HBox>
                                                       <HBox>
                                                          <children>
-                                                            <RadioButton fx:id="rdbBijvriendelijkLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text=" ">
+                                                            <RadioButton fx:id="rdbBijvriendelijkLeeg"  mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text=" ">
                                                                <toggleGroup>
                                                                   <ToggleGroup fx:id="BijvriendelijkToggle" />
                                                                </toggleGroup></RadioButton>
