@@ -295,7 +295,7 @@ public class ControllerPlantToevoegen {
         int iMinDichtheid = (int) spnMinPlantDicht.getValue();
         int iMaxDichtheid = (int) spnMaxPlantDicht.getValue();
 
-//Toevoegen van plant
+//Insert van plant
         PlantDAO plantDao = new PlantDAO(dbConnection);
         Plant plant = new Plant
                 (sType,
@@ -307,32 +307,31 @@ public class ControllerPlantToevoegen {
                         iMaxDichtheid,
                         fgsv);
         plantDao.createPlant(plant);
-        int plant_id = plant.getId();
 
-//Toevoegen Abiotische factoren
+//Insert Abiotische factoren
         createAbiotische(plant);
-//toevoegen Commensalisme
+//Insert Commensalisme
         createCommensalisme(plant);
-//Toevoegen Fenotype tot DB
+//Insert Fenotype tot DB
         createFenoType(plant);
-//Toevoegen Extra waarden tot DB
+//Insert Extra waarden tot DB
         createExtra(plant);
+
 //Aanmaken van de arrays voor de Feno Multi eigenschappen
         setArrayFenotypeMultiFunction();
-
-//Toevoegen multi eigenschap per categorie blad, bloei hoogte... tot DB
+//Insert Fenotype multi eigenschap per categorie blad, bloei hoogte... tot DB
         createFenoMultiEig(aBladhoogte, plant);
         createFenoMultiEig(aBladkleur, plant);
         createFenoMultiEig(aBloeihoogte, plant);
         createFenoMultiEig(aBloeikleur, plant);
 
-//Toevoegen Abiotische Multi Gegevens tot DB en oproepen functie listview Reader
-        listviewreaderhabitat(lvHabitat, plant, lblHabitat);
+//Insert Abiotische Multi Gegevens tot DB en oproepen functie listview Reader
+        createListViewReaderHabitat(lvHabitat, plant, lblHabitat);
 
 
 //Toevoegen Commensalisme Multi waarden tot DB met listviewreader en gewone methode
-        listviewreaderlevensduur(lvLevensduur, plant, lblLevensduur);
-        createcommensalismemulti(plant);
+        createListViewReaderLevensduur(lvLevensduur, plant);
+        createCommMultiSociabiliteit(plant);
 
         notificationBox("U plant is opgeslagen");
     }
@@ -553,14 +552,15 @@ public class ControllerPlantToevoegen {
     }
 
 
-    //Abiotische factoren Multi (Habitat) toevoegen DB & Functie list view
-    public void listviewreaderhabitat(ListView ls, Plant plant, Label label) throws SQLException {
+    //Abiotische factoren Multi (Habitat) in DB & Functie list view
+    public void createListViewReaderHabitat(ListView ls, Plant plant, Label label) throws SQLException {
         ArrayList<String> al = new ArrayList<>();
         al.addAll(ls.getItems());
 
+        //Als er geen gegevens gevonden zijn in de arraylist en dus in de list view
+        //dan word Nog niet ingegeven in de arraylist gestoken om deze zo op te slaan in de db
         if (al.size() == 0) {
-            ls.getItems().add("nog niet ingegeven");
-            al.addAll(ls.getItems());
+            al.add("nog niet ingegeven");
         }
 
         for (int i = 0; i < al.size(); i++) {
@@ -572,19 +572,20 @@ public class ControllerPlantToevoegen {
                             , al.get(i)
                     );
             abiotischedao.createabiomulti(abioMulti_eigenschap, plant);
+            ls.getItems().clear();
+            ls.refresh();
         }
     }
 
-
-    // Commensalisme Multi (levensduur) toevoegen DB & functie list view
-    public void listviewreaderlevensduur(ListView ls, Plant plant, Label label) throws SQLException {
+    //Insert Commensalisme Multi (levensduur) toevoegen DB
+    public void createListViewReaderLevensduur(ListView ls, Plant plant) throws SQLException {
         ArrayList<String> al = new ArrayList<>();
-
         al.addAll(ls.getItems());
 
+        //Als er geen gegevens gevonden zijn in de arraylist en dus in de list view
+        //dan word Nog niet ingegeven in de arraylist gestoken om deze zo op te slaan in de db
         if (al.size() == 0) {
-            ls.getItems().add("nog niet ingegeven");
-            al.addAll(ls.getItems());
+            al.add("nog niet ingegeven");
         }
 
         for (int i = 0; i < al.size(); i++) {
@@ -593,16 +594,14 @@ public class ControllerPlantToevoegen {
             CommMulti_Eigenschap commMulti_eigenschap = new CommMulti_Eigenschap
                     (
                             plant.getId(),
-                            label.getText()
+                            lblLevensduur.getText()
                             , al.get(i)
                     );
             commensalismeDAO.createcommulti(commMulti_eigenschap, plant);
         }
     }
-
-
-    //Aanmaken gegevens commensalisme Multi in DB
-    public void createcommensalismemulti(Plant plant) throws SQLException {
+    //Insert gegevens commensalisme Multi (Sociabiliteit) in DB
+    public void createCommMultiSociabiliteit(Plant plant) throws SQLException {
         RadioButton selectcoc = (RadioButton) Sociabiliteit.getSelectedToggle();
         String sSoc = selectcoc.getText();
         CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
@@ -654,10 +653,11 @@ public class ControllerPlantToevoegen {
         try {
             lv.getItems().add(cmb.getValue().toString());
         } catch (NullPointerException NullExc1) {
-            notificationBox("gelieve iets te selecteren voor toe te voegen"); }
+            notificationBox("gelieve iets te selecteren voor toe te voegen");
+        }
     }
 
-    
+
     //functie voor terug te kunnen keren naar het zoek scherm.
     public void clicked_TerugGaan(MouseEvent mouseEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("view/Zoekscherm.fxml"));
