@@ -2,7 +2,7 @@ package plantenApp.java.model;
 
 /**@author Siebe*/
 public class Beheerdaad_Eigenschap {
-    private int id;
+    private Integer id;
     private String naam;
     private String opmerking;
     private String maand;
@@ -16,8 +16,19 @@ public class Beheerdaad_Eigenschap {
         this.frequentie = frequentie;
     }
 
+    public Beheerdaad_Eigenschap(String naam, String opmerking, String maand, int frequentie) {
+        this.naam = naam;
+        this.opmerking = opmerking;
+        this.maand = maand;
+        this.frequentie = frequentie;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNaam() {

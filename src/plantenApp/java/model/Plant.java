@@ -56,6 +56,10 @@ public class Plant {
         this.fgsv =fgsv;
     }
 
+    public Plant(int id){
+        this.id = id;
+    }
+
     //idStudent wordt gegenereerd door de database.
     //enkel invullen als dit nog niet gebeurd is. Primary key!
     public void setId(int id) {

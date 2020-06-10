@@ -642,6 +642,14 @@ public class ControllerPlantToevoegen {
         window.setScene(scene);
     }
 
+    public void clicked_NaarBeheersdadenGaan(MouseEvent mouseEvent) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("view/BeheebehandelingPlant.fxml"));
+        Scene scene = new Scene(root);
+        Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        window.show();
+        window.setScene(scene);
+    }
+
 
     /* Deze functie word opgeroepen om de comboboxen van de kleuren en maand
        aan te passen van text naar kleur om een mooiere gebruikers ervaring */
@@ -790,5 +798,6 @@ public class ControllerPlantToevoegen {
     public void actioncboBloeikleurDec(ActionEvent actionEvent) {
         textToColor(cboBloeikleurDec, cboBloeikleurDec.getValue().toString());
     }
+
 
 }

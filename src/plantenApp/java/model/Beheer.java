@@ -16,6 +16,7 @@ public class Beheer {
         return plant_id;
     }
 
+
     public ArrayList<Beheerdaad_Eigenschap> getMultiEigenschappen() {
         return multiEigenschappen;
     }
