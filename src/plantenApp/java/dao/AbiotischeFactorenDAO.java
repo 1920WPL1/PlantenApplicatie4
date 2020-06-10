@@ -51,7 +51,6 @@ public class AbiotischeFactorenDAO implements Queries {
 
     private ArrayList<AbioMulti_Eigenschap> getByIdMulti(int id) throws SQLException {
         ArrayList<AbioMulti_Eigenschap> abioMulti = new ArrayList<>();
-        ;
 
         stmtSelectAbioMultiByID.setInt(1, id);
         ResultSet rs = stmtSelectAbioMultiByID.executeQuery();

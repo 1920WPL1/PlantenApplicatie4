@@ -1,5 +1,7 @@
 package plantenApp;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -21,13 +23,14 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ControllerPlantToevoegen {
     //Alle velden die ingevuld moeten worden bij Standaard
     public ComboBox cboType;
-    public TextField txtFamilie;
-    public TextField txtGeslacht;
-    public TextField txtSoort;
+    public ComboBox cboFamilie;
+    public ComboBox cboGeslacht;
+    public ComboBox cboSoort;
     public TextField txtVariant;
     public Spinner spnMinPlantDicht;
     public Spinner spnMaxPlantDicht;
@@ -216,6 +219,7 @@ public class ControllerPlantToevoegen {
     String sNaamSpnBloeihoogte;
     String sNaamCmbBladKleur;
     String sNaamCmbBloeiKleur;
+    String sFamilie;
 
 
     public void initialize() throws SQLException {
@@ -225,6 +229,8 @@ public class ControllerPlantToevoegen {
         InfoTables infoTables = infotablesDAO.getInfoTables();
         /*opvullen combobox Methode*/
         FillComboboxes(infoTables);
+        autocompleteFamilie(infotablesDAO);
+        autocompleteGeslacht(infotablesDAO);
     }
 
     private void FillComboboxes(InfoTables infotables) {
@@ -288,9 +294,9 @@ public class ControllerPlantToevoegen {
     public void clicked_ToevoegenPlant(MouseEvent mouseEvent) throws SQLException {
 //vars voor plant
         String sType = cboType.getValue().toString();
-        String sFam = txtFamilie.getText();
-        String sGeslacht = txtGeslacht.getText();
-        String sSoort = txtSoort.getText();
+        String sFam = cboFamilie.getValue().toString();
+        String sGeslacht = cboGeslacht.getValue().toString();
+        String sSoort = cboSoort.getValue().toString();
         String sVariant = txtVariant.getText();
         String fgsv = sFam + " " + sGeslacht + " " + sSoort + " '" + sVariant + "'";
         int iMinDichtheid = (int) spnMinPlantDicht.getValue();
@@ -430,6 +436,51 @@ public class ControllerPlantToevoegen {
         );
         extraDAO.createExtra(extra, plant);
 
+    }
+
+    public void autocompleteFamilie(InfoTablesDAO infoTablesDAO) throws SQLException {
+        List<String> autoFam = infoTablesDAO.getallFamilies();
+        cboFamilie.setEditable(true);
+        for (String s : autoFam) {
+            cboFamilie.getItems().add(s);
+        }
+        cboFamilie.getEditor().textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                String sFam = cboFamilie.getEditor().getText();
+                cboFamilie.getItems().removeAll(cboFamilie.getItems());
+                for (int i = 0; i < autoFam.size(); i++){
+                    if (autoFam.get(i).contains(sFam)) {
+                        cboFamilie.getItems().add(autoFam.get(i));
+                        sFamilie = sFam;
+                    }
+                }
+            }
+        });
+    }
+
+    public void autocompleteGeslacht(InfoTablesDAO infoTablesDAO) throws SQLException {
+        if (sFamilie == null) {
+            System.out.println(sFamilie);
+        } else {
+            List<String> autoGeslacht = infoTablesDAO.getallGeslacht(sFamilie);
+            cboGeslacht.setEditable(true);
+            for (String s : autoGeslacht) {
+                cboGeslacht.getItems().add(s);
+            }
+            cboGeslacht.getEditor().textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                    String sGeslacht = cboGeslacht.getEditor().getText();
+                    cboGeslacht.getItems().removeAll(cboGeslacht.getItems());
+                    for (int i = 0; i < autoGeslacht.size(); i++) {
+                        if (autoGeslacht.get(i).contains(sGeslacht)) {
+                            cboGeslacht.getItems().add(autoGeslacht.get(i));
+                        }
+                    }
+                }
+            });
+        }
     }
 
     //set array van bladhoogte bloeihoogte bladkleur bloeikleur voor fenotype Multi

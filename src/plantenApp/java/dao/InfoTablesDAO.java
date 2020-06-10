@@ -4,13 +4,37 @@ import plantenApp.java.model.InfoTables;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**@author Siebe*/
 public class InfoTablesDAO implements Queries {
     private Connection dbConnection;
+    private PreparedStatement stmtSelectGeslachtByFamilie;
 
     public InfoTablesDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
+        stmtSelectGeslachtByFamilie = dbConnection.prepareStatement(GETGESLACHTBYFAMILIE);
+    }
+
+    public List<String> getallFamilies() throws SQLException {
+        List <String> familieList = new ArrayList<>();
+        Statement stmt = dbConnection.createStatement();
+        ResultSet rs = stmt.executeQuery(GETALLFAMILIES);
+        while (rs.next()) {
+            familieList.add(rs.getString("familie"));
+        }
+        return familieList;
+    }
+
+    public List<String> getallGeslacht(String familie) throws SQLException {
+        List <String> geslachtList = new ArrayList<>();
+        stmtSelectGeslachtByFamilie.setString(1, familie);
+        ResultSet rs = stmtSelectGeslachtByFamilie.executeQuery();
+        while (rs.next()) {
+            geslachtList.add(rs.getString("geslacht"));
+            System.out.println(geslachtList);
+        }
+        return geslachtList;
     }
 
     /**

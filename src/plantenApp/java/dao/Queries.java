@@ -347,6 +347,12 @@ public interface Queries {
 
     String INSERTVOEDINGSBEHOEFTE =
             "INSERT INTO voedingsbehoeft(waarde) VALUES(?)";
+
+    String GETALLFAMILIES =
+            "SELECT distinct(familie) from plant";
+
+    String GETGESLACHTBYFAMILIE =
+            "SELECT distinct(geslacht) from plant where familie = ?";
     
 }
 

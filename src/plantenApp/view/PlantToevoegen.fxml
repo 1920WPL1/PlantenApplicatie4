@@ -159,10 +159,10 @@
                                     </VBox>
                                     <VBox>
                                        <children>
-                                          <ComboBox fx:id="cboType" editable="true" prefHeight="30.0" prefWidth="120.0" />
-                                          <TextField fx:id="txtFamilie" prefHeight="30.0" prefWidth="120.0" />
-                                          <TextField fx:id="txtGeslacht" prefHeight="30.0" prefWidth="120.0" />
-                                          <TextField fx:id="txtSoort" prefHeight="30.0" prefWidth="120.0" />
+                                          <ComboBox fx:id="cboType" prefHeight="30.0" prefWidth="154.0" />
+                                          <ComboBox fx:id="cboFamilie" prefHeight="30.0" prefWidth="155.0" />
+                                          <ComboBox fx:id="cboGeslacht" prefHeight="30.0" prefWidth="155.0" />
+                                          <ComboBox fx:id="cboSoort" prefHeight="30.0" prefWidth="155.0" />
                                           <TextField fx:id="txtVariant" prefHeight="30.0" prefWidth="120.0" />
                                        </children>
                                     </VBox>
