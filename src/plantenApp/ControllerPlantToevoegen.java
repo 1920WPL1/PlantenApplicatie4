@@ -1,5 +1,6 @@
 package plantenApp;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -8,13 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import plantenApp.java.dao.Database;
-import plantenApp.java.dao.InfoTablesDAO;
-import plantenApp.java.model.*;
 import plantenApp.java.dao.*;
-import plantenApp.java.model.Fenotype;
-import plantenApp.java.model.InfoTables;
-import plantenApp.java.model.Plant;
+import plantenApp.java.model.*;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -307,6 +303,7 @@ public class ControllerPlantToevoegen {
         int iMinDichtheid = (int) spnMinPlantDicht.getValue();
         int iMaxDichtheid = (int) spnMaxPlantDicht.getValue();
         int iStatus = 0;
+
 //Insert van plant
         PlantDAO plantDao = new PlantDAO(dbConnection);
         Plant plant = new Plant
@@ -684,6 +681,8 @@ public class ControllerPlantToevoegen {
     }
 
     public void clicked_versturenVoorGoedkeuring(ActionEvent actionEvent) throws SQLException {
+        ObservableList waarde = lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedIndices();
+        System.out.println(waarde);
 
     }
     public void Clicked_LijstVanOpgeslagenPlanten(ActionEvent actionEvent) throws SQLException {
