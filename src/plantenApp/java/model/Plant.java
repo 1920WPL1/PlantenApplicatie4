@@ -43,13 +43,14 @@ public class Plant {
     private InfoTables infoTables;
 
     //Constructor met id
-    public Plant(int id, String planttype, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, int status) {
+    public Plant(int id, String planttype, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, String fgsv, int status) {
         this.id = id;
         this.planttype = planttype;
         this.familie = familie;
         this.geslacht = geslacht;
         this.soort = soort;
         this.variatie = variatie;
+        this.fgsv = fgsv;
         this.minPlantdichtheid = minPlantdichtheid;
         this.maxPlantdichtheid = maxPlantdichtheid;
         this.status = status;
@@ -63,11 +64,12 @@ public class Plant {
         this.variatie = plant.getVariatie();
         this.minPlantdichtheid = plant.getMinPlantdichtheid();
         this.maxPlantdichtheid = plant.getMaxPlantdichtheid();
+        this.fgsv=plant.getFgsv();
         this.status = plant.getStatus();
     }
 
     //Constructor voor Insert : id wordt gegenereerd door de database.
-    public Plant(String planttype, String familie, String geslacht, String soort, String variatie, Integer minPlantdichtheid, Integer maxPlantdichtheid, String fgsv, int status) {
+    public Plant(String planttype, String familie, String geslacht, String soort, String variatie,Integer minPlantdichtheid, Integer maxPlantdichtheid, String fgsv, int status) {
         this.planttype = planttype;
         this.familie = familie;
         this.geslacht = geslacht;

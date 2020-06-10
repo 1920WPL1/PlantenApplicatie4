@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**@author Siebe*/
+/**
+ * @author Siebe
+ */
 public class PlantDAO implements Queries {
 
     private Connection dbConnection;
@@ -26,7 +28,7 @@ public class PlantDAO implements Queries {
         stmtSelectByPlant = dbConnection.prepareStatement(GETIDSBYPLANT);
         stmtInsertByStandard = dbConnection.prepareStatement(INSERTSTANDAARD,
                 Statement.RETURN_GENERATED_KEYS);
-        stmtSelectAllByStatus0=dbConnection.prepareStatement(GETPLANTSBYSTATUS);
+        stmtSelectAllByStatus0 = dbConnection.prepareStatement(GETPLANTSBYSTATUS);
 
     }
 
@@ -50,11 +52,13 @@ public class PlantDAO implements Queries {
                     rs.getString("variatie"),
                     rs.getInt("plantdichtheid_min"),
                     rs.getInt("plantdichtheid_max"),
+                    rs.getString("fgsv"),
                     rs.getInt("status")
             );
         }
         return plant;
     }
+
     public void createPlant(Plant plant) throws SQLException {
 
         stmtInsertByStandard.setString(1, plant.getType());
@@ -65,13 +69,14 @@ public class PlantDAO implements Queries {
         stmtInsertByStandard.setInt(6, plant.getMinPlantdichtheid());
         stmtInsertByStandard.setInt(7, plant.getMaxPlantdichtheid());
         stmtInsertByStandard.setString(8, plant.getFgsv());
-        stmtInsertByStandard.setInt(9,plant.getStatus());
+        stmtInsertByStandard.setInt(9, plant.getStatus());
         stmtInsertByStandard.executeUpdate();
         ResultSet rs = stmtInsertByStandard.getGeneratedKeys();
         rs.next();
         Integer plant_id = rs.getInt(1);
         plant.setId(plant_id);
     }
+
     public ArrayList getPlantenByStatus(int status) throws SQLException {
         ArrayList<Plant> arrListPlanten = new ArrayList<>();
 
@@ -87,6 +92,7 @@ public class PlantDAO implements Queries {
                     rs.getString("variatie"),
                     rs.getInt("plantdichtheid_min"),
                     rs.getInt("plantdichtheid_max"),
+                    rs.getString("fgsv"),
                     rs.getInt("status")));
         }
         return arrListPlanten;
