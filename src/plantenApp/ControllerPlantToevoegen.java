@@ -687,7 +687,7 @@ public class ControllerPlantToevoegen {
 
     }
     public void Clicked_LijstVanOpgeslagenPlanten(ActionEvent actionEvent) throws SQLException {
-        lvLijstOpgeslagenPlanten.getItems().removeAll();
+        lvLijstOpgeslagenPlanten.getItems().clear();
         lvLijstOpgeslagenPlanten.refresh();
 
         PlantDAO plantdao = new PlantDAO(dbConnection);
