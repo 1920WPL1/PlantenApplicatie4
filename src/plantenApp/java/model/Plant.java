@@ -91,6 +91,10 @@ public class Plant {
 
     }
 
+    public Plant(int id){
+        this.id = id;
+    }
+
     //Plant_id wordt gegenereerd door de database.
     //gebeurt enkel als niet gebeurd is. Primary key!
     public void setId(int id) {

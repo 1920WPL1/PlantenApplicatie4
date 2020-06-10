@@ -917,7 +917,7 @@
                            </font>
                         </Button>
                         <!--suppress XmlDuplicatedId -->
-                        <Button fx:id="btn_Terug" layoutX="1150.0" layoutY="1039.0" mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" prefHeight="50.0" prefWidth="118.0" text="Terug">
+                        <Button fx:id="btn_Terug" layoutX="1150.0" layoutY="1084.0" mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" prefHeight="50.0" prefWidth="118.0" text="Terug">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -931,6 +931,11 @@
                         <Button layoutX="560.0" layoutY="1045.0" mnemonicParsing="false" onAction="#Clicked_LijstVanOpgeslagenPlanten" text="Lijst ">
                            <font>
                               <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="950.0" layoutY="1027.0" mnemonicParsing="false" onMouseClicked="#clicked_BeheersdadenGeselecteerdePlant" prefHeight="35.0" prefWidth="249.0" text="Beheersdaden geselecteerde plant">
+                           <font>
+                              <Font size="15.0" />
                            </font>
                         </Button>
                      </children>
