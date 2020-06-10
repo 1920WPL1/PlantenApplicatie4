@@ -692,6 +692,7 @@ public class ControllerPlantToevoegen {
             plantje.setStatus(1);
             PlantDAO plantdao = new PlantDAO(dbConnection);
             plantdao.updatePlantStatusByID(plantje);
+            plantdao.UpdatePlantDateByID(plantje);
 
             lijstmakerEnRefresher();
         } else {notificationBox("De plant is niet doorgestuurd");

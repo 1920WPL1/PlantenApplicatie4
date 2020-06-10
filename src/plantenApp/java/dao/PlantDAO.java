@@ -18,6 +18,7 @@ public class PlantDAO implements Queries {
     private PreparedStatement stmtInsertByStandard;
     private PreparedStatement stmtSelectAllByStatus0;
     private PreparedStatement stmtUpdateStatusByid;
+    private PreparedStatement stmtUpdateDate;
 
     public PlantDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
@@ -27,6 +28,7 @@ public class PlantDAO implements Queries {
                 Statement.RETURN_GENERATED_KEYS);
         stmtSelectAllByStatus0 = dbConnection.prepareStatement(GETPLANTSBYSTATUS);
         stmtUpdateStatusByid = dbConnection.prepareStatement(UPDATESTATUSBYID);
+        stmtUpdateDate = dbConnection.prepareStatement(UPDARTEDATE);
     }
 
     /**
@@ -104,5 +106,10 @@ public class PlantDAO implements Queries {
         stmtUpdateStatusByid.executeUpdate();
 
 
+    }
+    public void UpdatePlantDateByID(Plant plant) throws SQLException {
+        stmtUpdateDate.setDate(1, plant.getLaatsteupdatedatum());
+        stmtUpdateDate.setInt(2, plant.getId());
+        stmtUpdateDate.executeUpdate();
     }
 }

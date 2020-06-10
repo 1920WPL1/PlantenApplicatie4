@@ -355,5 +355,7 @@ public interface Queries {
 
     String UPDATESTATUSBYID =
            "UPDATE plant SET status = ? WHERE plant_id= ?";
+    String UPDARTEDATE =
+            "UPDATE plant Set laatste_update_datum = ? WHERE plant_id= ?";
 }
 
