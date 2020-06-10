@@ -1,6 +1,5 @@
 package plantenApp;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -17,6 +16,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ControllerPlantToevoegen {
     //Alle velden die ingevuld moeten worden bij Standaard
@@ -303,6 +303,8 @@ public class ControllerPlantToevoegen {
         int iMinDichtheid = (int) spnMinPlantDicht.getValue();
         int iMaxDichtheid = (int) spnMaxPlantDicht.getValue();
         int iStatus = 0;
+        java.sql.Date uDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        System.out.println(uDate);
 
 //Insert van plant
         PlantDAO plantDao = new PlantDAO(dbConnection);
@@ -315,7 +317,8 @@ public class ControllerPlantToevoegen {
                         iMinDichtheid,
                         iMaxDichtheid,
                         fgsv,
-                        iStatus);
+                        iStatus,
+                        uDate);
         plantDao.createPlant(plant);
 
 //Insert Abiotische factoren

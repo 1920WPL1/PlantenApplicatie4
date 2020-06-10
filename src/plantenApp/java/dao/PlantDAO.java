@@ -50,7 +50,8 @@ public class PlantDAO implements Queries {
                     rs.getInt("plantdichtheid_min"),
                     rs.getInt("plantdichtheid_max"),
                     rs.getString("fgsv"),
-                    rs.getInt("status")
+                    rs.getInt("status"),
+                    rs.getDate("laatste_update_datum")
             );
         }
         return plant;
@@ -67,6 +68,7 @@ public class PlantDAO implements Queries {
         stmtInsertByStandard.setInt(7, plant.getMaxPlantdichtheid());
         stmtInsertByStandard.setString(8, plant.getFgsv());
         stmtInsertByStandard.setInt(9, plant.getStatus());
+        stmtInsertByStandard.setDate(10,(Date)plant.getLaatsteupdatedatum());
         stmtInsertByStandard.executeUpdate();
         ResultSet rs = stmtInsertByStandard.getGeneratedKeys();
         rs.next();
@@ -90,7 +92,8 @@ public class PlantDAO implements Queries {
                     rs.getInt("plantdichtheid_min"),
                     rs.getInt("plantdichtheid_max"),
                     rs.getString("fgsv"),
-                    rs.getInt("status")));
+                    rs.getInt("status"),
+                    rs.getDate("laatste_update_datum")));
         }
         return arrListPlanten;
     }
