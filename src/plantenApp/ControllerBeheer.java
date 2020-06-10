@@ -44,10 +44,10 @@ public class ControllerBeheer {
     public Label lblPlant_id;
     //Connectie
     private Connection dbConnection;
-    Plant Vlant;
+    Plant objectPlant;
 
     public void initialize(Plant plant) throws SQLException {
-        Vlant=plant;
+        objectPlant=plant;
         dbConnection = Database.getInstance().getConnection();
         /* infotabel object aanmaken */
         InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
@@ -73,7 +73,12 @@ public class ControllerBeheer {
 
     //Button om een opmerking toe te voegen
     public void clicked_OpmerkingToevoegen(MouseEvent mouseEvent) {
+        String sBehandeling = cboBehandeling.getValue().toString();
+        String sOpmerking = txtOpmerking.getText();
+        String sJan = chbJanuari.getText();
+
         lvLijstBehandeling.getItems().add(cboBehandeling.getValue().toString());
+
     }
 
     //Button om een opmerking te verwijderen
@@ -152,7 +157,7 @@ public class ControllerBeheer {
             BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
 
             Beheerdaad_Eigenschap beheerEig = new Beheerdaad_Eigenschap(
-                    Vlant.getId(),
+                    objectPlant.getId(),
                     sBehandeling,
                     sOpmerking,
                     sMaand,

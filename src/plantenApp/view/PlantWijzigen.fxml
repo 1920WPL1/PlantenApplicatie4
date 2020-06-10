@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
@@ -17,410 +17,187 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerPlantWijzigen">
-   <children>
-      <HBox>
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1798.0" minHeight="1798.0" prefHeight="1798.0" prefWidth="1325.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerPlantToevoegen">
+   <content>
+      <AnchorPane maxHeight="1797.0" maxWidth="1303.0" minHeight="1796.8" minWidth="1278.4" prefHeight="1797.0" prefWidth="1303.0">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <TitledPane text="Standaard">
-                    <content>
-                      <AnchorPane>
+            <TitledPane layoutX="567.0" layoutY="220.0" prefHeight="382.0" prefWidth="706.0" text="Commensalisme">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <VBox layoutX="14.0" layoutY="14.0" prefHeight="231.0" prefWidth="257.0">
                            <children>
-                              <HBox layoutX="14.0" layoutY="14.0">
+                              <Label prefHeight="30.0" prefWidth="240.0" text="Ontwikkelingssnelheid:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <HBox />
+                              <ComboBox fx:id="cboOntwikkelingssnelheid" prefHeight="30.0" prefWidth="240.0" value="unknown" />
+                              <Label fx:id="lblSociabiliteit" prefHeight="30.0" prefWidth="120.0" text="Sociabiliteit">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <HBox>
                                  <children>
-                                    <HBox>
-                                       <children>
-                                          <VBox alignment="CENTER_LEFT">
-                                             <children>
-                                                <Label prefHeight="30.0" prefWidth="120.0" text="Type:">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="30.0" prefWidth="120.0" text="Familie:">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="30.0" prefWidth="120.0" text="Geslacht:">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="30.0" prefWidth="120.0" text="Soort:">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="30.0" prefWidth="120.0" text="Variant:">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </VBox>
-                                          <VBox>
-                                             <children>
-                                                <ComboBox fx:id="cboType" prefHeight="30.0" prefWidth="120.0" />
-                                                <TextField fx:id="txtFamilie" prefHeight="30.0" prefWidth="120.0" />
-                                                <TextField fx:id="txtGeslacht" prefHeight="30.0" prefWidth="120.0" />
-                                                <TextField fx:id="txtSoort" prefHeight="30.0" prefWidth="120.0" />
-                                                <TextField fx:id="txtVariant" prefHeight="30.0" prefWidth="120.0" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                    <VBox>
-                                       <children>
-                                          <Label prefHeight="30.0" prefWidth="240.0" text="  Optimale plantdichtheid:">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <HBox>
-                                             <children>
-                                                <Label alignment="CENTER" prefHeight="30.0" prefWidth="33.0" text="Min" />
-                                                <TextField fx:id="txtMinPlantdichtheid" prefHeight="30.0" prefWidth="100.0" />
-                                                <Label alignment="CENTER" prefHeight="30.0" prefWidth="28.0" text="Max" />
-                                                <TextField fx:id="txtMaxPlantdichtheid" prefHeight="30.0" prefWidth="100.0" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
+                                    <RadioButton fx:id="rdbSociabiliteit1" mnemonicParsing="false" prefHeight="18.0" prefWidth="32.0" text="I">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="Sociabiliteit" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="rdbSociabiliteit2" mnemonicParsing="false" prefHeight="18.0" prefWidth="32.0" text="II" toggleGroup="$Sociabiliteit" />
+                                    <RadioButton fx:id="rdbSociabiliteit3" mnemonicParsing="false" prefHeight="18.0" prefWidth="38.0" text="III" toggleGroup="$Sociabiliteit" />
+                                    <RadioButton fx:id="rdbSociabiliteit4" mnemonicParsing="false" prefHeight="18.0" prefWidth="39.0" text="IV" toggleGroup="$Sociabiliteit" />
+                                    <RadioButton fx:id="rdbSociabiliteit5" mnemonicParsing="false" prefHeight="18.0" prefWidth="36.0" text="V" toggleGroup="$Sociabiliteit" />
+                                    <RadioButton fx:id="rdbSociabiliteitUnknow" mnemonicParsing="false" selected="true" text="Unknown" toggleGroup="$Sociabiliteit" />
                                  </children>
                               </HBox>
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </TitledPane>
-                  <TitledPane prefHeight="14.0" prefWidth="1096.0" text="AbiotischeFactoren">
-                    <content>
-                      <AnchorPane>
-                           <children>
-                              <VBox layoutX="14.0" layoutY="14.0">
+                              <Label prefHeight="30.0" prefWidth="120.0" text="Strategie:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <VBox>
                                  <children>
                                     <HBox>
                                        <children>
-                                          <VBox alignment="CENTER_LEFT">
-                                             <children>
-                                                <Label prefHeight="30.0" prefWidth="120.0" text="Bezonning:">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="30.0" prefWidth="120.0" text="Voedingsbehoefte:">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="30.0" prefWidth="120.0" text="Vochtbehoefte:">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </VBox>
-                                          <VBox>
-                                             <children>
-                                                <HBox>
-                                                   <children>
-                                                      <ComboBox fx:id="cboBezonning" prefHeight="26.0" prefWidth="122.0" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox>
-                                                   <children>
-                                                      <ComboBox fx:id="cboVoedingsbehoefte" prefHeight="26.0" prefWidth="122.0" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox>
-                                                   <children>
-                                                      <ComboBox fx:id="cboVochtbehoefte" prefHeight="26.0" prefWidth="122.0" />
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
-                                          <VBox>
-                                             <children>
-                                                <Label prefHeight="30.0" prefWidth="240.0" text="Reactie antagonitische omgeving:">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <ComboBox fx:id="cboReactieAntag" prefHeight="30.0" prefWidth="240.0" />
-                                                <HBox>
-                                                   <children>
-                                                      <Label prefHeight="30.0" prefWidth="120.0" text="Grondsoort:">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <ComboBox fx:id="cboGrondsoort" prefHeight="30.0" prefWidth="120.0" />
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                    <VBox>
-                                       <children>
-                                          <Label prefHeight="30.0" prefWidth="240.0" text="Habitat:">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <HBox>
-                                             <children>
-                                                <ComboBox fx:id="cboHabitat" prefHeight="30.0" prefWidth="450.0" />
-                                                <Button mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenHabitat" prefHeight="30.0" prefWidth="30.0" text="+" />
-                                                <Button mnemonicParsing="false" onMouseClicked="#clicked_VerwijderenHabitat" prefHeight="30.0" prefWidth="30.0" text="-" />
-                                             </children>
-                                          </HBox>
-                                          <ListView fx:id="lsHabitat" prefHeight="155.0" prefWidth="480.0" />
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </TitledPane>
-                  <TitledPane text="Commensalisme">
-                    <content>
-                      <AnchorPane>
-                           <children>
-                              <VBox layoutX="14.0" layoutY="14.0">
-                                 <children>
-                                    <Label prefHeight="30.0" prefWidth="240.0" text="Ontwikkelingssnelheid:">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <HBox />
-                                    <ComboBox fx:id="cboOntwikkelingssnelheid" prefHeight="30.0" prefWidth="240.0" />
-                                    <Label prefHeight="30.0" prefWidth="120.0" text="Sociabiliteit:">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <HBox>
-                                       <children>
-                                          <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="33.0" text="I">
+                                          <RadioButton fx:id="rdbStrategieUnknown" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" selected="true" text="Unknow">
                                              <toggleGroup>
-                                                <ToggleGroup fx:id="ToggleSociabiliteit" />
+                                                <ToggleGroup fx:id="StrategieToggle" />
                                              </toggleGroup>
                                           </RadioButton>
-                                          <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="37.0" text="II" toggleGroup="$ToggleSociabiliteit" />
-                                          <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="44.0" text="III" toggleGroup="$ToggleSociabiliteit" />
-                                          <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="47.0" text="IV" toggleGroup="$ToggleSociabiliteit" />
-                                          <RadioButton mnemonicParsing="false" text="V" toggleGroup="$ToggleSociabiliteit" />
+                                          <Label prefHeight="30.0" prefWidth="30.0" />
+                                          <RadioButton fx:id="rdbStrategieC" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="C" toggleGroup="$StrategieToggle" />
+                                          <Label prefHeight="30.0" prefWidth="30.0" />
+                                          <Label prefHeight="30.0" prefWidth="30.0" />
                                        </children>
                                     </HBox>
-                                    <Label prefHeight="30.0" prefWidth="120.0" text="Strategie:">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
+                                    <HBox>
+                                       <children>
+                                          <Label prefHeight="30.0" prefWidth="30.0" />
+                                          <Label prefHeight="30.0" prefWidth="41.0" />
+                                          <Label prefHeight="30.0" prefWidth="5.0" />
+                                          <RadioButton fx:id="rdbStrategieCS" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" text="C-S" toggleGroup="$StrategieToggle" />
+                                          <RadioButton fx:id="rdbStrategieCSR" mnemonicParsing="false" prefHeight="30.0" prefWidth="55.0" text="C-R-S" toggleGroup="$StrategieToggle" />
+                                          <RadioButton fx:id="rdbStrategieCR" mnemonicParsing="false" prefHeight="30.0" prefWidth="55.0" text="C-R" toggleGroup="$StrategieToggle" />
+                                          <Label prefHeight="30.0" prefWidth="30.0" />
+                                       </children>
+                                    </HBox>
+                                    <HBox>
+                                       <children>
+                                          <Label prefHeight="30.0" prefWidth="30.0" />
+                                          <Label prefHeight="30.0" prefWidth="16.0" />
+                                          <RadioButton fx:id="rdbStrategieS" mnemonicParsing="false" prefHeight="30.0" prefWidth="42.0" text="S" toggleGroup="$StrategieToggle" />
+                                          <Label prefHeight="30.0" prefWidth="30.0" />
+                                          <RadioButton fx:id="rdbStrategieSR" mnemonicParsing="false" prefHeight="30.0" prefWidth="54.0" text="S-R" toggleGroup="$StrategieToggle" />
+                                          <Label prefHeight="30.0" prefWidth="18.0" />
+                                          <RadioButton fx:id="rdbStrategieR" mnemonicParsing="false" prefHeight="30.0" prefWidth="42.0" text="R" toggleGroup="$StrategieToggle" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="272.0" layoutY="17.0">
+                           <children>
+                              <Label fx:id="lblLevensduur" prefHeight="30.0" prefWidth="211.0" text="Levensduur">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="30.0" prefWidth="193.0">
+                                 <children>
+                                    <ComboBox fx:id="cboLevensduur" prefHeight="30.0" prefWidth="187.0" promptText="maak u keuze" />
+                                    <Button mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenLevensduur" prefHeight="30.0" prefWidth="30.0" text="+" />
+                                    <Button mnemonicParsing="false" onMouseClicked="#clicked_DeleteLevensduur" prefHeight="30.0" prefWidth="31.0" text="-" />
+                                 </children>
+                              </HBox>
+                              <ListView fx:id="lvLevensduur" prefHeight="180.0" prefWidth="241.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </TitledPane>
+            <TitledPane layoutX="7.0" layoutY="6.0" prefHeight="214.0" prefWidth="561.0" text="Standaard">
+               <content>
+                  <AnchorPane prefHeight="187.0" prefWidth="620.0">
+                     <children>
+                        <HBox layoutX="14.0" layoutY="14.0">
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <VBox alignment="CENTER_LEFT">
+                                       <children>
+                                          <Label prefHeight="30.0" prefWidth="120.0" text="Type:">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="30.0" prefWidth="120.0" text="Familie:">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="30.0" prefWidth="120.0" text="Geslacht:">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="30.0" prefWidth="120.0" text="Soort:">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="30.0" prefWidth="120.0" text="Variant:">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
                                     <VBox>
                                        <children>
-                                          <HBox>
-                                             <children>
-                                                <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" text="Unknown">
-                                                   <toggleGroup>
-                                                      <ToggleGroup fx:id="ToggleStrategie" />
-                                                   </toggleGroup></RadioButton>
-                                                <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="C" toggleGroup="$ToggleStrategie" />
-                                                <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <Label prefHeight="30.0" prefWidth="30.0" />
-                                             </children>
-                                          </HBox>
-                                          <HBox>
-                                             <children>
-                                                <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$ToggleStrategie" />
-                                                <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$ToggleStrategie" />
-                                                <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$ToggleStrategie" />
-                                                <Label prefHeight="30.0" prefWidth="30.0" />
-                                             </children>
-                                          </HBox>
-                                          <HBox>
-                                             <children>
-                                                <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="R" toggleGroup="$ToggleStrategie" />
-                                                <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$ToggleStrategie" />
-                                                <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="S" toggleGroup="$ToggleStrategie" />
-                                             </children>
-                                          </HBox>
+                                          <ComboBox fx:id="cboType" prefHeight="30.0" prefWidth="120.0" />
+                                          <TextField fx:id="txtFamilie" prefHeight="30.0" prefWidth="120.0" />
+                                          <TextField fx:id="txtGeslacht" prefHeight="30.0" prefWidth="120.0" />
+                                          <TextField fx:id="txtSoort" prefHeight="30.0" prefWidth="120.0" />
+                                          <TextField fx:id="txtVariant" prefHeight="30.0" prefWidth="120.0" />
                                        </children>
                                     </VBox>
                                  </children>
-                              </VBox>
-                              <VBox layoutX="260.0" layoutY="14.0">
+                              </HBox>
+                              <VBox>
                                  <children>
-                                    <Label prefHeight="30.0" prefWidth="240.0" text="Levensduur/oncurrentiekracht">
+                                    <Label prefHeight="30.0" prefWidth="240.0" text="  Optimale plantdichtheid:">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
                                     <HBox>
                                        <children>
-                                          <ComboBox fx:id="cboLevensduur" prefHeight="30.0" prefWidth="210.0" />
-                                          <Button mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenLevensduur" prefHeight="30.0" prefWidth="30.0" text="+" />
-                                          <Button mnemonicParsing="false" onMouseClicked="#clicked_VerwijderenLevensduur" prefHeight="30.0" prefWidth="30.0" text="-" />
+                                          <Label alignment="CENTER" prefHeight="30.0" prefWidth="34.0" text="MIN" />
+                                          <Spinner fx:id="spnMinPlantDicht" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Label alignment="CENTER" prefHeight="30.0" prefWidth="38.0" text="MAX" />
+                                          <Spinner fx:id="spnMaxPlantDicht" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
                                        </children>
                                     </HBox>
-                                    <ListView fx:id="lsLevensduur" prefHeight="176.0" prefWidth="240.0" />
                                  </children>
                               </VBox>
                            </children>
-                        </AnchorPane>
-                    </content>
-                  </TitledPane>
-                  <TitledPane text="Extra">
-                    <content>
-                      <AnchorPane>
-                           <children>
-                              <HBox layoutX="14.0" layoutY="14.0">
-                                 <children>
-                                    <HBox>
-                                       <children>
-                                          <VBox alignment="CENTER_LEFT">
-                                             <children>
-                                                <Label prefHeight="30.0" prefWidth="120.0" text="Nectarwaarde:">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="30.0" prefWidth="120.0" text="Pollenwaarde:">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="30.0" prefWidth="120.0" text="Bijvriendelijk:">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="30.0" prefWidth="120.0" text="Vlindervriendelijk:">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </VBox>
-                                          <VBox>
-                                             <children>
-                                                <HBox>
-                                                   <children>
-                                                      <Slider prefHeight="30.0" prefWidth="90.0" />
-                                                      <Label alignment="CENTER" prefHeight="30.0" prefWidth="30.0" text="0" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox>
-                                                   <children>
-                                                      <Slider prefHeight="30.0" prefWidth="90.0" />
-                                                      <Label alignment="CENTER" prefHeight="30.0" prefWidth="30.0" text="0" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox>
-                                                   <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" />
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" />
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox>
-                                                   <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" />
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" />
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" />
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                    <HBox>
-                                       <children>
-                                          <VBox>
-                                             <children>
-                                                <Label prefHeight="30.0" prefWidth="120.0" text="Eetbaar:">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="30.0" prefWidth="120.0" text="Kruidgebruik:">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="30.0" prefWidth="120.0" text="Geurend:">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="30.0" prefWidth="120.0" text="Vorstgevoelig:">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </VBox>
-                                          <VBox>
-                                             <children>
-                                                <HBox>
-                                                   <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" />
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" />
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox>
-                                                   <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" />
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" />
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox>
-                                                   <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" />
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" />
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox>
-                                                   <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" />
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" />
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" />
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </TitledPane>
-               </children>
-            </VBox>
-            <TitledPane text="Fenotype">
-              <content>
-                <AnchorPane>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </TitledPane>
+            <TitledPane layoutX="8.0" layoutY="601.0" text="Fenotype">
+               <content>
+                  <AnchorPane prefHeight="1178.0" prefWidth="1584.0">
                      <children>
                         <VBox layoutX="14.0" layoutY="14.0">
                            <children>
-                              <HBox>
+                              <HBox prefHeight="339.0" prefWidth="1208.0">
                                  <children>
                                     <HBox>
                                        <children>
@@ -450,16 +227,16 @@
                                           </VBox>
                                           <VBox>
                                              <children>
-                                                <ComboBox fx:id="cboBladgrootte" prefHeight="30.0" prefWidth="120.0" />
-                                                <ComboBox fx:id="cboBladvorm" prefHeight="30.0" prefWidth="120.0" />
-                                                <ComboBox fx:id="cboRatio" prefHeight="30.0" prefWidth="120.0" />
-                                                <ComboBox fx:id="cboSpruitfenologie" prefHeight="30.0" prefWidth="120.0" />
+                                                <ComboBox fx:id="cboBladgrootte" prefHeight="30.0" prefWidth="120.0" value="0" />
+                                                <ComboBox fx:id="cboBladvorm" prefHeight="30.0" prefWidth="120.0" value="0" />
+                                                <ComboBox fx:id="cboRatio" prefHeight="30.0" prefWidth="120.0" value="0" />
+                                                <ComboBox fx:id="cboSpruitfenologie" prefHeight="30.0" prefWidth="120.0" value="0" />
                                              </children>
                                           </VBox>
                                           <Label text="       " />
-                                          <TitledPane text="Levensvorm volgens Raunkhiaer">
+                                          <TitledPane prefHeight="339.0" prefWidth="962.0" text="Levensvorm volgens Raunkhiaer">
                                              <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0">
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="313.0" prefWidth="923.0">
                                                    <children>
                                                       <HBox layoutX="14.0" layoutY="14.0">
                                                          <children>
@@ -468,52 +245,57 @@
                                                                   <Image url="@../view/img/LevensvormenvolgensRaunkiaer.gif" />
                                                                </image>
                                                             </ImageView>
-                                                            <VBox>
+                                                            <VBox prefHeight="277.0" prefWidth="133.0">
                                                                <children>
-                                                                  <RadioButton mnemonicParsing="false" prefHeight="25.0" text="1. Hydrofyt">
+                                                                  <RadioButton fx:id="rdbHydrofyt1" mnemonicParsing="false" prefHeight="25.0" text="1. Hydrofyt">
                                                                      <font>
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                      <toggleGroup>
-                                                                        <ToggleGroup fx:id="ToggleLevensvorm" />
+                                                                        <ToggleGroup fx:id="levensvormToggle" />
                                                                      </toggleGroup>
                                                                   </RadioButton>
-                                                                  <RadioButton mnemonicParsing="false" prefHeight="25.0" text="2. Hydrofyt" toggleGroup="$ToggleLevensvorm">
+                                                                  <RadioButton fx:id="rdbHydrofyt2" mnemonicParsing="false" prefHeight="25.0" text="2. Hydrofyt" toggleGroup="$levensvormToggle">
                                                                      <font>
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                   </RadioButton>
-                                                                  <RadioButton mnemonicParsing="false" prefHeight="25.0" text="3. Helofyt" toggleGroup="$ToggleLevensvorm">
+                                                                  <RadioButton fx:id="rdbHelofyt3" mnemonicParsing="false" prefHeight="25.0" text="3. Helofyt" toggleGroup="$levensvormToggle">
                                                                      <font>
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                   </RadioButton>
-                                                                  <RadioButton mnemonicParsing="false" prefHeight="25.0" text="4. Cryptophyt " toggleGroup="$ToggleLevensvorm">
+                                                                  <RadioButton fx:id="rdbCryptophyt4" mnemonicParsing="false" prefHeight="25.0" text="4. Cryptophyt " toggleGroup="$levensvormToggle">
                                                                      <font>
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                   </RadioButton>
-                                                                  <RadioButton mnemonicParsing="false" prefHeight="25.0" text="5. Cryptophyt " toggleGroup="$ToggleLevensvorm">
+                                                                  <RadioButton fx:id="rdbCryptophyt5" mnemonicParsing="false" prefHeight="25.0" text="5. Cryptophyt " toggleGroup="$levensvormToggle">
                                                                      <font>
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                   </RadioButton>
-                                                                  <RadioButton mnemonicParsing="false" prefHeight="25.0" text="6. Hemikryptofyt " toggleGroup="$ToggleLevensvorm">
+                                                                  <RadioButton fx:id="rdbHemikryptofyt6" mnemonicParsing="false" prefHeight="25.0" text="6. Hemikryptofyt " toggleGroup="$levensvormToggle">
                                                                      <font>
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                   </RadioButton>
-                                                                  <RadioButton mnemonicParsing="false" prefHeight="25.0" text="7. Chamaefyt" toggleGroup="$ToggleLevensvorm">
+                                                                  <RadioButton fx:id="rdbChamaefyt7" mnemonicParsing="false" prefHeight="25.0" text="7. Chamaefyt" toggleGroup="$levensvormToggle">
                                                                      <font>
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                   </RadioButton>
-                                                                  <RadioButton mnemonicParsing="false" prefHeight="25.0" text="8. Chamaefyt" toggleGroup="$ToggleLevensvorm">
+                                                                  <RadioButton fx:id="rdbChamaefyt8" mnemonicParsing="false" prefHeight="25.0" text="8. Chamaefyt" toggleGroup="$levensvormToggle">
                                                                      <font>
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                   </RadioButton>
-                                                                  <RadioButton mnemonicParsing="false" prefHeight="25.0" text="9. Fanerophyt" toggleGroup="$ToggleLevensvorm">
+                                                                  <RadioButton fx:id="rdbFanerophyt9" mnemonicParsing="false" prefHeight="25.0" text="9. Fanerophyt" toggleGroup="$levensvormToggle">
+                                                                     <font>
+                                                                        <Font size="14.0" />
+                                                                     </font>
+                                                                  </RadioButton>
+                                                                  <RadioButton fx:id="rdbFanerophyt0" mnemonicParsing="false" prefHeight="25.0" selected="true" text="0. Niet gekend" toggleGroup="$levensvormToggle">
                                                                      <font>
                                                                         <Font size="14.0" />
                                                                      </font>
@@ -531,8 +313,8 @@
                                  </children>
                               </HBox>
                               <TitledPane text="Monthly">
-                                <content>
-                                  <AnchorPane>
+                                 <content>
+                                    <AnchorPane>
                                        <children>
                                           <VBox layoutX="14.0" layoutY="14.0">
                                              <children>
@@ -612,18 +394,18 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnBladhoogteJan" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnBladhoogteFeb" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnBladhoogteMaa" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnBladhoogteApr" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnBladhoogteMei" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnBladhoogteJun" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnBladhoogteJul" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnBladhoogteAug" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnBladhoogteSept" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnBladhoogteOkt" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnBladhoogteNov" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnBladhoogteDec" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
@@ -633,18 +415,18 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
+                                                      <ComboBox fx:id="cboBladkleurJan" onAction="#clickedbladkleurjan" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurFeb" onAction="#clickedcboBladkleurFeb" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurMaa" onAction="#clickedcboBladkleurMaa" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurApr" onAction="#clickedcboBladkleurApr" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurMei" onAction="#ClickedcboBladkleurMei" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurJun" onAction="#ClickedcboBladkleurJun" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurJul" onAction="#ClickedcboBladkleurJul" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurAug" onAction="#ClickedcboBladkleurAug" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurSept" onAction="#ClickedcboBladkleurSept" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurOkt" onAction="#ClickedcboBladkleurOkt" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurNov" onAction="#ClickedcboBladkleurNov" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurDec" onAction="#ClickedcboBladkleurDec" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
@@ -654,18 +436,18 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMinBloeihoogteJan" disable="true" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMinBloeihoogteFeb" disable="true" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMinBloeihoogteMaa" disable="true" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMinBloeihoogteApr" disable="true" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMinBloeihoogteMei" disable="true" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMinBloeihoogteJun" disable="true" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMinBloeihoogteJul" disable="true" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMinBloeihoogteAug" disable="true" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMinBloeihoogteSept" disable="true" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMinBloeihoogteOkt" disable="true" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMinBloeihoogteNov" disable="true" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMinBloeihoogteDec" disable="true" prefHeight="30.0" prefWidth="80.0" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
@@ -675,18 +457,18 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMaxBloeihoogteJan" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMaxBloeihoogteFeb" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMaxBloeihoogteMaa" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMaxBloeihoogteApr" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMaxBloeihoogteMei" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMaxBloeihoogteJun" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMaxBloeihoogteJul" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMaxBloeihoogteAug" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMaxBloeihoogteSept" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMaxBloeihoogteOkt" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMaxBloeihoogteNov" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnMaxBloeihoogteDec" initialValue="0" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
@@ -696,35 +478,40 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox prefHeight="30.0" prefWidth="80.0" />
+                                                      <ComboBox fx:id="cboBloeikleurJan" onAction="#actioncboBloeikleurJan" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurFeb" onAction="#actioncboBloeikleurFeb" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurMaa" onAction="#actioncboBloeikleurMaa" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurApr" onAction="#actioncboBloeikleurApr" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurMei" onAction="#actioncboBloeikleurMei" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurJun" onAction="#actioncboBloeikleurJun" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurJul" onAction="#actioncboBloeikleurJul" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurAug" onAction="#actioncboBloeikleurAug" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurSept" onAction="#actioncboBloeikleurSept" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurOkt" onAction="#actioncboBloeikleurOkt" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurNov" onAction="#actioncboBloeikleurNov" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurDec" onAction="#actioncboBloeikleurDec" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+
                                                    </children>
                                                 </HBox>
                                              </children>
                                           </VBox>
                                        </children>
                                     </AnchorPane>
-                                </content>
+                                 </content>
                               </TitledPane>
-                              <TitledPane text="Habitus">
-                                <content>
-                                  <AnchorPane>
+                              <TitledPane prefHeight="171.0" prefWidth="1290.0" text="Habitus">
+                                 <content>
+                                    <AnchorPane>
                                        <children>
                                           <HBox layoutX="14.0" layoutY="14.0">
                                              <children>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                                      <RadioButton fx:id="rdbTufted" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" selected="true" text="Tufted">
+                                                         <toggleGroup>
+                                                            <ToggleGroup fx:id="habitusToggle" />
+                                                         </toggleGroup>
+                                                      </RadioButton>
                                                       <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/Habitus_01.png" />
@@ -734,7 +521,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                                      <RadioButton fx:id="rdbUprightArching" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Upright Arching" toggleGroup="$habitusToggle" />
                                                       <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/Habitus_02.png" />
@@ -744,7 +531,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                                      <RadioButton fx:id="rdbArching" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Arching" toggleGroup="$habitusToggle" />
                                                       <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/Habitus_03.png" />
@@ -754,7 +541,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                                      <RadioButton fx:id="rdbUprightDivergent" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Upright Divergent" toggleGroup="$habitusToggle" />
                                                       <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/Habitus_04.png" />
@@ -764,7 +551,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                                      <RadioButton fx:id="rdbUprightErect" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Upright Erect" toggleGroup="$habitusToggle" />
                                                       <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/Habitus_05.png" />
@@ -774,7 +561,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                                      <RadioButton fx:id="rdbMounded" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Mounded" toggleGroup="$habitusToggle" />
                                                       <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/Habitus_06.png" />
@@ -784,7 +571,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                                      <RadioButton fx:id="rdbMattenvormend" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Mattenvormend" toggleGroup="$habitusToggle" />
                                                       <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/Habitus_07.png" />
@@ -794,7 +581,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                                      <RadioButton fx:id="rdbWaaivormig" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Waaivormig" toggleGroup="$habitusToggle" />
                                                       <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/Habitus_08.png" />
@@ -804,7 +591,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                                      <RadioButton fx:id="rdbKussenvormend" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Kussenvomend" toggleGroup="$habitusToggle" />
                                                       <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/Habitus_09.png" />
@@ -814,7 +601,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                                      <RadioButton fx:id="rdbZuilvomrig" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Zuilvormig" toggleGroup="$habitusToggle" />
                                                       <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/Habitus_10.png" />
@@ -824,7 +611,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                                      <RadioButton fx:id="rdbUitbuigend" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Uitbuigend" toggleGroup="$habitusToggle" />
                                                       <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/Habitus_11.png" />
@@ -834,7 +621,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" toggleGroup="$habitusToggle" />
                                                       <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/Habitus_12.png" />
@@ -844,7 +631,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" toggleGroup="$habitusToggle" />
                                                       <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/Habitus_13.png" />
@@ -854,7 +641,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" toggleGroup="$habitusToggle" />
                                                       <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/Habitus_14.png" />
@@ -862,10 +649,10 @@
                                                       </ImageView>
                                                    </children>
                                                 </VBox>
-                                                <VBox>
+                                                <VBox prefHeight="74.0" prefWidth="51.0">
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
-                                                      <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="78.0" text="Habitus" toggleGroup="$habitusToggle" />
+                                                      <ImageView fitHeight="81.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/Habitus_15.png" />
                                                          </image>
@@ -874,19 +661,24 @@
                                                 </VBox>
                                              </children>
                                           </HBox>
+                                          <RadioButton layoutX="1212.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="74.0" selected="true" text="Unknown" toggleGroup="$habitusToggle" />
                                        </children>
                                     </AnchorPane>
-                                </content>
+                                 </content>
                               </TitledPane>
                               <TitledPane text="Bloeiwijze">
                                  <content>
-                                    <AnchorPane>
+                                    <AnchorPane prefWidth="887.0">
                                        <children>
                                           <HBox layoutX="14.0" layoutY="14.0">
                                              <children>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Aar" />
+                                                      <RadioButton fx:id="rdbAar" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" selected="true" text="Aar">
+                                                         <toggleGroup>
+                                                            <ToggleGroup fx:id="bloeiwijzeToggle" />
+                                                         </toggleGroup>
+                                                      </RadioButton>
                                                       <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/aar.jpg" />
@@ -896,7 +688,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Brede pluim" />
+                                                      <RadioButton fx:id="rdbBredePluim" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Brede pluim" toggleGroup="$bloeiwijzeToggle" />
                                                       <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/bredepluim.jpg" />
@@ -906,7 +698,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Etage" />
+                                                      <RadioButton fx:id="rdbEtage" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Etage" toggleGroup="$bloeiwijzeToggle" />
                                                       <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/etage.jpg" />
@@ -916,7 +708,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Bol of knop" />
+                                                      <RadioButton fx:id="rdbBolOfKnop" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Bol of knop" toggleGroup="$bloeiwijzeToggle" />
                                                       <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/knop.jpg" />
@@ -926,7 +718,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Margrietachtig" />
+                                                      <RadioButton fx:id="rdbMargrietachtig" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Margrietachtig" toggleGroup="$bloeiwijzeToggle" />
                                                       <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/margrietachtig.jpg" />
@@ -936,7 +728,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Schotel" />
+                                                      <RadioButton fx:id="rdbSchotel" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Schotel" toggleGroup="$bloeiwijzeToggle" />
                                                       <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/platscherm-schotel.jpg" />
@@ -946,7 +738,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Scherm" />
+                                                      <RadioButton fx:id="rdbScherm" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Scherm" toggleGroup="$bloeiwijzeToggle" />
                                                       <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/scherm.jpg" />
@@ -956,7 +748,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Smalle pluim" />
+                                                      <RadioButton fx:id="rdbSmallePluim" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Smalle pluim" toggleGroup="$bloeiwijzeToggle" />
                                                       <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../view/img/smallepluim.jpg" />
@@ -966,27 +758,285 @@
                                                 </VBox>
                                              </children>
                                           </HBox>
+                                          <RadioButton fx:id="rdbSmallePluim1" layoutX="814.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" selected="true" text="Unknown" toggleGroup="$bloeiwijzeToggle" />
                                        </children>
                                     </AnchorPane>
                                  </content>
                               </TitledPane>
                            </children>
                         </VBox>
+                        <TitledPane layoutX="14.0" layoutY="959.0" text="Extra">
+                           <content>
+                              <AnchorPane>
+                                 <children>
+                                    <HBox layoutX="14.0" layoutY="14.0">
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <VBox alignment="CENTER_LEFT">
+                                                   <children>
+                                                      <Label prefHeight="30.0" prefWidth="120.0" text="Nectarwaarde:">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label prefHeight="30.0" prefWidth="120.0" text="Pollenwaarde:">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label prefHeight="30.0" prefWidth="120.0" text="Bijvriendelijk:">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label prefHeight="30.0" prefWidth="120.0" text="Vlindervriendelijk:">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <VBox>
+                                                   <children>
+                                                      <HBox>
+                                                         <children>
+                                                            <Spinner fx:id="spnNectarwaarde" initialValue="0" max="5" min="0" prefHeight="26.0" prefWidth="105.0" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox>
+                                                         <children>
+                                                            <Spinner fx:id="spnPollenwaarde" initialValue="0" max="5" min="0" prefHeight="26.0" prefWidth="105.0" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox>
+                                                         <children>
+                                                            <RadioButton fx:id="rdbBijvriendelijkLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" selected="true" text=" ">
+                                                               <toggleGroup>
+                                                                  <ToggleGroup fx:id="BijvriendelijkToggle" />
+                                                               </toggleGroup></RadioButton>
+                                                            <RadioButton fx:id="rdbBijvriendelijkJa" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" toggleGroup="$BijvriendelijkToggle" />
+                                                            <RadioButton fx:id="rdbBijvriendelijkNeen" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" toggleGroup="$BijvriendelijkToggle" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox>
+                                                         <children>
+                                                            <RadioButton fx:id="rdbVlindervriendelijkLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" selected="true" text=" ">
+                                                               <toggleGroup>
+                                                                  <ToggleGroup fx:id="VlindervriendelijkToggle" />
+                                                               </toggleGroup></RadioButton>
+                                                            <RadioButton fx:id="rdbVlindervriendelijkJa" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" toggleGroup="$VlindervriendelijkToggle" />
+                                                            <RadioButton fx:id="rdbVlindervriendelijkNeen" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" toggleGroup="$VlindervriendelijkToggle" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox>
+                                             <children>
+                                                <VBox>
+                                                   <children>
+                                                      <Label prefHeight="30.0" prefWidth="120.0" text="Eetbaar:">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label prefHeight="30.0" prefWidth="120.0" text="Kruidgebruik:">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label prefHeight="30.0" prefWidth="120.0" text="Geurend:">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label prefHeight="30.0" prefWidth="120.0" text="Vorstgevoelig:">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <VBox>
+                                                   <children>
+                                                      <HBox>
+                                                         <children>
+                                                            <RadioButton fx:id="rdbEetbaarLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" selected="true" text=" ">
+                                                               <toggleGroup>
+                                                                  <ToggleGroup fx:id="EetbaarToggle" />
+                                                               </toggleGroup></RadioButton>
+                                                            <RadioButton fx:id="rdbEetbaarJa" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" toggleGroup="$EetbaarToggle" />
+                                                            <RadioButton fx:id="rdbEetbaarNeen" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" toggleGroup="$EetbaarToggle" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox>
+                                                         <children>
+                                                            <RadioButton fx:id="rdbKruidgebruikLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" selected="true" text=" ">
+                                                               <toggleGroup>
+                                                                  <ToggleGroup fx:id="KruidgebruikToggle" />
+                                                               </toggleGroup></RadioButton>
+                                                            <RadioButton fx:id="rdbKruidgebruikJa" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" toggleGroup="$KruidgebruikToggle" />
+                                                            <RadioButton fx:id="rdbKruidgebruikNeen" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" toggleGroup="$KruidgebruikToggle" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox>
+                                                         <children>
+                                                            <RadioButton fx:id="rdbGeurendLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" selected="true" text=" ">
+                                                               <toggleGroup>
+                                                                  <ToggleGroup fx:id="GeurendToggle" />
+                                                               </toggleGroup></RadioButton>
+                                                            <RadioButton fx:id="rdbGeurendJa" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" toggleGroup="$GeurendToggle" />
+                                                            <RadioButton fx:id="rdbGeurendNeen" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" toggleGroup="$GeurendToggle" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox>
+                                                         <children>
+                                                            <RadioButton fx:id="rdbVorstgevoeligLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" selected="true" text=" ">
+                                                               <toggleGroup>
+                                                                  <ToggleGroup fx:id="VorstgevoeligToggle" />
+                                                               </toggleGroup></RadioButton>
+                                                            <RadioButton fx:id="rdbVorstgevoeligJa" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" toggleGroup="$VorstgevoeligToggle" />
+                                                            <RadioButton fx:id="rdbVorstgevoeligNeen" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" toggleGroup="$VorstgevoeligToggle" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                        <Button layoutX="560.0" layoutY="975.0" mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenPlant" text="Opslaan">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <!--suppress XmlDuplicatedId -->
+                        <Button fx:id="btn_Terug" layoutX="1150.0" layoutY="1084.0" mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" prefHeight="50.0" prefWidth="118.0" text="Terug">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnVerstuurVoorGoek" layoutX="950.0" layoutY="975.0" mnemonicParsing="false" onAction="#clicked_versturenVoorGoedkeuring" text="Versturen voor goedkeuring">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <ListView fx:id="lvLijstOpgeslagenPlanten" layoutX="671.0" layoutY="975.0" prefHeight="180.0" prefWidth="241.0" />
+                        <Button layoutX="560.0" layoutY="1045.0" mnemonicParsing="false" onAction="#Clicked_LijstVanOpgeslagenPlanten" text="Lijst ">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="950.0" layoutY="1027.0" mnemonicParsing="false" onMouseClicked="#clicked_BeheersdadenGeselecteerdePlant" prefHeight="35.0" prefWidth="249.0" text="Beheersdaden geselecteerde plant">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
-              </content>
+               </content>
             </TitledPane>
+            <TitledPane layoutX="8.0" layoutY="219.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="382.0" prefWidth="559.0" text="AbiotischeFactoren">
+               <content>
+                  <AnchorPane prefHeight="60.0" prefWidth="532.0">
+                     <children>
+                        <VBox layoutX="14.0" layoutY="14.0">
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <VBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="120.0">
+                                       <children>
+                                          <Label prefHeight="25.0" prefWidth="120.0" text="Bezonning:">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="25.0" prefWidth="120.0" text="Voedingsbehoefte:">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="24.0" prefWidth="120.0" text="Vochtbehoefte:">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <ComboBox fx:id="cboBezonning" prefWidth="150.0" value="unkn" />
+                                             </children>
+                                          </HBox>
+                                          <HBox>
+                                             <children>
+                                                <ComboBox fx:id="cboVoedingsbehoefte" prefWidth="150.0" value="unknown" />
+                                             </children>
+                                          </HBox>
+                                          <HBox />
+                                          <ComboBox fx:id="cboVochtbehoefte" prefWidth="150.0" value="unknown" />
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <Label prefHeight="30.0" prefWidth="226.0" text="Reactie antagonitische omgeving:">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="cboReactieAntag" prefHeight="30.0" prefWidth="226.0" value="unknown" />
+                                          <HBox>
+                                             <children>
+                                                <Label prefHeight="30.0" prefWidth="119.0" text=" Grondsoort:">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="cboGrondsoort" prefHeight="30.0" prefWidth="106.0" value="unk" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <VBox prefHeight="216.0" prefWidth="480.0">
+                                 <children>
+                                    <Label fx:id="lblHabitat" prefHeight="30.0" prefWidth="240.0" text="Habitat">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox>
+                                       <children>
+                                          <ComboBox fx:id="cboHabitat" prefHeight="30.0" prefWidth="450.0" promptText="Maak u keuze" />
+                                          <Button mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenHabitat" prefHeight="30.0" prefWidth="30.0" text="+" />
+                                          <Button mnemonicParsing="false" onMouseClicked="#clicked_DeltenHabitat" prefHeight="30.0" prefWidth="30.0" text="-" />
+                                       </children>
+                                    </HBox>
+                                    <ListView fx:id="lvHabitat" prefHeight="155.0" prefWidth="486.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </TitledPane>
+            <!--suppress XmlDuplicatedId -->
+            <Button fx:id="btn_Terug" layoutX="1130.0" layoutY="87.0" mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" text="Terug">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
          </children>
-      </HBox>
-      <Button layoutX="1519.0" layoutY="980.0" mnemonicParsing="false" text="Wijzig plant">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Button>
-      <Button layoutX="1699.0" layoutY="980.0" mnemonicParsing="false" text="Terug">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Button>
-   </children>
-</AnchorPane>
+      </AnchorPane>
+   </content>
+</ScrollPane>

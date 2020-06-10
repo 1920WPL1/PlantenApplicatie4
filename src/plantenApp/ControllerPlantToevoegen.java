@@ -686,7 +686,7 @@ public class ControllerPlantToevoegen {
         window.show();
         window.setScene(scene);
     }
-
+    //functie voor
     public void clicked_versturenVoorGoedkeuring(ActionEvent actionEvent) throws SQLException {
         Plant plantje = (Plant) lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedItem();
         int sAntwoord = JOptionPane.showConfirmDialog(null, "bent u zeker dat u plant " + plantje.getFgsv() + " wenst door te sturen voor verbetering ?");
@@ -696,7 +696,13 @@ public class ControllerPlantToevoegen {
             plantje.setStatus(1);
             PlantDAO plantdao = new PlantDAO(dbConnection);
             plantdao.updatePlantStatusByID(plantje);
-    public void clicked_NaarBeheersdadenGaan(MouseEvent mouseEvent) throws IOException{
+            lijstmakerEnRefresher();
+        } else {notificationBox("De plant is niet doorgestuurd");
+        }
+    }
+
+    public void clicked_BeheersdadenGeselecteerdePlant(MouseEvent mouseEvent) throws SQLException{
+        Plant plant = (Plant) lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedItem();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("view/BeheeBehandelingPlant.fxml"));
             Parent root = loader.load();
@@ -705,15 +711,9 @@ public class ControllerPlantToevoegen {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
-        }catch (IOException ex){
+        } catch (IOException | SQLException ex) {
             ex.printStackTrace();
         }
-    }
-
-            lijstmakerEnRefresher();
-        } else {notificationBox("De plant is niet doorgestuurd");
-        }
-
     }
 
     public void Clicked_LijstVanOpgeslagenPlanten(ActionEvent actionEvent) throws SQLException {
@@ -885,6 +885,7 @@ public class ControllerPlantToevoegen {
     public void actioncboBloeikleurDec(ActionEvent actionEvent) {
         textToColor(cboBloeikleurDec, cboBloeikleurDec.getValue().toString());
     }
+
 
 
 }
