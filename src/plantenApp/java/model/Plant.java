@@ -15,6 +15,10 @@ public class Plant {
     private Integer maxPlantdichtheid;
     private String fgsv;
 
+    public Plant() {
+
+    }
+
     public String getFgsv() {
         return fgsv;
     }

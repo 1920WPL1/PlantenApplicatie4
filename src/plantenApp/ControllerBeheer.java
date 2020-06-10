@@ -85,85 +85,80 @@ public class ControllerBeheer {
         cboBehandeling.getItems().add(sBehandeling);
     }
 
+    String sBehandeling = cboBehandeling.getValue().toString();
+    String sOpmerking = txtOpmerking.getText();
+    int iJaar = (int) spnJaar.getValue();
+
     public void clicked_ToevoegenBeheerdaad(MouseEvent mouseEvent) throws SQLException {
         //Vars voor beheer
-        String sBehandeling = cboBehandeling.getValue().toString();
-        String sOpmerking = txtOpmerking.getText();
-        int iJaar = (int) spnJaar.getValue();
-
 
         //Toevoegen beheersdaad_eigenschappen
         //BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
         //Beheer beheer = new Beheer(
-          //      ,
-            //    createBeheerEig(lvLijstBehandeling, plant)
+
+
 
         //);
 
-        //beheer.createBeheer(beheer);
-        Beheerdaad_Eigenschap beheerdaadEigenschap = new Beheerdaad_Eigenschap(
+        Plant plant = new Plant();
+
+        for (int i = 0; i < 13; i++){
+            createBeheerEig(plant);
+        }
+
+    }
+
+    public void createBeheerEig(Plant plant) throws SQLException {
+
+        BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
+        Beheerdaad_Eigenschap beheerEig = new Beheerdaad_Eigenschap(
+                plant.getId(),
                 sBehandeling,
                 sOpmerking,
                 controleMaanden(),
                 iJaar
         );
-        //beheerDAO.createBeheerEigenschap(beheerdaadEigenschap);
-    }
-
-    public void createBeheerEig(ArrayList array, Plant plant) throws SQLException {
-
-        BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
-        Beheerdaad_Eigenschap beheerEig = new Beheerdaad_Eigenschap(
-                plant.getId(),
-                (String) array.get(0),
-                (String) array.get(1),
-                (String) array.get(2),
-                (int)    array.get(3)
-        );
-        //beheerDAO.createBeheerEigenschap(beheerEig, plant);
+        beheerDAO.createBeheerEigenschap(beheerEig);
 
     }
-
-
-
 
     public String controleMaanden(){
         String sMaand = " ";
         if (chbJanuari.isSelected()) {
-            sMaand += chbJanuari.getText();
+            sMaand = chbJanuari.getText();
         }
         else if(chbFebruari.isSelected()){
-            sMaand += chbFebruari.getText();
+            sMaand = chbFebruari.getText();
         }
         else if (chbMaart.isSelected()){
-            sMaand += chbMaart.getText();
+            sMaand = chbMaart.getText();
         }
         else if (chbApril.isSelected()){
-            sMaand += chbApril.getText();
+            sMaand = chbApril.getText();
         }
         else if (chbMei.isSelected()){
-            sMaand += chbMei.getText();
+            sMaand = chbMei.getText();
         }
         else if (chbJuni.isSelected()){
-            sMaand += chbJuni.getText();
+            sMaand = chbJuni.getText();
         }
         else if (chbJuli.isSelected()){
-            sMaand += chbJuli.getText();
+            sMaand = chbJuli.getText();
         }
         else if (chbAugustus.isSelected()){
-            sMaand += chbAugustus.getText();
+            sMaand = chbAugustus.getText();
         }
         else if (chbSeptember.isSelected()){
-            sMaand += chbSeptember.getText();
+            sMaand = chbSeptember.getText();
         }
         else  if (chbOktober.isSelected()){
-            sMaand += chbOktober.getText();
+            sMaand = chbOktober.getText();
         }
         else if(chbNovember.isSelected()){
-            sMaand += chbNovember.getText();
+            sMaand = chbNovember.getText();
         }
         else if (chbDecember.isSelected()){
-            sMaand += chbDecember.getText();
+            sMaand = chbDecember.getText();
         }
         else {
             sMaand = "null";
