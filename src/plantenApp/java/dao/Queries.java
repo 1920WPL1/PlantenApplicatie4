@@ -244,8 +244,8 @@ public interface Queries {
                     "VALUES(?, ?, ?, ?, ?)";
 
     String INSERTSTANDAARD =
-            "INSERT INTO plant (planttype, familie, geslacht, soort, variatie, plantdichtheid_min, plantdichtheid_max, fgsv, status) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            "INSERT INTO plant (planttype, familie, geslacht, soort, variatie, plantdichtheid_min, plantdichtheid_max, fgsv, status, laatste_update_datum) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
     String INSERTCOMMESALISME =
             "INSERT INTO commensalisme(plant_id, strategie, ontwikkelingssnelheid)" +

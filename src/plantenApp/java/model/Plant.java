@@ -1,11 +1,7 @@
 package plantenApp.java.model;
 
 
-import plantenApp.java.dao.PlantDAO;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
+import java.sql.Date;
 
 /**
  * @author Siebe
@@ -21,7 +17,15 @@ public class Plant {
     private Integer maxPlantdichtheid;
     private String fgsv;
     private Integer status;
+    private java.sql.Date laatsteupdatedatum;
 
+    public java.sql.Date getLaatsteupdatedatum() {
+        return laatsteupdatedatum;
+    }
+
+    public void setLaatsteupdatedatum(java.sql.Date laatsteupdatedatum) {
+        this.laatsteupdatedatum = laatsteupdatedatum;
+    }
 
     public String getFgsv() {
         return fgsv;
@@ -43,7 +47,7 @@ public class Plant {
     private InfoTables infoTables;
 
     //Constructor met id
-    public Plant(int id, String planttype, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, String fgsv, int status) {
+    public Plant(int id, String planttype, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, String fgsv, int status, java.sql.Date lastupdatedatum) {
         this.id = id;
         this.planttype = planttype;
         this.familie = familie;
@@ -54,6 +58,8 @@ public class Plant {
         this.minPlantdichtheid = minPlantdichtheid;
         this.maxPlantdichtheid = maxPlantdichtheid;
         this.status = status;
+        this.laatsteupdatedatum = lastupdatedatum;
+
     }
     public Plant(Plant plant) {
         this.id = plant.getId();
@@ -66,10 +72,12 @@ public class Plant {
         this.maxPlantdichtheid = plant.getMaxPlantdichtheid();
         this.fgsv=plant.getFgsv();
         this.status = plant.getStatus();
+        this.laatsteupdatedatum = plant.getLaatsteupdatedatum();
+
     }
 
     //Constructor voor Insert : id wordt gegenereerd door de database.
-    public Plant(String planttype, String familie, String geslacht, String soort, String variatie,Integer minPlantdichtheid, Integer maxPlantdichtheid, String fgsv, int status) {
+    public Plant(String planttype, String familie, String geslacht, String soort, String variatie,Integer minPlantdichtheid, Integer maxPlantdichtheid, String fgsv, int status, Date lastupdatedatum) {
         this.planttype = planttype;
         this.familie = familie;
         this.geslacht = geslacht;
@@ -79,6 +87,8 @@ public class Plant {
         this.maxPlantdichtheid = maxPlantdichtheid;
         this.fgsv = fgsv;
         this.status = status;
+        this.laatsteupdatedatum = lastupdatedatum;
+
     }
 
     //Plant_id wordt gegenereerd door de database.
@@ -111,7 +121,9 @@ public class Plant {
                 ", minPlantdichtheid=" + minPlantdichtheid +
                 ", maxPlantdichtheid=" + maxPlantdichtheid +
                 ", fgsv='" + fgsv + '\'' +
-                ", status=" + status +
+                ", status=" + status + '\'' +
+
+
                 '}';
     }
 
@@ -223,6 +235,9 @@ public class Plant {
     public int getStatus() {
         return status;
     }
+
+
+
 
     public void setStatus(int status) {
         this.status = status;
