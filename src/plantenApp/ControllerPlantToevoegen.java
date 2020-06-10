@@ -684,6 +684,13 @@ public class ControllerPlantToevoegen {
     }
 
     public void clicked_versturenVoorGoedkeuring(ActionEvent actionEvent) throws SQLException {
+    public void clicked_NaarBeheersdadenGaan(MouseEvent mouseEvent) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("view/BeheebehandelingPlant.fxml"));
+        Scene scene = new Scene(root);
+        Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        window.show();
+        window.setScene(scene);
+    }
 
     }
     public void Clicked_LijstVanOpgeslagenPlanten(ActionEvent actionEvent) throws SQLException {

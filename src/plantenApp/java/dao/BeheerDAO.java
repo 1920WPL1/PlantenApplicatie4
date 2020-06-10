@@ -2,12 +2,10 @@ package plantenApp.java.dao;
 
 import plantenApp.java.model.Beheer;
 import plantenApp.java.model.Beheerdaad_Eigenschap;
+import plantenApp.java.model.FenoMulti_Eigenschap;
 import plantenApp.java.model.Plant;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**@author Siebe*/
@@ -16,12 +14,16 @@ public class BeheerDAO implements Queries {
     private PreparedStatement stmtSelectBeheerByID;
     private PreparedStatement stmtSelectByBeheer;
     private PreparedStatement stmtInsertBeheer;
+    private PreparedStatement stmtInsertBeheerdaadEigenschap;
 
     public BeheerDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
         stmtSelectBeheerByID = dbConnection.prepareStatement(GETBEHEERBYPLANTID);
         stmtSelectByBeheer = dbConnection.prepareStatement(GETIDSBYBEHEER);
-        stmtInsertBeheer = dbConnection.prepareStatement(INSERTBEHEER);
+        stmtInsertBeheer = dbConnection.prepareStatement(INSERTBEHEERMULTI,
+                Statement.RETURN_GENERATED_KEYS);
+        stmtInsertBeheerdaadEigenschap = dbConnection.prepareStatement(INSERTBEHEERMULTI,
+                Statement.RETURN_GENERATED_KEYS);
     }
 
     /**@author Siebe
@@ -33,7 +35,7 @@ public class BeheerDAO implements Queries {
 
         beheer = new Beheer(
                 id,
-                getBeheerdaden(id)
+                getBeheerdadenByID(id)
         );
         return beheer;
     }
@@ -43,8 +45,8 @@ public class BeheerDAO implements Queries {
      * @param id -> plant_id
      * @return -> alle beheerdaden van de specifieke plant
      */
-    private ArrayList<Beheerdaad_Eigenschap> getBeheerdaden(int id) throws SQLException {
-        ArrayList<Beheerdaad_Eigenschap> abioMulti = new ArrayList<>();;
+    private ArrayList<Beheerdaad_Eigenschap> getBeheerdadenByID(int id) throws SQLException {
+        ArrayList<Beheerdaad_Eigenschap> arrBeheer = new ArrayList<>();;
 
         stmtSelectBeheerByID.setInt(1, id);
         ResultSet rs = stmtSelectBeheerByID.executeQuery();
@@ -56,47 +58,27 @@ public class BeheerDAO implements Queries {
                     rs.getString("maand"),
                     rs.getInt("frequentie_jaar")
             );
-            abioMulti.add(beheerdaad);
+            arrBeheer.add(beheerdaad);
         }
-        return abioMulti;
+        return arrBeheer;
     }
 
-    /**@author Siebe
-     * @param sPlant_ids -> de te filteren ids
-     * @param beheer -> naam van de behandeling om op te filteren
-     * @param maand -> maand van de behandeling om op te filteren
-     * @param frequentie -> frequentie om op te filteren
-     * @return -> de gefilterde ids
-     */
-    public ArrayList<Integer> KenmerkenFilter(String sPlant_ids, String beheer, String maand, int frequentie) throws SQLException {
-        ArrayList<Integer> ids = new ArrayList<Integer>();
-
-        stmtSelectByBeheer.setString(1, sPlant_ids);
-
-        int iTrue = (beheer.isBlank()) ? 1 : 0;
-        stmtSelectByBeheer.setString(2, beheer);
-        stmtSelectByBeheer.setInt(3, iTrue);
-
-        iTrue = (maand.isBlank()) ? 1 : 0;
-        stmtSelectByBeheer.setString(4, maand);
-        stmtSelectByBeheer.setInt(5, iTrue);
-
-        iTrue = (frequentie == 0) ? 1 : 0;
-        stmtSelectByBeheer.setInt(6, frequentie);
-        stmtSelectByBeheer.setInt(7, iTrue);
-
-        ResultSet rs = stmtSelectByBeheer.executeQuery();
-        while (rs.next()) {
-            ids.add(rs.getInt("plant_id"));
-        }
-        return ids;
-    }
 
     //Functie om een beheer/behandeling toe te voegen
-    public void createBeheer(Beheer beheer, Plant plant) throws SQLException
+    public void createBeheer(Beheer beheer) throws SQLException
     {
-        stmtInsertBeheer.setInt(1, plant.getId());
+        stmtInsertBeheer.setInt(1, beheer.getPlant_id());
+    }
 
+    public void createBeheerEigenschap(Beheerdaad_Eigenschap beheerEigenschap) throws SQLException{
+        stmtInsertBeheerdaadEigenschap.setString(1, beheerEigenschap.getNaam());
+        stmtInsertBeheerdaadEigenschap.setString(2, beheerEigenschap.getOpmerking());
+        stmtInsertBeheerdaadEigenschap.setString(3, beheerEigenschap.getMaand());
+        stmtInsertBeheerdaadEigenschap.setInt(4, beheerEigenschap.getFrequentie());
+        ResultSet rs = stmtInsertBeheerdaadEigenschap.getGeneratedKeys();
+        rs.next();
+        Integer beheer_id = rs.getInt(1);
+        beheerEigenschap.setId(beheer_id);
     }
 
 }

@@ -1031,6 +1031,11 @@
                   <Font size="24.0" />
                </font>
             </Button>
+            <Button layoutX="950.0" layoutY="87.0" mnemonicParsing="false" onMouseClicked="#clicked_NaarBeheersdadenGaan" prefHeight="50.0" prefWidth="153.0" text="Beheersdaden">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </content>

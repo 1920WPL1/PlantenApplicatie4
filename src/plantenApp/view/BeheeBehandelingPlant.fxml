@@ -22,7 +22,7 @@
               <content>
                 <AnchorPane>
                      <children>
-                        <VBox layoutX="14.0" layoutY="14.0">
+                        <VBox layoutX="14.0" layoutY="27.0" prefHeight="411.0" prefWidth="579.0">
                            <children>
                               <Button mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" text="Terug">
                                  <font>
@@ -154,6 +154,11 @@
                               </HBox>
                            </children>
                         </VBox>
+                        <Button layoutX="510.0" layoutY="8.0" mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenBeheerdaad" prefHeight="38.0" prefWidth="89.0" text="Toevoegen">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
               </content>

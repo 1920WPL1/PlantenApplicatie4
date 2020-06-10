@@ -180,4 +180,6 @@ public class InfoTables {
     public ArrayList<String> getPollenwaardes() {
         return pollenwaardes;
     }
+
+    public ArrayList<String> getBeheerdaden(){return beheerdaden;}
 }
