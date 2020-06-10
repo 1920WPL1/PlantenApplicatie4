@@ -65,9 +65,9 @@ public class BeheerDAO implements Queries {
 
 
     //Functie om een beheer/behandeling toe te voegen
-    public void createBeheer(Beheer beheer) throws SQLException
+    public void createBeheer(String swaarde) throws SQLException
     {
-        stmtInsertBeheer.setInt(1, beheer.getPlant_id());
+        stmtInsertBeheer.setString(1, swaarde);
     }
 
     public void createBeheerEigenschap(Beheerdaad_Eigenschap beheerEigenschap) throws SQLException{

@@ -294,9 +294,12 @@ public class ControllerPlantToevoegen {
         return string;
     }
 
+
+
     //Toevoegen van een volledige plant
     public void clicked_ToevoegenPlant(MouseEvent mouseEvent) throws SQLException {
-//vars voor plant
+
+        //vars voor plant
 
         String sType = cboType.getValue().toString();
         String sFam = txtFamilie.getText();
@@ -348,6 +351,7 @@ public class ControllerPlantToevoegen {
 
         notificationBox("U plant is opgeslagen " + "\r\n" + plant.getFgsv());
         btnVerstuurVoorGoek.setDisable(false);
+
     }
 
     /*!!!! Methodes voor de gegevens over te schrijven naar de databank !!!!*/
@@ -683,16 +687,22 @@ public class ControllerPlantToevoegen {
         window.setScene(scene);
     }
 
-    public void clicked_versturenVoorGoedkeuring(ActionEvent actionEvent) throws SQLException {
+    public void clicked_versturenVoorGoedkeuring(ActionEvent actionEvent) throws SQLException {}
     public void clicked_NaarBeheersdadenGaan(MouseEvent mouseEvent) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("view/BeheebehandelingPlant.fxml"));
-        Scene scene = new Scene(root);
-        Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        window.show();
-        window.setScene(scene);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("view/BeheeBehandelingPlant.fxml"));
+            Parent root = loader.load();
+            ControllerBeheer controllerBeheer = loader.getController();
+            controllerBeheer.initialize(plant);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
     }
 
-    }
+
     public void Clicked_LijstVanOpgeslagenPlanten(ActionEvent actionEvent) throws SQLException {
         lvLijstOpgeslagenPlanten.getItems().clear();
         lvLijstOpgeslagenPlanten.refresh();

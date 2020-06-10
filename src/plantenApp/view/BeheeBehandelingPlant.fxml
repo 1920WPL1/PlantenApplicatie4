@@ -29,6 +29,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Button>
+                              <Label fx:id="lblPlant_id" prefHeight="18.0" prefWidth="69.0" />
                               <Label text="Familie Geslacht Soort variant">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
