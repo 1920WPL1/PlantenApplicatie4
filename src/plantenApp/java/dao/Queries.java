@@ -351,6 +351,9 @@ public interface Queries {
 
     String INSERTVOEDINGSBEHOEFTE =
             "INSERT INTO voedingsbehoeft(waarde) VALUES(?)";
-    
+
+
+    String UPDATESTATUSBYID =
+           "UPDATE plant SET status = ? WHERE plant_id= ?";
 }
 
