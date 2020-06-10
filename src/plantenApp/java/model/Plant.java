@@ -1,7 +1,11 @@
 package plantenApp.java.model;
 
 
+import plantenApp.java.dao.PlantDAO;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * @author Siebe
@@ -17,6 +21,7 @@ public class Plant {
     private Integer maxPlantdichtheid;
     private String fgsv;
     private Integer status;
+
 
     public String getFgsv() {
         return fgsv;
@@ -49,6 +54,17 @@ public class Plant {
         this.maxPlantdichtheid = maxPlantdichtheid;
         this.status = status;
     }
+    public Plant(Plant plant) {
+        this.id = plant.getId();
+        this.planttype = plant.getType();
+        this.familie = plant.getFamilie();
+        this.geslacht = plant.getGeslacht();
+        this.soort = plant.getSoort();
+        this.variatie = plant.getVariatie();
+        this.minPlantdichtheid = plant.getMinPlantdichtheid();
+        this.maxPlantdichtheid = plant.getMaxPlantdichtheid();
+        this.status = plant.getStatus();
+    }
 
     //Constructor voor Insert : id wordt gegenereerd door de database.
     public Plant(String planttype, String familie, String geslacht, String soort, String variatie, Integer minPlantdichtheid, Integer maxPlantdichtheid, String fgsv, int status) {
@@ -79,6 +95,22 @@ public class Plant {
 
     public String getType() {
         return planttype;
+    }
+
+    @Override
+    public String toString() {
+        return "Plant{" +
+                "id=" + id +
+                ", planttype='" + planttype + '\'' +
+                ", familie='" + familie + '\'' +
+                ", geslacht='" + geslacht + '\'' +
+                ", soort='" + soort + '\'' +
+                ", variatie='" + variatie + '\'' +
+                ", minPlantdichtheid=" + minPlantdichtheid +
+                ", maxPlantdichtheid=" + maxPlantdichtheid +
+                ", fgsv='" + fgsv + '\'' +
+                ", status=" + status +
+                '}';
     }
 
     public String getFamilie() {

@@ -205,6 +205,7 @@ public class ControllerPlantToevoegen {
     public Label lblLevensduur;
     public Label lblSociabiliteit;
     public Button btnVerstuurVoorGoek;
+    public ListView lvLijstOpgeslagenPlanten;
 
     private Connection dbConnection;
     //arraylist van fenotype_Multi
@@ -283,10 +284,20 @@ public class ControllerPlantToevoegen {
 
     }
 
+    public String testerNullpointers(String string, ComboBox cb) {
+
+        if (cb.getValue().toString().equals("")) {
+            JOptionPane.showMessageDialog(null, "niet ok");
+        } else {
+            string = cb.getValue().toString();
+        }
+        return string;
+    }
 
     //Toevoegen van een volledige plant
     public void clicked_ToevoegenPlant(MouseEvent mouseEvent) throws SQLException {
 //vars voor plant
+
         String sType = cboType.getValue().toString();
         String sFam = txtFamilie.getText();
         String sGeslacht = txtGeslacht.getText();
@@ -295,7 +306,7 @@ public class ControllerPlantToevoegen {
         String fgsv = sFam + " " + sGeslacht + " " + sSoort + " '" + sVariant + "'";
         int iMinDichtheid = (int) spnMinPlantDicht.getValue();
         int iMaxDichtheid = (int) spnMaxPlantDicht.getValue();
-        int iStatus=0;
+        int iStatus = 0;
 //Insert van plant
         PlantDAO plantDao = new PlantDAO(dbConnection);
         Plant plant = new Plant
@@ -335,10 +346,9 @@ public class ControllerPlantToevoegen {
         createListViewReaderLevensduur(lvLevensduur, plant);
         createCommMultiSociabiliteit(plant);
 
-        notificationBox("U plant is opgeslagen "+"\r\n"+plant.getFgsv());
+        notificationBox("U plant is opgeslagen " + "\r\n" + plant.getFgsv());
         btnVerstuurVoorGoek.setDisable(false);
     }
-
 
     /*!!!! Methodes voor de gegevens over te schrijven naar de databank !!!!*/
 
@@ -603,6 +613,7 @@ public class ControllerPlantToevoegen {
             commensalismeDAO.createcommulti(commMulti_eigenschap, plant);
         }
     }
+
     //Insert gegevens commensalisme Multi (Sociabiliteit) in DB
     public void createCommMultiSociabiliteit(Plant plant) throws SQLException {
         RadioButton selectcoc = (RadioButton) Sociabiliteit.getSelectedToggle();
@@ -626,6 +637,7 @@ public class ControllerPlantToevoegen {
     public void clicked_DeltenHabitat(MouseEvent mouseEvent) {
         deleteFromListMethode(lvHabitat);
     }
+
     public void clicked_DeleteLevensduur(MouseEvent mouseEvent) {
         deleteFromListMethode(lvLevensduur);
     }
@@ -647,6 +659,7 @@ public class ControllerPlantToevoegen {
     public void clicked_ToevoegenHabitat(MouseEvent mouseEvent) {
         ToevoegenAanListMethode(lvHabitat, cboHabitat);
     }
+
     public void clicked_ToevoegenLevensduur(MouseEvent mouseEvent) {
         ToevoegenAanListMethode(lvLevensduur, cboLevensduur);
     }
@@ -669,10 +682,25 @@ public class ControllerPlantToevoegen {
         window.show();
         window.setScene(scene);
     }
-    public void clicked_versturenVoorGoedkeuring(ActionEvent actionEvent) {
+
+    public void clicked_versturenVoorGoedkeuring(ActionEvent actionEvent) throws SQLException {
 
     }
-    public void klaarVoorGoedkeuringStatus1(){}
+    public void Clicked_LijstVanOpgeslagenPlanten(ActionEvent actionEvent) throws SQLException {
+        lvLijstOpgeslagenPlanten.getItems().removeAll();
+        lvLijstOpgeslagenPlanten.refresh();
+
+        PlantDAO plantdao = new PlantDAO(dbConnection);
+        ArrayList <Plant> arrPlantjes =new ArrayList();
+        arrPlantjes.addAll(plantdao.getPlantenByStatus(0));
+        for (int i =0; i<arrPlantjes.size();i++){
+           lvLijstOpgeslagenPlanten.getItems().add(arrPlantjes.get(i));
+        }
+        System.out.println(arrPlantjes.toString());
+    }
+
+    public void klaarVoorGoedkeuringStatus1(){
+    }
 
     /* Deze functie word opgeroepen om de comboboxen van de kleuren en maand
        aan te passen van text naar kleur om een mooiere gebruikers ervaring */
@@ -827,6 +855,7 @@ public class ControllerPlantToevoegen {
     public void actioncboBloeikleurDec(ActionEvent actionEvent) {
         textToColor(cboBloeikleurDec, cboBloeikleurDec.getValue().toString());
     }
+
 
 
 }
