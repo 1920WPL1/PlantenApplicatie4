@@ -1,5 +1,6 @@
 package plantenApp;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -8,13 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import plantenApp.java.dao.Database;
-import plantenApp.java.dao.InfoTablesDAO;
-import plantenApp.java.model.*;
 import plantenApp.java.dao.*;
-import plantenApp.java.model.Fenotype;
-import plantenApp.java.model.InfoTables;
-import plantenApp.java.model.Plant;
+import plantenApp.java.model.*;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -307,6 +303,7 @@ public class ControllerPlantToevoegen {
         int iMinDichtheid = (int) spnMinPlantDicht.getValue();
         int iMaxDichtheid = (int) spnMaxPlantDicht.getValue();
         int iStatus = 0;
+
 //Insert van plant
         PlantDAO plantDao = new PlantDAO(dbConnection);
         Plant plant = new Plant
@@ -684,22 +681,35 @@ public class ControllerPlantToevoegen {
     }
 
     public void clicked_versturenVoorGoedkeuring(ActionEvent actionEvent) throws SQLException {
+        Plant plantje = (Plant) lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedItem();
+        int sAntwoord = JOptionPane.showConfirmDialog(null, "bent u zeker dat u plant " + plantje.getFgsv() + " wenst door te sturen voor verbetering ?");
+        System.out.println(sAntwoord);
+        //antwoord yes
+        if (sAntwoord == 0) {
+            plantje.setStatus(1);
+            PlantDAO plantdao = new PlantDAO(dbConnection);
+            plantdao.updatePlantStatusByID(plantje);
+
+            lijstmakerEnRefresher();
+        } else {notificationBox("De plant is niet doorgestuurd");
+        }
 
     }
+
     public void Clicked_LijstVanOpgeslagenPlanten(ActionEvent actionEvent) throws SQLException {
+        lijstmakerEnRefresher();
+    }
+
+    public void lijstmakerEnRefresher() throws SQLException {
         lvLijstOpgeslagenPlanten.getItems().clear();
         lvLijstOpgeslagenPlanten.refresh();
 
         PlantDAO plantdao = new PlantDAO(dbConnection);
-        ArrayList <Plant> arrPlantjes =new ArrayList();
+        ArrayList<Plant> arrPlantjes = new ArrayList();
         arrPlantjes.addAll(plantdao.getPlantenByStatus(0));
-        for (int i =0; i<arrPlantjes.size();i++){
-           lvLijstOpgeslagenPlanten.getItems().add(arrPlantjes.get(i));
+        for (int i = 0; i < arrPlantjes.size(); i++) {
+            lvLijstOpgeslagenPlanten.getItems().add(arrPlantjes.get(i));
         }
-        System.out.println(arrPlantjes.toString());
-    }
-
-    public void klaarVoorGoedkeuringStatus1(){
     }
 
     /* Deze functie word opgeroepen om de comboboxen van de kleuren en maand
@@ -855,7 +865,6 @@ public class ControllerPlantToevoegen {
     public void actioncboBloeikleurDec(ActionEvent actionEvent) {
         textToColor(cboBloeikleurDec, cboBloeikleurDec.getValue().toString());
     }
-
 
 
 }

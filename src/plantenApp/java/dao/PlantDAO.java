@@ -1,13 +1,9 @@
 package plantenApp.java.dao;
 
-import plantenApp.java.model.AbiotischeFactoren;
 import plantenApp.java.model.Plant;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author Siebe
@@ -21,6 +17,7 @@ public class PlantDAO implements Queries {
     private PreparedStatement stmtSelectByPlant;
     private PreparedStatement stmtInsertByStandard;
     private PreparedStatement stmtSelectAllByStatus0;
+    private PreparedStatement stmtUpdateStatusByid;
 
     public PlantDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
@@ -29,7 +26,7 @@ public class PlantDAO implements Queries {
         stmtInsertByStandard = dbConnection.prepareStatement(INSERTSTANDAARD,
                 Statement.RETURN_GENERATED_KEYS);
         stmtSelectAllByStatus0 = dbConnection.prepareStatement(GETPLANTSBYSTATUS);
-
+        stmtUpdateStatusByid = dbConnection.prepareStatement(UPDATESTATUSBYID);
     }
 
     /**
@@ -96,5 +93,13 @@ public class PlantDAO implements Queries {
                     rs.getInt("status")));
         }
         return arrListPlanten;
+    }
+
+    public void updatePlantStatusByID(Plant plant) throws SQLException {
+        stmtUpdateStatusByid.setInt(1, plant.getStatus());
+        stmtUpdateStatusByid.setInt(2, plant.getId());
+        stmtUpdateStatusByid.executeUpdate();
+
+
     }
 }
