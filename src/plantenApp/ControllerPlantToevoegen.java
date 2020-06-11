@@ -796,12 +796,6 @@ public class ControllerPlantToevoegen {
         fotoDao.createFoto(foteig,plant);
           }
 
-
-
-    public void tester(ActionEvent actionEvent) throws IOException, SQLException {
-
-    }
-
     //functie voor een lijst te refreshe en een lijst te maken
     public void lijstmakerEnRefresher() throws SQLException {
         lvLijstOpgeslagenPlanten.getItems().clear();
