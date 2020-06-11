@@ -24,6 +24,7 @@ public class AbiotischeFactoren {
         this.reactieAntagonistischeOmgeving = reactieAntagonistischeOmgeving;
         this.multiEigenschappen = multiEigenschappen;
     }
+
     //Constructor zonder id
     public AbiotischeFactoren(int plant_id, String bezonning, String grondsoort, String vochtbehoefte, String voedingsbehoefte, String reactieAntagonistischeOmgeving) {
         this.plant_id = plant_id;

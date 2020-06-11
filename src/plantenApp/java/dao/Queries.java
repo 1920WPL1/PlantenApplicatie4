@@ -260,8 +260,8 @@ public interface Queries {
 
     String INSERTEXTRA =
 
-            "INSERT INTO extra(plant_id, nectarwaarde, pollenwaarde, bijvriendelijk, eetbaar, kruidgebruik, geurend, vorstgevoelig)" +
-                    "VALUES(?, ?, ?, ?, ?, ?, ?,?)";
+            "INSERT INTO extra(plant_id, nectarwaarde, pollenwaarde, bijvriendelijk, vlindervriendelijk, eetbaar, kruidgebruik, geurend, vorstgevoelig)" +
+                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 
     String INSERTFENOTYPE =
@@ -394,7 +394,7 @@ public interface Queries {
 
     String UPDATEEXTRA =
             "UPDATE extra" +
-                    "SET plant_id = plant_id, nectarwaarde = ?, pollenwaarde = ?, bijvriendelijk = ?, eetbaar = ?, kruidgebruik = ?, geurend = ?, vorstgevoelig = ?" +
+                    "SET plant_id = plant_id, nectarwaarde = ?, pollenwaarde = ?, bijvriendelijk = ?, vlindervriendelijk = ?, eetbaar = ?, kruidgebruik = ?, geurend = ?, vorstgevoelig = ?" +
                     "WHERE plant_id = ?";
 
     String UPDATEFENOTYPE =

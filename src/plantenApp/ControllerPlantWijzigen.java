@@ -1,13 +1,22 @@
 package plantenApp;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import plantenApp.java.dao.Database;
-import plantenApp.java.dao.InfoTablesDAO;
-import plantenApp.java.model.InfoTables;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import plantenApp.java.dao.*;
+import plantenApp.java.model.*;
 
+import javax.swing.*;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ControllerPlantWijzigen {
     //Alle velden die ingevuld moeten worden bij Standaard
@@ -61,6 +70,7 @@ public class ControllerPlantWijzigen {
     public RadioButton rdbChamaefyt7;
     public RadioButton rdbChamaefyt8;
     public RadioButton rdbFanerophyt9;
+    public RadioButton rdbNietGekend;
     //Alle spinners per maand voor Max Bladhoogte
     public Spinner spnBladhoogteJan;
     public Spinner spnBladhoogteFeb;
@@ -138,6 +148,7 @@ public class ControllerPlantWijzigen {
     public RadioButton rdbKussenvormend;
     public RadioButton rdbZuilvomrig;
     public RadioButton rdbUitbuigend;
+    public RadioButton rdbHUnknown;
     //Alle radiobuttons voor Bloeiwijze
     public RadioButton rdbAar;
     public RadioButton rdbBredePluim;
@@ -147,6 +158,7 @@ public class ControllerPlantWijzigen {
     public RadioButton rdbSchotel;
     public RadioButton rdbScherm;
     public RadioButton rdbSmallePluim;
+    public RadioButton rdbBUnknown;
     //Alle velden die ingevuld moeten worden bij Extra
     public ComboBox cboLevensduur;
     public ListView lvLevensduur;
@@ -204,14 +216,22 @@ public class ControllerPlantWijzigen {
     String sNaamSpnBloeihoogte;
     String sNaamCmbBladKleur;
     String sNaamCmbBloeiKleur;
+    Plant objectPlant;
+    AbiotischeFactoren abiotischeFactoren;
 
-    public void initialize() throws SQLException {
+    public void initialize(Plant plant) throws SQLException {
         dbConnection = Database.getInstance().getConnection();
         /* infotabel object aanmaken */
         InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
         InfoTables infoTables = infotablesDAO.getInfoTables();
         /*opvullen combobox Methode*/
         FillComboboxes(infoTables);
+        objectPlant = plant;
+        invoegenStandaard();
+        invoegAbiotische();
+        invoegCommensalisme();
+        invoegFenotype();
+        invoegenExtra();
     }
 
     private void FillComboboxes(InfoTables infotables) {
@@ -268,5 +288,828 @@ public class ControllerPlantWijzigen {
         //habitat
         cboHabitat.getItems().addAll(infotables.getHabitats());
 
+    }
+
+
+    public void clicked_WijzigenPlant(MouseEvent mouseEvent) throws SQLException {
+        //vars voor plant
+
+        String sType = cboType.getValue().toString();
+        String sFam = txtFamilie.getText();
+        String sGeslacht = txtGeslacht.getText();
+        String sSoort = txtSoort.getText();
+        String sVariant = txtVariant.getText();
+        String fgsv = sFam + " " + sGeslacht + " " + sSoort + " '" + sVariant + "'";
+        int iMinDichtheid = (int) spnMinPlantDicht.getValue();
+        int iMaxDichtheid = (int) spnMaxPlantDicht.getValue();
+        int iStatus = 0;
+        java.sql.Date uDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        System.out.println(uDate);
+
+        //Insert van plant
+        PlantDAO plantDao = new PlantDAO(dbConnection);
+        Plant plant = new Plant
+                (sType,
+                        sFam,
+                        sGeslacht,
+                        sSoort,
+                        sVariant,
+                        iMinDichtheid,
+                        iMaxDichtheid,
+                        fgsv,
+                        iStatus,
+                        uDate);
+        plantDao.createPlant(plant);
+
+        //Insert Abiotische factoren
+        createAbiotische(plant);
+        //Insert Commensalisme
+        createCommensalisme(plant);
+        //Insert Fenotype tot DB
+        createFenoType(plant);
+        //Insert Extra waarden tot DB
+        createExtra(plant);
+
+        //Aanmaken van de arrays voor de Feno Multi eigenschappen
+        setArrayFenotypeMultiFunction();
+        //Insert Fenotype multi eigenschap per categorie blad, bloei hoogte... tot DB
+        createFenoMultiEig(aBladhoogte, plant);
+        createFenoMultiEig(aBladkleur, plant);
+        createFenoMultiEig(aBloeihoogte, plant);
+        createFenoMultiEig(aBloeikleur, plant);
+
+        //Insert Abiotische Multi Gegevens tot DB en oproepen functie listview Reader
+        createListViewReaderHabitat(lvHabitat, plant, lblHabitat);
+
+
+        //Toevoegen Commensalisme Multi waarden tot DB met listviewreader en gewone methode
+        createListViewReaderLevensduur(lvLevensduur, plant);
+        createCommMultiSociabiliteit(plant);
+
+        notificationBox("U plant is opgeslagen " + "\r\n" + plant.getFgsv());
+        btnVerstuurVoorGoek.setDisable(false);
+    }
+    /*!!!! Methodes voor de gegevens te updaten naar de databank !!!!*/
+
+    /*!!!! Methodes voor de gegevens over te schrijven naar de databank !!!!*/
+
+    //Aanmaken Abiotische gegevens in DB
+    public void createAbiotische(Plant plant) throws SQLException {
+        //vars voor Toevoegen Abio
+        String sBezonning = (String) cboBezonning.getValue();
+        String sGrond = (String) cboGrondsoort.getValue();
+        String sVochtB = (String) cboVochtbehoefte.getValue();
+        String sVoedingsB = (String) cboVoedingsbehoefte.getValue();
+        String sAnta = (String) cboReactieAntag.getValue();
+        AbiotischeFactorenDAO abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
+
+        AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren
+                (plant.getId()
+                        , sBezonning,
+                        sGrond,
+                        sVochtB,
+                        sVoedingsB,
+                        sAnta);
+        abiotischeFactorenDAO.createAbio(abiotischeFactoren, plant);
+    }
+
+    //Aanmaken Commensalimse gegevens in DB
+    public void createCommensalisme(Plant plant) throws SQLException {
+        //Vars voor toevoegen Commensalisme
+        String sOntwikkelingssnelheid = (String) cboOntwikkelingssnelheid.getValue();
+        RadioButton selectStategied = (RadioButton) StrategieToggle.getSelectedToggle();
+        String sStrategie = selectStategied.getText();
+        CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
+        Commensalisme commensalisme = new Commensalisme(
+                plant.getId(),
+                sStrategie,
+                sOntwikkelingssnelheid);
+        commensalismeDAO.createCommensalisme(commensalisme, plant);
+    }
+
+    // Aanmaken Fenotype gegevens in DB
+    public void createFenoType(Plant plant) throws SQLException {
+        //vars voor toevoegen Fenotype
+        String sBladvorm = (String) cboBladvorm.getValue();
+        RadioButton selectedRadioButton = (RadioButton) levensvormToggle.getSelectedToggle();
+        String sLevensvorm = selectedRadioButton.getText();
+        RadioButton selectedRadioButton2 = (RadioButton) habitusToggle.getSelectedToggle();
+        String sHabitus = selectedRadioButton2.getText();
+        RadioButton selectedRadioButton3 = (RadioButton) bloeiwijzeToggle.getSelectedToggle();
+        String sBloeiwijze = selectedRadioButton3.getText();
+        int iBladgrootte = Integer.parseInt(cboBladgrootte.getValue().toString());
+        String sRatioBloeiBlad = cboRatio.getValue().toString();
+        String sSpruitfeno = (String) cboSpruitfenologie.getValue();
+
+        FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
+        Fenotype fenotype = new Fenotype(plant.getId(),
+                sBladvorm,
+                sLevensvorm,
+                sHabitus,
+                sBloeiwijze,
+                iBladgrootte,
+                sRatioBloeiBlad,
+                sSpruitfeno);
+        fenotypeDAO.createFeno(fenotype, plant);
+    }
+
+    // Aanmaken Extra plantgegevens in DB
+    public void createExtra(Plant plant) throws SQLException {
+        int iNectarwaarde = (int) spnNectarwaarde.getValue();
+        int iPollenwaarde = (int) spnPollenwaarde.getValue();
+        RadioButton selectBijvriendelijk = (RadioButton) BijvriendelijkToggle.getSelectedToggle();
+        String sBijvriendelijk = selectBijvriendelijk.getText();
+        RadioButton selectVlindervriendelijk = (RadioButton) VlindervriendelijkToggle.getSelectedToggle();
+        String sVlindervriendelijk = selectVlindervriendelijk.getText();
+        RadioButton selectEetbaar = (RadioButton) EetbaarToggle.getSelectedToggle();
+        String sEetbaar = selectEetbaar.getText();
+        RadioButton selectKruidgebruik = (RadioButton) KruidgebruikToggle.getSelectedToggle();
+        String sKruidgebruik = selectKruidgebruik.getText();
+        RadioButton selectGeurend = (RadioButton) GeurendToggle.getSelectedToggle();
+        String sGeurend = selectGeurend.getText();
+        RadioButton selectVorstgevoelig = (RadioButton) VorstgevoeligToggle.getSelectedToggle();
+        String sVorstgevoelig = selectVorstgevoelig.getText();
+
+        ExtraDAO extraDAO = new ExtraDAO(dbConnection);
+        Extra extra = new Extra(
+                plant.getId(),
+                iNectarwaarde,
+                iPollenwaarde,
+                sBijvriendelijk,
+                sVlindervriendelijk,
+                sEetbaar,
+                sKruidgebruik,
+                sGeurend,
+                sVorstgevoelig
+        );
+        extraDAO.createExtra(extra, plant);
+
+    }
+
+    //set array van bladhoogte bloeihoogte bladkleur bloeikleur voor fenotype Multi
+    public void setArrayFenotypeMultiFunction() {
+
+        for (int i = 0; i < 13; i++) {
+            switch (i) {
+                case 0:
+
+                    sNaamSpnbladhoogte = "bladhoogte";
+                    sNaamCmbBladKleur = "bladkleur";
+                    sNaamCmbBloeiKleur = "bloeikleur";
+                    sNaamSpnBloeihoogte = "bloeihoogte";
+                    break;
+
+                case 1:
+                    sNaamSpnbladhoogte = spnBladhoogteJan.getValue().toString();
+                    sNaamCmbBladKleur = String.valueOf(cboBladkleurJan.getValue());
+                    sNaamCmbBloeiKleur = String.valueOf(cboBloeikleurJan.getValue());
+                    sNaamSpnBloeihoogte = spnMaxBloeihoogteJan.getValue().toString();
+                    break;
+                case 2:
+                    sNaamSpnbladhoogte = spnBladhoogteFeb.getValue().toString();
+                    sNaamCmbBladKleur = String.valueOf(cboBladkleurFeb.getValue());
+                    sNaamCmbBloeiKleur = String.valueOf(cboBloeikleurFeb.getValue());
+                    sNaamSpnBloeihoogte = spnMaxBloeihoogteFeb.getValue().toString();
+                    break;
+                case 3:
+                    sNaamSpnbladhoogte = spnBladhoogteMaa.getValue().toString();
+                    sNaamCmbBladKleur = String.valueOf(cboBladkleurMaa.getValue());
+                    sNaamCmbBloeiKleur = String.valueOf(cboBloeikleurMaa.getValue());
+                    sNaamSpnBloeihoogte = spnMaxBloeihoogteMaa.getValue().toString();
+                    break;
+                case 4:
+                    sNaamSpnbladhoogte = spnBladhoogteApr.getValue().toString();
+                    sNaamCmbBladKleur = String.valueOf(cboBladkleurApr.getValue());
+                    sNaamCmbBloeiKleur = String.valueOf(cboBloeikleurApr.getValue());
+                    sNaamSpnBloeihoogte = spnMaxBloeihoogteApr.getValue().toString();
+                    break;
+                case 5:
+                    sNaamSpnbladhoogte = spnBladhoogteMei.getValue().toString();
+                    sNaamCmbBladKleur = String.valueOf(cboBladkleurMei.getValue());
+                    sNaamCmbBloeiKleur = String.valueOf(cboBloeikleurMei.getValue());
+                    sNaamSpnBloeihoogte = spnMaxBloeihoogteMei.getValue().toString();
+                    break;
+                case 6:
+                    sNaamSpnbladhoogte = spnBladhoogteJun.getValue().toString();
+                    sNaamCmbBladKleur = String.valueOf(cboBladkleurJun.getValue());
+                    sNaamCmbBloeiKleur = String.valueOf(cboBloeikleurJun.getValue());
+                    sNaamSpnBloeihoogte = spnMaxBloeihoogteJun.getValue().toString();
+                    break;
+                case 7:
+                    sNaamSpnbladhoogte = spnBladhoogteJul.getValue().toString();
+                    sNaamCmbBladKleur = String.valueOf(cboBladkleurJul.getValue());
+                    sNaamCmbBloeiKleur = String.valueOf(cboBloeikleurJul.getValue());
+                    sNaamSpnBloeihoogte = spnMaxBloeihoogteJul.getValue().toString();
+                    break;
+                case 8:
+                    sNaamSpnbladhoogte = spnBladhoogteAug.getValue().toString();
+                    sNaamCmbBladKleur = String.valueOf(cboBladkleurAug.getValue());
+                    sNaamCmbBloeiKleur = String.valueOf(cboBloeikleurAug.getValue());
+                    sNaamSpnBloeihoogte = spnMaxBloeihoogteAug.getValue().toString();
+                    break;
+                case 9:
+                    sNaamSpnbladhoogte = spnBladhoogteSept.getValue().toString();
+                    sNaamCmbBladKleur = String.valueOf(cboBladkleurSept.getValue());
+                    sNaamCmbBloeiKleur = String.valueOf(cboBloeikleurSept.getValue());
+                    sNaamSpnBloeihoogte = spnMaxBloeihoogteSept.getValue().toString();
+                    break;
+                case 10:
+                    sNaamSpnbladhoogte = spnBladhoogteOkt.getValue().toString();
+                    sNaamCmbBladKleur = String.valueOf(cboBladkleurOkt.getValue());
+                    sNaamCmbBloeiKleur = String.valueOf(cboBloeikleurOkt.getValue());
+                    sNaamSpnBloeihoogte = spnMaxBloeihoogteOkt.getValue().toString();
+                    break;
+                case 11:
+                    sNaamSpnbladhoogte = spnBladhoogteNov.getValue().toString();
+                    sNaamCmbBladKleur = String.valueOf(cboBladkleurNov.getValue());
+                    sNaamCmbBloeiKleur = String.valueOf(cboBloeikleurNov.getValue());
+                    sNaamSpnBloeihoogte = spnMaxBloeihoogteNov.getValue().toString();
+                    break;
+                case 12:
+                    sNaamSpnbladhoogte = spnBladhoogteDec.getValue().toString();
+                    sNaamCmbBladKleur = String.valueOf(cboBladkleurDec.getValue());
+                    sNaamCmbBloeiKleur = String.valueOf(cboBloeikleurDec.getValue());
+                    sNaamSpnBloeihoogte = spnMaxBloeihoogteDec.getValue().toString();
+                    break;
+            }
+
+
+            aBladhoogte.add(sNaamSpnbladhoogte);
+            aBladkleur.add(sNaamCmbBladKleur);
+            aBloeihoogte.add(sNaamSpnBloeihoogte);
+            aBloeikleur.add(sNaamCmbBloeiKleur);
+
+
+        }
+    }
+
+    // aanmaken Fenotype multi eigenschappen in DB
+    public void createFenoMultiEig(ArrayList array, Plant plant) throws SQLException {
+
+        FenotypeDAO fenotypedao = new FenotypeDAO(dbConnection);
+        FenoMulti_Eigenschap fenomulti = new FenoMulti_Eigenschap(
+                plant.getId(),
+                (String) array.get(0),
+                (String) array.get(1),
+                (String) array.get(2),
+                (String) array.get(3),
+                (String) array.get(4),
+                (String) array.get(5),
+                (String) array.get(6),
+                (String) array.get(7),
+                (String) array.get(8),
+                (String) array.get(9),
+                (String) array.get(10),
+                (String) array.get(11),
+                (String) array.get(12)
+        );
+        fenotypedao.createfenomulti(fenomulti, plant);
+
+
+    }
+
+
+    //Abiotische factoren Multi (Habitat) in DB & Functie list view
+    public void createListViewReaderHabitat(ListView ls, Plant plant, Label label) throws SQLException {
+        ArrayList<String> al = new ArrayList<>();
+        al.addAll(ls.getItems());
+
+        //Als er geen gegevens gevonden zijn in de arraylist en dus in de list view
+        //dan word Nog niet ingegeven in de arraylist gestoken om deze zo op te slaan in de db
+        if (al.size() == 0) {
+            al.add("nog niet ingegeven");
+        }
+
+        for (int i = 0; i < al.size(); i++) {
+            AbiotischeFactorenDAO abiotischedao = new AbiotischeFactorenDAO(dbConnection);
+            AbioMulti_Eigenschap abioMulti_eigenschap = new AbioMulti_Eigenschap
+                    (
+                            plant.getId(),
+                            label.getText()
+                            , al.get(i)
+                    );
+            abiotischedao.createabiomulti(abioMulti_eigenschap, plant);
+            ls.getItems().clear();
+            ls.refresh();
+        }
+    }
+
+    //Insert Commensalisme Multi (levensduur) toevoegen DB
+    public void createListViewReaderLevensduur(ListView ls, Plant plant) throws SQLException {
+        ArrayList<String> al = new ArrayList<>();
+        al.addAll(ls.getItems());
+
+        //Als er geen gegevens gevonden zijn in de arraylist en dus in de list view
+        //dan word Nog niet ingegeven in de arraylist gestoken om deze zo op te slaan in de db
+        if (al.size() == 0) {
+            al.add("nog niet ingegeven");
+        }
+
+        for (int i = 0; i < al.size(); i++) {
+
+            CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
+            CommMulti_Eigenschap commMulti_eigenschap = new CommMulti_Eigenschap
+                    (
+                            plant.getId(),
+                            lblLevensduur.getText()
+                            , al.get(i)
+                    );
+            commensalismeDAO.createcommulti(commMulti_eigenschap, plant);
+        }
+    }
+
+    //Insert gegevens commensalisme Multi (Sociabiliteit) in DB
+    public void createCommMultiSociabiliteit(Plant plant) throws SQLException {
+        RadioButton selectcoc = (RadioButton) Sociabiliteit.getSelectedToggle();
+        String sSoc = selectcoc.getText();
+        CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
+        CommMulti_Eigenschap commMulti_eigenschap = new CommMulti_Eigenschap(
+                plant.getId(),
+                lblSociabiliteit.getText(),
+                sSoc);
+        commensalismeDAO.createcommulti(commMulti_eigenschap, plant);
+    }
+
+
+    public void notificationBox(String string) {
+        JOptionPane.showMessageDialog(null, string);
+    }
+
+    /* !!!!Click Events!!!!!*/
+
+    //Clicked events Delete from Listview (Habitat en Levensduur) met methode deleteFromListMethode
+    public void clicked_DeltenHabitat(MouseEvent mouseEvent) {
+        deleteFromListMethode(lvHabitat);
+    }
+
+    public void clicked_DeleteLevensduur(MouseEvent mouseEvent) {
+        deleteFromListMethode(lvLevensduur);
+    }
+
+    //delete from list Methode +fout afhandeling
+    public void deleteFromListMethode(ListView lv) {
+        try {
+            String sStringTester = lv.getSelectionModel().getSelectedItem().toString();
+            System.out.println(sStringTester);
+        } catch (NullPointerException exception) {
+            notificationBox("Gelieve een keuze te maken uit de lijst voor u kan verwijderen");
+        }
+        lv.getItems().remove(lv.getSelectionModel().getSelectedItem());
+        lv.refresh();
+    }
+
+
+    //Clicked events add to Listview (Habitat en Levensduur) met methode toevoegenAanListMethode
+    public void clicked_ToevoegenHabitat(MouseEvent mouseEvent) {
+        ToevoegenAanListMethode(lvHabitat, cboHabitat);
+    }
+
+    public void clicked_ToevoegenLevensduur(MouseEvent mouseEvent) {
+        ToevoegenAanListMethode(lvLevensduur, cboLevensduur);
+    }
+
+    //add to list Methode +fout afhandeling
+    public void ToevoegenAanListMethode(ListView lv, ComboBox cmb) {
+        try {
+            lv.getItems().add(cmb.getValue().toString());
+        } catch (NullPointerException NullExc1) {
+            notificationBox("gelieve iets te selecteren voor toe te voegen");
+        }
+    }
+
+
+    //functie voor terug te kunnen keren naar het zoek scherm.
+    public void clicked_TerugGaan(MouseEvent mouseEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("view/PlantToevoegen.fxml"));
+        Scene scene = new Scene(root);
+        Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        window.show();
+        window.setScene(scene);
+    }
+
+    //functie voor
+    public void clicked_versturenVoorGoedkeuring(ActionEvent actionEvent) throws SQLException {
+        Plant plantje = (Plant) lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedItem();
+        int sAntwoord = JOptionPane.showConfirmDialog(null, "bent u zeker dat u plant " + plantje.getFgsv() + " wenst door te sturen voor verbetering ?");
+        System.out.println(sAntwoord);
+        //antwoord yes
+        if (sAntwoord == 0) {
+            plantje.setStatus(1);
+            PlantDAO plantdao = new PlantDAO(dbConnection);
+            plantdao.updatePlantStatusByID(plantje);
+            lijstmakerEnRefresher();
+        } else {
+            notificationBox("De plant is niet doorgestuurd");
+        }
+    }
+
+    public void clicked_BeheersdadenGeselecteerdePlant(MouseEvent mouseEvent) throws SQLException {
+        Plant plant = (Plant) lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedItem();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("view/BeheeBehandelingPlant.fxml"));
+            Parent root = loader.load();
+            ControllerBeheer controllerBeheer = loader.getController();
+            controllerBeheer.initialize(plant);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException | SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void Clicked_LijstVanOpgeslagenPlanten(ActionEvent actionEvent) throws SQLException {
+        lijstmakerEnRefresher();
+    }
+
+    public void lijstmakerEnRefresher() throws SQLException {
+        lvLijstOpgeslagenPlanten.getItems().clear();
+        lvLijstOpgeslagenPlanten.refresh();
+
+        PlantDAO plantdao = new PlantDAO(dbConnection);
+        ArrayList<Plant> arrPlantjes = new ArrayList();
+        arrPlantjes.addAll(plantdao.getPlantenByStatus(0));
+        for (int i = 0; i < arrPlantjes.size(); i++) {
+            lvLijstOpgeslagenPlanten.getItems().add(arrPlantjes.get(i));
+        }
+    }
+
+    /* Deze functie word opgeroepen om de comboboxen van de kleuren en maand
+       aan te passen van text naar kleur om een mooiere gebruikers ervaring */
+    public void textToColor(ComboBox cbo, String kleur) {
+        switch (kleur) {
+            case "rood":
+                cbo.setStyle("-fx-background-color:RED; -fx-text-base-color: WHITE");
+
+                break;
+            case "bruin":
+                cbo.setStyle("-fx-background-color:BROWN");
+                break;
+            case "geel":
+                cbo.setStyle("-fx-background-color:YELLOW");
+                break;
+            case "grijs":
+                cbo.setStyle("-fx-background-color:GREY");
+                break;
+            case "groen":
+                cbo.setStyle("-fx-background-color:GREEN");
+                break;
+            case "lila":
+                cbo.setStyle("-fx-background-color:LAVENDER");
+                break;
+            case "oranje":
+                cbo.setStyle("-fx-background-color:ORANGE");
+                break;
+            case "paars":
+                cbo.setStyle("-fx-background-color:PURPLE;  -fx-text-base-color: WHITE ");
+
+                break;
+            case "roze":
+                cbo.setStyle("-fx-background-color:PINK");
+                break;
+            case "violet":
+                cbo.setStyle("-fx-background-color:VIOLET;  ");
+                break;
+            case "":
+                cbo.setStyle("-fx-background-color:white");
+                break;
+            case "wit":
+                cbo.setStyle("-fx-background-color:white");
+                break;
+            case "zwart":
+                cbo.setStyle("-fx-background-color:Black;  -fx-text-base-color: WHITE");
+
+                break;
+            case "blauw":
+                cbo.setStyle("-fx-background-color:BLUE;  -fx-text-base-color: WHITE ");
+
+                break;
+            case "Unkown":
+                cbo.setStyle("-fx-background-color:Lightgray ");
+        }
+
+    }
+
+    // Clicked event op de Comboboxes voor text naar kleur
+    public void clickedbladkleurjan(ActionEvent actionEvent) {
+        textToColor(cboBladkleurJan, cboBladkleurJan.getValue().toString());
+
+    }
+
+    public void clickedcboBladkleurFeb(ActionEvent actionEvent) {
+        textToColor(cboBladkleurFeb, cboBladkleurFeb.getValue().toString());
+    }
+
+    public void clickedcboBladkleurMaa(ActionEvent actionEvent) {
+        textToColor(cboBladkleurMaa, cboBladkleurMaa.getValue().toString());
+    }
+
+    public void clickedcboBladkleurApr(ActionEvent actionEvent) {
+        textToColor(cboBladkleurApr, cboBladkleurApr.getValue().toString());
+    }
+
+    public void ClickedcboBladkleurMei(ActionEvent actionEvent) {
+        textToColor(cboBladkleurMei, cboBladkleurMei.getValue().toString());
+    }
+
+    public void ClickedcboBladkleurJun(ActionEvent actionEvent) {
+        textToColor(cboBladkleurJun, cboBladkleurJun.getValue().toString());
+    }
+
+    public void ClickedcboBladkleurJul(ActionEvent actionEvent) {
+        textToColor(cboBladkleurJul, cboBladkleurJul.getValue().toString());
+    }
+
+    public void ClickedcboBladkleurAug(ActionEvent actionEvent) {
+        textToColor(cboBladkleurAug, cboBladkleurAug.getValue().toString());
+    }
+
+    public void ClickedcboBladkleurSept(ActionEvent actionEvent) {
+        textToColor(cboBladkleurSept, cboBladkleurSept.getValue().toString());
+    }
+
+    public void ClickedcboBladkleurOkt(ActionEvent actionEvent) {
+        textToColor(cboBladkleurOkt, cboBladkleurOkt.getValue().toString());
+    }
+
+    public void ClickedcboBladkleurNov(ActionEvent actionEvent) {
+        textToColor(cboBladkleurNov, cboBladkleurNov.getValue().toString());
+    }
+
+    public void ClickedcboBladkleurDec(ActionEvent actionEvent) {
+        textToColor(cboBladkleurDec, cboBladkleurDec.getValue().toString());
+    }
+
+    public void actioncboBloeikleurJan(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurJan, cboBloeikleurJan.getValue().toString());
+    }
+
+    public void actioncboBloeikleurFeb(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurFeb, cboBloeikleurFeb.getValue().toString());
+    }
+
+    public void actioncboBloeikleurMaa(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurMaa, cboBloeikleurMaa.getValue().toString());
+    }
+
+    public void actioncboBloeikleurApr(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurApr, cboBloeikleurApr.getValue().toString());
+    }
+
+    public void actioncboBloeikleurMei(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurMei, cboBloeikleurMei.getValue().toString());
+    }
+
+    public void actioncboBloeikleurJun(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurJun, cboBloeikleurJun.getValue().toString());
+    }
+
+    public void actioncboBloeikleurJul(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurJul, cboBloeikleurJul.getValue().toString());
+    }
+
+    public void actioncboBloeikleurAug(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurAug, cboBloeikleurAug.getValue().toString());
+    }
+
+    public void actioncboBloeikleurSept(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurSept, cboBloeikleurSept.getValue().toString());
+    }
+
+    public void actioncboBloeikleurOkt(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurOkt, cboBloeikleurOkt.getValue().toString());
+    }
+
+    public void actioncboBloeikleurNov(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurNov, cboBloeikleurNov.getValue().toString());
+    }
+
+    public void actioncboBloeikleurDec(ActionEvent actionEvent) {
+        textToColor(cboBloeikleurDec, cboBloeikleurDec.getValue().toString());
+    }
+
+
+    public void btnAfbChooser1(ActionEvent actionEvent) {
+    }
+
+    public void btnAfbChooser2(ActionEvent actionEvent) {
+    }
+
+    public void invoegenStandaard() {
+        cboType.setValue(objectPlant.getType());
+        txtFamilie.setText(objectPlant.getFamilie());
+        txtGeslacht.setText(objectPlant.getGeslacht());
+        txtSoort.setText(objectPlant.getSoort());
+        txtVariant.setText(objectPlant.getVariatie());
+        spnMinPlantDicht.getValueFactory().setValue(objectPlant.getMinPlantdichtheid());
+        spnMaxPlantDicht.getValueFactory().setValue(objectPlant.getMaxPlantdichtheid());
+    }
+
+    public void invoegAbiotische() throws SQLException {
+        AbiotischeFactorenDAO abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
+        ArrayList<String> arrListAbiotisch = abiotischeFactorenDAO.getAbiotischById(objectPlant.getId());
+        cboBezonning.setValue(arrListAbiotisch.get(2));
+        cboVoedingsbehoefte.setValue(arrListAbiotisch.get(5));
+        cboVochtbehoefte.setValue(arrListAbiotisch.get(4));
+        cboGrondsoort.setValue(arrListAbiotisch.get(3));
+        cboReactieAntag.setValue(arrListAbiotisch.get(6));
+    }
+
+    public void invoegCommensalisme() throws SQLException {
+        CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
+        ArrayList<String> arrListCommensalisme = commensalismeDAO.getCommensalismeById(objectPlant.getId());
+        cboOntwikkelingssnelheid.setValue(arrListCommensalisme.get(2));
+    }
+
+    public void invoegFenotype() throws SQLException {
+        FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
+        ArrayList<String> arrListFenotype = fenotypeDAO.getFenotypeById(objectPlant.getId());
+        cboBladgrootte.setValue(arrListFenotype.get(6));
+        cboBladvorm.setValue(arrListFenotype.get(2));
+        cboRatio.setValue(arrListFenotype.get(7));
+        cboSpruitfenologie.setValue(arrListFenotype.get(8));
+        String levensvorm = arrListFenotype.get(3);
+        switch (levensvorm) {
+            case "1. Hydrofyt":
+                rdbHydrofyt1.setSelected(true);
+                break;
+            case "2. Hydrofyt":
+                rdbHydrofyt2.setSelected(true);
+                break;
+            case "3. Helofyt":
+                rdbHelofyt3.setSelected(true);
+                break;
+            case "4. Cryptophyt":
+                rdbCryptophyt4.setSelected(true);
+                break;
+            case "5. Cryptophyt":
+                rdbCryptophyt4.setSelected(true);
+                break;
+            case "6. Hemikryptofyt":
+                rdbHemikryptofyt6.setSelected(true);
+                break;
+            case "7. Chamaefyt":
+                rdbChamaefyt7.setSelected(true);
+                break;
+            case "8. Chamaefyt":
+                rdbChamaefyt8.setSelected(true);
+                break;
+            case "9. Fanerophyt":
+                rdbFanerophyt9.setSelected(true);
+                break;
+            case "0. Niet gekend":
+                rdbNietGekend.setSelected(true);
+                break;
+        }
+
+        String habitus = arrListFenotype.get(4);
+        switch (habitus) {
+            case "Tufted":
+                rdbTufted.setSelected(true);
+                break;
+            case "Upright Arching":
+                rdbUprightArching.setSelected(true);
+                break;
+            case "Arching":
+                rdbArching.setSelected(true);
+                break;
+            case "Upright Divergent":
+                rdbUprightDivergent.setSelected(true);
+                break;
+            case "Upright Erect":
+                rdbUprightErect.setSelected(true);
+                break;
+            case "Mounded":
+                rdbMounded.setSelected(true);
+                break;
+            case "Mattenvormend":
+                rdbMattenvormend.setSelected(true);
+                break;
+            case "Waaivormig":
+                rdbWaaivormig.setSelected(true);
+                break;
+            case "Kussenvomend":
+                rdbKussenvormend.setSelected(true);
+                break;
+            case "Zuilvormig":
+                rdbZuilvomrig.setSelected(true);
+                break;
+            case "Uitbuigend":
+                rdbUitbuigend.setSelected(true);
+                break;
+            case "Unknown":
+                rdbHUnknown.setSelected(true);
+                break;
+        }
+
+        String bloeiwijze = arrListFenotype.get(5);
+        switch (bloeiwijze) {
+            case "Aar":
+                rdbAar.setSelected(true);
+                break;
+            case "Brede pluim":
+                rdbBredePluim.setSelected(true);
+                break;
+            case "Etage":
+                rdbEtage.setSelected(true);
+                break;
+            case "Margrietachtig":
+                rdbMargrietachtig.setSelected(true);
+                break;
+            case "Schotel":
+                rdbSchotel.setSelected(true);
+                break;
+            case "Scherm":
+                rdbScherm.setSelected(true);
+                break;
+            case "Smalle pluim":
+                rdbSmallePluim.setSelected(true);
+                break;
+            case "Unknown":
+                rdbBUnknown.setSelected(true);
+                break;
+
+
+        }
+
+    }
+
+    public void invoegenExtra() throws SQLException {
+        ExtraDAO extraDAO = new ExtraDAO(dbConnection);
+        ArrayList<String> arrListExtra = extraDAO.getExtraById(objectPlant.getId());
+        spnNectarwaarde.getValueFactory().setValue(Integer.parseInt(arrListExtra.get(2)));
+        spnPollenwaarde.getValueFactory().setValue(Integer.parseInt(arrListExtra.get(3)));
+        String bijvriendelijk = arrListExtra.get(4);
+        switch (bijvriendelijk) {
+            case "J":
+                rdbBijvriendelijkJa.setSelected(true);
+                break;
+            case "N":
+                rdbBijvriendelijkNeen.setSelected(true);
+                break;
+            case "":
+                rdbBijvriendelijkLeeg.setSelected(true);
+                break;
+        }
+        String vlindervriendelijk = arrListExtra.get(5);
+        switch (vlindervriendelijk) {
+            case "J":
+                rdbVlindervriendelijkJa.setSelected(true);
+                break;
+            case "N":
+                rdbVlindervriendelijkNeen.setSelected(true);
+                break;
+            case "":
+                rdbVlindervriendelijkLeeg.setSelected(true);
+                break;
+        }
+        String eetbaar = arrListExtra.get(6);
+        switch (eetbaar) {
+            case "J":
+                rdbEetbaarJa.setSelected(true);
+                break;
+            case "N":
+                rdbEetbaarNeen.setSelected(true);
+                break;
+            case "":
+                rdbEetbaarLeeg.setSelected(true);
+                break;
+        }
+        String kruidgebruik = arrListExtra.get(7);
+        switch (kruidgebruik) {
+            case "J":
+                rdbKruidgebruikJa.setSelected(true);
+                break;
+            case "N":
+                rdbKruidgebruikNeen.setSelected(true);
+                break;
+            case "":
+                rdbKruidgebruikLeeg.setSelected(true);
+                break;
+        }
+        String geurend = arrListExtra.get(8);
+        switch (geurend) {
+            case "J":
+                rdbGeurendJa.setSelected(true);
+                break;
+            case "N":
+                rdbGeurendNeen.setSelected(true);
+                break;
+            case "":
+                rdbGeurendLeeg.setSelected(true);
+                break;
+        }
+        String vorstgevoelig = arrListExtra.get(9);
+        switch (vorstgevoelig) {
+            case "J":
+                rdbVorstgevoeligJa.setSelected(true);
+                break;
+            case "N":
+                rdbVorstgevoeligNeen.setSelected(true);
+                break;
+            case "":
+                rdbVorstgevoeligLeeg.setSelected(true);
+                break;
+        }
     }
 }

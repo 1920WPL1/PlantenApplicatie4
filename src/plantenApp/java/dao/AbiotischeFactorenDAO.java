@@ -28,44 +28,22 @@ public class AbiotischeFactorenDAO implements Queries {
                 Statement.RETURN_GENERATED_KEYS);
     }
 
-
-    public AbiotischeFactoren getById(int id) throws SQLException {
-        AbiotischeFactoren abio = null;
+    public ArrayList getAbiotischById(int id) throws SQLException {
+        ArrayList<String> arrListAbiotisch = new ArrayList<>();
 
         stmtSelectAbioByID.setInt(1, id);
         ResultSet rs = stmtSelectAbioByID.executeQuery();
-        if (rs.next()) {
-            abio = new AbiotischeFactoren(
-                    rs.getInt("abiotische_id"),
-                    rs.getInt("plant_id"),
-                    rs.getString("bezonning"),
-                    rs.getString("grondsoort"),
-                    rs.getString("vochtbehoefte"),
-                    rs.getString("voedingsbehoefte"),
-                    rs.getString("reactie_antagonistische_omg"),
-                    getByIdMulti(id)
-            );
-        }
-        return abio;
-    }
-
-    private ArrayList<AbioMulti_Eigenschap> getByIdMulti(int id) throws SQLException {
-        ArrayList<AbioMulti_Eigenschap> abioMulti = new ArrayList<>();
-        ;
-
-        stmtSelectAbioMultiByID.setInt(1, id);
-        ResultSet rs = stmtSelectAbioMultiByID.executeQuery();
         while (rs.next()) {
-            AbioMulti_Eigenschap abioEigenschap = new AbioMulti_Eigenschap(
-                    rs.getInt("abiotische_id"),
-                    rs.getString("eigenschap"),
-                    rs.getString("waarde")
-            );
-            abioMulti.add(abioEigenschap);
+            arrListAbiotisch.add(rs.getString("abiotische_id"));
+            arrListAbiotisch.add(rs.getString("plant_id"));
+            arrListAbiotisch.add(rs.getString("bezonning"));
+            arrListAbiotisch.add(rs.getString("grondsoort"));
+            arrListAbiotisch.add(rs.getString("vochtbehoefte"));
+            arrListAbiotisch.add(rs.getString("voedingsbehoefte"));
+            arrListAbiotisch.add(rs.getString("reactie_antagonistische_omg"));
         }
-        return abioMulti;
+        return arrListAbiotisch;
     }
-
 
 
 

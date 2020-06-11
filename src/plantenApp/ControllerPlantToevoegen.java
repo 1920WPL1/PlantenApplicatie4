@@ -302,6 +302,7 @@ public class ControllerPlantToevoegen {
         return string;
     }
 
+
     //Toevoegen van een volledige plant
     public void clicked_ToevoegenPlant(MouseEvent mouseEvent) throws SQLException, IOException {
         //Kijken of type ingevuld is of niet
@@ -442,6 +443,8 @@ public class ControllerPlantToevoegen {
         int iPollenwaarde = (int) spnPollenwaarde.getValue();
         RadioButton selectBijvriendelijk = (RadioButton) BijvriendelijkToggle.getSelectedToggle();
         String sBijvriendelijk = selectBijvriendelijk.getText();
+        RadioButton selectVlindervriendelijk = (RadioButton) VlindervriendelijkToggle.getSelectedToggle();
+        String sVlindervriendelijk = selectVlindervriendelijk.getText();
         RadioButton selectEetbaar = (RadioButton) EetbaarToggle.getSelectedToggle();
         String sEetbaar = selectEetbaar.getText();
         RadioButton selectKruidgebruik = (RadioButton) KruidgebruikToggle.getSelectedToggle();
@@ -457,6 +460,7 @@ public class ControllerPlantToevoegen {
                 iNectarwaarde,
                 iPollenwaarde,
                 sBijvriendelijk,
+                sVlindervriendelijk,
                 sEetbaar,
                 sKruidgebruik,
                 sGeurend,
@@ -699,8 +703,6 @@ public class ControllerPlantToevoegen {
         window.show();
         window.setScene(scene);
     }
-
-
     //verstuuring voor goedkeuring
     public void clicked_versturenVoorGoedkeuring(ActionEvent actionEvent) throws SQLException {
         Plant plantje = (Plant) lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedItem();
@@ -968,4 +970,18 @@ public class ControllerPlantToevoegen {
     }
 
 
+    public void Clicked_Wijzigen(MouseEvent mouseEvent) {
+        Plant plant = (Plant) lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedItem();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("view/PlantWijzigen.fxml"));
+            Parent root = loader.load();
+            ControllerPlantWijzigen controllerPlantWijzigen = loader.getController();
+            controllerPlantWijzigen.initialize(plant);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException | SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
