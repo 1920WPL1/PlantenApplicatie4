@@ -307,7 +307,7 @@ public class ControllerPlantToevoegen {
 
 
     //Toevoegen van een volledige plant
-    public void clicked_ToevoegenPlant(MouseEvent mouseEvent) throws SQLException, IOException {
+    public void clicked_ToevoegenPlant(MouseEvent mouseEvent) throws Exception {
         //Kijken of type ingevuld is of niet
         //Zo niet krijg je een bericht dat je een type moet kiezen
         //Zo ja maakt hij de plant aan
@@ -339,7 +339,7 @@ public class ControllerPlantToevoegen {
                             fgsv,
                             iStatus,
                             uDate);
-            
+
             createPlantNaam();
             plantDao.createPlant(plant);
 
