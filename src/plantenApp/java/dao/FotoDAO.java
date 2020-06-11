@@ -22,19 +22,6 @@ public class FotoDAO implements Queries {
                 Statement.RETURN_GENERATED_KEYS);
     }
 
-<<<<<<< HEAD
-
-    public Foto getFotoById(int id) throws SQLException {
-        Foto foto = null;
-
-        foto = new Foto(
-                id,
-                getFotos(id)
-        );
-        return foto;
-    }
-=======
->>>>>>> GeoffkeTak
 
     private ArrayList<Foto_Eigenschap> getFotos(int id) throws SQLException {
         ArrayList<Foto_Eigenschap> fotos = new ArrayList<>();

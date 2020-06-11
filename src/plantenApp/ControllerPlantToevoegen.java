@@ -302,10 +302,6 @@ public class ControllerPlantToevoegen {
         return string;
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> GeoffkeTak
     //Toevoegen van een volledige plant
     public void clicked_ToevoegenPlant(MouseEvent mouseEvent) throws SQLException, IOException {
         //Kijken of type ingevuld is of niet
@@ -704,11 +700,8 @@ public class ControllerPlantToevoegen {
         window.setScene(scene);
     }
 
-<<<<<<< HEAD
-    //functie voor
-=======
-    //clicked event voor
->>>>>>> GeoffkeTak
+
+    //verstuuring voor goedkeuring
     public void clicked_versturenVoorGoedkeuring(ActionEvent actionEvent) throws SQLException {
         Plant plantje = (Plant) lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedItem();
         int sAntwoord = JOptionPane.showConfirmDialog(null, "bent u zeker dat u plant " + plantje.getFgsv() + " wenst door te sturen voor verbetering ?");
@@ -724,10 +717,9 @@ public class ControllerPlantToevoegen {
         }
     }
 
-<<<<<<< HEAD
-=======
+
     //clicked event voor Beheersdaad voor de geselcteerde plant naar view
->>>>>>> GeoffkeTak
+
     public void clicked_BeheersdadenGeselecteerdePlant(MouseEvent mouseEvent) throws SQLException {
         Plant plant = (Plant) lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedItem();
         try {
