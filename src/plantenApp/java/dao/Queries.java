@@ -353,6 +353,10 @@ public interface Queries {
     String INSERTVOEDINGSBEHOEFTE =
             "INSERT INTO voedingsbehoeft(waarde) VALUES(?)";
 
+    String INSERTFOTOEIG =
+            "INSERT INTO foto (plant_id, eigenschap, url, figuur)" +
+                    "VALUES (?,?,?,?)";
+
 
     String UPDATESTATUSBYID =
            "UPDATE plant SET status = ? WHERE plant_id= ?";

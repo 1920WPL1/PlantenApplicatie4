@@ -15,12 +15,18 @@ import javafx.stage.Window;
 import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 
 public class ControllerPlantToevoegen {
@@ -220,7 +226,7 @@ public class ControllerPlantToevoegen {
     String sNaamSpnBloeihoogte;
     String sNaamCmbBladKleur;
     String sNaamCmbBloeiKleur;
-    private Window mainStage;
+
 
     public void initialize() throws SQLException {
         dbConnection = Database.getInstance().getConnection();
@@ -297,15 +303,13 @@ public class ControllerPlantToevoegen {
     }
 
     //Toevoegen van een volledige plant
-    public void clicked_ToevoegenPlant(MouseEvent mouseEvent) throws SQLException {
+    public void clicked_ToevoegenPlant(MouseEvent mouseEvent) throws SQLException, IOException {
         //Kijken of type ingevuld is of niet
         //Zo niet krijg je een bericht dat je een type moet kiezen
         //Zo ja maakt hij de plant aan
-        if (cboType.getValue().toString().equals(""))
-        {
+        if (cboType.getValue().toString().equals("")) {
             JOptionPane.showMessageDialog(null, "Kies een type!");
-        }
-        else {
+        } else {
             //vars voor plant
             String sType = cboType.getValue().toString();
             String sFam = txtFamilie.getText();
@@ -318,7 +322,7 @@ public class ControllerPlantToevoegen {
             int iStatus = 0;
             java.sql.Date uDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
             System.out.println(uDate);
-        //Insert van plant
+            //Insert van plant
             PlantDAO plantDao = new PlantDAO(dbConnection);
             Plant plant = new Plant
                     (sType,
@@ -333,30 +337,37 @@ public class ControllerPlantToevoegen {
                             uDate);
             plantDao.createPlant(plant);
 
-        //Insert Abiotische factoren
+            //Insert Abiotische factoren
             createAbiotische(plant);
-        //Insert Commensalisme
+            //Insert Commensalisme
             createCommensalisme(plant);
-        //Insert Fenotype tot DB
+            //Insert Fenotype tot DB
             createFenoType(plant);
-        //Insert Extra waarden tot DB
+            //Insert Extra waarden tot DB
             createExtra(plant);
 
-        //Aanmaken van de arrays voor de Feno Multi eigenschappen
+            //Aanmaken van de arrays voor de Feno Multi eigenschappen
             setArrayFenotypeMultiFunction();
-        //Insert Fenotype multi eigenschap per categorie blad, bloei hoogte... tot DB
+            //Insert Fenotype multi eigenschap per categorie blad, bloei hoogte... tot DB
             createFenoMultiEig(aBladhoogte, plant);
             createFenoMultiEig(aBladkleur, plant);
             createFenoMultiEig(aBloeihoogte, plant);
             createFenoMultiEig(aBloeikleur, plant);
 
-        //Insert Abiotische Multi Gegevens tot DB en oproepen functie listview Reader
+            //Insert Abiotische Multi Gegevens tot DB en oproepen functie listview Reader
             createListViewReaderHabitat(lvHabitat, plant, lblHabitat);
 
 
-        //Toevoegen Commensalisme Multi waarden tot DB met listviewreader en gewone methode
+            //Toevoegen Commensalisme Multi waarden tot DB met listviewreader en gewone methode
             createListViewReaderLevensduur(lvLevensduur, plant);
             createCommMultiSociabiliteit(plant);
+
+
+            String sPLantdetail="Plant Detail";
+            InsertFotoInDB(plant,sPLantdetail,imgView1);
+
+            String sPLant="Plant Geheel";
+            InsertFotoInDB(plant,sPLant,imgView2);
 
             notificationBox("U plant is opgeslagen " + "\r\n" + plant.getFgsv());
             btnVerstuurVoorGoek.setDisable(false);
@@ -700,12 +711,13 @@ public class ControllerPlantToevoegen {
             PlantDAO plantdao = new PlantDAO(dbConnection);
             plantdao.updatePlantStatusByID(plantje);
             lijstmakerEnRefresher();
-        } else {notificationBox("De plant is niet doorgestuurd");
+        } else {
+            notificationBox("De plant is niet doorgestuurd");
         }
     }
 
-    //clicked event voor
-    public void clicked_BeheersdadenGeselecteerdePlant(MouseEvent mouseEvent) throws SQLException{
+    //clicked event voor Beheersdaad voor de geselcteerde plant naar view
+    public void clicked_BeheersdadenGeselecteerdePlant(MouseEvent mouseEvent) throws SQLException {
         Plant plant = (Plant) lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedItem();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("view/BeheeBehandelingPlant.fxml"));
@@ -723,6 +735,66 @@ public class ControllerPlantToevoegen {
     //clicked event
     public void Clicked_LijstVanOpgeslagenPlanten(ActionEvent actionEvent) throws SQLException {
         lijstmakerEnRefresher();
+        btnVerstuurVoorGoek.setDisable(false);
+    }
+
+    public void btnAfbChooser1(ActionEvent actionEvent) {
+        AfbeeldingKiezen(imgView1);
+    }
+
+    public void btnAfbChooser2(ActionEvent actionEvent) {
+        AfbeeldingKiezen(imgView2);
+    }
+
+    //functie om afbeelding te kiezen
+    public void AfbeeldingKiezen(ImageView iv) {
+        Stage mainStage = new Stage();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.setTitle("Toevoegen foto plant");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image", "*.png", "*.jpg", "*.bmp"));
+        File selectedImage = fileChooser.showOpenDialog(mainStage);
+        String sSelected = selectedImage.getAbsolutePath();
+        String sFinalUrl = "file:///" + sSelected;
+        iv.setImage(new Image(sFinalUrl));
+    }
+
+    public Blob vanImgToBlob(Image img) throws IOException, SQLException {
+
+        BufferedImage Buffimage = ImageIO.read(new URL(img.getUrl()));
+        ByteArrayOutputStream bArrayStr = new ByteArrayOutputStream();
+        ImageIO.write(Buffimage, "jpg", bArrayStr);
+        byte[] jpgByteArray = bArrayStr.toByteArray();
+        StringBuilder sb = new StringBuilder();
+        Blob blob = null;
+        for (byte by : jpgByteArray)
+            sb.append(Integer.toBinaryString(by & 0xFF));
+        String blobString = sb.toString();
+        byte[] byteContent = blobString.getBytes();
+        blob = dbConnection.createBlob();
+        blob.setBytes(1,byteContent);
+
+        return blob;
+    }
+
+
+    //insert foto eigenschappen in DB
+  public void InsertFotoInDB(Plant plant,String sEigensch, ImageView img) throws SQLException, IOException {
+        String sEigenschap = sEigensch;
+        String sUrl = img.getImage().getUrl();
+        Blob bImage = vanImgToBlob(img.getImage());
+        FotoDAO fotoDao = new FotoDAO(dbConnection);
+        Foto_Eigenschap foteig = new Foto_Eigenschap(plant.getId()
+                , sEigenschap,
+                sUrl,
+                bImage);
+        fotoDao.createFoto(foteig,plant);
+          }
+
+
+
+    public void tester(ActionEvent actionEvent) throws IOException, SQLException {
+
     }
 
     //functie voor een lijst te refreshe en een lijst te maken
@@ -893,21 +965,4 @@ public class ControllerPlantToevoegen {
     }
 
 
-    public void btnAfbChooser1(ActionEvent actionEvent) {
-        AfbeeldingKiezen(imgView1);
-    }
-
-    public void btnAfbChooser2(ActionEvent actionEvent) {
-       AfbeeldingKiezen(imgView2);
-    }
-
-    public void AfbeeldingKiezen(ImageView iv){
-        Stage mainStage = new Stage() ;
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Toevoegen foto plant");
-        fileChooser.getExtensionFilters().addAll( new FileChooser.ExtensionFilter("Image", "*.png", "*.jpg", "*.bmp"));
-        File selectedImage = fileChooser.showOpenDialog(mainStage);
-        selectedImage.createNewFile();
-        iv.setImage((Image)selectedImage);
-    }
 }

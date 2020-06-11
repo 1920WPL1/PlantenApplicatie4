@@ -939,6 +939,11 @@
                               <Font size="15.0" />
                            </font>
                         </Button>
+                        <Button layoutX="990.0" layoutY="1090.0" mnemonicParsing="false" onAction="#tester" text="Lijst ">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
               </content>
