@@ -230,7 +230,7 @@ public interface Queries {
     //endregion
 
     //Groep 4
-    //Insert query voor toevoegen
+    //Insert queries voor toevoegen
     String INSERTABIOTISCHEFMULTI =
             "INSERT INTO abiotisch_multi(plant_id, eigenschap, waarde)" +
                     "VALUES(?, ?, ?)";
@@ -276,7 +276,7 @@ public interface Queries {
             "INSERT INTO foto(plant_id, eigenschap, url, figuur)" +
                     "VALUES(?, ?, ?, ?)";
 
-    //Insert query voor naaktetabellen
+    //Insert queries voor naaktetabellen
     String INSERTBEHEERDAAD =
             "INSERT INTO beheerdaad(waarde)" +
                     "VALUES(?)";
@@ -357,7 +357,7 @@ public interface Queries {
     String UPDATESTATUSBYID =
            "UPDATE plant SET status = ? WHERE plant_id= ?";
 
-    //Update query voor aanpassen/wijzigen
+    //Update queries voor aanpassen/wijzigen
     String UPDATEABIOTISCHEFMULTI =
             "UPDATE abiotisch_multi" +
                     "SET plant_id = plant_id, eigenschap = ?, waarde = ?" +
@@ -403,7 +403,7 @@ public interface Queries {
                     "SET plant_id = plant_id, eigenschap = ?, jan = ?, feb = ?, maa = ?, apr = ?, mei = ?, jun = ?, jul = ?, aug = ?, sep = ?, okt = ?, nov = ?, dec = ?" +
                     "WHERE plant_id = ?";
 
-    //Update query voor naakte tabellen
+    //Update queries voor naakte tabellen
     String UPDATEBEHEERDAAD =
             "UPDATE beheerdaad" +
                     "SET waarde = ?";
@@ -508,6 +508,21 @@ public interface Queries {
     String UPDATEVOEDINGSBEHOEFTE =
             "UPDATE voedingsbehoeft" +
                     "SET waarde = ?";
+
+    //Queries voor toevoegen naam
+    String SELECTDUBBELENAAM = "select COUNT(*) from familie f,geslacht g,soort s,variatie v, planttype p " +
+            "where p.planttype_naam = ? and f.familie_naam = ? and g.geslacht_naam = ? and s.soort_naam = ? and v.variatie_naam = ? " +
+            "and f.familie_id = g.familie_id and g.geslacht_id = s.geslacht_id";
+    String SELECTIDPLANTTYPE = "select planttype_id from planttype where planttype_naam = ?";
+    String SELECTDUBBELEFAMILIE = "if exists (select familie_id from familie where familie_naam = ?) " +
+            "select familie_id from familie where familie_naam = ? else select 0";
+    String SELECTDUBBELEGESLACHT = "if exists (select geslacht_id from geslacht where geslacht_naam = ?) " +
+            "select geslacht_id from geslacht where geslacht_naam = ? else select 0";
+    String SELECTDUBBELESOORT = "if exists (select soort_id from soort where soort_naam = ?) " +
+            "select soort_id from soort where soort_naam = ? else select 0";
+    String SELECTDUBBELEVARIATIE = "if exists (select variatie_id from variatie where variatie_naam = ?) " +
+            "select variatie_id from variatie where variatie_naam = ? else select 0";
+
 }
 
 

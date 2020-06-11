@@ -13,10 +13,12 @@ import java.util.ArrayList;
 public class FotoDAO implements Queries {
     private Connection dbConnection;
     private PreparedStatement stmtSelectFotoByID;
+    private PreparedStatement stmtInsertFoto;
 
     public FotoDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
         stmtSelectFotoByID = dbConnection.prepareStatement(GETFOTOBYPLANTID);
+
     }
 
     /**@author Siebe

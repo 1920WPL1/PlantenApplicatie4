@@ -15,6 +15,7 @@ import javafx.stage.Window;
 import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +23,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.logging.Logger;
+
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class ControllerPlantToevoegen {
     //Alle velden die ingevuld moeten worden bij Standaard
@@ -289,21 +293,24 @@ public class ControllerPlantToevoegen {
     public String testerNullpointers(String string, ComboBox cb) {
 
         if (cb.getValue().toString().equals("")) {
-            JOptionPane.showMessageDialog(null, "niet ok");
+            showMessageDialog(null, "niet ok");
         } else {
             string = cb.getValue().toString();
         }
         return string;
     }
 
+
+
+
     //Toevoegen van een volledige plant
-    public void clicked_ToevoegenPlant(MouseEvent mouseEvent) throws SQLException {
+    public void clicked_ToevoegenPlant(MouseEvent mouseEvent) throws Exception {
         //Kijken of type ingevuld is of niet
         //Zo niet krijg je een bericht dat je een type moet kiezen
         //Zo ja maakt hij de plant aan
         if (cboType.getValue().toString().equals(""))
         {
-            JOptionPane.showMessageDialog(null, "Kies een type!");
+            showMessageDialog(null, "Kies een type!");
         }
         else {
             //vars voor plant
@@ -331,6 +338,8 @@ public class ControllerPlantToevoegen {
                             fgsv,
                             iStatus,
                             uDate);
+            
+            createPlantNaam();
             plantDao.createPlant(plant);
 
         //Insert Abiotische factoren
@@ -636,8 +645,33 @@ public class ControllerPlantToevoegen {
 
 
     public void notificationBox(String string) {
-        JOptionPane.showMessageDialog(null, string);
+        showMessageDialog(null, string);
     }
+
+    public void createPlantNaam() throws Exception {
+        if (cboType.getValue().toString().equals(""))
+        {
+            showMessageDialog(null, "Kies een type!");
+        }
+        else {
+            String sType = cboType.getValue().toString();
+            String sFam = txtFamilie.getText();
+            String sGeslacht = txtGeslacht.getText();
+            String sSoort = txtSoort.getText();
+            String sVariant = txtVariant.getText();
+            PlantNaamDAO plantNaamDAO = new PlantNaamDAO(dbConnection);
+            //Conrole op textboxen + dubbele plant is al gebeurd bij controle createplant
+            try {
+                Plant plant = new Plant(sType, sFam, sGeslacht, sSoort, sVariant);
+                plantNaamDAO.createPlantNaam(plant);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Er is een fout opgetreden bij het invullen van de plantnaam.");
+                System.out.println(ex);
+                throw new Exception();
+            }
+        }
+    }
+
 
     /* !!!!Click Events!!!!!*/
 
@@ -892,22 +926,4 @@ public class ControllerPlantToevoegen {
         textToColor(cboBloeikleurDec, cboBloeikleurDec.getValue().toString());
     }
 
-
-    public void btnAfbChooser1(ActionEvent actionEvent) {
-        AfbeeldingKiezen(imgView1);
-    }
-
-    public void btnAfbChooser2(ActionEvent actionEvent) {
-       AfbeeldingKiezen(imgView2);
-    }
-
-    public void AfbeeldingKiezen(ImageView iv){
-        Stage mainStage = new Stage() ;
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Toevoegen foto plant");
-        fileChooser.getExtensionFilters().addAll( new FileChooser.ExtensionFilter("Image", "*.png", "*.jpg", "*.bmp"));
-        File selectedImage = fileChooser.showOpenDialog(mainStage);
-        selectedImage.createNewFile();
-        iv.setImage((Image)selectedImage);
-    }
 }
