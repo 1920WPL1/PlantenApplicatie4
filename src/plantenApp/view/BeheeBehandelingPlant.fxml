@@ -122,7 +122,7 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Spinner fx:id="spnJaar" prefHeight="30.0" prefWidth="80.0" />
+                                                      <Spinner fx:id="spnJaar" prefHeight="30.0" prefWidth="80.0" initialValue="1" min="0" max="100"/>
                                                    </children>
                                                 </VBox>
                                                 <VBox>
@@ -142,7 +142,7 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button mnemonicParsing="false" onMouseClicked="#clicked_OpmerkingVerwijderen" prefHeight="30.0" prefWidth="30.0" text="-" />
+                                                      <Button mnemonicParsing="false" onMouseClicked="#clicked_verwijderlijstitems" prefHeight="30.0" prefWidth="30.0" text="-" />
                                                    </children>
                                                 </VBox>
                                              </children>

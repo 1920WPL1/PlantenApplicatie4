@@ -20,8 +20,7 @@ public class BeheerDAO implements Queries {
         this.dbConnection = dbConnection;
         stmtSelectBeheerByID = dbConnection.prepareStatement(GETBEHEERBYPLANTID);
         stmtSelectByBeheer = dbConnection.prepareStatement(GETIDSBYBEHEER);
-        stmtInsertBeheer = dbConnection.prepareStatement(INSERTBEHEERMULTI,
-                Statement.RETURN_GENERATED_KEYS);
+        stmtInsertBeheer = dbConnection.prepareStatement(INSERTBEHEER);
         stmtInsertBeheerdaadEigenschap = dbConnection.prepareStatement(INSERTBEHEERMULTI,
                 Statement.RETURN_GENERATED_KEYS);
     }
@@ -68,6 +67,7 @@ public class BeheerDAO implements Queries {
     public void createBeheer(String swaarde) throws SQLException
     {
         stmtInsertBeheer.setString(1, swaarde);
+        stmtInsertBeheer.executeUpdate();
     }
 
     public void createBeheerEigenschap(Beheerdaad_Eigenschap beheerEigenschap) throws SQLException{

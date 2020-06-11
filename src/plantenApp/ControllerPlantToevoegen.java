@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import plantenApp.java.dao.*;
@@ -202,6 +203,8 @@ public class ControllerPlantToevoegen {
     public Label lblSociabiliteit;
     public Button btnVerstuurVoorGoek;
     public ListView lvLijstOpgeslagenPlanten;
+    public ImageView imgView1;
+    public ImageView imgView2;
 
     private Connection dbConnection;
     //arraylist van fenotype_Multi
@@ -887,5 +890,9 @@ public class ControllerPlantToevoegen {
     }
 
 
+    public void btnAfbChooser1(ActionEvent actionEvent) {
+    }
 
+    public void btnAfbChooser2(ActionEvent actionEvent) {
+    }
 }

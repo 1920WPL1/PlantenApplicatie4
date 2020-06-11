@@ -9,11 +9,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import plantenApp.java.dao.BeheerDAO;
 import plantenApp.java.dao.Database;
-import plantenApp.java.dao.FenotypeDAO;
 import plantenApp.java.dao.InfoTablesDAO;
 import plantenApp.java.model.*;
 
-import javax.imageio.IIOException;
 import javax.swing.*;
 import java.io.IOException;
 import java.sql.Connection;
@@ -47,7 +45,7 @@ public class ControllerBeheer {
     Plant objectPlant;
 
     public void initialize(Plant plant) throws SQLException {
-        objectPlant=plant;
+        objectPlant = plant;
         dbConnection = Database.getInstance().getConnection();
         /* infotabel object aanmaken */
         InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
@@ -56,13 +54,14 @@ public class ControllerBeheer {
         FillComboboxes(infoTables);
     }
 
+
     private void FillComboboxes(InfoTables infoTables) {
         //beheerdaden
         cboBehandeling.getItems().addAll(infoTables.getBeheerdaden());
     }
 
     /* !!!!Click Events!!!!!*/
-   //Button om terug te gaan naar de vorig pagina
+    //Button om terug te gaan naar de vorig pagina
     public void clicked_TerugGaan(MouseEvent mouseEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("view/PlantToevoegen.fxml"));
         Scene scene = new Scene(root);
@@ -72,22 +71,106 @@ public class ControllerBeheer {
     }
 
     //Button om een opmerking toe te voegen
-    public void clicked_OpmerkingToevoegen(MouseEvent mouseEvent) {
-        String sBehandeling = cboBehandeling.getValue().toString();
+    public void clicked_OpmerkingToevoegen(MouseEvent mouseEvent) throws SQLException {
+        String sMaand = null;
+        for (int i = 0; i < 12; i++) {
+            switch (i) {
+                case 0:
+                    if (chbJanuari.isSelected()) {
+                        sMaand = chbJanuari.getText();
+                        beheersdaadaanmaken(sMaand);
+                    }
+                    break;
+                case 1:
+                    if (chbFebruari.isSelected()) {
+                        sMaand = chbFebruari.getText();
+                        beheersdaadaanmaken(sMaand);
+                    }
+                    break;
+                case 2:
+                    if (chbMaart.isSelected()) {
+                        sMaand = chbMaart.getText();
+                        beheersdaadaanmaken(sMaand);
+                    }
+                    break;
+                case 3:
+                    if (chbApril.isSelected()) {
+                        sMaand = chbApril.getText();
+                        beheersdaadaanmaken(sMaand);
+                    }
+                    break;
+                case 4:
+                    if (chbMei.isSelected()) {
+                        sMaand = chbMei.getText();
+                        beheersdaadaanmaken(sMaand);
+                    }
+                    break;
+                case 5:
+                    if (chbJuni.isSelected()) {
+                        sMaand = chbJuni.getText();
+                        beheersdaadaanmaken(sMaand);
+                    }
+                    break;
+                case 6:
+                    if (chbJuli.isSelected()) {
+                        sMaand = chbJuli.getText();
+                        beheersdaadaanmaken(sMaand);
+                    }
+                    break;
+                case 7:
+                    if (chbAugustus.isSelected()) {
+                        sMaand = chbAugustus.getText();
+                        beheersdaadaanmaken(sMaand);
+                    }
+                    break;
+                case 8:
+                    if (chbSeptember.isSelected()) {
+                        sMaand = chbSeptember.getText();
+                        beheersdaadaanmaken(sMaand);
+                    }
+                    break;
+                case 9:
+                    if (chbOktober.isSelected()) {
+                        sMaand = chbOktober.getText();
+                        beheersdaadaanmaken(sMaand);
+                    }
+                    break;
+                case 10:
+                    if (chbNovember.isSelected()) {
+                        sMaand = chbNovember.getText();
+                        beheersdaadaanmaken(sMaand);
+                    }
+                    break;
+                case 11:
+                    if (chbDecember.isSelected()) {
+                        sMaand = chbDecember.getText();
+                        beheersdaadaanmaken(sMaand);
+                    }
+                    break;
+            }
+        }
+    }
+    public void beheersdaadaanmaken(String sMaand){
         String sOpmerking = txtOpmerking.getText();
-        String sJan = chbJanuari.getText();
+        String sBehandeling = cboBehandeling.getValue().toString();
+        int iFrequentie = Integer.parseInt(spnJaar.getValue().toString());
+        Beheerdaad_Eigenschap beheerEig = new Beheerdaad_Eigenschap(
+                objectPlant.getId(),
+                sBehandeling,
+                sOpmerking,
+                sMaand,
+                iFrequentie);
 
-        lvLijstBehandeling.getItems().add(cboBehandeling.getValue().toString());
-
+        lvLijstBehandeling.getItems().add(beheerEig.toString());
     }
 
-    //Button om een opmerking te verwijderen
-    public void clicked_OpmerkingVerwijderen(MouseEvent mouseEvent) {
+    //Button om een object van de lijst te verwijderen
+    public void clicked_verwijderlijstitems(MouseEvent mouseEvent) {
         lvLijstBehandeling.getItems().remove(lvLijstBehandeling.getSelectionModel().getSelectedItem());
         lvLijstBehandeling.refresh();
     }
 
-    //Button om een behandeling toe te voegen
+    //Button om een behandeling extra toe te voegen aan de combobox en de DB
     public void clicked_BehandelingToevoegen(MouseEvent mouseEvent) throws SQLException {
 
         String swaarde = txtBehandeling.getText();
@@ -100,78 +183,9 @@ public class ControllerBeheer {
 
     }
 
-
+    // schrijven van de data naar de DB
     public void clicked_ToevoegenBeheerdaad(MouseEvent mouseEvent) throws SQLException {
-        //String sPlant_id = lblPlant_id.getText();
-        createBeheerEig();
+        BeheerDAO beheerdao = new BeheerDAO(dbConnection);
 
-    }
-
-    public void createBeheerEig() throws SQLException {
-        for (int i = 0; i < 12; i++) {
-            String sBehandeling = cboBehandeling.getValue().toString();
-            String sOpmerking = txtOpmerking.getText();
-            CheckBox checkBox = null;
-            switch (i){
-                case 0:
-                    checkBox = chbJanuari;
-                    break;
-                case 1:
-                    checkBox = chbFebruari;
-                    break;
-                case 2:
-                    checkBox = chbMaart;
-                    break;
-                case 3:
-                    checkBox = chbApril;
-                    break;
-                case 4:
-                    checkBox = chbMei;
-                    break;
-                case 5:
-                    checkBox = chbJuni;
-                    break;
-                case 6:
-                    checkBox = chbJuli;
-                    break;
-                case 7:
-                    checkBox = chbAugustus;
-                    break;
-                case 8:
-                    checkBox = chbSeptember;
-                    break;
-                case 9:
-                    checkBox = chbOktober;
-                    break;
-                case 10:
-                    checkBox = chbNovember;
-                    break;
-                case 11:
-                    checkBox = chbDecember;
-                    break;
-                default:
-                    JOptionPane.showMessageDialog(null, "Geen maanden aangeduid!");
-            }
-            String sMaand = checkCheckbox(checkBox);
-            int iJaar = (int) spnJaar.getValue();
-            BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
-
-            Beheerdaad_Eigenschap beheerEig = new Beheerdaad_Eigenschap(
-                    objectPlant.getId(),
-                    sBehandeling,
-                    sOpmerking,
-                    sMaand,
-                    iJaar
-            );
-            beheerDAO.createBeheerEigenschap(beheerEig);
-        }
-    }
-
-    public String checkCheckbox(CheckBox chb) {
-        String sMaand = " ";
-        if (chb.isSelected()) {
-            sMaand = chb.getText();
-        }
-        return sMaand;
     }
 }

@@ -239,6 +239,9 @@ public interface Queries {
             "INSERT INTO abiotische_factoren(plant_id, bezonning, grondsoort, vochtbehoefte, voedingsbehoefte, reactie_antagonistische_omg) " +
                     "VALUES (?, ?, ?, ?, ?, ?)";
 
+    String INSERTBEHEER =   "INSERT INTO beheerdaad (waarde)" +
+            "VALUES(?)";
+
     String INSERTBEHEERMULTI =
             "INSERT INTO beheer_multi(plant_id, beheerdaad, opmerking, maand, frequentie_jaar)" +
                     "VALUES(?, ?, ?, ?, ?)";

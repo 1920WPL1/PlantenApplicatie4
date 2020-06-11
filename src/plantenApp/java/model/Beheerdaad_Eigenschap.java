@@ -35,6 +35,17 @@ public class Beheerdaad_Eigenschap {
         return naam;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+                "plant id=" + id +
+                ", naam='" + naam + '\'' +
+                ", opmerking='" + opmerking + '\'' +
+                ", maand='" + maand + '\'' +
+                ", frequentie=" + frequentie +
+                '}';
+    }
+
     public String getOpmerking() {
         return opmerking;
     }
