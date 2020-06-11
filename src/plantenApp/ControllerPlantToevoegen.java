@@ -926,4 +926,9 @@ public class ControllerPlantToevoegen {
         textToColor(cboBloeikleurDec, cboBloeikleurDec.getValue().toString());
     }
 
+    public void btnAfbChooser1(ActionEvent actionEvent) {
+    }
+
+    public void btnAfbChooser2(ActionEvent actionEvent) {
+    }
 }
