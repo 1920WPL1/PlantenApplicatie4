@@ -7,29 +7,32 @@ public class Extra {
     private int nectarwaarde;
     private int pollenwaarde;
     private String bijvriendelijk;
+    private String vlindervriendelijk;
     private String eetbaar;
     private String kruidgebruik;
     private String geurend;
     private String vorstgevoelig;
 
     //Constructor met id
-    public Extra(int id, int plant_id, int nectarwaarde, int pollenwaarde, String bijvriendelijk, String eetbaar, String kruidgebruik, String geurend, String vorstgevoelig) {
+    public Extra(int id, int plant_id, int nectarwaarde, int pollenwaarde, String bijvriendelijk,String vlindervriendelijk, String eetbaar, String kruidgebruik, String geurend, String vorstgevoelig) {
         this.id = id;
         this.plant_id = plant_id;
         this.nectarwaarde = nectarwaarde;
         this.pollenwaarde = pollenwaarde;
         this.bijvriendelijk = bijvriendelijk;
+        this.vlindervriendelijk = vlindervriendelijk;
         this.eetbaar = eetbaar;
         this.kruidgebruik = kruidgebruik;
         this.geurend = geurend;
         this.vorstgevoelig = vorstgevoelig;
     }
     //Constructor zonder id
-    public Extra( int plant_id, int nectarwaarde, int pollenwaarde, String bijvriendelijk, String eetbaar, String kruidgebruik, String geurend, String vorstgevoelig) {
+    public Extra( int plant_id, int nectarwaarde, int pollenwaarde, String bijvriendelijk, String vlindervriendelijk, String eetbaar, String kruidgebruik, String geurend, String vorstgevoelig) {
         this.plant_id = plant_id;
         this.nectarwaarde = nectarwaarde;
         this.pollenwaarde = pollenwaarde;
         this.bijvriendelijk = bijvriendelijk;
+        this.vlindervriendelijk = vlindervriendelijk;
         this.eetbaar = eetbaar;
         this.kruidgebruik = kruidgebruik;
         this.geurend = geurend;
@@ -55,6 +58,10 @@ public class Extra {
 
     public String getBijvriendelijk() {
         return bijvriendelijk;
+    }
+
+    public String getVlindervriendelijk(){
+        return vlindervriendelijk;
     }
 
     public String getEetbaar() {

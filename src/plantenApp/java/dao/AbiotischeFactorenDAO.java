@@ -7,9 +7,6 @@ import plantenApp.java.model.Plant;
 import java.sql.*;
 import java.util.ArrayList;
 
-
-
-/**@author Siebe*/
 public class AbiotischeFactorenDAO implements Queries {
     private Connection dbConnection;
     private PreparedStatement stmtSelectAbioByID;
@@ -31,56 +28,26 @@ public class AbiotischeFactorenDAO implements Queries {
                 Statement.RETURN_GENERATED_KEYS);
     }
 
-    /**
-     * @param id -> plant_id
-     * @return -> alle abiotische factoren van de specifieke plant
-     * @author Siebe
-     */
-    public AbiotischeFactoren getById(int id) throws SQLException {
-        AbiotischeFactoren abio = null;
+    public ArrayList getAbiotischById(int id) throws SQLException {
+        ArrayList<String> arrListAbiotisch = new ArrayList<>();
 
         stmtSelectAbioByID.setInt(1, id);
         ResultSet rs = stmtSelectAbioByID.executeQuery();
-        if (rs.next()) {
-            abio = new AbiotischeFactoren(
-                    rs.getInt("abiotische_id"),
-                    rs.getInt("plant_id"),
-                    rs.getString("bezonning"),
-                    rs.getString("grondsoort"),
-                    rs.getString("vochtbehoefte"),
-                    rs.getString("voedingsbehoefte"),
-                    rs.getString("reactie_antagonistische_omg"),
-                    getByIdMulti(id)
-            );
-        }
-        return abio;
-    }
-
-    /**
-     * @param id -> plant_id
-     * @return -> alle abiotische_multi factoren van de specifieke plant
-     * @author Siebe
-     * word alleen gebruikt in getById
-     */
-    private ArrayList<AbioMulti_Eigenschap> getByIdMulti(int id) throws SQLException {
-        ArrayList<AbioMulti_Eigenschap> abioMulti = new ArrayList<>();
-        ;
-
-        stmtSelectAbioMultiByID.setInt(1, id);
-        ResultSet rs = stmtSelectAbioMultiByID.executeQuery();
         while (rs.next()) {
-            AbioMulti_Eigenschap abioEigenschap = new AbioMulti_Eigenschap(
-                    rs.getInt("abiotische_id"),
-                    rs.getString("eigenschap"),
-                    rs.getString("waarde")
-            );
-            abioMulti.add(abioEigenschap);
+            arrListAbiotisch.add(rs.getString("abiotische_id"));
+            arrListAbiotisch.add(rs.getString("plant_id"));
+            arrListAbiotisch.add(rs.getString("bezonning"));
+            arrListAbiotisch.add(rs.getString("grondsoort"));
+            arrListAbiotisch.add(rs.getString("vochtbehoefte"));
+            arrListAbiotisch.add(rs.getString("voedingsbehoefte"));
+            arrListAbiotisch.add(rs.getString("reactie_antagonistische_omg"));
         }
-        return abioMulti;
+        return arrListAbiotisch;
     }
+
+
 
     public void createAbio(AbiotischeFactoren abiotischeFactoren, Plant plant) throws SQLException {
-
         stmsInsertAbiotischeFactoren.setInt(1, plant.getId());
         stmsInsertAbiotischeFactoren.setString(2,abiotischeFactoren.getBezonning());
         stmsInsertAbiotischeFactoren.setString(3, abiotischeFactoren.getGrondsoort());

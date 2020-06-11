@@ -32,95 +32,25 @@ public class FenotypeDAO implements Queries {
                 Statement.RETURN_GENERATED_KEYS);
     }
 
-
-    /**
-     * @param id -> plant_id
-     * @return alle fenotipsche factoren van de specifieke plant
-     * @author Siebe
-     */
-    public Fenotype getById(int id) throws SQLException {
-        Fenotype feno = null;
+    public ArrayList getFenotypeById(int id) throws SQLException {
+        ArrayList<String> arrListFeno = new ArrayList<>();
 
         stmtSelectFenoByID.setInt(1, id);
         ResultSet rs = stmtSelectFenoByID.executeQuery();
-        if (rs.next()) {
-            feno = new Fenotype(
-                    rs.getInt("fenotype_id"),
-                    rs.getInt("plant_id"),
-                    rs.getString("bladvorm"),
-                    rs.getString("levensvorm"),
-                    rs.getString("habitus"),
-                    rs.getString("bloeiwijze"),
-                    rs.getInt("bladgrootte"),
-                    rs.getString("ratio_bloei_blad"),
-                    rs.getString("spruitfenelogie"),
-                    getByIdMulti(id)
-            );
-        }
-        return feno;
-    }
-
-
-    public void createFenotypeMulti(FenoMulti_Eigenschap fenomulti, Plant plant) throws SQLException {
-
-        stmtInsertFenotypeMulti.setInt(1, plant.getId());
-        stmtInsertFenotypeMulti.setString(2, fenomulti.getNaam());
-        stmtInsertFenotypeMulti.setString(3, fenomulti.getJan());
-        stmtInsertFenotypeMulti.setString(4, fenomulti.getFeb());
-        stmtInsertFenotypeMulti.setString(5, fenomulti.getMaa());
-        stmtInsertFenotypeMulti.setString(6, fenomulti.getApr());
-        stmtInsertFenotypeMulti.setString(7, fenomulti.getMei());
-        stmtInsertFenotypeMulti.setString(8, fenomulti.getJun());
-        stmtInsertFenotypeMulti.setString(9, fenomulti.getJul());
-        stmtInsertFenotypeMulti.setString(10, fenomulti.getAug());
-        stmtInsertFenotypeMulti.setString(11, fenomulti.getSep());
-        stmtInsertFenotypeMulti.setString(12, fenomulti.getOkt());
-        stmtInsertFenotypeMulti.setString(13, fenomulti.getNov());
-        stmtInsertFenotypeMulti.setString(14, fenomulti.getDec());
-        stmtInsertFenotypeMulti.executeUpdate();
-        ResultSet rs = stmtInsertFenotypeMulti.getGeneratedKeys();
-        rs.next();
-        Integer fenotype_id = rs.getInt(1);
-        fenomulti.setId(fenotype_id);
-
-    }
-
-
-
-
-
-
-    /**@author Siebe
-     * word alleen gebruikt in getById
-     * @param id -> plant_id
-     * @return -> alle fenotype_multi van de specifieke plant
-     */
-    private ArrayList<FenoMulti_Eigenschap> getByIdMulti(int id) throws SQLException {
-        ArrayList<FenoMulti_Eigenschap> commMulti = new ArrayList<>();;
-
-        stmtSelectFenoMultiByID.setInt(1, id);
-        ResultSet rs = stmtSelectFenoMultiByID.executeQuery();
         while (rs.next()) {
-            FenoMulti_Eigenschap fenoEigenschap = new FenoMulti_Eigenschap(
-                    rs.getInt("fenotype_id"),
-                    rs.getString("eigenschap"),
-                    rs.getString("jan"),
-                    rs.getString("feb"),
-                    rs.getString("maa"),
-                    rs.getString("apr"),
-                    rs.getString("mei"),
-                    rs.getString("jun"),
-                    rs.getString("jul"),
-                    rs.getString("aug"),
-                    rs.getString("sep"),
-                    rs.getString("okt"),
-                    rs.getString("nov"),
-                    rs.getString("dec")
-            );
-            commMulti.add(fenoEigenschap);
+            arrListFeno.add(rs.getString("fenotype_id"));
+            arrListFeno.add(rs.getString("plant_id"));
+            arrListFeno.add(rs.getString("bladvorm"));
+            arrListFeno.add(rs.getString("levensvorm"));
+            arrListFeno.add(rs.getString("habitus"));
+            arrListFeno.add(rs.getString("bloeiwijze"));
+            arrListFeno.add(rs.getString("bladgrootte"));
+            arrListFeno.add(rs.getString("ratio_bloei_blad"));
+            arrListFeno.add(rs.getString("spruitfenologie"));
         }
-        return commMulti;
+        return arrListFeno;
     }
+
     public void createFeno(Fenotype fenotype, Plant plant) throws SQLException {
 
         stmtInsertByFenotype.setInt(1, plant.getId());

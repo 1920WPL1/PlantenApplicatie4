@@ -1,12 +1,14 @@
 package plantenApp.java.model;
 
 
-import java.util.Date;
+import java.sql.Date;
 
-/**@author Siebe*/
+/**
+ * @author Siebe
+ */
 public class Plant {
     private Integer id;
-    private String type;
+    private String planttype;
     private String familie;
     private String geslacht;
     private String soort;
@@ -14,6 +16,16 @@ public class Plant {
     private Integer minPlantdichtheid;
     private Integer maxPlantdichtheid;
     private String fgsv;
+    private Integer status;
+    private java.sql.Date laatsteupdatedatum;
+
+    public java.sql.Date getLaatsteupdatedatum() {
+        return laatsteupdatedatum;
+    }
+
+    public void setLaatsteupdatedatum(java.sql.Date laatsteupdatedatum) {
+        this.laatsteupdatedatum = laatsteupdatedatum;
+    }
 
     public String getFgsv() {
         return fgsv;
@@ -34,30 +46,66 @@ public class Plant {
     private Foto_Eigenschap foto_eigenschap;
     private InfoTables infoTables;
 
-    public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid) {
+    //Constructor met id
+    public Plant(int id, String planttype, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, String fgsv, int status, java.sql.Date lastupdatedatum) {
         this.id = id;
-        this.type = type;
+        this.planttype = planttype;
         this.familie = familie;
         this.geslacht = geslacht;
         this.soort = soort;
         this.variatie = variatie;
+        this.fgsv = fgsv;
         this.minPlantdichtheid = minPlantdichtheid;
         this.maxPlantdichtheid = maxPlantdichtheid;
+        this.status = status;
+        this.laatsteupdatedatum = lastupdatedatum;
+
     }
-    //Constructor voor Insert : id wordt gegenereerd door de database.
-    public Plant(String type, String familie,String geslacht, String soort,String variatie,Integer minPlantdichtheid ,Integer maxPlantdichtheid,String fgsv) {
-        this.type = type;
-        this.familie = familie;
-        this.geslacht = geslacht;
-        this.soort = soort;
-        this.variatie = variatie;
-        this.minPlantdichtheid = minPlantdichtheid;
-        this.maxPlantdichtheid = maxPlantdichtheid;
-        this.fgsv =fgsv;
+    public Plant(Plant plant) {
+        this.id = plant.getId();
+        this.planttype = plant.getType();
+        this.familie = plant.getFamilie();
+        this.geslacht = plant.getGeslacht();
+        this.soort = plant.getSoort();
+        this.variatie = plant.getVariatie();
+        this.minPlantdichtheid = plant.getMinPlantdichtheid();
+        this.maxPlantdichtheid = plant.getMaxPlantdichtheid();
+        this.fgsv=plant.getFgsv();
+        this.status = plant.getStatus();
+        this.laatsteupdatedatum = plant.getLaatsteupdatedatum();
+
     }
 
-    //idStudent wordt gegenereerd door de database.
-    //enkel invullen als dit nog niet gebeurd is. Primary key!
+    //Constructor voor Insert : id wordt gegenereerd door de database.
+    public Plant(String planttype, String familie, String geslacht, String soort, String variatie,Integer minPlantdichtheid, Integer maxPlantdichtheid, String fgsv, int status, Date lastupdatedatum) {
+        this.planttype = planttype;
+        this.familie = familie;
+        this.geslacht = geslacht;
+        this.soort = soort;
+        this.variatie = variatie;
+        this.minPlantdichtheid = minPlantdichtheid;
+        this.maxPlantdichtheid = maxPlantdichtheid;
+        this.fgsv = fgsv;
+        this.status = status;
+        this.laatsteupdatedatum = lastupdatedatum;
+
+    }
+
+    //Constructor voor PlantNaam
+    public Plant(String planttype, String familie, String geslacht, String soort, String variatie) {
+        this.planttype = planttype;
+        this.familie = familie;
+        this.geslacht = geslacht;
+        this.soort = soort;
+        this.variatie = variatie;
+    }
+
+    public Plant(int id){
+        this.id = id;
+    }
+
+    //Plant_id wordt gegenereerd door de database.
+    //gebeurt enkel als niet gebeurd is. Primary key!
     public void setId(int id) {
         if (this.id != null) {
             throw new UnsupportedOperationException("Id change not permitted");
@@ -71,7 +119,25 @@ public class Plant {
     }
 
     public String getType() {
-        return type;
+        return planttype;
+    }
+
+    @Override
+    public String toString() {
+        return "Plant{" +
+                "id=" + id +
+                ", planttype='" + planttype + '\'' +
+                ", familie='" + familie + '\'' +
+                ", geslacht='" + geslacht + '\'' +
+                ", soort='" + soort + '\'' +
+                ", variatie='" + variatie + '\'' +
+                ", minPlantdichtheid=" + minPlantdichtheid +
+                ", maxPlantdichtheid=" + maxPlantdichtheid +
+                ", fgsv='" + fgsv + '\'' +
+                ", status=" + status + '\'' +
+
+
+                '}';
     }
 
     public String getFamilie() {
@@ -176,5 +242,17 @@ public class Plant {
 
     public void setInfoTables(InfoTables infoTables) {
         this.infoTables = infoTables;
+    }
+
+
+    public int getStatus() {
+        return status;
+    }
+
+
+
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

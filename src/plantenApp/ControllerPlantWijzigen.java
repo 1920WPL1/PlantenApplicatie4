@@ -6,33 +6,19 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
-import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.sql.Blob;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.logging.Logger;
 
-import static javax.swing.JOptionPane.showMessageDialog;
-
-public class ControllerPlantToevoegen {
+public class ControllerPlantWijzigen {
     //Alle velden die ingevuld moeten worden bij Standaard
     public ComboBox cboType;
     public TextField txtFamilie;
@@ -84,6 +70,7 @@ public class ControllerPlantToevoegen {
     public RadioButton rdbChamaefyt7;
     public RadioButton rdbChamaefyt8;
     public RadioButton rdbFanerophyt9;
+    public RadioButton rdbNietGekend;
     //Alle spinners per maand voor Max Bladhoogte
     public Spinner spnBladhoogteJan;
     public Spinner spnBladhoogteFeb;
@@ -161,6 +148,7 @@ public class ControllerPlantToevoegen {
     public RadioButton rdbKussenvormend;
     public RadioButton rdbZuilvomrig;
     public RadioButton rdbUitbuigend;
+    public RadioButton rdbHUnknown;
     //Alle radiobuttons voor Bloeiwijze
     public RadioButton rdbAar;
     public RadioButton rdbBredePluim;
@@ -170,6 +158,7 @@ public class ControllerPlantToevoegen {
     public RadioButton rdbSchotel;
     public RadioButton rdbScherm;
     public RadioButton rdbSmallePluim;
+    public RadioButton rdbBUnknown;
     //Alle velden die ingevuld moeten worden bij Extra
     public ComboBox cboLevensduur;
     public ListView lvLevensduur;
@@ -216,8 +205,6 @@ public class ControllerPlantToevoegen {
     public Label lblSociabiliteit;
     public Button btnVerstuurVoorGoek;
     public ListView lvLijstOpgeslagenPlanten;
-    public ImageView imgView1;
-    public ImageView imgView2;
 
     private Connection dbConnection;
     //arraylist van fenotype_Multi
@@ -229,15 +216,22 @@ public class ControllerPlantToevoegen {
     String sNaamSpnBloeihoogte;
     String sNaamCmbBladKleur;
     String sNaamCmbBloeiKleur;
+    Plant objectPlant;
+    AbiotischeFactoren abiotischeFactoren;
 
-
-    public void initialize() throws SQLException {
+    public void initialize(Plant plant) throws SQLException {
         dbConnection = Database.getInstance().getConnection();
         /* infotabel object aanmaken */
         InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
         InfoTables infoTables = infotablesDAO.getInfoTables();
         /*opvullen combobox Methode*/
         FillComboboxes(infoTables);
+        objectPlant = plant;
+        invoegenStandaard();
+        invoegAbiotische();
+        invoegCommensalisme();
+        invoegFenotype();
+        invoegenExtra();
     }
 
     private void FillComboboxes(InfoTables infotables) {
@@ -293,92 +287,69 @@ public class ControllerPlantToevoegen {
         cboBloeikleurDec.getItems().addAll(infotables.getKleuren());
         //habitat
         cboHabitat.getItems().addAll(infotables.getHabitats());
-    }
 
-    public String testerNullpointers(String string, ComboBox cb) {
-
-        if (cb.getValue().toString().equals("")) {
-            showMessageDialog(null, "niet ok");
-        } else {
-            string = cb.getValue().toString();
-        }
-        return string;
     }
 
 
-    //Toevoegen van een volledige plant
-    public void clicked_ToevoegenPlant(MouseEvent mouseEvent) throws Exception {
-        //Kijken of type ingevuld is of niet
-        //Zo niet krijg je een bericht dat je een type moet kiezen
-        //Zo ja maakt hij de plant aan
-        if (cboType.getValue().toString().equals("")) {
-            JOptionPane.showMessageDialog(null, "Kies een type!");
-        } else {
-            //vars voor plant
-            String sType = cboType.getValue().toString();
-            String sFam = txtFamilie.getText();
-            String sGeslacht = txtGeslacht.getText();
-            String sSoort = txtSoort.getText();
-            String sVariant = txtVariant.getText();
-            String fgsv = sFam + " " + sGeslacht + " " + sSoort + " '" + sVariant + "'";
-            int iMinDichtheid = (int) spnMinPlantDicht.getValue();
-            int iMaxDichtheid = (int) spnMaxPlantDicht.getValue();
-            int iStatus = 0;
-            java.sql.Date uDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-            System.out.println(uDate);
-            //Insert van plant
-            PlantDAO plantDao = new PlantDAO(dbConnection);
-            Plant plant = new Plant
-                    (sType,
-                            sFam,
-                            sGeslacht,
-                            sSoort,
-                            sVariant,
-                            iMinDichtheid,
-                            iMaxDichtheid,
-                            fgsv,
-                            iStatus,
-                            uDate);
+    public void clicked_WijzigenPlant(MouseEvent mouseEvent) throws SQLException {
+        //vars voor plant
 
-            createPlantNaam();
-            plantDao.createPlant(plant);
+        String sType = cboType.getValue().toString();
+        String sFam = txtFamilie.getText();
+        String sGeslacht = txtGeslacht.getText();
+        String sSoort = txtSoort.getText();
+        String sVariant = txtVariant.getText();
+        String fgsv = sFam + " " + sGeslacht + " " + sSoort + " '" + sVariant + "'";
+        int iMinDichtheid = (int) spnMinPlantDicht.getValue();
+        int iMaxDichtheid = (int) spnMaxPlantDicht.getValue();
+        int iStatus = 0;
+        java.sql.Date uDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        System.out.println(uDate);
 
-            //Insert Abiotische factoren
-            createAbiotische(plant);
-            //Insert Commensalisme
-            createCommensalisme(plant);
-            //Insert Fenotype tot DB
-            createFenoType(plant);
-            //Insert Extra waarden tot DB
-            createExtra(plant);
+        //Insert van plant
+        PlantDAO plantDao = new PlantDAO(dbConnection);
+        Plant plant = new Plant
+                (sType,
+                        sFam,
+                        sGeslacht,
+                        sSoort,
+                        sVariant,
+                        iMinDichtheid,
+                        iMaxDichtheid,
+                        fgsv,
+                        iStatus,
+                        uDate);
+        plantDao.createPlant(plant);
 
-            //Aanmaken van de arrays voor de Feno Multi eigenschappen
-            setArrayFenotypeMultiFunction();
-            //Insert Fenotype multi eigenschap per categorie blad, bloei hoogte... tot DB
-            createFenoMultiEig(aBladhoogte, plant);
-            createFenoMultiEig(aBladkleur, plant);
-            createFenoMultiEig(aBloeihoogte, plant);
-            createFenoMultiEig(aBloeikleur, plant);
+        //Insert Abiotische factoren
+        createAbiotische(plant);
+        //Insert Commensalisme
+        createCommensalisme(plant);
+        //Insert Fenotype tot DB
+        createFenoType(plant);
+        //Insert Extra waarden tot DB
+        createExtra(plant);
 
-            //Insert Abiotische Multi Gegevens tot DB en oproepen functie listview Reader
-            createListViewReaderHabitat(lvHabitat, plant, lblHabitat);
+        //Aanmaken van de arrays voor de Feno Multi eigenschappen
+        setArrayFenotypeMultiFunction();
+        //Insert Fenotype multi eigenschap per categorie blad, bloei hoogte... tot DB
+        createFenoMultiEig(aBladhoogte, plant);
+        createFenoMultiEig(aBladkleur, plant);
+        createFenoMultiEig(aBloeihoogte, plant);
+        createFenoMultiEig(aBloeikleur, plant);
+
+        //Insert Abiotische Multi Gegevens tot DB en oproepen functie listview Reader
+        createListViewReaderHabitat(lvHabitat, plant, lblHabitat);
 
 
-            //Toevoegen Commensalisme Multi waarden tot DB met listviewreader en gewone methode
-            createListViewReaderLevensduur(lvLevensduur, plant);
-            createCommMultiSociabiliteit(plant);
+        //Toevoegen Commensalisme Multi waarden tot DB met listviewreader en gewone methode
+        createListViewReaderLevensduur(lvLevensduur, plant);
+        createCommMultiSociabiliteit(plant);
 
-
-            String sPLantdetail="Plant Detail";
-            InsertFotoInDB(plant,sPLantdetail,imgView1);
-
-            String sPLant="Plant Geheel";
-            InsertFotoInDB(plant,sPLant,imgView2);
-
-            notificationBox("U plant is opgeslagen " + "\r\n" + plant.getFgsv());
-            btnVerstuurVoorGoek.setDisable(false);
-        }
+        notificationBox("U plant is opgeslagen " + "\r\n" + plant.getFgsv());
+        btnVerstuurVoorGoek.setDisable(false);
     }
+    /*!!!! Methodes voor de gegevens te updaten naar de databank !!!!*/
 
     /*!!!! Methodes voor de gegevens over te schrijven naar de databank !!!!*/
 
@@ -567,6 +538,8 @@ public class ControllerPlantToevoegen {
             aBladkleur.add(sNaamCmbBladKleur);
             aBloeihoogte.add(sNaamSpnBloeihoogte);
             aBloeikleur.add(sNaamCmbBloeiKleur);
+
+
         }
     }
 
@@ -591,7 +564,10 @@ public class ControllerPlantToevoegen {
                 (String) array.get(12)
         );
         fenotypedao.createfenomulti(fenomulti, plant);
+
+
     }
+
 
     //Abiotische factoren Multi (Habitat) in DB & Functie list view
     public void createListViewReaderHabitat(ListView ls, Plant plant, Label label) throws SQLException {
@@ -656,33 +632,8 @@ public class ControllerPlantToevoegen {
 
 
     public void notificationBox(String string) {
-        showMessageDialog(null, string);
+        JOptionPane.showMessageDialog(null, string);
     }
-
-    public void createPlantNaam() throws Exception {
-        if (cboType.getValue().toString().equals(""))
-        {
-            showMessageDialog(null, "Kies een type!");
-        }
-        else {
-            String sType = cboType.getValue().toString();
-            String sFam = txtFamilie.getText();
-            String sGeslacht = txtGeslacht.getText();
-            String sSoort = txtSoort.getText();
-            String sVariant = txtVariant.getText();
-            PlantNaamDAO plantNaamDAO = new PlantNaamDAO(dbConnection);
-            //Conrole op textboxen + dubbele plant is al gebeurd bij controle createplant
-            try {
-                Plant plant = new Plant(sType, sFam, sGeslacht, sSoort, sVariant);
-                plantNaamDAO.createPlantNaam(plant);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Er is een fout opgetreden bij het invullen van de plantnaam.");
-                System.out.println(ex);
-                throw new Exception();
-            }
-        }
-    }
-
 
     /* !!!!Click Events!!!!!*/
 
@@ -707,6 +658,7 @@ public class ControllerPlantToevoegen {
         lv.refresh();
     }
 
+
     //Clicked events add to Listview (Habitat en Levensduur) met methode toevoegenAanListMethode
     public void clicked_ToevoegenHabitat(MouseEvent mouseEvent) {
         ToevoegenAanListMethode(lvHabitat, cboHabitat);
@@ -716,7 +668,7 @@ public class ControllerPlantToevoegen {
         ToevoegenAanListMethode(lvLevensduur, cboLevensduur);
     }
 
-    //add to list Methode + fout afhandeling
+    //add to list Methode +fout afhandeling
     public void ToevoegenAanListMethode(ListView lv, ComboBox cmb) {
         try {
             lv.getItems().add(cmb.getValue().toString());
@@ -725,15 +677,17 @@ public class ControllerPlantToevoegen {
         }
     }
 
-    //clicked event voor terug te kunnen keren naar het zoek scherm.
+
+    //functie voor terug te kunnen keren naar het zoek scherm.
     public void clicked_TerugGaan(MouseEvent mouseEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("view/Zoekscherm.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/PlantToevoegen.fxml"));
         Scene scene = new Scene(root);
         Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         window.show();
         window.setScene(scene);
     }
-    //verstuuring voor goedkeuring
+
+    //functie voor
     public void clicked_versturenVoorGoedkeuring(ActionEvent actionEvent) throws SQLException {
         Plant plantje = (Plant) lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedItem();
         int sAntwoord = JOptionPane.showConfirmDialog(null, "bent u zeker dat u plant " + plantje.getFgsv() + " wenst door te sturen voor verbetering ?");
@@ -748,9 +702,6 @@ public class ControllerPlantToevoegen {
             notificationBox("De plant is niet doorgestuurd");
         }
     }
-
-
-    //clicked event voor Beheersdaad voor de geselcteerde plant naar view
 
     public void clicked_BeheersdadenGeselecteerdePlant(MouseEvent mouseEvent) throws SQLException {
         Plant plant = (Plant) lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedItem();
@@ -767,66 +718,10 @@ public class ControllerPlantToevoegen {
         }
     }
 
-    //clicked event
     public void Clicked_LijstVanOpgeslagenPlanten(ActionEvent actionEvent) throws SQLException {
         lijstmakerEnRefresher();
-        btnVerstuurVoorGoek.setDisable(false);
     }
 
-    public void btnAfbChooser1(ActionEvent actionEvent) {
-        AfbeeldingKiezen(imgView1);
-    }
-
-    public void btnAfbChooser2(ActionEvent actionEvent) {
-        AfbeeldingKiezen(imgView2);
-    }
-
-    //functie om afbeelding te kiezen
-    public void AfbeeldingKiezen(ImageView iv) {
-        Stage mainStage = new Stage();
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        fileChooser.setTitle("Toevoegen foto plant");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image", "*.png", "*.jpg", "*.bmp"));
-        File selectedImage = fileChooser.showOpenDialog(mainStage);
-        String sSelected = selectedImage.getAbsolutePath();
-        String sFinalUrl = "file:///" + sSelected;
-        iv.setImage(new Image(sFinalUrl));
-    }
-
-    public Blob vanImgToBlob(Image img) throws IOException, SQLException {
-
-        BufferedImage Buffimage = ImageIO.read(new URL(img.getUrl()));
-        ByteArrayOutputStream bArrayStr = new ByteArrayOutputStream();
-        ImageIO.write(Buffimage, "jpg", bArrayStr);
-        byte[] jpgByteArray = bArrayStr.toByteArray();
-        StringBuilder sb = new StringBuilder();
-        Blob blob = null;
-        for (byte by : jpgByteArray)
-            sb.append(Integer.toBinaryString(by & 0xFF));
-        String blobString = sb.toString();
-        byte[] byteContent = blobString.getBytes();
-        blob = dbConnection.createBlob();
-        blob.setBytes(1,byteContent);
-
-        return blob;
-    }
-
-
-    //insert foto eigenschappen in DB
-  public void InsertFotoInDB(Plant plant,String sEigensch, ImageView img) throws SQLException, IOException {
-        String sEigenschap = sEigensch;
-        String sUrl = img.getImage().getUrl();
-        Blob bImage = vanImgToBlob(img.getImage());
-        FotoDAO fotoDao = new FotoDAO(dbConnection);
-        Foto_Eigenschap foteig = new Foto_Eigenschap(plant.getId()
-                , sEigenschap,
-                sUrl,
-                bImage);
-        fotoDao.createFoto(foteig,plant);
-          }
-
-    //functie voor een lijst te refreshe en een lijst te maken
     public void lijstmakerEnRefresher() throws SQLException {
         lvLijstOpgeslagenPlanten.getItems().clear();
         lvLijstOpgeslagenPlanten.refresh();
@@ -994,18 +889,227 @@ public class ControllerPlantToevoegen {
     }
 
 
-    public void Clicked_Wijzigen(MouseEvent mouseEvent) {
-        Plant plant = (Plant) lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedItem();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("view/PlantWijzigen.fxml"));
-            Parent root = loader.load();
-            ControllerPlantWijzigen controllerPlantWijzigen = loader.getController();
-            controllerPlantWijzigen.initialize(plant);
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException | SQLException ex) {
-            ex.printStackTrace();
+    public void btnAfbChooser1(ActionEvent actionEvent) {
+    }
+
+    public void btnAfbChooser2(ActionEvent actionEvent) {
+    }
+
+    public void invoegenStandaard() {
+        cboType.setValue(objectPlant.getType());
+        txtFamilie.setText(objectPlant.getFamilie());
+        txtGeslacht.setText(objectPlant.getGeslacht());
+        txtSoort.setText(objectPlant.getSoort());
+        txtVariant.setText(objectPlant.getVariatie());
+        spnMinPlantDicht.getValueFactory().setValue(objectPlant.getMinPlantdichtheid());
+        spnMaxPlantDicht.getValueFactory().setValue(objectPlant.getMaxPlantdichtheid());
+    }
+
+    public void invoegAbiotische() throws SQLException {
+        AbiotischeFactorenDAO abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
+        ArrayList<String> arrListAbiotisch = abiotischeFactorenDAO.getAbiotischById(objectPlant.getId());
+        cboBezonning.setValue(arrListAbiotisch.get(2));
+        cboVoedingsbehoefte.setValue(arrListAbiotisch.get(5));
+        cboVochtbehoefte.setValue(arrListAbiotisch.get(4));
+        cboGrondsoort.setValue(arrListAbiotisch.get(3));
+        cboReactieAntag.setValue(arrListAbiotisch.get(6));
+    }
+
+    public void invoegCommensalisme() throws SQLException {
+        CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
+        ArrayList<String> arrListCommensalisme = commensalismeDAO.getCommensalismeById(objectPlant.getId());
+        cboOntwikkelingssnelheid.setValue(arrListCommensalisme.get(2));
+    }
+
+    public void invoegFenotype() throws SQLException {
+        FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
+        ArrayList<String> arrListFenotype = fenotypeDAO.getFenotypeById(objectPlant.getId());
+        cboBladgrootte.setValue(arrListFenotype.get(6));
+        cboBladvorm.setValue(arrListFenotype.get(2));
+        cboRatio.setValue(arrListFenotype.get(7));
+        cboSpruitfenologie.setValue(arrListFenotype.get(8));
+        String levensvorm = arrListFenotype.get(3);
+        switch (levensvorm) {
+            case "1. Hydrofyt":
+                rdbHydrofyt1.setSelected(true);
+                break;
+            case "2. Hydrofyt":
+                rdbHydrofyt2.setSelected(true);
+                break;
+            case "3. Helofyt":
+                rdbHelofyt3.setSelected(true);
+                break;
+            case "4. Cryptophyt":
+                rdbCryptophyt4.setSelected(true);
+                break;
+            case "5. Cryptophyt":
+                rdbCryptophyt4.setSelected(true);
+                break;
+            case "6. Hemikryptofyt":
+                rdbHemikryptofyt6.setSelected(true);
+                break;
+            case "7. Chamaefyt":
+                rdbChamaefyt7.setSelected(true);
+                break;
+            case "8. Chamaefyt":
+                rdbChamaefyt8.setSelected(true);
+                break;
+            case "9. Fanerophyt":
+                rdbFanerophyt9.setSelected(true);
+                break;
+            case "0. Niet gekend":
+                rdbNietGekend.setSelected(true);
+                break;
+        }
+
+        String habitus = arrListFenotype.get(4);
+        switch (habitus) {
+            case "Tufted":
+                rdbTufted.setSelected(true);
+                break;
+            case "Upright Arching":
+                rdbUprightArching.setSelected(true);
+                break;
+            case "Arching":
+                rdbArching.setSelected(true);
+                break;
+            case "Upright Divergent":
+                rdbUprightDivergent.setSelected(true);
+                break;
+            case "Upright Erect":
+                rdbUprightErect.setSelected(true);
+                break;
+            case "Mounded":
+                rdbMounded.setSelected(true);
+                break;
+            case "Mattenvormend":
+                rdbMattenvormend.setSelected(true);
+                break;
+            case "Waaivormig":
+                rdbWaaivormig.setSelected(true);
+                break;
+            case "Kussenvomend":
+                rdbKussenvormend.setSelected(true);
+                break;
+            case "Zuilvormig":
+                rdbZuilvomrig.setSelected(true);
+                break;
+            case "Uitbuigend":
+                rdbUitbuigend.setSelected(true);
+                break;
+            case "Unknown":
+                rdbHUnknown.setSelected(true);
+                break;
+        }
+
+        String bloeiwijze = arrListFenotype.get(5);
+        switch (bloeiwijze) {
+            case "Aar":
+                rdbAar.setSelected(true);
+                break;
+            case "Brede pluim":
+                rdbBredePluim.setSelected(true);
+                break;
+            case "Etage":
+                rdbEtage.setSelected(true);
+                break;
+            case "Margrietachtig":
+                rdbMargrietachtig.setSelected(true);
+                break;
+            case "Schotel":
+                rdbSchotel.setSelected(true);
+                break;
+            case "Scherm":
+                rdbScherm.setSelected(true);
+                break;
+            case "Smalle pluim":
+                rdbSmallePluim.setSelected(true);
+                break;
+            case "Unknown":
+                rdbBUnknown.setSelected(true);
+                break;
+
+
+        }
+
+    }
+
+    public void invoegenExtra() throws SQLException {
+        ExtraDAO extraDAO = new ExtraDAO(dbConnection);
+        ArrayList<String> arrListExtra = extraDAO.getExtraById(objectPlant.getId());
+        spnNectarwaarde.getValueFactory().setValue(Integer.parseInt(arrListExtra.get(2)));
+        spnPollenwaarde.getValueFactory().setValue(Integer.parseInt(arrListExtra.get(3)));
+        String bijvriendelijk = arrListExtra.get(4);
+        switch (bijvriendelijk) {
+            case "J":
+                rdbBijvriendelijkJa.setSelected(true);
+                break;
+            case "N":
+                rdbBijvriendelijkNeen.setSelected(true);
+                break;
+            case "":
+                rdbBijvriendelijkLeeg.setSelected(true);
+                break;
+        }
+        String vlindervriendelijk = arrListExtra.get(5);
+        switch (vlindervriendelijk) {
+            case "J":
+                rdbVlindervriendelijkJa.setSelected(true);
+                break;
+            case "N":
+                rdbVlindervriendelijkNeen.setSelected(true);
+                break;
+            case "":
+                rdbVlindervriendelijkLeeg.setSelected(true);
+                break;
+        }
+        String eetbaar = arrListExtra.get(6);
+        switch (eetbaar) {
+            case "J":
+                rdbEetbaarJa.setSelected(true);
+                break;
+            case "N":
+                rdbEetbaarNeen.setSelected(true);
+                break;
+            case "":
+                rdbEetbaarLeeg.setSelected(true);
+                break;
+        }
+        String kruidgebruik = arrListExtra.get(7);
+        switch (kruidgebruik) {
+            case "J":
+                rdbKruidgebruikJa.setSelected(true);
+                break;
+            case "N":
+                rdbKruidgebruikNeen.setSelected(true);
+                break;
+            case "":
+                rdbKruidgebruikLeeg.setSelected(true);
+                break;
+        }
+        String geurend = arrListExtra.get(8);
+        switch (geurend) {
+            case "J":
+                rdbGeurendJa.setSelected(true);
+                break;
+            case "N":
+                rdbGeurendNeen.setSelected(true);
+                break;
+            case "":
+                rdbGeurendLeeg.setSelected(true);
+                break;
+        }
+        String vorstgevoelig = arrListExtra.get(9);
+        switch (vorstgevoelig) {
+            case "J":
+                rdbVorstgevoeligJa.setSelected(true);
+                break;
+            case "N":
+                rdbVorstgevoeligNeen.setSelected(true);
+                break;
+            case "":
+                rdbVorstgevoeligLeeg.setSelected(true);
+                break;
         }
     }
 }

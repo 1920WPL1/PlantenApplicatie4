@@ -23,11 +23,15 @@ public interface Queries {
     //region GETIDBYKENMERKEN
     String GETIDSBYPLANT =
             "SELECT plant_id FROM plant WHERE " +
-                    "type = ? OR  1=? " +
+                    "planttype = ? OR  1=? " +
                     "AND " +
                     "familie = ? OR 1=?" +
                     "AND " +
                     "fgsv LIKE ? OR 1=?";
+
+    String GETPLANTSBYSTATUS =
+            "SELECT * FROM plant WHERE "+
+                    "status = ?";
 
     String GETIDSBYEXTRA =
             "SELECT plant_id FROM extra WHERE " +
@@ -150,7 +154,7 @@ public interface Queries {
     //region NAAKTETABELLEN
 
     String NTTYPE =
-            "SELECT type_naam FROM type";
+            "SELECT planttype_naam FROM planttype";
 
     String NTFAMILIE =
             "SELECT familie_naam FROM familie";
@@ -226,7 +230,7 @@ public interface Queries {
     //endregion
 
     //Groep 4
-    //Insert query voor toevoegen
+    //Insert queries voor toevoegen
     String INSERTABIOTISCHEFMULTI =
             "INSERT INTO abiotisch_multi(plant_id, eigenschap, waarde)" +
                     "VALUES(?, ?, ?)";
@@ -235,13 +239,16 @@ public interface Queries {
             "INSERT INTO abiotische_factoren(plant_id, bezonning, grondsoort, vochtbehoefte, voedingsbehoefte, reactie_antagonistische_omg) " +
                     "VALUES (?, ?, ?, ?, ?, ?)";
 
-    String INSERTBEHEER =
-            "INSERT INTO beheer(plant_id, beheerdaad, opmerking, maand, frequentie_jaar)" +
+    String INSERTBEHEER =   "INSERT INTO beheerdaad (waarde)" +
+            "VALUES(?)";
+
+    String INSERTBEHEERMULTI =
+            "INSERT INTO beheer_multi(plant_id, beheerdaad, opmerking, maand, frequentie_jaar)" +
                     "VALUES(?, ?, ?, ?, ?)";
 
     String INSERTSTANDAARD =
-            "INSERT INTO plant (type, familie, geslacht, soort, variatie, plantdichtheid_min, plantdichtheid_max, fgsv) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            "INSERT INTO plant (planttype, familie, geslacht, soort, variatie, plantdichtheid_min, plantdichtheid_max, fgsv, status, laatste_update_datum) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
     String INSERTCOMMESALISME =
             "INSERT INTO commensalisme(plant_id, strategie, ontwikkelingssnelheid)" +
@@ -252,11 +259,13 @@ public interface Queries {
                     "VALUES(?, ?, ?)";
 
     String INSERTEXTRA =
-            "INSERT INTO extra(plant_id, nectarwaarde, pollenwaarde, bijvriendelijk, eetbaar, kruidgebruik, geurend, vorstgevoelig)" +
-                    "VALUES(?, ?, ?, ?, ?, ?, ?,?)";
+
+            "INSERT INTO extra(plant_id, nectarwaarde, pollenwaarde, bijvriendelijk, vlindervriendelijk, eetbaar, kruidgebruik, geurend, vorstgevoelig)" +
+                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
 
     String INSERTFENOTYPE =
-            "INSERT INTO fenotype(plant_id, bladvorm, levensvorm, habitus, bloeiwijze, bladgrootte, ratio_bloei_blad, spruitfenelogie)" +
+            "INSERT INTO fenotype(plant_id, bladvorm, levensvorm, habitus, bloeiwijze, bladgrootte, ratio_bloei_blad, spruitfenologie)" +
                     "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
     String INSERTFENOTYPEMULTI =
@@ -267,8 +276,7 @@ public interface Queries {
             "INSERT INTO foto(plant_id, eigenschap, url, figuur)" +
                     "VALUES(?, ?, ?, ?)";
 
-
-    //Insert query voor naaktetabellen
+    //Insert queries voor naaktetabellen
     String INSERTBEHEERDAAD =
             "INSERT INTO beheerdaad(waarde)" +
                     "VALUES(?)";
@@ -283,7 +291,7 @@ public interface Queries {
             "INSERT INTO bloeiwijze(waarde) VALEUS(?)";
 
     String INSERTFAMILIE =
-            "INSERT INTO familie(familie_naam, type_id) VALUES(?, ?)";
+            "INSERT INTO familie(familie_naam, planttype_id) VALUES(?, ?)";
 
     String INSERTGESLACHT =
             "INSERT INTO geslacht(geslacht_naam, familie_id) VALUES(?, ?)";
@@ -333,8 +341,8 @@ public interface Queries {
     String INSERTSTRATEGIE =
             "INSERT INTO strategie(waarde) VALUES(?)";
 
-    String INSERTTYPE =
-            "INSERT INTO type(type_naam) VALUES(?)";
+    String INSERTPLANTTYPE =
+            "INSERT INTO planttype(planttype_naam) VALUES(?)";
 
     String INSERTVARIATIE =
             "INSERT INTO variatie(variatie_naam, soort_id) VALUES(?,?)";
@@ -344,6 +352,190 @@ public interface Queries {
 
     String INSERTVOEDINGSBEHOEFTE =
             "INSERT INTO voedingsbehoeft(waarde) VALUES(?)";
-    
+
+    String INSERTFOTOEIG =
+            "INSERT INTO foto (plant_id, eigenschap, url, figuur)" +
+                    "VALUES (?,?,?,?)";
+
+
+    String UPDATESTATUSBYID =
+           "UPDATE plant SET status = ? WHERE plant_id= ?";
+
+    //Update queries voor aanpassen/wijzigen
+    String UPDATEABIOTISCHEFMULTI =
+            "UPDATE abiotisch_multi" +
+                    "SET plant_id = plant_id, eigenschap = ?, waarde = ?" +
+                    "WHERE plant_id = ?";
+
+    String UPDATEABIOTISCHEF =
+            "UPDATE abiotische_factoren" +
+                    "SET plant_id = plant_id, bezonning = ?, grondsoort = ?, vochtbehoefte = ?, voedingsbehoefte = ?, reactie_antagonistische_omg = ?" +
+                    "WHERE plant_id = ?";
+
+    String UPDATEBEHEERMULTI =
+            "UPDATE beheer_multi" +
+                    "SET plant_id = plant_id, beheerdaad = ?, opmerking = ?, maand = ?, frequentie_jaar = ?" +
+                    "WHERE plant_id = ?";
+
+    String UPDATEPLANT =
+            "UPDATE plant" +
+                    "SET planttypt = ?, familie = ?, geslacht = ?, variatie = ?, plantdichtheid_min = ?, plantdichtheid_max = ?, fgsv = ?, status = ?, laatste_update_door = ?,  laatste_update_datum = ?" +
+                    "WHERE plant_id = ?";
+
+    String UPDATECOMMENSALISME =
+            "UPDATE commensalisme" +
+                    "SET plant_id = plant_id, strategie = ?, ontwikkelingssnelheid = ?" +
+                    "WHERE plant_id = plant_id";
+
+    String UPDATECOMMENSALISMEMULTI =
+            "UPDATE commensalisme_multi" +
+                    "SET plant_id = plant_id, eigenschap = ?, waarde = ?" +
+                    "WHERE plant_id= ?";
+
+    String UPDATEEXTRA =
+            "UPDATE extra" +
+                    "SET plant_id = plant_id, nectarwaarde = ?, pollenwaarde = ?, bijvriendelijk = ?, vlindervriendelijk = ?, eetbaar = ?, kruidgebruik = ?, geurend = ?, vorstgevoelig = ?" +
+                    "WHERE plant_id = ?";
+
+    String UPDATEFENOTYPE =
+            "UPDATE fenotype" +
+                    "SET plant_id = plant_id, bladvor = ?, levensvorm = ?, habitus = ?, bloeiwijze = ?, bladgrootte = ?, ratio_bloei_blad = ?, spruitfenologie = ?" +
+                    "WHERE plant_id = ?";
+
+    String UPDATEFENOTYPEMULTI =
+            "UPDATE fenotype_multi" +
+                    "SET plant_id = plant_id, eigenschap = ?, jan = ?, feb = ?, maa = ?, apr = ?, mei = ?, jun = ?, jul = ?, aug = ?, sep = ?, okt = ?, nov = ?, dec = ?" +
+                    "WHERE plant_id = ?";
+
+    //Update queries voor naakte tabellen
+    String UPDATEBEHEERDAAD =
+            "UPDATE beheerdaad" +
+                    "SET waarde = ?";
+
+    String UPDATEBEZONNING =
+            "UPDATE bezonning" +
+                    "SET waarde + ?";
+
+    String UPDATEBLADVORM =
+            "UPDATE bladvorm" +
+                    "SET waarde = ?";
+
+    String UPDATEBLOEIWIJZE =
+            "UPDATE bloeiwijze" +
+                    "SET waarde = ?";
+
+    String UPDATEFAMILIE =
+            "UPDATE familie" +
+                    "SET familie_naam = ?, planttype_id = planttype_id" +
+                    "WHERE planttype_id = ?";
+
+    String UPDATEGESLACHT =
+            "UPDATE geslacht" +
+                    "SETgeslacht_naam = ?, familie_id = familie_id" +
+                    "WHERE familie_id = ?";
+
+    String UPDATEGRONDSOORT =
+            "UPDATE grondsoort" +
+                    "SET waarde = ?";
+
+    String UPDATEHABITAT =
+            "UPDATE habitat" +
+                    "SET waarde = ?, afkorting = ?";
+
+    String UPDATEHABITUS =
+            "UPDATE habitus" +
+                    "SET waarde = ?, afbeelding = ?";
+
+    String UPDATEKLEUR =
+            "UPDATE kleuren" +
+                    "SET kleur = ?";
+
+    String UPDATELEVENSDUUR =
+            "UPDATE levenduur_concurrentiekracht" +
+                    "SET waarde = ?";
+
+    String UPDATEMAXBLADGROOTTE =
+            "UPDATE maxbladgrootte" +
+                    "SET waarde = ?";
+
+    String UPDATENECTARWAARDE =
+            "UPDATE nectarwaarde" +
+                    "SET waarde = ?";
+
+    String UPDATEONTWIKKELINGSSNELHEID =
+            "UPDATE ontwikkelingssnelheid" +
+                    "SET waarde = ?";
+
+    String UPDATEPOLLENWAARDE =
+            "UPDATE pollenwaarde" +
+                    "SET waarde = ?";
+
+    String UPDATERATIO =
+            "UPDATE ratio_bloeiblad" +
+                    "SET waarde = ?";
+
+    String UPDATEREACTIEOMGEVING =
+            "UPDATE reactieomgeving" +
+                    "SET waarde = ?";
+
+    String UPDATESOCIABILITEIT =
+            "UPDATE sociabiliteit" +
+                    "SET waarde = ?";
+
+    String UDATESOORT =
+            "UPDATE soort" +
+                    "SET soort_naam = ?, geslacht_id = geslacht_id" +
+                    "WHERE geslacht_id = ?";
+
+    String UPDATESPRUITFENOLOGIE =
+            "UPDATE spruitfenologie" +
+                    "SET waarde = ?";
+
+    String UPDATESTRATEGIE =
+            "UPDATE strategie" +
+                    "SET waarde = ?";
+
+    String UPDATETYPE =
+            "UPDATE planttype" +
+                    "SET planttype_id = planttyper_id, type_naam = ?" +
+                    "WHERE planttype_id = ?";
+
+    String UPDATEVARIATIE =
+            "UPDATE variatie" +
+                    "SET variatie_naam = ?, soort_id = soort_id" +
+                    "WHERE soort_id = ?";
+
+    String UPDATEVOCHTBEHOEFTE =
+            "UPDATE vochtbehoefte" +
+                    "SET waarde = ?";
+
+    String UPDATEVOEDINGSBEHOEFTE =
+            "UPDATE voedingsbehoeft" +
+                    "SET waarde = ?";
+
+    //Queries voor toevoegen naam
+    String SELECTDUBBELENAAM = "select COUNT(*) from familie f,geslacht g,soort s,variatie v, planttype p " +
+            "where p.planttype_naam = ? and f.familie_naam = ? and g.geslacht_naam = ? and s.soort_naam = ? and v.variatie_naam = ? " +
+            "and f.familie_id = g.familie_id and g.geslacht_id = s.geslacht_id";
+    String SELECTIDPLANTTYPE = "select planttype_id from planttype where planttype_naam = ?";
+    String SELECTDUBBELEFAMILIE = "if exists (select familie_id from familie where familie_naam = ?) " +
+            "select familie_id from familie where familie_naam = ? else select 0";
+    String SELECTDUBBELEGESLACHT = "if exists (select geslacht_id from geslacht where geslacht_naam = ?) " +
+            "select geslacht_id from geslacht where geslacht_naam = ? else select 0";
+    String SELECTDUBBELESOORT = "if exists (select soort_id from soort where soort_naam = ?) " +
+            "select soort_id from soort where soort_naam = ? else select 0";
+    String SELECTDUBBELEVARIATIE = "if exists (select variatie_id from variatie where variatie_naam = ?) " +
+            "select variatie_id from variatie where variatie_naam = ? else select 0";
+
 }
+
+
+
+
+
+
+
+
+
+
 

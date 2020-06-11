@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,9 +18,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1798.0" minHeight="1798.0" prefHeight="1798.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerPlantToevoegen">
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1798.0" minHeight="1798.0" prefHeight="1798.0" prefWidth="1325.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerPlantToevoegen">
    <content>
-      <AnchorPane maxHeight="1796.8" maxWidth="1278.4" minHeight="1796.8" minWidth="1278.4" prefHeight="1796.8" prefWidth="1278.4">
+      <AnchorPane maxHeight="1797.0" maxWidth="1303.0" minHeight="1796.8" minWidth="1278.4" prefHeight="1797.0" prefWidth="1303.0">
          <children>
             <TitledPane layoutX="567.0" layoutY="220.0" prefHeight="382.0" prefWidth="706.0" text="Commensalisme">
               <content>
@@ -33,7 +34,7 @@
                                  </font>
                               </Label>
                               <HBox />
-                              <ComboBox fx:id="cboOntwikkelingssnelheid" prefHeight="30.0" prefWidth="240.0" />
+                              <ComboBox fx:id="cboOntwikkelingssnelheid" prefHeight="30.0" prefWidth="240.0" value="unknown" />
                               <Label fx:id="lblSociabiliteit" prefHeight="30.0" prefWidth="120.0" text="Sociabiliteit">
                                  <font>
                                     <Font size="14.0" />
@@ -50,7 +51,7 @@
                                     <RadioButton fx:id="rdbSociabiliteit3" mnemonicParsing="false" prefHeight="18.0" prefWidth="38.0" text="III" toggleGroup="$Sociabiliteit" />
                                     <RadioButton fx:id="rdbSociabiliteit4" mnemonicParsing="false" prefHeight="18.0" prefWidth="39.0" text="IV" toggleGroup="$Sociabiliteit" />
                                     <RadioButton fx:id="rdbSociabiliteit5" mnemonicParsing="false" prefHeight="18.0" prefWidth="36.0" text="V" toggleGroup="$Sociabiliteit" />
-                                    <RadioButton fx:id="rdbSociabiliteitUnknow" mnemonicParsing="false" text="Unknown" toggleGroup="$Sociabiliteit" />
+                                    <RadioButton fx:id="rdbSociabiliteitUnknow" mnemonicParsing="false" selected="true" text="Unknown" toggleGroup="$Sociabiliteit" />
                                  </children>
                               </HBox>
                               <Label prefHeight="30.0" prefWidth="120.0" text="Strategie:">
@@ -62,7 +63,7 @@
                                  <children>
                                     <HBox>
                                        <children>
-                                          <RadioButton fx:id="rdbStrategieUnknown" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" selected="true" text="Unknown">
+                                          <RadioButton fx:id="rdbStrategieUnknown" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" selected="true" text="Unknow">
                                              <toggleGroup>
                                                 <ToggleGroup fx:id="StrategieToggle" />
                                              </toggleGroup>
@@ -108,7 +109,7 @@
                               </Label>
                               <HBox prefHeight="30.0" prefWidth="193.0">
                                  <children>
-                                    <ComboBox fx:id="cboLevensduur" prefHeight="30.0" prefWidth="187.0" />
+                                    <ComboBox fx:id="cboLevensduur" prefHeight="30.0" prefWidth="187.0" promptText="maak u keuze" />
                                     <Button mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenLevensduur" prefHeight="30.0" prefWidth="30.0" text="+" />
                                     <Button mnemonicParsing="false" onMouseClicked="#clicked_DeleteLevensduur" prefHeight="30.0" prefWidth="31.0" text="-" />
                                  </children>
@@ -159,7 +160,7 @@
                                     </VBox>
                                     <VBox>
                                        <children>
-                                          <ComboBox fx:id="cboType" prefHeight="30.0" prefWidth="120.0" />
+                                          <ComboBox fx:id="cboType" prefHeight="30.0" prefWidth="120.0" value="" />
                                           <TextField fx:id="txtFamilie" prefHeight="30.0" prefWidth="120.0" />
                                           <TextField fx:id="txtGeslacht" prefHeight="30.0" prefWidth="120.0" />
                                           <TextField fx:id="txtSoort" prefHeight="30.0" prefWidth="120.0" />
@@ -193,7 +194,7 @@
             </TitledPane>
             <TitledPane layoutX="8.0" layoutY="601.0" text="Fenotype">
               <content>
-                <AnchorPane>
+                <AnchorPane prefHeight="1178.0" prefWidth="1584.0">
                      <children>
                         <VBox layoutX="14.0" layoutY="14.0">
                            <children>
@@ -227,10 +228,10 @@
                                           </VBox>
                                           <VBox>
                                              <children>
-                                                <ComboBox fx:id="cboBladgrootte" prefHeight="30.0" prefWidth="120.0" />
-                                                <ComboBox fx:id="cboBladvorm" prefHeight="30.0" prefWidth="120.0" />
-                                                <ComboBox fx:id="cboRatio" prefHeight="30.0" prefWidth="120.0" />
-                                                <ComboBox fx:id="cboSpruitfenologie" prefHeight="30.0" prefWidth="120.0" />
+                                                <ComboBox fx:id="cboBladgrootte" prefHeight="30.0" prefWidth="120.0" value="0" />
+                                                <ComboBox fx:id="cboBladvorm" prefHeight="30.0" prefWidth="120.0" value="0" />
+                                                <ComboBox fx:id="cboRatio" prefHeight="30.0" prefWidth="120.0" value="0" />
+                                                <ComboBox fx:id="cboSpruitfenologie" prefHeight="30.0" prefWidth="120.0" value="0" />
                                              </children>
                                           </VBox>
                                           <Label text="       " />
@@ -295,7 +296,7 @@
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                   </RadioButton>
-                                                                  <RadioButton fx:id="rdbFanerophyt0" mnemonicParsing="false" prefHeight="25.0" selected="true" text="0. Niet gekend" toggleGroup="$levensvormToggle">
+                                                                  <RadioButton fx:id="rdbNietGekend" mnemonicParsing="false" prefHeight="25.0" selected="true" text="0. Niet gekend" toggleGroup="$levensvormToggle">
                                                                      <font>
                                                                         <Font size="14.0" />
                                                                      </font>
@@ -415,18 +416,18 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <ComboBox fx:id="cboBladkleurJan" onAction="#clickedbladkleurjan" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBladkleurFeb" onAction="#clickedcboBladkleurFeb" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBladkleurMaa" onAction="#clickedcboBladkleurMaa" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBladkleurApr" onAction="#clickedcboBladkleurApr" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBladkleurMei" onAction="#ClickedcboBladkleurMei" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBladkleurJun" onAction="#ClickedcboBladkleurJun" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBladkleurJul" onAction="#ClickedcboBladkleurJul" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBladkleurAug" onAction="#ClickedcboBladkleurAug" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBladkleurSept" onAction="#ClickedcboBladkleurSept" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBladkleurOkt" onAction="#ClickedcboBladkleurOkt" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBladkleurNov" onAction="#ClickedcboBladkleurNov" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBladkleurDec" onAction="#ClickedcboBladkleurDec" prefHeight="30.0" prefWidth="80.0" />
+                                                      <ComboBox fx:id="cboBladkleurJan" onAction="#clickedbladkleurjan" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurFeb" onAction="#clickedcboBladkleurFeb" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurMaa" onAction="#clickedcboBladkleurMaa" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurApr" onAction="#clickedcboBladkleurApr" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurMei" onAction="#ClickedcboBladkleurMei" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurJun" onAction="#ClickedcboBladkleurJun" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurJul" onAction="#ClickedcboBladkleurJul" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurAug" onAction="#ClickedcboBladkleurAug" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurSept" onAction="#ClickedcboBladkleurSept" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurOkt" onAction="#ClickedcboBladkleurOkt" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurNov" onAction="#ClickedcboBladkleurNov" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBladkleurDec" onAction="#ClickedcboBladkleurDec" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
@@ -478,18 +479,18 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <ComboBox fx:id="cboBloeikleurJan" onAction="#actioncboBloeikleurJan" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBloeikleurFeb" onAction="#actioncboBloeikleurFeb" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBloeikleurMaa" onAction="#actioncboBloeikleurMaa" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBloeikleurApr" onAction="#actioncboBloeikleurApr" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBloeikleurMei" onAction="#actioncboBloeikleurMei" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBloeikleurJun" onAction="#actioncboBloeikleurJun" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBloeikleurJul" onAction="#actioncboBloeikleurJul" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBloeikleurAug" onAction="#actioncboBloeikleurAug" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBloeikleurSept" onAction="#actioncboBloeikleurSept" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBloeikleurOkt" onAction="#actioncboBloeikleurOkt" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBloeikleurNov" onAction="#actioncboBloeikleurNov" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cboBloeikleurDec" onAction="#actioncboBloeikleurDec" prefHeight="30.0" prefWidth="80.0" />
+                                                      <ComboBox fx:id="cboBloeikleurJan" onAction="#actioncboBloeikleurJan" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurFeb" onAction="#actioncboBloeikleurFeb" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurMaa" onAction="#actioncboBloeikleurMaa" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurApr" onAction="#actioncboBloeikleurApr" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurMei" onAction="#actioncboBloeikleurMei" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurJun" onAction="#actioncboBloeikleurJun" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurJul" onAction="#actioncboBloeikleurJul" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurAug" onAction="#actioncboBloeikleurAug" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurSept" onAction="#actioncboBloeikleurSept" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurOkt" onAction="#actioncboBloeikleurOkt" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurNov" onAction="#actioncboBloeikleurNov" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
+                                                      <ComboBox fx:id="cboBloeikleurDec" onAction="#actioncboBloeikleurDec" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: Lightgray;" value="Unkown" />
 
                                                    </children>
                                                 </HBox>
@@ -499,7 +500,7 @@
                                     </AnchorPane>
                                 </content>
                               </TitledPane>
-                              <TitledPane text="Habitus">
+                              <TitledPane prefHeight="171.0" prefWidth="1290.0" text="Habitus">
                                 <content>
                                   <AnchorPane>
                                        <children>
@@ -661,6 +662,7 @@
                                                 </VBox>
                                              </children>
                                           </HBox>
+                                          <RadioButton layoutX="1212.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="74.0" selected="true" text="Unknown" toggleGroup="$habitusToggle" />
                                        </children>
                                     </AnchorPane>
                                 </content>
@@ -757,6 +759,7 @@
                                                 </VBox>
                                              </children>
                                           </HBox>
+                                          <RadioButton fx:id="rdbSmallePluim1" layoutX="814.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" selected="true" text="Unknown" toggleGroup="$bloeiwijzeToggle" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -809,7 +812,7 @@
                                                       </HBox>
                                                       <HBox>
                                                          <children>
-                                                            <RadioButton fx:id="rdbBijvriendelijkLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text=" ">
+                                                            <RadioButton fx:id="rdbBijvriendelijkLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" selected="true" text=" ">
                                                                <toggleGroup>
                                                                   <ToggleGroup fx:id="BijvriendelijkToggle" />
                                                                </toggleGroup></RadioButton>
@@ -819,7 +822,7 @@
                                                       </HBox>
                                                       <HBox>
                                                          <children>
-                                                            <RadioButton fx:id="rdbVlindervriendelijkLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text=" ">
+                                                            <RadioButton fx:id="rdbVlindervriendelijkLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" selected="true" text=" ">
                                                                <toggleGroup>
                                                                   <ToggleGroup fx:id="VlindervriendelijkToggle" />
                                                                </toggleGroup></RadioButton>
@@ -861,7 +864,7 @@
                                                    <children>
                                                       <HBox>
                                                          <children>
-                                                            <RadioButton fx:id="rdbEetbaarLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text=" ">
+                                                            <RadioButton fx:id="rdbEetbaarLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" selected="true" text=" ">
                                                                <toggleGroup>
                                                                   <ToggleGroup fx:id="EetbaarToggle" />
                                                                </toggleGroup></RadioButton>
@@ -871,7 +874,7 @@
                                                       </HBox>
                                                       <HBox>
                                                          <children>
-                                                            <RadioButton fx:id="rdbKruidgebruikLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text=" ">
+                                                            <RadioButton fx:id="rdbKruidgebruikLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" selected="true" text=" ">
                                                                <toggleGroup>
                                                                   <ToggleGroup fx:id="KruidgebruikToggle" />
                                                                </toggleGroup></RadioButton>
@@ -881,7 +884,7 @@
                                                       </HBox>
                                                       <HBox>
                                                          <children>
-                                                            <RadioButton fx:id="rdbGeurendLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text=" ">
+                                                            <RadioButton fx:id="rdbGeurendLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" selected="true" text=" ">
                                                                <toggleGroup>
                                                                   <ToggleGroup fx:id="GeurendToggle" />
                                                                </toggleGroup></RadioButton>
@@ -891,7 +894,7 @@
                                                       </HBox>
                                                       <HBox>
                                                          <children>
-                                                            <RadioButton fx:id="rdbVorstgevoeligLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text=" ">
+                                                            <RadioButton fx:id="rdbVorstgevoeligLeeg" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" selected="true" text=" ">
                                                                <toggleGroup>
                                                                   <ToggleGroup fx:id="VorstgevoeligToggle" />
                                                                </toggleGroup></RadioButton>
@@ -909,16 +912,34 @@
                               </AnchorPane>
                           </content>
                         </TitledPane>
-                        <Button layoutX="1025.0" layoutY="1050.0" mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenPlant" text="Voeg plant toe">
+                        <Button layoutX="560.0" layoutY="975.0" mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenPlant" text="Opslaan">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <!--suppress XmlDuplicatedId -->
+                        <Button fx:id="btn_Terug" layoutX="1150.0" layoutY="1084.0" mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" prefHeight="50.0" prefWidth="118.0" text="Terug">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btn_Terug" layoutX="909.0" layoutY="1050.0" mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" text="Terug">
+                        <Button fx:id="btnVerstuurVoorGoek" layoutX="950.0" layoutY="975.0" mnemonicParsing="false" onAction="#clicked_versturenVoorGoedkeuring" text="Versturen voor goedkeuring">
                            <font>
-                              <Font size="24.0" />
+                              <Font size="18.0" />
                            </font>
                         </Button>
+                        <ListView fx:id="lvLijstOpgeslagenPlanten" layoutX="671.0" layoutY="975.0" prefHeight="180.0" prefWidth="241.0" />
+                        <Button layoutX="560.0" layoutY="1045.0" mnemonicParsing="false" onAction="#Clicked_LijstVanOpgeslagenPlanten" text="Lijst ">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="950.0" layoutY="1027.0" mnemonicParsing="false" onMouseClicked="#clicked_BeheersdadenGeselecteerdePlant" prefHeight="35.0" prefWidth="249.0" text="Beheersdaden geselecteerde plant">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="950.0" layoutY="1097.0" mnemonicParsing="false" onMouseClicked="#Clicked_Wijzigen" prefHeight="29.0" prefWidth="76.0" text="Wijzigen" />
                      </children>
                   </AnchorPane>
               </content>
@@ -954,16 +975,16 @@
                                        <children>
                                           <HBox>
                                              <children>
-                                                <ComboBox fx:id="cboBezonning" prefWidth="150.0" />
+                                                <ComboBox fx:id="cboBezonning" prefWidth="150.0" value="unkn" />
                                              </children>
                                           </HBox>
                                           <HBox>
                                              <children>
-                                                <ComboBox fx:id="cboVoedingsbehoefte" prefWidth="150.0" />
+                                                <ComboBox fx:id="cboVoedingsbehoefte" prefWidth="150.0" value="unknown" />
                                              </children>
                                           </HBox>
                                           <HBox />
-                                          <ComboBox fx:id="cboVochtbehoefte" prefWidth="150.0" />
+                                          <ComboBox fx:id="cboVochtbehoefte" prefWidth="150.0" value="unknown" />
                                        </children>
                                     </VBox>
                                     <VBox>
@@ -973,7 +994,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="cboReactieAntag" prefHeight="30.0" prefWidth="226.0" />
+                                          <ComboBox fx:id="cboReactieAntag" prefHeight="30.0" prefWidth="226.0" value="unknown" />
                                           <HBox>
                                              <children>
                                                 <Label prefHeight="30.0" prefWidth="119.0" text=" Grondsoort:">
@@ -981,7 +1002,7 @@
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <ComboBox fx:id="cboGrondsoort" prefHeight="30.0" prefWidth="106.0" />
+                                                <ComboBox fx:id="cboGrondsoort" prefHeight="30.0" prefWidth="106.0" value="unk" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -997,7 +1018,7 @@
                                     </Label>
                                     <HBox>
                                        <children>
-                                          <ComboBox fx:id="cboHabitat" prefHeight="30.0" prefWidth="450.0" />
+                                          <ComboBox fx:id="cboHabitat" prefHeight="30.0" prefWidth="450.0" promptText="Maak u keuze" />
                                           <Button mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenHabitat" prefHeight="30.0" prefWidth="30.0" text="+" />
                                           <Button mnemonicParsing="false" onMouseClicked="#clicked_DeltenHabitat" prefHeight="30.0" prefWidth="30.0" text="-" />
                                        </children>
@@ -1011,11 +1032,37 @@
                   </AnchorPane>
               </content>
             </TitledPane>
-            <Button fx:id="btn_Terug" layoutX="1130.0" layoutY="87.0" mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" text="Terug">
+            <!--suppress XmlDuplicatedId -->
+            <Button fx:id="btn_Terug" layoutX="1120.0" layoutY="121.0" mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" text="Terug">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
+            <ImageView fx:id="imgView1" fitHeight="150.0" fitWidth="200.0" layoutX="652.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/cheetah-10698-12140-550x550.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgView2" fitHeight="150.0" fitWidth="200.0" layoutX="845.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/cheetah-10698-12140-550x550.png" />
+               </image>
+            </ImageView>
+            <ToolBar layoutX="620.0" layoutY="177.0" prefHeight="40.0" prefWidth="200.0">
+              <items>
+                <Button mnemonicParsing="false" onAction="#btnAfbChooser1" text="afbeelding toev." />
+              </items>
+            </ToolBar>
+            <ToolBar layoutX="820.0" layoutY="177.0" prefHeight="40.0" prefWidth="200.0">
+               <items>
+                  <Button mnemonicParsing="false" onAction="#btnAfbChooser2" text="afbeelding toev." />
+               </items>
+            </ToolBar>
+            <ImageView fitHeight="107.0" fitWidth="164.0" layoutX="1139.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/Vives_Logo.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </content>
