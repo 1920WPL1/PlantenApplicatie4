@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1798.0" minHeight="1798.0" prefHeight="1798.0" prefWidth="1325.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerPlantToevoegen">
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1798.0" minHeight="1798.0" prefHeight="1798.0" prefWidth="1325.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerPlantWijzigen">
    <content>
       <AnchorPane maxHeight="1797.0" maxWidth="1303.0" minHeight="1796.8" minWidth="1278.4" prefHeight="1797.0" prefWidth="1303.0">
          <children>
@@ -295,7 +295,7 @@
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                   </RadioButton>
-                                                                  <RadioButton fx:id="rdbFanerophyt0" mnemonicParsing="false" prefHeight="25.0" selected="true" text="0. Niet gekend" toggleGroup="$levensvormToggle">
+                                                                  <RadioButton fx:id="rdbNietGekend" mnemonicParsing="false" prefHeight="25.0" selected="true" text="0. Niet gekend" toggleGroup="$levensvormToggle">
                                                                      <font>
                                                                         <Font size="14.0" />
                                                                      </font>
@@ -661,7 +661,7 @@
                                                 </VBox>
                                              </children>
                                           </HBox>
-                                          <RadioButton layoutX="1212.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="74.0" selected="true" text="Unknown" toggleGroup="$habitusToggle" />
+                                          <RadioButton fx:id="rdbHUnknown" layoutX="1212.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="74.0" selected="true" text="Unknown" toggleGroup="$habitusToggle" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -758,7 +758,7 @@
                                                 </VBox>
                                              </children>
                                           </HBox>
-                                          <RadioButton fx:id="rdbSmallePluim1" layoutX="814.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" selected="true" text="Unknown" toggleGroup="$bloeiwijzeToggle" />
+                                          <RadioButton fx:id="rdbBUnknown" layoutX="814.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" selected="true" text="Unknown" toggleGroup="$bloeiwijzeToggle" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -911,7 +911,7 @@
                               </AnchorPane>
                            </content>
                         </TitledPane>
-                        <Button layoutX="560.0" layoutY="975.0" mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenPlant" text="Opslaan">
+                        <Button layoutX="560.0" layoutY="975.0" mnemonicParsing="false" onMouseClicked="#clicked_WijzigenPlant" text="Wijzigen">
                            <font>
                               <Font size="18.0" />
                            </font>

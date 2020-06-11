@@ -296,7 +296,7 @@
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                   </RadioButton>
-                                                                  <RadioButton fx:id="rdbFanerophyt0" mnemonicParsing="false" prefHeight="25.0" selected="true" text="0. Niet gekend" toggleGroup="$levensvormToggle">
+                                                                  <RadioButton fx:id="rdbNietGekend" mnemonicParsing="false" prefHeight="25.0" selected="true" text="0. Niet gekend" toggleGroup="$levensvormToggle">
                                                                      <font>
                                                                         <Font size="14.0" />
                                                                      </font>
@@ -939,6 +939,7 @@
                               <Font size="15.0" />
                            </font>
                         </Button>
+                        <Button layoutX="950.0" layoutY="1097.0" mnemonicParsing="false" onMouseClicked="#Clicked_Wijzigen" prefHeight="29.0" prefWidth="76.0" text="Wijzigen" />
                      </children>
                   </AnchorPane>
               </content>

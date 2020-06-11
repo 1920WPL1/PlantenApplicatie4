@@ -294,7 +294,6 @@ public class ControllerPlantToevoegen {
     }
 
 
-
     //Toevoegen van een volledige plant
     public void clicked_ToevoegenPlant(MouseEvent mouseEvent) throws SQLException {
 
@@ -425,6 +424,8 @@ public class ControllerPlantToevoegen {
         int iPollenwaarde = (int) spnPollenwaarde.getValue();
         RadioButton selectBijvriendelijk = (RadioButton) BijvriendelijkToggle.getSelectedToggle();
         String sBijvriendelijk = selectBijvriendelijk.getText();
+        RadioButton selectVlindervriendelijk = (RadioButton) VlindervriendelijkToggle.getSelectedToggle();
+        String sVlindervriendelijk = selectVlindervriendelijk.getText();
         RadioButton selectEetbaar = (RadioButton) EetbaarToggle.getSelectedToggle();
         String sEetbaar = selectEetbaar.getText();
         RadioButton selectKruidgebruik = (RadioButton) KruidgebruikToggle.getSelectedToggle();
@@ -440,6 +441,7 @@ public class ControllerPlantToevoegen {
                 iNectarwaarde,
                 iPollenwaarde,
                 sBijvriendelijk,
+                sVlindervriendelijk,
                 sEetbaar,
                 sKruidgebruik,
                 sGeurend,
@@ -689,6 +691,7 @@ public class ControllerPlantToevoegen {
         window.show();
         window.setScene(scene);
     }
+
     //functie voor
     public void clicked_versturenVoorGoedkeuring(ActionEvent actionEvent) throws SQLException {
         Plant plantje = (Plant) lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedItem();
@@ -700,11 +703,12 @@ public class ControllerPlantToevoegen {
             PlantDAO plantdao = new PlantDAO(dbConnection);
             plantdao.updatePlantStatusByID(plantje);
             lijstmakerEnRefresher();
-        } else {notificationBox("De plant is niet doorgestuurd");
+        } else {
+            notificationBox("De plant is niet doorgestuurd");
         }
     }
 
-    public void clicked_BeheersdadenGeselecteerdePlant(MouseEvent mouseEvent) throws SQLException{
+    public void clicked_BeheersdadenGeselecteerdePlant(MouseEvent mouseEvent) throws SQLException {
         Plant plant = (Plant) lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedItem();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("view/BeheeBehandelingPlant.fxml"));
@@ -894,5 +898,20 @@ public class ControllerPlantToevoegen {
     }
 
     public void btnAfbChooser2(ActionEvent actionEvent) {
+    }
+
+    public void Clicked_Wijzigen(MouseEvent mouseEvent) {
+        Plant plant = (Plant) lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedItem();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("view/PlantWijzigen.fxml"));
+            Parent root = loader.load();
+            ControllerPlantWijzigen controllerPlantWijzigen = loader.getController();
+            controllerPlantWijzigen.initialize(plant);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException | SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }
