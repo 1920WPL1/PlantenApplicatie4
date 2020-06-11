@@ -6,17 +6,27 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.io.IOException;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 
 public class ControllerPlantToevoegen {
@@ -280,7 +290,6 @@ public class ControllerPlantToevoegen {
         cboBloeikleurDec.getItems().addAll(infotables.getKleuren());
         //habitat
         cboHabitat.getItems().addAll(infotables.getHabitats());
-
     }
 
     public String testerNullpointers(String string, ComboBox cb) {
@@ -293,67 +302,80 @@ public class ControllerPlantToevoegen {
         return string;
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> GeoffkeTak
     //Toevoegen van een volledige plant
-    public void clicked_ToevoegenPlant(MouseEvent mouseEvent) throws SQLException {
+    public void clicked_ToevoegenPlant(MouseEvent mouseEvent) throws SQLException, IOException {
+        //Kijken of type ingevuld is of niet
+        //Zo niet krijg je een bericht dat je een type moet kiezen
+        //Zo ja maakt hij de plant aan
+        if (cboType.getValue().toString().equals("")) {
+            JOptionPane.showMessageDialog(null, "Kies een type!");
+        } else {
+            //vars voor plant
+            String sType = cboType.getValue().toString();
+            String sFam = txtFamilie.getText();
+            String sGeslacht = txtGeslacht.getText();
+            String sSoort = txtSoort.getText();
+            String sVariant = txtVariant.getText();
+            String fgsv = sFam + " " + sGeslacht + " " + sSoort + " '" + sVariant + "'";
+            int iMinDichtheid = (int) spnMinPlantDicht.getValue();
+            int iMaxDichtheid = (int) spnMaxPlantDicht.getValue();
+            int iStatus = 0;
+            java.sql.Date uDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+            System.out.println(uDate);
+            //Insert van plant
+            PlantDAO plantDao = new PlantDAO(dbConnection);
+            Plant plant = new Plant
+                    (sType,
+                            sFam,
+                            sGeslacht,
+                            sSoort,
+                            sVariant,
+                            iMinDichtheid,
+                            iMaxDichtheid,
+                            fgsv,
+                            iStatus,
+                            uDate);
+            plantDao.createPlant(plant);
 
-        //vars voor plant
+            //Insert Abiotische factoren
+            createAbiotische(plant);
+            //Insert Commensalisme
+            createCommensalisme(plant);
+            //Insert Fenotype tot DB
+            createFenoType(plant);
+            //Insert Extra waarden tot DB
+            createExtra(plant);
 
-        String sType = cboType.getValue().toString();
-        String sFam = txtFamilie.getText();
-        String sGeslacht = txtGeslacht.getText();
-        String sSoort = txtSoort.getText();
-        String sVariant = txtVariant.getText();
-        String fgsv = sFam + " " + sGeslacht + " " + sSoort + " '" + sVariant + "'";
-        int iMinDichtheid = (int) spnMinPlantDicht.getValue();
-        int iMaxDichtheid = (int) spnMaxPlantDicht.getValue();
-        int iStatus = 0;
-        java.sql.Date uDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-        System.out.println(uDate);
+            //Aanmaken van de arrays voor de Feno Multi eigenschappen
+            setArrayFenotypeMultiFunction();
+            //Insert Fenotype multi eigenschap per categorie blad, bloei hoogte... tot DB
+            createFenoMultiEig(aBladhoogte, plant);
+            createFenoMultiEig(aBladkleur, plant);
+            createFenoMultiEig(aBloeihoogte, plant);
+            createFenoMultiEig(aBloeikleur, plant);
 
-//Insert van plant
-        PlantDAO plantDao = new PlantDAO(dbConnection);
-        Plant plant = new Plant
-                (sType,
-                        sFam,
-                        sGeslacht,
-                        sSoort,
-                        sVariant,
-                        iMinDichtheid,
-                        iMaxDichtheid,
-                        fgsv,
-                        iStatus,
-                        uDate);
-        plantDao.createPlant(plant);
-
-//Insert Abiotische factoren
-        createAbiotische(plant);
-//Insert Commensalisme
-        createCommensalisme(plant);
-//Insert Fenotype tot DB
-        createFenoType(plant);
-//Insert Extra waarden tot DB
-        createExtra(plant);
-
-//Aanmaken van de arrays voor de Feno Multi eigenschappen
-        setArrayFenotypeMultiFunction();
-//Insert Fenotype multi eigenschap per categorie blad, bloei hoogte... tot DB
-        createFenoMultiEig(aBladhoogte, plant);
-        createFenoMultiEig(aBladkleur, plant);
-        createFenoMultiEig(aBloeihoogte, plant);
-        createFenoMultiEig(aBloeikleur, plant);
-
-//Insert Abiotische Multi Gegevens tot DB en oproepen functie listview Reader
-        createListViewReaderHabitat(lvHabitat, plant, lblHabitat);
+            //Insert Abiotische Multi Gegevens tot DB en oproepen functie listview Reader
+            createListViewReaderHabitat(lvHabitat, plant, lblHabitat);
 
 
-//Toevoegen Commensalisme Multi waarden tot DB met listviewreader en gewone methode
-        createListViewReaderLevensduur(lvLevensduur, plant);
-        createCommMultiSociabiliteit(plant);
+            //Toevoegen Commensalisme Multi waarden tot DB met listviewreader en gewone methode
+            createListViewReaderLevensduur(lvLevensduur, plant);
+            createCommMultiSociabiliteit(plant);
 
-        notificationBox("U plant is opgeslagen " + "\r\n" + plant.getFgsv());
-        btnVerstuurVoorGoek.setDisable(false);
 
+            String sPLantdetail="Plant Detail";
+            InsertFotoInDB(plant,sPLantdetail,imgView1);
+
+            String sPLant="Plant Geheel";
+            InsertFotoInDB(plant,sPLant,imgView2);
+
+            notificationBox("U plant is opgeslagen " + "\r\n" + plant.getFgsv());
+            btnVerstuurVoorGoek.setDisable(false);
+        }
     }
 
     /*!!!! Methodes voor de gegevens over te schrijven naar de databank !!!!*/
@@ -540,8 +562,6 @@ public class ControllerPlantToevoegen {
             aBladkleur.add(sNaamCmbBladKleur);
             aBloeihoogte.add(sNaamSpnBloeihoogte);
             aBloeikleur.add(sNaamCmbBloeiKleur);
-
-
         }
     }
 
@@ -566,10 +586,7 @@ public class ControllerPlantToevoegen {
                 (String) array.get(12)
         );
         fenotypedao.createfenomulti(fenomulti, plant);
-
-
     }
-
 
     //Abiotische factoren Multi (Habitat) in DB & Functie list view
     public void createListViewReaderHabitat(ListView ls, Plant plant, Label label) throws SQLException {
@@ -660,7 +677,6 @@ public class ControllerPlantToevoegen {
         lv.refresh();
     }
 
-
     //Clicked events add to Listview (Habitat en Levensduur) met methode toevoegenAanListMethode
     public void clicked_ToevoegenHabitat(MouseEvent mouseEvent) {
         ToevoegenAanListMethode(lvHabitat, cboHabitat);
@@ -670,7 +686,7 @@ public class ControllerPlantToevoegen {
         ToevoegenAanListMethode(lvLevensduur, cboLevensduur);
     }
 
-    //add to list Methode +fout afhandeling
+    //add to list Methode + fout afhandeling
     public void ToevoegenAanListMethode(ListView lv, ComboBox cmb) {
         try {
             lv.getItems().add(cmb.getValue().toString());
@@ -679,8 +695,7 @@ public class ControllerPlantToevoegen {
         }
     }
 
-
-    //functie voor terug te kunnen keren naar het zoek scherm.
+    //clicked event voor terug te kunnen keren naar het zoek scherm.
     public void clicked_TerugGaan(MouseEvent mouseEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("view/Zoekscherm.fxml"));
         Scene scene = new Scene(root);
@@ -689,7 +704,11 @@ public class ControllerPlantToevoegen {
         window.setScene(scene);
     }
 
+<<<<<<< HEAD
     //functie voor
+=======
+    //clicked event voor
+>>>>>>> GeoffkeTak
     public void clicked_versturenVoorGoedkeuring(ActionEvent actionEvent) throws SQLException {
         Plant plantje = (Plant) lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedItem();
         int sAntwoord = JOptionPane.showConfirmDialog(null, "bent u zeker dat u plant " + plantje.getFgsv() + " wenst door te sturen voor verbetering ?");
@@ -705,6 +724,10 @@ public class ControllerPlantToevoegen {
         }
     }
 
+<<<<<<< HEAD
+=======
+    //clicked event voor Beheersdaad voor de geselcteerde plant naar view
+>>>>>>> GeoffkeTak
     public void clicked_BeheersdadenGeselecteerdePlant(MouseEvent mouseEvent) throws SQLException {
         Plant plant = (Plant) lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedItem();
         try {
@@ -720,10 +743,72 @@ public class ControllerPlantToevoegen {
         }
     }
 
+    //clicked event
     public void Clicked_LijstVanOpgeslagenPlanten(ActionEvent actionEvent) throws SQLException {
         lijstmakerEnRefresher();
+        btnVerstuurVoorGoek.setDisable(false);
     }
 
+    public void btnAfbChooser1(ActionEvent actionEvent) {
+        AfbeeldingKiezen(imgView1);
+    }
+
+    public void btnAfbChooser2(ActionEvent actionEvent) {
+        AfbeeldingKiezen(imgView2);
+    }
+
+    //functie om afbeelding te kiezen
+    public void AfbeeldingKiezen(ImageView iv) {
+        Stage mainStage = new Stage();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.setTitle("Toevoegen foto plant");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image", "*.png", "*.jpg", "*.bmp"));
+        File selectedImage = fileChooser.showOpenDialog(mainStage);
+        String sSelected = selectedImage.getAbsolutePath();
+        String sFinalUrl = "file:///" + sSelected;
+        iv.setImage(new Image(sFinalUrl));
+    }
+
+    public Blob vanImgToBlob(Image img) throws IOException, SQLException {
+
+        BufferedImage Buffimage = ImageIO.read(new URL(img.getUrl()));
+        ByteArrayOutputStream bArrayStr = new ByteArrayOutputStream();
+        ImageIO.write(Buffimage, "jpg", bArrayStr);
+        byte[] jpgByteArray = bArrayStr.toByteArray();
+        StringBuilder sb = new StringBuilder();
+        Blob blob = null;
+        for (byte by : jpgByteArray)
+            sb.append(Integer.toBinaryString(by & 0xFF));
+        String blobString = sb.toString();
+        byte[] byteContent = blobString.getBytes();
+        blob = dbConnection.createBlob();
+        blob.setBytes(1,byteContent);
+
+        return blob;
+    }
+
+
+    //insert foto eigenschappen in DB
+  public void InsertFotoInDB(Plant plant,String sEigensch, ImageView img) throws SQLException, IOException {
+        String sEigenschap = sEigensch;
+        String sUrl = img.getImage().getUrl();
+        Blob bImage = vanImgToBlob(img.getImage());
+        FotoDAO fotoDao = new FotoDAO(dbConnection);
+        Foto_Eigenschap foteig = new Foto_Eigenschap(plant.getId()
+                , sEigenschap,
+                sUrl,
+                bImage);
+        fotoDao.createFoto(foteig,plant);
+          }
+
+
+
+    public void tester(ActionEvent actionEvent) throws IOException, SQLException {
+
+    }
+
+    //functie voor een lijst te refreshe en een lijst te maken
     public void lijstmakerEnRefresher() throws SQLException {
         lvLijstOpgeslagenPlanten.getItems().clear();
         lvLijstOpgeslagenPlanten.refresh();
@@ -891,9 +976,4 @@ public class ControllerPlantToevoegen {
     }
 
 
-    public void btnAfbChooser1(ActionEvent actionEvent) {
-    }
-
-    public void btnAfbChooser2(ActionEvent actionEvent) {
-    }
 }

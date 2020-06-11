@@ -2,23 +2,27 @@ package plantenApp.java.dao;
 
 import plantenApp.java.model.Foto;
 import plantenApp.java.model.Foto_Eigenschap;
+import plantenApp.java.model.Plant;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
-/**@author Siebe*/
+/**
+ * @author Siebe
+ */
 public class FotoDAO implements Queries {
     private Connection dbConnection;
     private PreparedStatement stmtSelectFotoByID;
+    private PreparedStatement stmtInsertFoto;
 
     public FotoDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
         stmtSelectFotoByID = dbConnection.prepareStatement(GETFOTOBYPLANTID);
+        stmtInsertFoto = dbConnection.prepareStatement(INSERTFOTOEIG,
+                Statement.RETURN_GENERATED_KEYS);
     }
 
+<<<<<<< HEAD
 
     public Foto getFotoById(int id) throws SQLException {
         Foto foto = null;
@@ -29,11 +33,9 @@ public class FotoDAO implements Queries {
         );
         return foto;
     }
+=======
+>>>>>>> GeoffkeTak
 
-    /**@author Siebe
-     * @param id -> plant_id
-     * @return -> fotos van de specifieke plant
-     */
     private ArrayList<Foto_Eigenschap> getFotos(int id) throws SQLException {
         ArrayList<Foto_Eigenschap> fotos = new ArrayList<>();
         stmtSelectFotoByID.setInt(1, id);
@@ -50,5 +52,18 @@ public class FotoDAO implements Queries {
             fotos.add(foto);
         }
         return fotos;
+    }
+
+    public void createFoto(Foto_Eigenschap foto_eigenschap, Plant plant) throws SQLException {
+
+        stmtInsertFoto.setInt(1, plant.getId());
+        stmtInsertFoto.setString(2, foto_eigenschap.getEigenschap());
+        stmtInsertFoto.setString(3, foto_eigenschap.getUrl());
+        stmtInsertFoto.setBlob(4, foto_eigenschap.getImage());
+        stmtInsertFoto.executeUpdate();
+        ResultSet rs = stmtInsertFoto.getGeneratedKeys();
+        rs.next();
+        Integer fotoId = rs.getInt(1);
+        foto_eigenschap.setId(fotoId);
     }
 }

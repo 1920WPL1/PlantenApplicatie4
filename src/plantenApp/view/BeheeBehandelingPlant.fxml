@@ -9,6 +9,8 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -16,14 +18,15 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerBeheer">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0">
+      <VBox prefHeight="631.0" prefWidth="622.0">
          <children>
-            <TitledPane animated="false" collapsible="false" text="Beheer">
+            <TitledPane animated="false" collapsible="false" prefHeight="518.0" prefWidth="622.0" text="Beheer">
               <content>
                 <AnchorPane>
                      <children>
-                        <VBox layoutX="14.0" layoutY="27.0" prefHeight="411.0" prefWidth="579.0">
+                        <VBox layoutX="14.0" layoutY="95.0" prefHeight="374.0" prefWidth="579.0">
                            <children>
+<<<<<<< HEAD
                               <Button mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" text="Terug">
                                  <font>
                                     <Font size="18.0" />
@@ -35,6 +38,8 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
+=======
+>>>>>>> GeoffkeTak
                               <HBox>
                                  <children>
                                     <VBox>
@@ -156,11 +161,30 @@
                               </HBox>
                            </children>
                         </VBox>
+<<<<<<< HEAD
                         <Button layoutX="510.0" layoutY="8.0" mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenBeheerdaad" prefHeight="38.0" prefWidth="86.0" text="Opslaan " textAlignment="CENTER">
+=======
+                        <Button layoutX="376.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenBeheerdaad" prefHeight="38.0" prefWidth="89.0" text="Toevoegen">
+>>>>>>> GeoffkeTak
                            <font>
                               <Font size="13.0" />
                            </font>
                         </Button>
+                        <Button layoutX="35.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" text="Terug">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Label layoutX="35.0" layoutY="72.0" text="Familie Geslacht Soort variant">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="86.0" fitWidth="129.0" layoutX="492.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/Vives_Logo.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
               </content>
