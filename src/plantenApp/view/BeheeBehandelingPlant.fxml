@@ -30,7 +30,7 @@
                                  </font>
                               </Button>
                               <Label fx:id="lblPlant_id" prefHeight="18.0" prefWidth="69.0" />
-                              <Label text="Familie Geslacht Soort variant">
+                              <Label fx:id="lblPlantnaam" text="Familie Geslacht Soort variant">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -103,7 +103,7 @@
                                     </VBox>
                                     <VBox>
                                        <children>
-                                          <HBox>
+                                          <HBox prefHeight="58.0" prefWidth="478.0">
                                              <children>
                                                 <VBox>
                                                    <children>
@@ -122,7 +122,19 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Spinner fx:id="spnJaar" prefHeight="30.0" prefWidth="80.0" initialValue="1" min="0" max="100"/>
+                                                      <Spinner fx:id="spnJaar" initialValue="1" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="BOTTOM_CENTER" prefHeight="22.0" prefWidth="100.0">
+                                                   <children>
+                                                      <Button mnemonicParsing="false" onMouseClicked="#clicked_OpmerkingToevoegen" prefHeight="23.0" prefWidth="102.0" text="toevoegen Beheer">
+                                                         <font>
+                                                            <Font size="10.0" />
+                                                         </font></Button>
+                                                      <Button mnemonicParsing="false" onMouseClicked="#clicked_verwijderlijstitems" prefHeight="23.0" prefWidth="102.0" text="verwijderen beheer">
+                                                         <font>
+                                                            <Font size="10.0" />
+                                                         </font></Button>
                                                    </children>
                                                 </VBox>
                                                 <VBox>
@@ -132,17 +144,6 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button mnemonicParsing="false" onMouseClicked="#clicked_OpmerkingToevoegen" prefHeight="30.0" prefWidth="30.0" text="+" />
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <Label prefHeight="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Button mnemonicParsing="false" onMouseClicked="#clicked_verwijderlijstitems" prefHeight="30.0" prefWidth="30.0" text="-" />
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -155,7 +156,7 @@
                               </HBox>
                            </children>
                         </VBox>
-                        <Button layoutX="510.0" layoutY="8.0" mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenBeheerdaad" prefHeight="38.0" prefWidth="89.0" text="Toevoegen">
+                        <Button layoutX="510.0" layoutY="8.0" mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenBeheerdaad" prefHeight="38.0" prefWidth="86.0" text="Opslaan " textAlignment="CENTER">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -182,12 +183,14 @@
                               </VBox>
                               <VBox>
                                  <children>
-                                    <Label prefHeight="30.0">
+                                    <Label prefHeight="30.0" text="Behandeling toevoegen" textFill="#838383">
                                        <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Button mnemonicParsing="false" onMouseClicked="#clicked_BehandelingToevoegen" prefHeight="30.0" prefWidth="30.0" text="+" />
+                                          <Font size="10.0" />
+                                       </font></Label>
+                                    <Button mnemonicParsing="false" onMouseClicked="#clicked_BehandelingToevoegen" prefHeight="30.0" prefWidth="104.0" text="voeg toe">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font></Button>
                                  </children>
                               </VBox>
                               <VBox>
@@ -197,7 +200,6 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label prefHeight="30.0" text="  Behandeling succesvol toegevoegd" textFill="#838383" />
                                  </children>
                               </VBox>
                            </children>

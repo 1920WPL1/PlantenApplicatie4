@@ -2,8 +2,6 @@ package plantenApp.java.dao;
 
 import plantenApp.java.model.Beheer;
 import plantenApp.java.model.Beheerdaad_Eigenschap;
-import plantenApp.java.model.FenoMulti_Eigenschap;
-import plantenApp.java.model.Plant;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -71,10 +69,12 @@ public class BeheerDAO implements Queries {
     }
 
     public void createBeheerEigenschap(Beheerdaad_Eigenschap beheerEigenschap) throws SQLException{
-        stmtInsertBeheerdaadEigenschap.setString(1, beheerEigenschap.getNaam());
-        stmtInsertBeheerdaadEigenschap.setString(2, beheerEigenschap.getOpmerking());
-        stmtInsertBeheerdaadEigenschap.setString(3, beheerEigenschap.getMaand());
-        stmtInsertBeheerdaadEigenschap.setInt(4, beheerEigenschap.getFrequentie());
+        stmtInsertBeheerdaadEigenschap.setInt(1,beheerEigenschap.getPlantID());
+        stmtInsertBeheerdaadEigenschap.setString(2, beheerEigenschap.getNaam());
+        stmtInsertBeheerdaadEigenschap.setString(3, beheerEigenschap.getOpmerking());
+        stmtInsertBeheerdaadEigenschap.setString(4, beheerEigenschap.getMaand());
+        stmtInsertBeheerdaadEigenschap.setInt(5, beheerEigenschap.getFrequentie());
+        stmtInsertBeheerdaadEigenschap.executeUpdate();
         ResultSet rs = stmtInsertBeheerdaadEigenschap.getGeneratedKeys();
         rs.next();
         Integer beheer_id = rs.getInt(1);
