@@ -28,6 +28,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.logging.Logger;
+
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class ControllerPlantToevoegen {
     //Alle velden die ingevuld moeten worden bij Standaard
@@ -295,7 +298,7 @@ public class ControllerPlantToevoegen {
     public String testerNullpointers(String string, ComboBox cb) {
 
         if (cb.getValue().toString().equals("")) {
-            JOptionPane.showMessageDialog(null, "niet ok");
+            showMessageDialog(null, "niet ok");
         } else {
             string = cb.getValue().toString();
         }
@@ -336,6 +339,8 @@ public class ControllerPlantToevoegen {
                             fgsv,
                             iStatus,
                             uDate);
+            
+            createPlantNaam();
             plantDao.createPlant(plant);
 
             //Insert Abiotische factoren
@@ -651,8 +656,33 @@ public class ControllerPlantToevoegen {
 
 
     public void notificationBox(String string) {
-        JOptionPane.showMessageDialog(null, string);
+        showMessageDialog(null, string);
     }
+
+    public void createPlantNaam() throws Exception {
+        if (cboType.getValue().toString().equals(""))
+        {
+            showMessageDialog(null, "Kies een type!");
+        }
+        else {
+            String sType = cboType.getValue().toString();
+            String sFam = txtFamilie.getText();
+            String sGeslacht = txtGeslacht.getText();
+            String sSoort = txtSoort.getText();
+            String sVariant = txtVariant.getText();
+            PlantNaamDAO plantNaamDAO = new PlantNaamDAO(dbConnection);
+            //Conrole op textboxen + dubbele plant is al gebeurd bij controle createplant
+            try {
+                Plant plant = new Plant(sType, sFam, sGeslacht, sSoort, sVariant);
+                plantNaamDAO.createPlantNaam(plant);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Er is een fout opgetreden bij het invullen van de plantnaam.");
+                System.out.println(ex);
+                throw new Exception();
+            }
+        }
+    }
+
 
     /* !!!!Click Events!!!!!*/
 
