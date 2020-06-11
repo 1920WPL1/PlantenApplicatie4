@@ -40,6 +40,7 @@ public class ControllerBeheer {
     //Alle velden voor een nieuwe behandeling
     public TextField txtBehandeling;
     public Label lblPlant_id;
+    public Label lblPlantnaam;
     //Connectie
     private Connection dbConnection;
     Plant objectPlant;
@@ -52,6 +53,7 @@ public class ControllerBeheer {
         InfoTables infoTables = infotablesDAO.getInfoTables();
         /*opvullen combobox Methode*/
         FillComboboxes(infoTables);
+        lblPlantnaam.setText(objectPlant.getFgsv());
     }
 
 
@@ -150,27 +152,54 @@ public class ControllerBeheer {
             }
         }
     }
-    public void beheersdaadaanmaken(String sMaand){
-        String sOpmerking = txtOpmerking.getText();
-        String sBehandeling = cboBehandeling.getValue().toString();
-        int iFrequentie = Integer.parseInt(spnJaar.getValue().toString());
-        Beheerdaad_Eigenschap beheerEig = new Beheerdaad_Eigenschap(
-                objectPlant.getId(),
-                sBehandeling,
-                sOpmerking,
-                sMaand,
-                iFrequentie);
 
-        lvLijstBehandeling.getItems().add(beheerEig.toString());
+    public void beheersdaadaanmaken(String sMaand) {
+        try {
+            cboBehandeling.getValue().toString();
+        } catch (NullPointerException except) {
+            JOptionPane.showMessageDialog(null, "Behandeling moet ingevuld zijn");
+        }
+
+        if (txtOpmerking.getText().equals("")) {
+            int iResp = JOptionPane.showConfirmDialog(null, "bent u zeker dat u geen opmerking wenst in te geven ?");
+            if (iResp == 0) {
+                System.out.println(iResp);
+                String sOpmerking = "";
+                String sBehandeling = cboBehandeling.getValue().toString();
+                int iFrequentie = Integer.parseInt(spnJaar.getValue().toString());
+                Beheerdaad_Eigenschap beheerEig = new Beheerdaad_Eigenschap(
+                        objectPlant.getId(),
+                        sBehandeling,
+                        sOpmerking,
+                        sMaand,
+                        iFrequentie);
+
+                lvLijstBehandeling.getItems().add(beheerEig);
+            }
+        } else {
+            String sOpmerking = txtOpmerking.getText();
+            String sBehandeling = cboBehandeling.getValue().toString();
+            int iFrequentie = Integer.parseInt(spnJaar.getValue().toString());
+            Beheerdaad_Eigenschap beheerEig = new Beheerdaad_Eigenschap(
+                    objectPlant.getId(),
+                    sBehandeling,
+                    sOpmerking,
+                    sMaand,
+                    iFrequentie);
+
+            lvLijstBehandeling.getItems().add(beheerEig);
+        }
+
     }
 
     //Button om een object van de lijst te verwijderen
     public void clicked_verwijderlijstitems(MouseEvent mouseEvent) {
+
         lvLijstBehandeling.getItems().remove(lvLijstBehandeling.getSelectionModel().getSelectedItem());
         lvLijstBehandeling.refresh();
     }
 
-    //Button om een behandeling extra toe te voegen aan de combobox en de DB
+    //Button om een behandeling extra toe te voegen aan de combobox en de DB beheerdaad
     public void clicked_BehandelingToevoegen(MouseEvent mouseEvent) throws SQLException {
 
         String swaarde = txtBehandeling.getText();
@@ -185,7 +214,16 @@ public class ControllerBeheer {
 
     // schrijven van de data naar de DB
     public void clicked_ToevoegenBeheerdaad(MouseEvent mouseEvent) throws SQLException {
-        BeheerDAO beheerdao = new BeheerDAO(dbConnection);
 
+        int iResp = JOptionPane.showConfirmDialog(null, "Wenst u deze beheersdaden op te slaan in de databank ?");
+        if (iResp == 0) {
+            BeheerDAO beheerdao = new BeheerDAO(dbConnection);
+            ArrayList<Beheerdaad_Eigenschap> arrBeheerEig = new ArrayList<>();
+            arrBeheerEig.addAll(lvLijstBehandeling.getItems());
+            System.out.println(arrBeheerEig);
+            for (int i = 0; i < arrBeheerEig.size() - 1; i++) {
+                beheerdao.createBeheerEigenschap(arrBeheerEig.get(i));
+            }
+        }
     }
 }

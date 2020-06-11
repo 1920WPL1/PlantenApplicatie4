@@ -294,7 +294,6 @@ public class ControllerPlantToevoegen {
     }
 
 
-
     //Toevoegen van een volledige plant
     public void clicked_ToevoegenPlant(MouseEvent mouseEvent) throws SQLException {
 
@@ -689,6 +688,7 @@ public class ControllerPlantToevoegen {
         window.show();
         window.setScene(scene);
     }
+
     //functie voor
     public void clicked_versturenVoorGoedkeuring(ActionEvent actionEvent) throws SQLException {
         Plant plantje = (Plant) lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedItem();
@@ -700,11 +700,12 @@ public class ControllerPlantToevoegen {
             PlantDAO plantdao = new PlantDAO(dbConnection);
             plantdao.updatePlantStatusByID(plantje);
             lijstmakerEnRefresher();
-        } else {notificationBox("De plant is niet doorgestuurd");
+        } else {
+            notificationBox("De plant is niet doorgestuurd");
         }
     }
 
-    public void clicked_BeheersdadenGeselecteerdePlant(MouseEvent mouseEvent) throws SQLException{
+    public void clicked_BeheersdadenGeselecteerdePlant(MouseEvent mouseEvent) throws SQLException {
         Plant plant = (Plant) lvLijstOpgeslagenPlanten.getSelectionModel().getSelectedItem();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("view/BeheeBehandelingPlant.fxml"));
