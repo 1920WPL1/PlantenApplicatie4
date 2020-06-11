@@ -19,10 +19,7 @@ public class FotoDAO implements Queries {
         stmtSelectFotoByID = dbConnection.prepareStatement(GETFOTOBYPLANTID);
     }
 
-    /**@author Siebe
-     * @param id -> plant_id
-     * @return -> verzameling van de fotos van de specifieke plant
-     */
+
     public Foto getFotoById(int id) throws SQLException {
         Foto foto = null;
 
