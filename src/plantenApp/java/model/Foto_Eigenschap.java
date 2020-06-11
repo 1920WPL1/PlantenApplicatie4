@@ -9,7 +9,7 @@ public class Foto_Eigenschap {
     private String url;
     private Blob image;
 
-    public Foto_Eigenschap(int id, String eigenschap, String url,Blob image) {
+    public Foto_Eigenschap(int foto_id, int id, String eigenschap, String url, Blob image) {
         this.id = id;
         this.eigenschap = eigenschap;
         this.url = url;

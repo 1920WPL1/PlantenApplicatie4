@@ -38,17 +38,18 @@ public class FotoDAO implements Queries {
      * @return -> fotos van de specifieke plant
      */
     private ArrayList<Foto_Eigenschap> getFotos(int id) throws SQLException {
-        ArrayList<Foto_Eigenschap> fotos = null;
-
+        ArrayList<Foto_Eigenschap> fotos = new ArrayList<>();
         stmtSelectFotoByID.setInt(1, id);
         ResultSet rs = stmtSelectFotoByID.executeQuery();
         while (rs.next()) {
             Foto_Eigenschap foto = new Foto_Eigenschap(
                     rs.getInt("foto_id"),
+                    rs.getInt("plant_id"),
                     rs.getString("eigenschap"),
                     rs.getString("url"),
                     rs.getBlob("figuur")
             );
+            System.out.println(foto.getImage());
             fotos.add(foto);
         }
         return fotos;
