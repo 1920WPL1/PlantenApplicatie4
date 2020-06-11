@@ -209,7 +209,7 @@
                                                 </VBox>
                                              </children>
                                           </HBox>
-                                          <Label minWidth="20.0" prefHeight="120.0" prefWidth="378.0" />
+                                          <Label minWidth="20.0" prefHeight="120.0" prefWidth="218.0" />
                                           <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Zoek">
                                              <font>
                                                 <Font size="24.0" />
@@ -220,6 +220,11 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
+                                          <ImageView fitHeight="107.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Vives_Logo.png" />
+                                             </image>
+                                          </ImageView>
                                        </children>
                                     </HBox>
                                     <Label minWidth="20.0" />

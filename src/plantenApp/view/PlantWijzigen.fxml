@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -1031,11 +1032,37 @@
                </content>
             </TitledPane>
             <!--suppress XmlDuplicatedId -->
-            <Button fx:id="btn_Terug" layoutX="1130.0" layoutY="87.0" mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" text="Terug">
+            <Button fx:id="btn_Terug" layoutX="1120.0" layoutY="113.0" mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" text="Terug">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
+            <ImageView fx:id="imgView1" fitHeight="150.0" fitWidth="200.0" layoutX="652.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/cheetah-10698-12140-550x550.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgView2" fitHeight="150.0" fitWidth="200.0" layoutX="845.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/cheetah-10698-12140-550x550.png" />
+               </image>
+            </ImageView>
+            <ToolBar layoutX="620.0" layoutY="177.0" prefHeight="40.0" prefWidth="200.0">
+               <items>
+                  <Button mnemonicParsing="false" onAction="#btnAfbChooser1" text="afbeelding toev." />
+               </items>
+            </ToolBar>
+            <ToolBar layoutX="820.0" layoutY="177.0" prefHeight="40.0" prefWidth="200.0">
+               <items>
+                  <Button mnemonicParsing="false" onAction="#btnAfbChooser2" text="afbeelding toev." />
+               </items>
+            </ToolBar>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="107.0" fitWidth="164.0" layoutX="1139.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/Vives_Logo.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </content>

@@ -9,6 +9,8 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -16,25 +18,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerBeheer">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0">
+      <VBox prefHeight="631.0" prefWidth="622.0">
          <children>
-            <TitledPane animated="false" collapsible="false" text="Beheer">
+            <TitledPane animated="false" collapsible="false" prefHeight="518.0" prefWidth="622.0" text="Beheer">
               <content>
                 <AnchorPane>
                      <children>
-                        <VBox layoutX="14.0" layoutY="27.0" prefHeight="411.0" prefWidth="579.0">
+                        <VBox layoutX="14.0" layoutY="95.0" prefHeight="374.0" prefWidth="579.0">
                            <children>
-                              <Button mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" text="Terug">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Button>
-                              <Label fx:id="lblPlant_id" prefHeight="18.0" prefWidth="69.0" />
-                              <Label text="Familie Geslacht Soort variant">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
                               <HBox>
                                  <children>
                                     <VBox>
@@ -122,7 +113,7 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Spinner fx:id="spnJaar" prefHeight="30.0" prefWidth="80.0" initialValue="1" min="0" max="100"/>
+                                                      <Spinner fx:id="spnJaar" initialValue="1" max="100" min="0" prefHeight="30.0" prefWidth="80.0" />
                                                    </children>
                                                 </VBox>
                                                 <VBox>
@@ -155,11 +146,26 @@
                               </HBox>
                            </children>
                         </VBox>
-                        <Button layoutX="510.0" layoutY="8.0" mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenBeheerdaad" prefHeight="38.0" prefWidth="89.0" text="Toevoegen">
+                        <Button layoutX="376.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#clicked_ToevoegenBeheerdaad" prefHeight="38.0" prefWidth="89.0" text="Toevoegen">
                            <font>
                               <Font size="13.0" />
                            </font>
                         </Button>
+                        <Button layoutX="35.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#clicked_TerugGaan" text="Terug">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Label layoutX="35.0" layoutY="72.0" text="Familie Geslacht Soort variant">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="86.0" fitWidth="129.0" layoutX="492.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/Vives_Logo.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
               </content>
